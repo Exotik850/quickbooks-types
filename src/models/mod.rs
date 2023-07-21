@@ -1,19 +1,21 @@
 mod account;
+mod attachable;
+mod bill;
 mod common;
 mod company_info;
 mod customer;
 mod invoice;
 mod item;
 mod line;
-mod bill;
-mod attachable;
+mod payment;
 
 pub use account::*;
+pub use attachable::*;
+pub use bill::*;
 pub use common::*;
 pub use company_info::*;
 pub use customer::*;
 pub use invoice::*;
 pub use item::*;
 pub use line::*;
-pub use bill::*;
-pub use attachable::*;
+pub use payment::*;

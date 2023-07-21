@@ -3,6 +3,11 @@ use serde_with::skip_serializing_none;
 
 use super::common::{MetaData, NtRef};
 
+/*
+    Item Object
+    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/item
+*/
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

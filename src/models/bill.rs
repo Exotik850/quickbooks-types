@@ -1,15 +1,23 @@
 use chrono::NaiveDate;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
-use super::{common::{NtRef, LinkedTxn, MetaData}, line::Line};
+use super::{
+    common::{LinkedTxn, MetaData, NtRef},
+    line::Line,
+};
+
+/*
+    Bill Object
+    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/bill
+*/
 
 #[derive(Debug, Default, Clone, Serialize, Deserialize, PartialEq)]
-#[serde(rename_all="PascalCase", default)]
+#[serde(rename_all = "PascalCase", default)]
 pub struct Bill {
     sync_token: Option<String>,
     domain: Option<String>,
     id: Option<String>,
-    #[serde(rename="APAcountRef")]
+    #[serde(rename="APAccountRef")]
     ap_account_ref: Option<NtRef>,
     vendor_ref: NtRef,
     txn_date: Option<NaiveDate>,
@@ -26,6 +34,6 @@ pub struct Bill {
     private_note: Option<String>,
     exchange_rate: Option<f32>,
     department_ref: Option<NtRef>,
-    home_balance: Option<f32>, 
+    home_balance: Option<f32>,
     recur_data_ref: Option<NtRef>,
 }

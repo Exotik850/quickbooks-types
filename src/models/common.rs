@@ -2,6 +2,13 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+/*
+    These are not full quickbooks object but they are used in other quickbooks objects,
+    they have no documentation of their own but their types are shown in the objects
+    they are used in
+*/
+
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "PascalCase", default)]
@@ -61,7 +68,9 @@ impl std::fmt::Display for Addr {
             "{}, {}, {}, {} {}",
             self.line1.as_ref().unwrap_or(&"".to_owned()),
             self.city.as_ref().unwrap_or(&"".to_owned()),
-            self.country_sub_division_code.as_ref().unwrap_or(&"".to_owned()),
+            self.country_sub_division_code
+                .as_ref()
+                .unwrap_or(&"".to_owned()),
             self.country.as_ref().unwrap_or(&"".to_owned()),
             self.postal_code.as_ref().unwrap_or(&"".to_owned())
         )
@@ -93,6 +102,6 @@ pub struct CustomField {
 pub struct MarkupInfo {
     percent_based: Option<bool>,
     value: Option<f32>,
-    percent: Option<f32>, 
+    percent: Option<f32>,
     price_level_ref: Option<NtRef>,
 }

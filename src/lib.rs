@@ -1,8 +1,5 @@
 pub mod models;
 
-
-
-
 // #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 // #[serde(default, rename_all = "PascalCase")]
 // pub struct AttachableRef {

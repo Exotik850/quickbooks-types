@@ -3,12 +3,10 @@ use serde_with::skip_serializing_none;
 
 use super::common::{MetaData, NtRef};
 
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "PascalCase")]
-pub enum AccountType {
-    #[default]
-    TODO,
-}
+/*
+    Account Object
+    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/account
+*/
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
@@ -33,4 +31,11 @@ pub struct Account {
     tax_code_ref: Option<NtRef>,
     account_sub_type: Option<String>,
     current_balance: Option<f32>,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "PascalCase")]
+pub enum AccountType {
+    #[default]
+    TODO, // TODO Make this
 }

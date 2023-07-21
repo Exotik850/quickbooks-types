@@ -4,6 +4,11 @@ use serde_with::skip_serializing_none;
 
 use super::common::{LinkedTxn, NtRef};
 
+/*
+    Line object
+    No documentation page, but used as a detail for purchased items or services
+*/
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -25,7 +30,7 @@ pub enum LineDetail {
     DescriptionOnlyLine(DescriptionLineDetail),
     DiscountLine(DiscountLineDetail),
     SubTotalLine(SubTotalLineDetail),
-    ItemBasedExpenseLine(ItemBasedExpenseLineDetail),   
+    ItemBasedExpenseLine(ItemBasedExpenseLineDetail),
     AccountBasedExpenseLine(AccountBasedExpenseLineDetail),
 }
 
@@ -78,11 +83,11 @@ pub struct SubTotalLineDetail {
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub enum BillableStatus {
-    #[default] Billable,
+    #[default]
+    Billable,
     NotBillable,
     HasBeenBilled,
 }
-
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -96,7 +101,6 @@ pub struct ItemBasedExpenseLineDetail {
     billable_status: BillableStatus,
     qty: f32,
     unit_price: f32,
-
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]

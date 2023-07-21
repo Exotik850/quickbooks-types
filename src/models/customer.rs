@@ -4,6 +4,11 @@ use serde_with::skip_serializing_none;
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
+/*
+    Customer Object
+    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/customer
+*/
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -53,7 +58,7 @@ struct Customer {
 }
 
 #[derive(Copy, Clone, Debug, Deserialize, Serialize, PartialEq)]
-#[serde(from="u8",into="u8")]
+#[serde(from = "u8", into = "u8")]
 enum TaxExemptStatus {
     FederalGovernment,
     StateGovernment,

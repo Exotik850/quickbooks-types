@@ -7,7 +7,7 @@ use super::line::Line;
 
 /*
     Invoice Object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/invoice 
+    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/invoice
 */
 
 #[skip_serializing_none]
@@ -38,12 +38,9 @@ pub struct Invoice {
 
 #[skip_serializing_none]
 #[derive(Serialize, Deserialize, Debug, Clone, Default, PartialEq)]
-#[serde(rename_all = "PascalCase")]
+#[serde(rename_all = "PascalCase", default)]
 struct TxnTaxDetail {
-    #[serde(default)]
     txn_tax_code_ref: Option<NtRef>,
-    #[serde(default)]
     total_tax: Option<f32>,
-    #[serde(default)]
     tax_line: Option<Vec<Line>>,
 }

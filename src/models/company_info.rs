@@ -4,6 +4,11 @@ use serde_with::skip_serializing_none;
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
+/*
+    CompanyInfo Object
+    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/companyinfo
+*/
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
