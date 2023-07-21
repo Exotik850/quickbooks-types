@@ -6,3 +6,4 @@ mod invoice;
 mod item;
 mod line;
 mod bill;
+mod attachable;

@@ -1,7 +1,7 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
-#[derive(Debug, Clone, Default, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub struct NtRef {
     #[serde(default, skip_serializing_if = "String::is_empty", rename = "type")]
     pub entity_ref_type: String,
@@ -70,20 +70,31 @@ impl std::fmt::Display for Addr {
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "PascalCase")]
+#[serde(rename_all = "PascalCase", default)]
 pub struct LinkedTxn {
-    #[serde(default, skip_serializing_if = "String::is_empty")]
+    #[serde(skip_serializing_if = "String::is_empty")]
     pub txn_id: String,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
+    #[serde(skip_serializing_if = "String::is_empty")]
     pub txn_type: String,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "PascalCase")]
+#[serde(rename_all = "PascalCase", default)]
 pub struct CustomField {
     definition_id: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     string_value: Option<String>,
+    #[serde(skip_serializing_if = "String::is_empty")]
     name: String,
     #[serde(rename = "type")]
     field_type: String,
+}
+
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct MarkupInfo {
+    percent_based: bool,
+    value: f32,
+    percent: f32, 
+    price_level_ref: NtRef,
 }

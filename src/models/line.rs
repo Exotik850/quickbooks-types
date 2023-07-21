@@ -1,42 +1,37 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
 
 use super::common::{LinkedTxn, NtRef};
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
-#[serde(rename_all = "PascalCase")]
+#[serde(rename_all = "PascalCase", default)]
+
 pub struct Line {
     #[serde(flatten)]
-    pub line_detail: LineDetail,
-    #[serde(default)]
-    pub amount: f32,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub description: String,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub linked_txn: Vec<LinkedTxn>,
+    pub line_detail: Option<LineDetail>,
+    pub amount: Option<f32>,
+    pub description: Option<String>,
+    pub id: Option<String>,
+    pub linked_txn: Option<Vec<LinkedTxn>>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 #[serde(tag = "DetailType")]
 pub enum LineDetail {
-    // For Invoice type
     SalesItemLine(SalesItemLineDetail),
     GroupLine(GroupLineDetail),
     DescriptionOnlyLine(DescriptionLineDetail),
     DiscountLine(DiscountLineDetail),
     SubTotalLine(SubTotalLineDetail),
-
-    // For Bill type
     ItemBasedExpenseLine(ItemBasedExpenseLineDetail),   
     AccountBasedExpenseLine(AccountBasedExpenseLineDetail),
-
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
-struct SalesItemLineDetail {
+pub struct SalesItemLineDetail {
     tax_inclusive_amt: f32,
     discount_amt: f32,
     item_ref: NtRef,
@@ -51,7 +46,7 @@ struct SalesItemLineDetail {
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
-struct GroupLineDetail {
+pub struct GroupLineDetail {
     quantity: f32,
     line: Vec<Line>,
     group_item_ref: NtRef,
@@ -59,14 +54,14 @@ struct GroupLineDetail {
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
-struct DescriptionLineDetail {
+pub struct DescriptionLineDetail {
     tax_code_ref: NtRef,
     service_date: DateTime<Utc>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
-struct DiscountLineDetail {
+pub struct DiscountLineDetail {
     class_ref: NtRef,
     tax_code_ref: NtRef,
     discount_account_ref: NtRef,
@@ -77,12 +72,12 @@ struct DiscountLineDetail {
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
-struct SubTotalLineDetail {
+pub struct SubTotalLineDetail {
     item_ref: NtRef,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
-enum BillableStatus {
+pub enum BillableStatus {
     #[default] Billable,
     NotBillable,
     HasBeenBilled,
@@ -91,7 +86,7 @@ enum BillableStatus {
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
-struct ItemBasedExpenseLineDetail {
+pub struct ItemBasedExpenseLineDetail {
     tax_inclusive_amt: f32,
     item_ref: NtRef,
     customer_ref: NtRef,
