@@ -1,5 +1,6 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub struct NtRef {
@@ -69,13 +70,12 @@ impl std::fmt::Display for Addr {
     }
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct LinkedTxn {
-    #[serde(skip_serializing_if = "String::is_empty")]
-    pub txn_id: String,
-    #[serde(skip_serializing_if = "String::is_empty")]
-    pub txn_type: String,
+    pub txn_id: Option<String>,
+    pub txn_type: Option<String>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]

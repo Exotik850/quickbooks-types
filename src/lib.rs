@@ -2,7 +2,9 @@ pub use chrono::{DateTime, NaiveDate, Utc};
 
 use serde::{Deserialize, Serialize};
 
-mod models;
+pub mod models;
+
+
 
 
 // #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
