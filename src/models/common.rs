@@ -2,14 +2,16 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[serde(rename_all = "PascalCase", default)]
 pub struct NtRef {
-    #[serde(default, skip_serializing_if = "String::is_empty", rename = "type")]
-    pub entity_ref_type: String,
-    #[serde(default, skip_serializing_if = "String::is_empty", alias = "Name")]
-    pub name: String,
-    #[serde(default, skip_serializing_if = "String::is_empty", alias = "Value")]
-    pub value: String,
+    #[serde(rename = "type")]
+    pub entity_ref_type: Option<String>,
+    #[serde(alias = "Name")]
+    pub name: Option<String>,
+    #[serde(alias = "Value")]
+    pub value: Option<String>,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -19,53 +21,49 @@ pub struct MetaData {
     pub last_updated_time: DateTime<Utc>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "PascalCase")]
+#[serde(rename_all = "PascalCase", default)]
 pub struct Email {
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub address: String,
+    pub address: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "PascalCase")]
+#[serde(rename_all = "PascalCase", default)]
 pub struct Addr {
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub city: String,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub country: String,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub country_sub_division_code: String,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub id: String,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub line1: String,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub postal_code: String,
+    pub city: Option<String>,
+    pub country: Option<String>,
+    pub country_sub_division_code: Option<String>,
+    pub id: Option<String>,
+    pub line1: Option<String>,
+    pub postal_code: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct WebAddr {
-    #[serde(default, rename = "URL", skip_serializing_if = "String::is_empty")]
-    url: String,
+    #[serde(default, rename = "URL")]
+    url: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "PascalCase")]
+#[serde(rename_all = "PascalCase", default)]
 pub struct PhoneNumber {
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub free_form_number: String,
+    pub free_form_number: Option<String>,
 }
 
 impl std::fmt::Display for Addr {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            "{street_addr}, {city}, {country_sub_division_code}, {country} {postal_code}",
-            street_addr = self.line1,
-            city = self.city,
-            country_sub_division_code = self.country_sub_division_code,
-            country = self.country,
-            postal_code = self.postal_code
+            "{}, {}, {}, {} {}",
+            self.line1.as_ref().unwrap_or(&"".to_owned()),
+            self.city.as_ref().unwrap_or(&"".to_owned()),
+            self.country_sub_division_code.as_ref().unwrap_or(&"".to_owned()),
+            self.country.as_ref().unwrap_or(&"".to_owned()),
+            self.postal_code.as_ref().unwrap_or(&"".to_owned())
         )
     }
 }
@@ -78,23 +76,23 @@ pub struct LinkedTxn {
     pub txn_type: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct CustomField {
-    definition_id: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
+    definition_id: Option<String>,
     string_value: Option<String>,
-    #[serde(skip_serializing_if = "String::is_empty")]
-    name: String,
+    name: Option<String>,
     #[serde(rename = "type")]
-    field_type: String,
+    field_type: Option<String>,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "PascalCase")]
+#[serde(rename_all = "PascalCase", default)]
 pub struct MarkupInfo {
-    percent_based: bool,
-    value: f32,
-    percent: f32, 
-    price_level_ref: NtRef,
+    percent_based: Option<bool>,
+    value: Option<f32>,
+    percent: Option<f32>, 
+    price_level_ref: Option<NtRef>,
 }

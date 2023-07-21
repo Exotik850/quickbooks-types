@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
 
 use super::common::{MetaData, NtRef};
 
@@ -9,33 +10,27 @@ pub enum AccountType {
     TODO,
 }
 
+#[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(default, rename_all = "PascalCase")]
 pub struct Account {
-    id: String,
-    name: String,
-    sync_token: String,
-    #[serde(skip_serializing_if = "String::is_empty")]
-    acct_num: String,
-    currency_ref: NtRef,
-    parent_ref: NtRef,
-    #[serde(skip_serializing_if = "String::is_empty")]
-    descripton: String,
-    active: bool,
-    meta_data: MetaData,
-    sub_account: bool,
-    #[serde(skip_serializing_if = "String::is_empty")]
-    classification: String,
-    #[serde(skip_serializing_if = "String::is_empty")]
-    fully_qualified_name: String,
-    #[serde(skip_serializing_if = "String::is_empty")]
-    txn_location_type: String,
-    account_type: AccountType,
-    current_balance_with_sub_accounts: f32,
-    #[serde(skip_serializing_if = "String::is_empty")]
-    account_alias: String,
-    tax_code_ref: NtRef,
-    #[serde(skip_serializing_if = "String::is_empty")]
-    account_sub_type: String,
-    current_balance: f32,
+    id: Option<String>,
+    name: Option<String>,
+    sync_token: Option<String>,
+    acct_num: Option<String>,
+    currency_ref: Option<NtRef>,
+    parent_ref: Option<NtRef>,
+    descripton: Option<String>,
+    active: Option<bool>,
+    meta_data: Option<MetaData>,
+    sub_account: Option<bool>,
+    classification: Option<String>,
+    fully_qualified_name: Option<String>,
+    txn_location_type: Option<String>,
+    account_type: Option<AccountType>,
+    current_balance_with_sub_accounts: Option<f32>,
+    account_alias: Option<String>,
+    tax_code_ref: Option<NtRef>,
+    account_sub_type: Option<String>,
+    current_balance: Option<f32>,
 }

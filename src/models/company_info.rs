@@ -1,45 +1,29 @@
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "PascalCase")]
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[serde(rename_all = "PascalCase", default)]
 pub struct CompanyInfo {
-    #[serde(default)]
-    pub company_addr: Addr,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub company_name: String,
-
-    pub company_start_date: NaiveDate,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub country: String,
-    #[serde(default)]
-    pub customer_communication_addr: Addr,
-    #[serde(default, skip_serializing_if = "String::is_empty", rename = "domain")]
-    pub domain: String,
-    #[serde(default)]
-    pub email: Email,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub fiscal_year_start_month: String,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub id: String,
-    #[serde(default)]
-    pub legal_addr: Addr,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub legal_name: String,
-
-    pub meta_data: MetaData,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub name_value: Vec<NtRef>,
-    #[serde(default)]
-    pub primary_phone: PhoneNumber,
-    #[serde(default, rename = "sparse")]
-    pub sparse: bool,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub supported_languages: String,
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub sync_token: String,
-    #[serde(default)]
-    pub web_addr: WebAddr,
+    pub company_addr: Option<Addr>,
+    pub company_name: Option<String>,
+    pub company_start_date: Option<NaiveDate>,
+    pub country: Option<String>,
+    pub customer_communication_addr: Option<Addr>,
+    pub domain: Option<String>,
+    pub email: Option<Email>,
+    pub fiscal_year_start_month: Option<String>,
+    pub id: Option<String>,
+    pub legal_addr: Option<Addr>,
+    pub legal_name: Option<String>,
+    pub meta_data: Option<MetaData>,
+    pub name_value: Option<Vec<NtRef>>,
+    pub primary_phone: Option<PhoneNumber>,
+    pub sparse: Option<bool>,
+    pub supported_languages: Option<String>,
+    pub sync_token: Option<String>,
+    pub web_addr: Option<WebAddr>,
 }

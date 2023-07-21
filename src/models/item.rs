@@ -1,9 +1,11 @@
 use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
 
 use super::common::{MetaData, NtRef};
 
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
-#[serde(rename_all = "PascalCase")]
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[serde(rename_all = "PascalCase", default)]
 pub struct Item {
     /// If true, the object is currently enabled for use by QuickBooks.
     pub active: Option<bool>,
@@ -19,12 +21,11 @@ pub struct Item {
     /// Description of the item.
     ///
     /// * max character: maximum of 4000 chars
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
 
     /// Documentation unavailable.
-    #[serde(default, skip_serializing_if = "String::is_empty", rename = "domain")]
-    pub domain: String,
+    #[serde(rename = "domain")]
+    pub domain: Option<String>,
 
     /// Reference to the expense account used to pay the vendor for this item.
     /// Must be an account with account type of Cost of Goods Sold.
@@ -36,7 +37,6 @@ pub struct Item {
     /// * This is the purchase account id, If not provided it defaults to the default purchase account: 605100 and 601100 are the default expense accounts used for Service and Product type of item, respectively.
     ///
     /// Required for Inventory, NonInventory, and Service item types
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub expense_account_ref: Option<NtRef>,
 
     /// Fully qualified name of the entity.
@@ -48,8 +48,7 @@ pub struct Item {
     /// * filterable
     /// * read only
     /// * system defined
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub fully_qualified_name: String,
+    pub fully_qualified_name: Option<String>,
 
     /// Unique Identifier for an Intuit entity (object).
     ///
@@ -59,14 +58,9 @@ pub struct Item {
     /// * read only
     /// * sortable
     /// * system defined
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub id: String,
-
-    #[serde(default)]
-    pub income_account_ref: NtRef,
-
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub inv_start_date: String,
+    pub id: Option<String>,
+    pub income_account_ref: Option<NtRef>,
+    pub inv_start_date: Option<String>,
 
     /// Classification that specifies the use of this item.
     /// Available when endpoint is evoked with the minorversion=3 query parameter.
@@ -74,49 +68,22 @@ pub struct Item {
     /// Valid values include: Product and Service.
     ///
     /// Applicable for France companies only.
-    #[serde(skip_serializing_if = "Option::is_none")]
     pub item_category_type: Option<String>,
-
-    #[serde(default, skip_serializing_if = "String::is_empty", rename = "Type")]
-    pub item_type: String,
-
-    #[serde(default)]
-    pub level: i64,
-
+    #[serde(rename = "Type")]
+    pub item_type: Option<String>,
+    pub level: Option<i64>,
     pub meta_data: MetaData,
-
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub name: String,
-
-    #[serde(default)]
-    pub parent_ref: NtRef,
-
-    #[serde(default)]
-    pub purchase_cost: f32,
-
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub purchase_desc: String,
-
-    #[serde(default)]
-    pub qty_on_hand: i64,
-
+    pub name: Option<String>,
+    pub parent_ref: Option<NtRef>,
+    pub purchase_cost: Option<f32>,
+    pub purchase_desc: Option<String>,
+    pub qty_on_hand: Option<i64>,
     pub sku: Option<String>,
-
-    #[serde(default, rename = "sparse")]
-    pub sparse: bool,
-
-    #[serde(default)]
-    pub sub_item: bool,
-
-    #[serde(default, skip_serializing_if = "String::is_empty")]
-    pub sync_token: String,
-
-    #[serde(default)]
-    pub taxable: bool,
-
-    #[serde(default)]
-    pub track_qty_on_hand: bool,
-
-    #[serde(default)]
-    pub unit_price: f32,
+    #[serde(rename = "sparse")]
+    pub sparse: Option<bool>,
+    pub sub_item: Option<bool>,
+    pub sync_token: Option<String>,
+    pub taxable: Option<bool>,
+    pub track_qty_on_hand: Option<bool>,
+    pub unit_price: Option<f32>,
 }
