@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{MetaData, NtRef};
+use super::{common::NtRef, qb_object_data::QBObjectData};
 
 /*
     Account Object
@@ -12,15 +12,14 @@ use super::common::{MetaData, NtRef};
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(default, rename_all = "PascalCase")]
 pub struct Account {
-    id: Option<String>,
+    #[serde(flatten)]
+    qb_data: QBObjectData,
     name: Option<String>,
-    sync_token: Option<String>,
     acct_num: Option<String>,
     currency_ref: Option<NtRef>,
     parent_ref: Option<NtRef>,
     descripton: Option<String>,
     active: Option<bool>,
-    meta_data: Option<MetaData>,
     sub_account: Option<bool>,
     classification: Option<String>,
     fully_qualified_name: Option<String>,

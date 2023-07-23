@@ -2,7 +2,10 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
+use super::{
+    common::{Addr, Email, NtRef, PhoneNumber, WebAddr},
+    qb_object_data::QBObjectData,
+};
 
 /*
     Customer Object
@@ -13,8 +16,8 @@ use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 struct Customer {
-    id: Option<String>,
-    sync_token: Option<String>,
+    #[serde(flatten)]
+    qb_data: QBObjectData,
     display_name: Option<String>,
     title: Option<String>,
     given_name: Option<String>,
@@ -39,7 +42,6 @@ struct Customer {
     open_balance_date: Option<NaiveDate>,
     taxable: Option<bool>,
     alternate_phone: Option<PhoneNumber>,
-    meta_data: MetaData,
     parent_ref: Option<NtRef>,
     notes: Option<String>,
     web_addr: Option<WebAddr>,

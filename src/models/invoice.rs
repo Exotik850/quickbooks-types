@@ -2,8 +2,11 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail};
-use super::line::Line;
+use super::{
+    common::{Addr, CustomField, Email, LinkedTxn, NtRef, TxnTaxDetail},
+    line::Line,
+    qb_object_data::QBObjectData,
+};
 
 /*
     Invoice Object
@@ -14,10 +17,10 @@ use super::line::Line;
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct Invoice {
-    id: Option<String>,
+    #[serde(flatten)]
+    qb_data: QBObjectData,
     line: Vec<Line>,
     customer_ref: NtRef,
-    sync_token: Option<String>,
     txn_date: Option<NaiveDate>,
     domain: Option<String>,
     print_status: Option<String>,
@@ -32,6 +35,5 @@ pub struct Invoice {
     ship_addr: Option<Addr>,
     email_status: Option<String>,
     bill_addr: Option<Addr>,
-    meta_data: Option<MetaData>,
     custom_field: Option<Vec<CustomField>>,
 }

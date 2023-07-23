@@ -10,11 +10,11 @@ use super::Line;
     they are used in
 */
 
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "PascalCase", default)]
-pub struct NtRef { // Reference Type
+pub struct NtRef {
+    // Reference Type
     #[serde(rename = "type")]
     pub entity_ref_type: Option<String>,
     #[serde(alias = "Name")]

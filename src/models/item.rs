@@ -1,7 +1,10 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{MetaData, NtRef};
+use super::{
+    common::NtRef,
+    qb_object_data::QBObjectData,
+};
 
 /*
     Item Object
@@ -12,6 +15,9 @@ use super::common::{MetaData, NtRef};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct Item {
+    #[serde(flatten)]
+    qb_data: QBObjectData,
+
     /// If true, the object is currently enabled for use by QuickBooks.
     pub active: Option<bool>,
 
@@ -54,16 +60,6 @@ pub struct Item {
     /// * read only
     /// * system defined
     pub fully_qualified_name: Option<String>,
-
-    /// Unique Identifier for an Intuit entity (object).
-    ///
-    /// Required for the update operation.
-    ///
-    /// * filterable
-    /// * read only
-    /// * sortable
-    /// * system defined
-    pub id: Option<String>,
     pub income_account_ref: Option<NtRef>,
     pub inv_start_date: Option<String>,
 
@@ -77,7 +73,6 @@ pub struct Item {
     #[serde(rename = "Type")]
     pub item_type: Option<String>,
     pub level: Option<i64>,
-    pub meta_data: MetaData,
     pub name: Option<String>,
     pub parent_ref: Option<NtRef>,
     pub purchase_cost: Option<f32>,
@@ -87,7 +82,6 @@ pub struct Item {
     #[serde(rename = "sparse")]
     pub sparse: Option<bool>,
     pub sub_item: Option<bool>,
-    pub sync_token: Option<String>,
     pub taxable: Option<bool>,
     pub track_qty_on_hand: Option<bool>,
     pub unit_price: Option<f32>,

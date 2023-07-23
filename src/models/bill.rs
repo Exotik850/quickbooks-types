@@ -2,8 +2,9 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 
 use super::{
-    common::{LinkedTxn, MetaData, NtRef},
+    common::{LinkedTxn, NtRef},
     line::Line,
+    qb_object_data::QBObjectData,
 };
 
 /*
@@ -14,10 +15,10 @@ use super::{
 #[derive(Debug, Default, Clone, Serialize, Deserialize, PartialEq)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct Bill {
-    sync_token: Option<String>,
+    #[serde(flatten)]
+    qb_data: QBObjectData,
     domain: Option<String>,
-    id: Option<String>,
-    #[serde(rename="APAccountRef")]
+    #[serde(rename = "APAccountRef")]
     ap_account_ref: Option<NtRef>,
     vendor_ref: NtRef,
     txn_date: Option<NaiveDate>,
@@ -29,7 +30,6 @@ pub struct Bill {
     sparse: Option<bool>,
     line: Vec<Line>,
     balance: Option<f32>,
-    meta_data: Option<MetaData>,
     doc_number: Option<String>,
     private_note: Option<String>,
     exchange_rate: Option<f32>,

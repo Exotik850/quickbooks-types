@@ -1,7 +1,10 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{MetaData, NtRef, CustomField};
+use super::{
+    common::{CustomField, NtRef},
+    qb_object_data::QBObjectData,
+};
 
 /*
     Attachable Object
@@ -12,8 +15,8 @@ use super::common::{MetaData, NtRef, CustomField};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 struct Attachable {
-    id: Option<String>,
-    sync_token: Option<String>,
+    #[serde(flatten)]
+    qb_data: QBObjectData,
     file_name: Option<String>,
     note: Option<String>,
     category: Option<AttachmentCategory>,
@@ -23,7 +26,6 @@ struct Attachable {
     long: Option<String>,
     tag: Option<String>,
     lat: Option<String>,
-    meta_data: Option<MetaData>,
     file_access_uri: Option<String>,
     size: Option<f32>,
     thumbnail_file_access_uri: Option<String>,

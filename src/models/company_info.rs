@@ -2,7 +2,10 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
+use super::{
+    common::{Addr, Email, NtRef, PhoneNumber, WebAddr},
+    qb_object_data::QBObjectData,
+};
 
 /*
     CompanyInfo Object
@@ -13,6 +16,8 @@ use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct CompanyInfo {
+    #[serde(flatten)]
+    qb_data: QBObjectData,
     pub company_addr: Option<Addr>,
     pub company_name: Option<String>,
     pub company_start_date: Option<NaiveDate>,
@@ -21,14 +26,11 @@ pub struct CompanyInfo {
     pub domain: Option<String>,
     pub email: Option<Email>,
     pub fiscal_year_start_month: Option<String>,
-    pub id: Option<String>,
     pub legal_addr: Option<Addr>,
     pub legal_name: Option<String>,
-    pub meta_data: Option<MetaData>,
     pub name_value: Option<Vec<NtRef>>,
     pub primary_phone: Option<PhoneNumber>,
     pub sparse: Option<bool>,
     pub supported_languages: Option<String>,
-    pub sync_token: Option<String>,
     pub web_addr: Option<WebAddr>,
 }

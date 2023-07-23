@@ -2,16 +2,19 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{NtRef, Email, Addr, CustomField, LinkedTxn, MetaData, TxnTaxDetail};
-use super::Line;
+use super::{
+    common::{Addr, CustomField, Email, LinkedTxn, NtRef, TxnTaxDetail},
+    qb_object_data::QBObjectData,
+    Line,
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 struct Estimate {
-    id: Option<String>,
+    #[serde(flatten)]
+    qb_data: QBObjectData,
     customer_ref: Option<NtRef>,
-    sync_token: Option<String>,
     currency_ref: Option<NtRef>,
     bill_email: Option<Email>,
     txn_date: Option<NaiveDate>,
@@ -26,7 +29,6 @@ struct Estimate {
     accepted_date: Option<NaiveDate>,
     expiration_date: Option<NaiveDate>,
     due_date: Option<NaiveDate>,
-    meta_data: Option<MetaData>,
     doc_number: Option<String>,
     private_note: Option<String>,
     customer_memo: Option<NtRef>,
