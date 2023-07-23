@@ -2,7 +2,8 @@ use chrono::{NaiveDate, DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{NtRef, Line, MetaData};
+use super::common::{NtRef, MetaData};
+use super::Line;
 
 
 

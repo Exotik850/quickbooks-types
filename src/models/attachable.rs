@@ -1,10 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{
-    common::{MetaData, NtRef},
-    CustomField,
-};
+use super::common::{MetaData, NtRef, CustomField};
 
 /*
     Attachable Object

@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef};
+use super::common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail};
 use super::line::Line;
 
 /*
@@ -34,13 +34,4 @@ pub struct Invoice {
     bill_addr: Option<Addr>,
     meta_data: Option<MetaData>,
     custom_field: Option<Vec<CustomField>>,
-}
-
-#[skip_serializing_none]
-#[derive(Serialize, Deserialize, Debug, Clone, Default, PartialEq)]
-#[serde(rename_all = "PascalCase", default)]
-struct TxnTaxDetail {
-    txn_tax_code_ref: Option<NtRef>,
-    total_tax: Option<f32>,
-    tax_line: Option<Vec<Line>>,
 }

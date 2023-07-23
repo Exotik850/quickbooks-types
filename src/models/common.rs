@@ -2,6 +2,8 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use super::Line;
+
 /*
     These are not full quickbooks object but they are used in other quickbooks objects,
     they have no documentation of their own but their types are shown in the objects
@@ -12,7 +14,7 @@ use serde_with::skip_serializing_none;
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "PascalCase", default)]
-pub struct NtRef {
+pub struct NtRef { // Reference Type
     #[serde(rename = "type")]
     pub entity_ref_type: Option<String>,
     #[serde(alias = "Name")]
@@ -104,4 +106,13 @@ pub struct MarkupInfo {
     value: Option<f32>,
     percent: Option<f32>,
     price_level_ref: Option<NtRef>,
+}
+
+#[skip_serializing_none]
+#[derive(Serialize, Deserialize, Debug, Clone, Default, PartialEq)]
+#[serde(rename_all = "PascalCase", default)]
+pub struct TxnTaxDetail {
+    txn_tax_code_ref: Option<NtRef>,
+    total_tax: Option<f32>,
+    tax_line: Option<Vec<Line>>,
 }
