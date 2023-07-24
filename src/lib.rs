@@ -8,8 +8,8 @@ use models::common::MetaData;
 use serde::Serialize;
 use std::fmt::Display;
 
-pub trait HasQBData 
-where Self: Serialize
+pub trait QBItem 
+where Self: Serialize + Default + Clone + PartialEq
 {
     fn id(&self) -> Option<String>;
     fn sync_token(&self) -> Option<String>;
@@ -21,7 +21,7 @@ where Self: Serialize
 macro_rules! impl_qb_data {
     ($($x:ident),+) => {
         $(
-            impl HasQBData for $x {
+            impl QBItem for $x {
                 fn id(&self) -> Option<String> {
                     self.id.clone()
                 }
