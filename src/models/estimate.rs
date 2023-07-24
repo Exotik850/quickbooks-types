@@ -3,8 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::{
-    common::{Addr, CustomField, Email, LinkedTxn, NtRef, TxnTaxDetail},
-    qb_object_data::QBObjectData,
+    common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail},
     Line,
 };
 
@@ -13,8 +12,9 @@ use super::{
 #[serde(rename_all = "PascalCase", default)]
 #[builder(setter(into, strip_option), default)]
 struct Estimate {
-    #[serde(flatten)]
-    qb_data: QBObjectData,
+    id: Option<String>,
+    sync_token: Option<String>,
+    meta_data: Option<MetaData>,
     customer_ref: Option<NtRef>,
     currency_ref: Option<NtRef>,
     bill_email: Option<Email>,

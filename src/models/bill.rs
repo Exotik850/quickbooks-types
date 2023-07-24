@@ -3,9 +3,8 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::{
-    common::{LinkedTxn, NtRef},
+    common::{LinkedTxn, MetaData, NtRef},
     line::Line,
-    qb_object_data::QBObjectData,
 };
 
 /*
@@ -18,8 +17,9 @@ use super::{
 #[serde(rename_all = "PascalCase", default)]
 #[builder(setter(into, strip_option), default)]
 pub struct Bill {
-    #[serde(flatten)]
-    qb_data: QBObjectData,
+    id: Option<String>,
+    sync_token: Option<String>,
+    meta_data: Option<MetaData>,
     domain: Option<String>,
     #[serde(rename = "APAccountRef")]
     ap_account_ref: Option<NtRef>,

@@ -1,10 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{
-    common::{CustomField, NtRef},
-    qb_object_data::QBObjectData,
-};
+use super::common::{CustomField, MetaData, NtRef};
 
 /*
     Attachable Object
@@ -15,8 +12,9 @@ use super::{
 #[serde(rename_all = "PascalCase", default)]
 #[builder(setter(into, strip_option), default)]
 struct Attachable {
-    #[serde(flatten)]
-    qb_data: QBObjectData,
+    id: Option<String>,
+    sync_token: Option<String>,
+    meta_data: Option<MetaData>,
     file_name: Option<String>,
     note: Option<String>,
     category: Option<AttachmentCategory>,

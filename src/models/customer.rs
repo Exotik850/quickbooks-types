@@ -2,10 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{
-    common::{Addr, Email, NtRef, PhoneNumber, WebAddr},
-    qb_object_data::QBObjectData,
-};
+use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
 /*
     Customer Object
@@ -17,8 +14,9 @@ use super::{
 #[serde(rename_all = "PascalCase", default)]
 #[builder(setter(into, strip_option), default)]
 struct Customer {
-    #[serde(flatten)]
-    qb_data: QBObjectData,
+    id: Option<String>,
+    sync_token: Option<String>,
+    meta_data: Option<MetaData>,
     display_name: Option<String>,
     title: Option<String>,
     given_name: Option<String>,
@@ -79,7 +77,8 @@ enum TaxExemptStatus {
     AgriculturalProduction,
     IndustrialProductionOrManufacturing,
     ForeignDiplomat,
-    #[default] Other,
+    #[default]
+    Other,
 }
 
 impl From<u8> for TaxExemptStatus {
@@ -100,7 +99,7 @@ impl From<u8> for TaxExemptStatus {
             13 => TaxExemptStatus::AgriculturalProduction,
             14 => TaxExemptStatus::IndustrialProductionOrManufacturing,
             15 => TaxExemptStatus::ForeignDiplomat,
-            _ => TaxExemptStatus::Other
+            _ => TaxExemptStatus::Other,
         }
     }
 }

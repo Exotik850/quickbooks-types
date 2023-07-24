@@ -1,15 +1,18 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{qb_object_data::QBObjectData, common::{Email, PhoneNumber, NtRef, WebAddr, Addr}};
+use super::{
+    common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr},
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
 #[builder(setter(into, strip_option), default)]
 pub struct Vendor {
-    #[serde(flatten)]
-    qb_data: QBObjectData,
+    id: Option<String>,
+    sync_token: Option<String>,
+    meta_data: Option<MetaData>,
     title: Option<String>,
     given_name: Option<String>,
     middle_name: Option<String>,
@@ -18,18 +21,18 @@ pub struct Vendor {
     primary_email_addr: Option<Email>,
     display_name: Option<String>,
     other_contact_info: Option<ContactInfo>,
-    #[serde(rename="APAccountRef")]
+    #[serde(rename = "APAccountRef")]
     ap_account_ref: Option<NtRef>,
     term_ref: Option<NtRef>,
     source: Option<String>,
-    #[serde(rename="GSTIN")]
+    #[serde(rename = "GSTIN")]
     gstin: Option<String>,
-    #[serde(rename="T4AEligible")]
+    #[serde(rename = "T4AEligible")]
     t4a_eligible: Option<bool>,
     fax: Option<PhoneNumber>,
     business_number: Option<String>,
     currency_ref: Option<NtRef>,
-    #[serde(rename="HasTPAR")]
+    #[serde(rename = "HasTPAR")]
     has_tpar: Option<bool>,
     tax_reporting_basis: Option<String>,
     mobile: Option<PhoneNumber>,
@@ -45,11 +48,11 @@ pub struct Vendor {
     vendor_payment_bank_detail: Option<VendorPaymentBankDetail>,
     tax_identifier: Option<String>,
     acct_num: Option<String>,
-    #[serde(rename="GSTRegistrationType")]
+    #[serde(rename = "GSTRegistrationType")]
     gst_registration_type: Option<String>,
     print_check_on_name: Option<String>,
     bill_addr: Option<Addr>,
-    balance: Option<f32>
+    balance: Option<f32>,
 }
 
 // Weird type they used for just this specific object
@@ -58,7 +61,7 @@ pub struct Vendor {
 #[serde(rename_all = "PascalCase", default)]
 #[builder(setter(into, strip_option), default)]
 pub struct ContactInfo {
-    #[serde(rename="Type")]
+    #[serde(rename = "Type")]
     contact_type: Option<String>,
     telephone: Option<PhoneNumber>,
 }

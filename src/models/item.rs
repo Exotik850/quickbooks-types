@@ -1,10 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{
-    common::NtRef,
-    qb_object_data::QBObjectData,
-};
+use super::common::{MetaData, NtRef};
 
 /*
     Item Object
@@ -16,8 +13,9 @@ use super::{
 #[serde(rename_all = "PascalCase", default)]
 #[builder(setter(into, strip_option), default)]
 pub struct Item {
-    #[serde(flatten)]
-    qb_data: QBObjectData,
+    id: Option<String>,
+    sync_token: Option<String>,
+    meta_data: Option<MetaData>,
 
     /// If true, the object is currently enabled for use by QuickBooks.
     pub active: Option<bool>,

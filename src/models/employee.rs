@@ -2,10 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{
-    common::{Addr, Email, PhoneNumber},
-    qb_object_data::QBObjectData,
-};
+use super::common::{Addr, Email, MetaData, PhoneNumber};
 
 /*
     Employee object
@@ -17,8 +14,9 @@ use super::{
 #[serde(rename_all = "PascalCase", default)]
 #[builder(setter(into, strip_option), default)]
 struct Employee {
-    #[serde(flatten)]
-    qb_data: QBObjectData,
+    id: Option<String>,
+    sync_token: Option<String>,
+    meta_data: Option<MetaData>,
     primary_addr: Option<Addr>,
     primary_email_addr: Option<Email>,
     display_name: Option<String>,

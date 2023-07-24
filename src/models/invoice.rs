@@ -3,9 +3,8 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::{
-    common::{Addr, CustomField, Email, LinkedTxn, NtRef, TxnTaxDetail},
+    common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail},
     line::Line,
-    qb_object_data::QBObjectData,
 };
 
 /*
@@ -18,8 +17,9 @@ use super::{
 #[serde(rename_all = "PascalCase", default)]
 #[builder(setter(into, strip_option), default)]
 pub struct Invoice {
-    #[serde(flatten)]
-    qb_data: QBObjectData,
+    id: Option<String>,
+    sync_token: Option<String>,
+    meta_data: Option<MetaData>,
     line: Vec<Line>,
     customer_ref: NtRef,
     txn_date: Option<NaiveDate>,
