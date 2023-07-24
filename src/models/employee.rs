@@ -10,35 +10,36 @@ use super::common::{Addr, Email, MetaData, PhoneNumber};
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[builder(setter(into, strip_option), default)]
-struct Employee {
-    id: Option<String>,
-    sync_token: Option<String>,
-    meta_data: Option<MetaData>,
-    primary_addr: Option<Addr>,
-    primary_email_addr: Option<Email>,
-    display_name: Option<String>,
-    title: Option<String>,
-    billable_time: Option<bool>,
-    given_name: Option<String>,
-    birth_date: Option<NaiveDate>,
-    middle_name: Option<String>,
-    ssn: Option<String>,
-    primary_phone: Option<PhoneNumber>,
-    active: Option<bool>,
-    released_date: Option<NaiveDate>,
-    cost_rate: Option<f64>,
-    mobile: Option<PhoneNumber>,
-    gender: Option<String>,
-    hired_date: Option<NaiveDate>,
-    bill_rate: Option<f64>,
-    organization: Option<bool>,
-    suffix: Option<String>,
-    family_name: Option<String>,
-    print_on_check_name: Option<String>,
-    employee_number: Option<String>,
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+pub struct Employee {
+    pub id: Option<String>,
+    pub sync_token: Option<String>,
+    pub meta_data: Option<MetaData>,
+    pub primary_addr: Option<Addr>,
+    pub primary_email_addr: Option<Email>,
+    pub display_name: Option<String>,
+    pub title: Option<String>,
+    pub billable_time: Option<bool>,
+    pub given_name: Option<String>,
+    pub birth_date: Option<NaiveDate>,
+    pub middle_name: Option<String>,
+    pub ssn: Option<String>,
+    pub primary_phone: Option<PhoneNumber>,
+    pub active: Option<bool>,
+    pub released_date: Option<NaiveDate>,
+    pub cost_rate: Option<f64>,
+    pub mobile: Option<PhoneNumber>,
+    pub gender: Option<String>,
+    pub hired_date: Option<NaiveDate>,
+    pub bill_rate: Option<f64>,
+    pub organization: Option<bool>,
+    pub suffix: Option<String>,
+    pub family_name: Option<String>,
+    pub print_on_check_name: Option<String>,
+    pub employee_number: Option<String>,
     #[serde(rename = "V4IDPseudonym")]
-    v4id_pseudonym: Option<String>,
+    pub v4id_pseudonym: Option<String>,
 }

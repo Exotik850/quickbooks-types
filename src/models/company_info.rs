@@ -10,13 +10,14 @@ use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[builder(setter(into, strip_option), default)]
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
 pub struct CompanyInfo {
-    id: Option<String>,
-    sync_token: Option<String>,
-    meta_data: Option<MetaData>,
+    pub id: Option<String>,
+    pub sync_token: Option<String>,
+    pub meta_data: Option<MetaData>,
     pub company_addr: Option<Addr>,
     pub company_name: Option<String>,
     pub company_start_date: Option<NaiveDate>,

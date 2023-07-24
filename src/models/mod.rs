@@ -1,7 +1,7 @@
 mod account;
 mod attachable;
 mod bill;
-pub(crate) mod common;
+pub mod common;
 mod company_info;
 mod customer;
 mod employee;
@@ -10,7 +10,6 @@ mod invoice;
 mod item;
 mod line;
 mod payment;
-pub(crate) mod qb_object_data;
 mod vendor;
 
 pub use account::*;
@@ -25,3 +24,4 @@ pub use item::*;
 pub use line::*;
 pub use payment::*;
 pub use vendor::*;
+pub use payment::*;

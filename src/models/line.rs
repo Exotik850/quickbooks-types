@@ -10,9 +10,10 @@ use super::common::{LinkedTxn, NtRef};
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[builder(setter(into, strip_option), default)]
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
 pub struct Line {
     #[serde(flatten)]
     pub line_detail: Option<LineDetail>,

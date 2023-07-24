@@ -13,28 +13,29 @@ use super::{
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[builder(setter(into, strip_option), default)]
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
 pub struct Invoice {
-    id: Option<String>,
-    sync_token: Option<String>,
-    meta_data: Option<MetaData>,
-    line: Vec<Line>,
-    customer_ref: NtRef,
-    txn_date: Option<NaiveDate>,
-    domain: Option<String>,
-    print_status: Option<String>,
-    sales_term_ref: Option<NtRef>,
-    total_amt: Option<f32>,
-    due_date: Option<NaiveDate>,
-    sparse: Option<bool>,
-    doc_number: Option<String>,
-    txn_tax_detail: Option<TxnTaxDetail>,
-    linked_txn: Option<Vec<LinkedTxn>>,
-    bill_email: Option<Email>,
-    ship_addr: Option<Addr>,
-    email_status: Option<String>,
-    bill_addr: Option<Addr>,
-    custom_field: Option<Vec<CustomField>>,
+    pub id: Option<String>,
+    pub sync_token: Option<String>,
+    pub meta_data: Option<MetaData>,
+    pub line: Vec<Line>,
+    pub customer_ref: NtRef,
+    pub txn_date: Option<NaiveDate>,
+    pub domain: Option<String>,
+    pub print_status: Option<String>,
+    pub sales_term_ref: Option<NtRef>,
+    pub total_amt: Option<f32>,
+    pub due_date: Option<NaiveDate>,
+    pub sparse: Option<bool>,
+    pub doc_number: Option<String>,
+    pub txn_tax_detail: Option<TxnTaxDetail>,
+    pub linked_txn: Option<Vec<LinkedTxn>>,
+    pub bill_email: Option<Email>,
+    pub ship_addr: Option<Addr>,
+    pub email_status: Option<String>,
+    pub bill_addr: Option<Addr>,
+    pub custom_field: Option<Vec<CustomField>>,
 }

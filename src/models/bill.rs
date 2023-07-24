@@ -13,13 +13,14 @@ use super::{
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[builder(setter(into, strip_option), default)]
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
 pub struct Bill {
-    id: Option<String>,
-    sync_token: Option<String>,
-    meta_data: Option<MetaData>,
+    pub id: Option<String>,
+    pub sync_token: Option<String>,
+    pub meta_data: Option<MetaData>,
     domain: Option<String>,
     #[serde(rename = "APAccountRef")]
     ap_account_ref: Option<NtRef>,

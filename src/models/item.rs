@@ -9,13 +9,14 @@ use super::common::{MetaData, NtRef};
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[builder(setter(into, strip_option), default)]
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
 pub struct Item {
-    id: Option<String>,
-    sync_token: Option<String>,
-    meta_data: Option<MetaData>,
+    pub id: Option<String>,
+    pub sync_token: Option<String>,
+    pub meta_data: Option<MetaData>,
 
     /// If true, the object is currently enabled for use by QuickBooks.
     pub active: Option<bool>,

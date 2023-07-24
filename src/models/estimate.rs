@@ -8,33 +8,34 @@ use super::{
 };
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[builder(setter(into, strip_option), default)]
-struct Estimate {
-    id: Option<String>,
-    sync_token: Option<String>,
-    meta_data: Option<MetaData>,
-    customer_ref: Option<NtRef>,
-    currency_ref: Option<NtRef>,
-    bill_email: Option<Email>,
-    txn_date: Option<NaiveDate>,
-    ship_from_addr: Option<Addr>,
-    ship_date: Option<NaiveDate>,
-    class_ref: Option<NtRef>,
-    custom_field: Option<Vec<CustomField>>,
-    print_status: Option<String>,
-    sales_term_ref: Option<NtRef>,
-    txn_status: Option<String>,
-    global_tax_calculation: Option<String>,
-    accepted_date: Option<NaiveDate>,
-    expiration_date: Option<NaiveDate>,
-    due_date: Option<NaiveDate>,
-    doc_number: Option<String>,
-    private_note: Option<String>,
-    customer_memo: Option<NtRef>,
-    email_status: Option<String>,
-    txn_tax_detail: Option<TxnTaxDetail>,
-    line: Option<Vec<Line>>,
-    linked_txn: Option<Vec<LinkedTxn>>,
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+pub struct Estimate {
+    pub id: Option<String>,
+    pub sync_token: Option<String>,
+    pub meta_data: Option<MetaData>,
+    pub customer_ref: Option<NtRef>,
+    pub currency_ref: Option<NtRef>,
+    pub bill_email: Option<Email>,
+    pub txn_date: Option<NaiveDate>,
+    pub ship_from_addr: Option<Addr>,
+    pub ship_date: Option<NaiveDate>,
+    pub class_ref: Option<NtRef>,
+    pub custom_field: Option<Vec<CustomField>>,
+    pub print_status: Option<String>,
+    pub sales_term_ref: Option<NtRef>,
+    pub txn_status: Option<String>,
+    pub global_tax_calculation: Option<String>,
+    pub accepted_date: Option<NaiveDate>,
+    pub expiration_date: Option<NaiveDate>,
+    pub due_date: Option<NaiveDate>,
+    pub doc_number: Option<String>,
+    pub private_note: Option<String>,
+    pub customer_memo: Option<NtRef>,
+    pub email_status: Option<String>,
+    pub txn_tax_detail: Option<TxnTaxDetail>,
+    pub line: Option<Vec<Line>>,
+    pub linked_txn: Option<Vec<LinkedTxn>>,
 }
