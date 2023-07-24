@@ -4,8 +4,9 @@ use serde_with::skip_serializing_none;
 use super::{qb_object_data::QBObjectData, common::{Email, PhoneNumber, NtRef, WebAddr, Addr}};
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct Vendor {
     #[serde(flatten)]
     qb_data: QBObjectData,
@@ -53,9 +54,10 @@ pub struct Vendor {
 
 // Weird type they used for just this specific object
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
-struct ContactInfo {
+#[builder(setter(into, strip_option), default)]
+pub struct ContactInfo {
     #[serde(rename="Type")]
     contact_type: Option<String>,
     telephone: Option<PhoneNumber>,
@@ -63,9 +65,10 @@ struct ContactInfo {
 
 // Another one
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
-struct VendorPaymentBankDetail {
+#[builder(setter(into, strip_option), default)]
+pub struct VendorPaymentBankDetail {
     bank_account_name: Option<String>,
     bank_branch_identifier: Option<String>,
     bank_account_number: Option<String>,

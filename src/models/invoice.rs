@@ -14,8 +14,9 @@ use super::{
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct Invoice {
     #[serde(flatten)]
     qb_data: QBObjectData,

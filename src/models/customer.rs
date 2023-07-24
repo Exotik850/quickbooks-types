@@ -13,8 +13,9 @@ use super::{
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 struct Customer {
     #[serde(flatten)]
     qb_data: QBObjectData,
@@ -59,7 +60,8 @@ struct Customer {
     tax_exemption_reason_id: Option<TaxExemptStatus>,
 }
 
-#[derive(Copy, Clone, Debug, Deserialize, Serialize, PartialEq)]
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(from = "u8", into = "u8")]
 enum TaxExemptStatus {
     FederalGovernment,
@@ -77,6 +79,7 @@ enum TaxExemptStatus {
     AgriculturalProduction,
     IndustrialProductionOrManufacturing,
     ForeignDiplomat,
+    #[default] Other,
 }
 
 impl From<u8> for TaxExemptStatus {
@@ -97,7 +100,7 @@ impl From<u8> for TaxExemptStatus {
             13 => TaxExemptStatus::AgriculturalProduction,
             14 => TaxExemptStatus::IndustrialProductionOrManufacturing,
             15 => TaxExemptStatus::ForeignDiplomat,
-            e => panic!("Unknown Tax Exempt Code: {e}"),
+            _ => TaxExemptStatus::Other
         }
     }
 }
@@ -105,6 +108,7 @@ impl From<u8> for TaxExemptStatus {
 impl Into<u8> for TaxExemptStatus {
     fn into(self) -> u8 {
         match self {
+            TaxExemptStatus::Other => 0,
             TaxExemptStatus::FederalGovernment => 1,
             TaxExemptStatus::StateGovernment => 2,
             TaxExemptStatus::LocalGovernment => 3,

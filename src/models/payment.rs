@@ -4,9 +4,11 @@ use serde_with::skip_serializing_none;
 
 use super::{common::NtRef, qb_object_data::QBObjectData, Line};
 
+
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 struct Payment {
     #[serde(flatten)]
     qb_data: QBObjectData,
@@ -30,16 +32,18 @@ struct Payment {
 }
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 struct CreditCardPayment {
     credit_charge_response: Option<CreditChargeResponse>,
     credit_charge_info: Option<CreditChargeInfo>,
 }
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 struct CreditChargeResponse {
     status: Option<CCPaymentStatus>,
     auth_code: Option<String>,
@@ -56,8 +60,9 @@ enum CCPaymentStatus {
 }
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 struct CreditChargeInfo {
     cc_expiry_month: Option<u32>,
     process_payment: Option<bool>,

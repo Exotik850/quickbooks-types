@@ -1,5 +1,6 @@
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
 
 use super::{
     common::{LinkedTxn, NtRef},
@@ -12,8 +13,10 @@ use super::{
     https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/bill
 */
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, PartialEq)]
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct Bill {
     #[serde(flatten)]
     qb_data: QBObjectData,

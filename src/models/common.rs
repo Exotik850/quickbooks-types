@@ -11,8 +11,9 @@ use super::Line;
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct NtRef {
     // Reference Type
     #[serde(rename = "type")]
@@ -31,15 +32,17 @@ pub struct MetaData {
 }
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct Email {
     pub address: Option<String>,
 }
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct Addr {
     pub city: Option<String>,
     pub country: Option<String>,
@@ -57,8 +60,9 @@ pub struct WebAddr {
 }
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct PhoneNumber {
     pub free_form_number: Option<String>,
 }
@@ -80,16 +84,18 @@ impl std::fmt::Display for Addr {
 }
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct LinkedTxn {
     pub txn_id: Option<String>,
     pub txn_type: Option<String>,
 }
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct CustomField {
     definition_id: Option<String>,
     string_value: Option<String>,
@@ -99,8 +105,9 @@ pub struct CustomField {
 }
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct MarkupInfo {
     percent_based: Option<bool>,
     value: Option<f32>,

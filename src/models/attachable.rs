@@ -10,10 +10,10 @@ use super::{
     Attachable Object
     https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/attachable
 */
-
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 struct Attachable {
     #[serde(flatten)]
     qb_data: QBObjectData,
@@ -43,10 +43,10 @@ enum AttachmentCategory {
     #[default]
     Other,
 }
-
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
 #[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 struct AttachableRef {
     include_on_send: Option<bool>,
     line_info: Option<String>,

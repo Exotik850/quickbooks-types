@@ -9,8 +9,9 @@ use super::{common::NtRef, qb_object_data::QBObjectData};
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(default, rename_all = "PascalCase")]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default, Builder)]
+#[serde(rename_all = "PascalCase", default)]
+#[builder(setter(into, strip_option), default)]
 pub struct Account {
     #[serde(flatten)]
     qb_data: QBObjectData,
