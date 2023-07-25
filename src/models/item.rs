@@ -1,3 +1,4 @@
+use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
@@ -61,7 +62,19 @@ pub struct Item {
     /// * system defined
     pub fully_qualified_name: Option<String>,
     pub income_account_ref: Option<NtRef>,
-    pub inv_start_date: Option<String>,
+    pub inv_start_date: Option<NaiveDate>,
+    pub sales_tax_included: Option<bool>,
+    pub sales_tax_code_ref: Option<NtRef>,
+    pub class_ref: Option<NtRef>,
+    pub source: Option<String>,
+    pub purcjase_tax_included: Option<bool>,
+    pub reorder_point: Option<f32>,
+    pub purchase_dec: Option<String>,
+    pub pref_vendor_ref: Option<NtRef>,
+    pub purchase_tax_code_ref: Option<NtRef>,
+    pub purchase_cost: Option<f64>,
+    pub parent_ref: Option<NtRef>,
+    pub tax_classification_ref: Option<NtRef>,
 
     /// Classification that specifies the use of this item.
     /// Available when endpoint is evoked with the minorversion=3 query parameter.
@@ -74,8 +87,6 @@ pub struct Item {
     pub item_type: Option<String>,
     pub level: Option<i64>,
     pub name: Option<String>,
-    pub parent_ref: Option<NtRef>,
-    pub purchase_cost: Option<f32>,
     pub purchase_desc: Option<String>,
     pub qty_on_hand: Option<i64>,
     pub sku: Option<String>,

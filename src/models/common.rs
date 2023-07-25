@@ -132,3 +132,17 @@ pub struct TxnTaxDetail {
     total_tax: Option<f32>,
     tax_line: Option<Vec<Line>>,
 }
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+pub enum PrintStatus {
+    #[default] NotSet,
+    NeedToPrint,
+    PrintComplete
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+pub enum EmailStatus {
+    #[default] NotSent,
+    NeedToSend,
+    EmailSent
+}

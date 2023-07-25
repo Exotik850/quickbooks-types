@@ -4,10 +4,11 @@ extern crate derive_builder;
 
 pub mod models;
 use models::*;
-use models::common::MetaData;
+use models::common::{MetaData, Email};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 use std::fmt::Display;
+use const_str::convert_ascii_case; 
 
 pub trait QBItem
 where Self: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned
@@ -16,7 +17,7 @@ where Self: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned
     fn sync_token(&self) -> Option<String>;
     fn meta_data(&self) -> Option<MetaData>;
     fn name() -> &'static str;
-    fn qb_id() -> String;
+    fn qb_id() -> &'static str;
 }
 
 macro_rules! impl_qb_data {
@@ -41,8 +42,8 @@ macro_rules! impl_qb_data {
                 }
 
                 #[inline]
-                fn qb_id() -> String {
-                    Self::name().to_lowercase()
+                fn qb_id() -> &'static str {
+                    convert_ascii_case!(lower, stringify!($x))
                 }
             }
 
@@ -56,3 +57,7 @@ macro_rules! impl_qb_data {
 }
 
 impl_qb_data!(Invoice, Vendor, Payment, Item, Estimate, Employee, Customer, CompanyInfo, Bill, Attachable, Account);
+
+pub trait QBSendable {
+    fn bill_email(&self) -> Option<Email>;
+}
