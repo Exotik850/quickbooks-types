@@ -6,16 +6,17 @@ pub mod models;
 use models::*;
 use models::common::MetaData;
 use serde::Serialize;
+use serde::de::DeserializeOwned;
 use std::fmt::Display;
 
-pub trait QBItem 
-where Self: Serialize + Default + Clone + PartialEq
+pub trait QBItem
+where Self: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned
 {
     fn id(&self) -> Option<String>;
     fn sync_token(&self) -> Option<String>;
     fn meta_data(&self) -> Option<MetaData>;
-    fn name(&self) -> &str;
-    fn qb_id(&self) -> String;
+    fn name() -> &'static str;
+    fn qb_id() -> String;
 }
 
 macro_rules! impl_qb_data {
@@ -35,19 +36,19 @@ macro_rules! impl_qb_data {
                 }
 
                 #[inline]
-                fn name(&self) -> &str {
+                fn name() -> &'static str {
                     stringify!($x)
                 }
 
                 #[inline]
-                fn qb_id(&self) -> String {
-                    self.name().to_lowercase()
+                fn qb_id() -> String {
+                    Self::name().to_lowercase()
                 }
             }
 
             impl Display for $x {
                 fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                    write!(f, "{} : {}", self.name(), serde_json::to_string_pretty(self).unwrap())
+                    write!(f, "{} : {}", Self::name(), serde_json::to_string_pretty(self).unwrap())
                 }
             }
         )+
