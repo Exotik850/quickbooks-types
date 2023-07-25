@@ -142,7 +142,8 @@ pub enum PrintStatus {
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum EmailStatus {
-    #[default] NotSent,
+    #[default] NotSet,
+    NotSent,
     NeedToSend,
     EmailSent
 }
