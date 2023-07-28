@@ -7,11 +7,11 @@ use models::*;
 use models::common::{MetaData, Email};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
-use std::fmt::Display;
+use std::fmt::{Display, Debug};
 use const_str::convert_ascii_case; 
 
 pub trait QBItem
-where Self: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned
+where Self: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned + Debug
 {
     fn id(&self) -> Option<String>;
     fn sync_token(&self) -> Option<String>;
