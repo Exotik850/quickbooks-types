@@ -58,6 +58,7 @@ macro_rules! impl_qb_data {
 
 impl_qb_data!(Invoice, Vendor, Payment, Item, Estimate, Employee, Customer, CompanyInfo, Bill, Attachable, Account);
 
+// TODO MAKE SPECIAL TRAITS FOR THE OTHER FUNCTIONS
 pub trait QBSendable {
     fn bill_email(&self) -> Option<Email>;
 }
