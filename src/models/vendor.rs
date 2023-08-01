@@ -1,13 +1,15 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use crate::QBCreatable;
+
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct Vendor {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -58,8 +60,8 @@ pub struct Vendor {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct ContactInfo {
     #[serde(rename = "Type")]
     contact_type: Option<String>,
@@ -70,11 +72,22 @@ pub struct ContactInfo {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct VendorPaymentBankDetail {
     bank_account_name: Option<String>,
     bank_branch_identifier: Option<String>,
     bank_account_number: Option<String>,
     statement_text: Option<String>,
+}
+
+impl QBCreatable for Vendor {
+    fn can_create(&self) -> bool {
+        self.display_name.is_some()
+            || self.suffix.is_some()
+            || self.title.is_some()
+            || self.middle_name.is_some()
+            || self.family_name.is_some()
+            || self.given_name.is_some()
+    }
 }

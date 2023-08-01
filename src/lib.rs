@@ -1,17 +1,18 @@
-#[cfg(feature="builder")]
+#[cfg(feature = "builder")]
 #[macro_use]
 extern crate derive_builder;
 
 mod models;
+use const_str::convert_ascii_case;
+use models::common::MetaData;
 pub use models::*;
-use models::common::{MetaData, Email};
-use serde::Serialize;
 use serde::de::DeserializeOwned;
-use std::fmt::{Display, Debug};
-use const_str::convert_ascii_case; 
+use serde::Serialize;
+use std::fmt::{Debug, Display};
 
 pub trait QBItem
-where Self: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned + Debug
+where
+    Self: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned + Debug,
 {
     fn id(&self) -> Option<String>;
     fn sync_token(&self) -> Option<&String>;
@@ -27,11 +28,11 @@ macro_rules! impl_qb_data {
                 fn id(&self) -> Option<String> {
                     self.id.clone()
                 }
-                
+
                 fn sync_token(&self) -> Option<&String> {
                     self.sync_token.as_ref()
                 }
-                
+
                 fn meta_data(&self) -> Option<&MetaData> {
                     self.meta_data.as_ref()
                 }
@@ -56,9 +57,141 @@ macro_rules! impl_qb_data {
    }
 }
 
-impl_qb_data!(Invoice, Vendor, Payment, Item, Estimate, Employee, Customer, CompanyInfo, Bill, Attachable, Account, SalesReceipt);
+impl_qb_data!(
+    Invoice,
+    Vendor,
+    Payment,
+    Item,
+    Estimate,
+    Employee,
+    Customer,
+    CompanyInfo,
+    Bill,
+    Attachable,
+    Account,
+    SalesReceipt
+);
 
-// TODO MAKE SPECIAL TRAITS FOR THE OTHER FUNCTIONS
-pub trait QBSendable {
-    fn bill_email(&self) -> Option<Email>;
+pub trait QBCreatable {
+    fn can_create(&self) -> bool;
 }
+
+pub trait QBReadable: QBItem {
+    fn can_read(&self) -> bool;
+}
+
+impl<T: QBItem> QBReadable for T {
+    fn can_read(&self) -> bool {
+        !self.id().is_none()
+    }
+}
+
+pub trait QBQueryable: QBItem {}
+impl<T: QBItem> QBQueryable for T {}
+
+pub trait QBDeletable {
+    fn can_delete(&self) -> bool;
+}
+
+pub trait QBVoidable {
+    fn can_void(&self) -> bool;
+}
+
+pub trait QBFullUpdatable {
+    fn can_full_update(&self) -> bool;
+}
+
+pub trait QBSparseUpdateable {
+    fn can_sparse_update(&self) -> bool;
+}
+
+pub trait QBSendable {
+    fn can_send(&self) -> bool;
+}
+
+pub trait QBPDFable {
+    fn can_get_pdf(&self) -> bool;
+}
+
+/*
+Create: ✓
+- Account
+- Bill
+- Customer
+- Employee
+- Estimate
+- Invoice
+- Item (Category)
+- Payment
+- Sales Receipt
+- Vendor
+Read:
+- Attachable
+- Account
+- Bill
+- CompanyInfo
+- Customer
+- Employee
+- Estimate
+- Invoice
+- Item (Category, Bundle)
+- Sales Receipt
+- Vendor
+Query:
+- Attachable
+- Account
+- Bill
+- CompanyInfo
+- Customer
+- Employee
+- Estimate
+- Invoice
+- Item (Category, Bundle)
+- Payment
+- Sales Receipt
+- Vendor
+Delete:
+- Attachable
+- Bill
+- Estimate
+- Invoice
+- Payment
+- Sales Receipt
+Void:
+- Invoice
+- Payment
+- Sales Receipt
+Full Update:
+- Account
+- Attachable
+- Bill
+- CompanyInfo
+- Customer
+- Employee
+- Estimate
+- Invoice
+- Item (Category)
+- Payment
+- Sales Receipt
+- Vendor
+Sparse Update:
+- CompanyInfo
+- Customer
+- Estimate
+- Invoice
+- Sales Receipt
+Send:
+- Account
+- Estimate
+- Invoice
+- Payment
+- Sales Receipt
+Get as PDF:
+- Estimate
+- Invoice
+- Payment
+- Sales Receipt
+
+- Attachment has three other actions that are unique
+
+*/

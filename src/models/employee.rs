@@ -2,6 +2,8 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use crate::QBCreatable;
+
 use super::common::{Addr, Email, MetaData, PhoneNumber};
 
 /*
@@ -12,8 +14,8 @@ use super::common::{Addr, Email, MetaData, PhoneNumber};
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct Employee {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -42,4 +44,10 @@ pub struct Employee {
     pub employee_number: Option<String>,
     #[serde(rename = "V4IDPseudonym")]
     pub v4id_pseudonym: Option<String>,
+}
+
+impl QBCreatable for Employee {
+    fn can_create(&self) -> bool {
+        self.given_name.is_some() || self.family_name.is_some()
+    }
 }

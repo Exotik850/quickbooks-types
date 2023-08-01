@@ -10,8 +10,8 @@ mod invoice;
 mod item;
 mod line;
 mod payment;
-mod vendor;
 mod sales_receipt;
+mod vendor;
 
 pub use account::*;
 pub use attachable::*;
@@ -24,6 +24,6 @@ pub use invoice::*;
 pub use item::*;
 pub use line::*;
 pub use payment::*;
-pub use vendor::*;
 pub use payment::*;
 pub use sales_receipt::*;
+pub use vendor::*;

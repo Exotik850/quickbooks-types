@@ -2,6 +2,8 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use crate::QBCreatable;
+
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
 /*
@@ -12,8 +14,8 @@ use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct Customer {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -125,5 +127,16 @@ impl Into<u8> for TaxExemptStatus {
             TaxExemptStatus::IndustrialProductionOrManufacturing => 14,
             TaxExemptStatus::ForeignDiplomat => 15,
         }
+    }
+}
+
+impl QBCreatable for Customer {
+    fn can_create(&self) -> bool {
+        self.display_name.is_some()
+            || self.suffix.is_some()
+            || self.title.is_some()
+            || self.middle_name.is_some()
+            || self.family_name.is_some()
+            || self.given_name.is_some()
     }
 }

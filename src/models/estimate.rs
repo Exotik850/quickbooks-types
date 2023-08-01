@@ -2,6 +2,8 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use crate::QBCreatable;
+
 use super::{
     common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail},
     Line,
@@ -10,8 +12,8 @@ use super::{
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct Estimate {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -50,4 +52,10 @@ pub struct Estimate {
     pub tax_exemption_ref: Option<NtRef>,
     pub home_total_amt: Option<f32>,
     pub free_form_address: Option<bool>,
+}
+
+impl QBCreatable for Estimate {
+    fn can_create(&self) -> bool {
+        self.line.is_some() && self.customer_ref.is_some()
+    }
 }

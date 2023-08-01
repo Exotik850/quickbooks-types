@@ -2,6 +2,8 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use crate::QBCreatable;
+
 use super::common::{MetaData, NtRef};
 
 /*
@@ -12,8 +14,8 @@ use super::common::{MetaData, NtRef};
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct Item {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -96,4 +98,11 @@ pub struct Item {
     pub taxable: Option<bool>,
     pub track_qty_on_hand: Option<bool>,
     pub unit_price: Option<f32>,
+}
+
+// TODO More conditions for creating items
+impl QBCreatable for Item {
+    fn can_create(&self) -> bool {
+        self.name.is_some()
+    }
 }

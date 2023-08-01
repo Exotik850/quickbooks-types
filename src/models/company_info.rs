@@ -12,8 +12,8 @@ use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct CompanyInfo {
     pub id: Option<String>,
     pub sync_token: Option<String>,

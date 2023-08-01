@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use crate::QBCreatable;
+
 use super::common::{MetaData, NtRef};
 
 /*
@@ -11,8 +13,8 @@ use super::common::{MetaData, NtRef};
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct Account {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -40,4 +42,10 @@ pub struct Account {
 pub enum AccountType {
     #[default]
     TODO, // TODO Make this
+}
+
+impl QBCreatable for Account {
+    fn can_create(&self) -> bool {
+        self.name.is_some() && (self.account_type.is_some() || self.account_sub_type.is_some())
+    }
 }

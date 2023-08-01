@@ -2,8 +2,11 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use super::common::{
+    Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn,
+    MetaData, NtRef, PrintStatus, TxnTaxDetail,
+};
 use super::Line;
-use super::common::{NtRef, Email, Addr, CustomField, PrintStatus, LinkedTxn, GlobalTaxCalculation, CreditCardPayment, TxnTaxDetail, MetaData, DeliveryInfo};
 
 /*
     Sales Receipt Object:
@@ -13,8 +16,8 @@ use super::common::{NtRef, Email, Addr, CustomField, PrintStatus, LinkedTxn, Glo
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct SalesReceipt {
     pub id: Option<String>,
     pub line: Option<Vec<Line>>,

@@ -2,8 +2,13 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use crate::QBCreatable;
+
 use super::{
-    common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail, PrintStatus, EmailStatus, DeliveryInfo},
+    common::{
+        Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef,
+        PrintStatus, TxnTaxDetail,
+    },
     line::Line,
 };
 
@@ -15,8 +20,8 @@ use super::{
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct Invoice {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -27,9 +32,9 @@ pub struct Invoice {
     pub class_ref: Option<NtRef>,
     pub txn_source: Option<String>,
     pub deposit_to_account_ref: Option<NtRef>,
-    #[serde(rename="AllowOnlineACHPayment")]
+    #[serde(rename = "AllowOnlineACHPayment")]
     pub allow_online_ach_payment: Option<bool>,
-    pub line: Vec<Line>,
+    pub line: Option<Vec<Line>>,
     pub private_note: Option<String>,
     pub delivery_info: Option<DeliveryInfo>,
     pub bill_email_cc: Option<Email>,
@@ -64,4 +69,10 @@ pub struct Invoice {
     pub ship_addr: Option<Addr>,
     pub bill_addr: Option<Addr>,
     pub custom_field: Option<Vec<CustomField>>,
+}
+
+impl QBCreatable for Invoice {
+    fn can_create(&self) -> bool {
+        self.customer_ref.is_some() && self.line.is_some()
+    }
 }

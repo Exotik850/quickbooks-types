@@ -13,8 +13,8 @@ use super::Line;
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct NtRef {
     // Reference Type
     #[serde(rename = "type")]
@@ -35,8 +35,8 @@ pub struct MetaData {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct Email {
     pub address: Option<String>,
 }
@@ -44,8 +44,8 @@ pub struct Email {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct Addr {
     pub city: Option<String>,
     pub country: Option<String>,
@@ -81,8 +81,8 @@ pub struct WebAddr {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct PhoneNumber {
     pub free_form_number: Option<String>,
 }
@@ -90,8 +90,8 @@ pub struct PhoneNumber {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct LinkedTxn {
     pub txn_id: Option<String>,
     pub txn_type: Option<String>,
@@ -100,8 +100,8 @@ pub struct LinkedTxn {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct CustomField {
     definition_id: Option<String>,
     string_value: Option<String>,
@@ -113,8 +113,8 @@ pub struct CustomField {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct MarkupInfo {
     percent_based: Option<bool>,
     value: Option<f32>,
@@ -125,8 +125,8 @@ pub struct MarkupInfo {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct TxnTaxDetail {
     txn_tax_code_ref: Option<NtRef>,
     total_tax: Option<f32>,
@@ -144,8 +144,8 @@ pub struct DeliveryInfo {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct CreditCardPayment {
     credit_charge_response: Option<CreditChargeResponse>,
     credit_charge_info: Option<CreditChargeInfo>,
@@ -154,8 +154,8 @@ pub struct CreditCardPayment {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct CreditChargeResponse {
     status: Option<CCPaymentStatus>,
     auth_code: Option<String>,
@@ -174,8 +174,8 @@ pub enum CCPaymentStatus {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", derive(Builder))]
+#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct CreditChargeInfo {
     cc_expiry_month: Option<u32>,
     process_payment: Option<bool>,
@@ -190,17 +190,19 @@ pub struct CreditChargeInfo {
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum PrintStatus {
-    #[default] NotSet,
+    #[default]
+    NotSet,
     NeedToPrint,
-    PrintComplete
+    PrintComplete,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum EmailStatus {
-    #[default] NotSet,
+    #[default]
+    NotSet,
     NotSent,
     NeedToSend,
-    EmailSent
+    EmailSent,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -209,5 +211,7 @@ pub enum GlobalTaxCalculation {
     FranceOverseas,
     OutsideFranceWithEU,
     OutsideEU,
-    #[default] #[serde(skip)] Other,
+    #[default]
+    #[serde(skip)]
+    Other,
 }
