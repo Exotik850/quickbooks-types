@@ -19,9 +19,9 @@ pub struct NtRef {
     // Reference Type
     #[serde(rename = "type")]
     pub entity_ref_type: Option<String>,
-    #[serde(alias = "Name")]
+    #[serde(alias = "name")]
     pub name: Option<String>,
-    #[serde(alias = "Value")]
+    #[serde(alias = "value")]
     pub value: Option<String>,
 }
 
@@ -55,22 +55,6 @@ pub struct Addr {
     pub postal_code: Option<String>,
 }
 
-#[skip_serializing_none]
-#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-pub struct WebAddr {
-    #[serde(default, rename = "URL")]
-    url: Option<String>,
-}
-
-#[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
-#[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature="builder", derive(Builder))]
-#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
-pub struct PhoneNumber {
-    pub free_form_number: Option<String>,
-}
-
 impl std::fmt::Display for Addr {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(
@@ -85,6 +69,22 @@ impl std::fmt::Display for Addr {
             self.postal_code.as_ref().unwrap_or(&"".to_owned())
         )
     }
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+pub struct WebAddr {
+    #[serde(default, rename = "URL")]
+    url: Option<String>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[serde(rename_all = "PascalCase", default)]
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+pub struct PhoneNumber {
+    pub free_form_number: Option<String>,
 }
 
 #[skip_serializing_none]
@@ -133,6 +133,61 @@ pub struct TxnTaxDetail {
     tax_line: Option<Vec<Line>>,
 }
 
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[serde(rename_all = "PascalCase", default)]
+pub struct DeliveryInfo {
+    delivery_type: String,
+    delivery_time: DateTime<Utc>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[serde(rename_all = "PascalCase", default)]
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+pub struct CreditCardPayment {
+    credit_charge_response: Option<CreditChargeResponse>,
+    credit_charge_info: Option<CreditChargeInfo>,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[serde(rename_all = "PascalCase", default)]
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+pub struct CreditChargeResponse {
+    status: Option<CCPaymentStatus>,
+    auth_code: Option<String>,
+    txn_authorization_time: Option<DateTime<Utc>>,
+    #[serde(rename = "CCTransId")]
+    cc_trans_id: Option<String>,
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+pub enum CCPaymentStatus {
+    Completed,
+    #[default]
+    Unkown,
+}
+
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[serde(rename_all = "PascalCase", default)]
+#[cfg_attr(feature="builder", derive(Builder))]
+#[cfg_attr(feature="builder", builder(setter(into, strip_option), default))]
+pub struct CreditChargeInfo {
+    cc_expiry_month: Option<u32>,
+    process_payment: Option<bool>,
+    postal_code: Option<String>,
+    amount: Option<f32>,
+    name_on_acct: Option<String>,
+    cc_expiry_year: Option<u32>,
+    #[serde(rename = "type")]
+    card_type: Option<String>,
+    bill_addr_street: Option<String>,
+}
+
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum PrintStatus {
     #[default] NotSet,
@@ -146,4 +201,13 @@ pub enum EmailStatus {
     NotSent,
     NeedToSend,
     EmailSent
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+pub enum GlobalTaxCalculation {
+    WithinFrance,
+    FranceOverseas,
+    OutsideFranceWithEU,
+    OutsideEU,
+    #[default] #[serde(skip)] Other,
 }

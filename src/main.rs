@@ -1,4 +1,4 @@
-use quickbooks_types::models::VendorBuilder;
+use quickbooks_types::VendorBuilder;
 
 fn main() {
     let ven = VendorBuilder::default().title("Nana").build().unwrap();

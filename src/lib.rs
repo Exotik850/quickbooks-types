@@ -2,8 +2,8 @@
 #[macro_use]
 extern crate derive_builder;
 
-pub mod models;
-use models::*;
+mod models;
+pub use models::*;
 use models::common::{MetaData, Email};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
@@ -14,8 +14,8 @@ pub trait QBItem
 where Self: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned + Debug
 {
     fn id(&self) -> Option<String>;
-    fn sync_token(&self) -> Option<String>;
-    fn meta_data(&self) -> Option<MetaData>;
+    fn sync_token(&self) -> Option<&String>;
+    fn meta_data(&self) -> Option<&MetaData>;
     fn name() -> &'static str;
     fn qb_id() -> &'static str;
 }
@@ -28,12 +28,12 @@ macro_rules! impl_qb_data {
                     self.id.clone()
                 }
                 
-                fn sync_token(&self) -> Option<String> {
-                    self.sync_token.clone()
+                fn sync_token(&self) -> Option<&String> {
+                    self.sync_token.as_ref()
                 }
                 
-                fn meta_data(&self) -> Option<MetaData> {
-                    self.meta_data.clone()
+                fn meta_data(&self) -> Option<&MetaData> {
+                    self.meta_data.as_ref()
                 }
 
                 #[inline]
@@ -56,7 +56,7 @@ macro_rules! impl_qb_data {
    }
 }
 
-impl_qb_data!(Invoice, Vendor, Payment, Item, Estimate, Employee, Customer, CompanyInfo, Bill, Attachable, Account);
+impl_qb_data!(Invoice, Vendor, Payment, Item, Estimate, Employee, Customer, CompanyInfo, Bill, Attachable, Account, SalesReceipt);
 
 // TODO MAKE SPECIAL TRAITS FOR THE OTHER FUNCTIONS
 pub trait QBSendable {

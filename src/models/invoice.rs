@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::{
-    common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail, PrintStatus, EmailStatus},
+    common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail, PrintStatus, EmailStatus, DeliveryInfo},
     line::Line,
 };
 
@@ -31,6 +31,7 @@ pub struct Invoice {
     pub allow_online_ach_payment: Option<bool>,
     pub line: Vec<Line>,
     pub private_note: Option<String>,
+    pub delivery_info: Option<DeliveryInfo>,
     pub bill_email_cc: Option<Email>,
     pub bill_email_bcc: Option<Email>,
     pub ship_method_reef: Option<NtRef>,
