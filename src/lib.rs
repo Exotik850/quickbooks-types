@@ -4,17 +4,16 @@ extern crate derive_builder;
 
 mod models;
 use const_str::convert_ascii_case;
-use models::common::MetaData;
+use models::common::{MetaData, NtRef};
 pub use models::*;
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 use std::fmt::{Debug, Display};
 
-pub trait QBItem
-where
-    Self: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned + Debug,
+pub trait QBItem: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned + Debug
 {
-    fn id(&self) -> Option<String>;
+    fn id(&self) -> Option<&String>;
+    fn clone_id(&self) -> Option<String>;
     fn sync_token(&self) -> Option<&String>;
     fn meta_data(&self) -> Option<&MetaData>;
     fn name() -> &'static str;
@@ -25,7 +24,11 @@ macro_rules! impl_qb_data {
     ($($x:ident),+) => {
         $(
             impl QBItem for $x {
-                fn id(&self) -> Option<String> {
+                fn id(&self) -> Option<&String> {
+                    self.id.as_ref()
+                }
+                
+                fn clone_id(&self) -> Option<String> {
                     self.id.clone()
                 }
 
@@ -82,7 +85,7 @@ pub trait QBReadable: QBItem {
 
 impl<T: QBItem> QBReadable for T {
     fn can_read(&self) -> bool {
-        !self.id().is_none()
+        self.id().is_some()
     }
 }
 
@@ -111,6 +114,20 @@ pub trait QBSendable {
 
 pub trait QBPDFable {
     fn can_get_pdf(&self) -> bool;
+}
+
+pub trait QBToRef {
+    fn ref_name(&self) -> Option<&String>;
+}
+
+impl<T: QBItem + QBToRef> From<T> for NtRef {
+    fn from(value: T) -> Self {
+        NtRef { 
+            entity_ref_type: Some(T::name().into()), 
+            name: Some(value.ref_name().unwrap().to_owned()), 
+            value: value.clone_id() 
+        }
+    }
 }
 
 /*

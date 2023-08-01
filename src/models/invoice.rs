@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::QBCreatable;
+use crate::{QBCreatable, QBToRef};
 
 use super::{
     common::{
@@ -74,5 +74,11 @@ pub struct Invoice {
 impl QBCreatable for Invoice {
     fn can_create(&self) -> bool {
         self.customer_ref.is_some() && self.line.is_some()
+    }
+}
+
+impl QBToRef for Invoice {
+    fn ref_name(&self) -> Option<&String> {
+        self.doc_number.as_ref()
     }
 }

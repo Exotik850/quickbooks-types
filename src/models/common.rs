@@ -12,7 +12,7 @@ use super::Line;
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
-#[serde(rename_all = "PascalCase", default)]
+#[serde(default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
 #[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct NtRef {
