@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::QBCreatable;
+use crate::{QBCreatable, QBToRef};
 
 use super::common::{MetaData, NtRef};
 
@@ -104,5 +104,11 @@ pub struct Item {
 impl QBCreatable for Item {
     fn can_create(&self) -> bool {
         self.name.is_some()
+    }
+}
+
+impl QBToRef for Item {
+    fn ref_name(&self) -> Option<&String> {
+        self.name.as_ref()
     }
 }
