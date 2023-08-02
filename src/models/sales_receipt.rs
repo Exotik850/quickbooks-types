@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::QBToRef;
+use crate::{QBToRef, QBCreatable};
 
 use super::common::{
     Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn,
@@ -62,5 +62,15 @@ pub struct SalesReceipt {
 impl QBToRef for SalesReceipt {
     fn ref_name(&self) -> Option<&String> {
         self.doc_number.as_ref()
+    }
+}
+
+impl QBCreatable for SalesReceipt {
+    fn can_create(&self) -> bool {
+        if let Some(data) = &self.line {
+            data.iter().all(|c| c.can_create())
+        } else {
+            false
+        }
     }
 }

@@ -73,7 +73,11 @@ pub struct Invoice {
 
 impl QBCreatable for Invoice {
     fn can_create(&self) -> bool {
-        self.customer_ref.is_some() && self.line.is_some()
+        if let Some(data) = &self.line {
+            self.customer_ref.is_some() && data.iter().all(|c| c.can_create())
+        } else {
+            false
+        }
     }
 }
 

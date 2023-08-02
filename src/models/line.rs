@@ -2,6 +2,8 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize, ser::SerializeStruct};
 use serde_with::skip_serializing_none;
 
+use crate::QBCreatable;
+
 use super::common::{LinkedTxn, NtRef};
 
 /*
@@ -21,6 +23,12 @@ pub struct Line {
     pub description: Option<String>,
     pub id: Option<String>,
     pub linked_txn: Option<Vec<LinkedTxn>>,
+}
+
+impl QBCreatable for Line {
+    fn can_create(&self) -> bool {
+        self.line_detail.is_some() && self.amount.is_some()
+    }
 }
 
 impl Serialize for LineDetail {
