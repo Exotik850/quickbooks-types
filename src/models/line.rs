@@ -1,5 +1,5 @@
 use chrono::{DateTime, Utc};
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize, ser::SerializeStruct};
 use serde_with::skip_serializing_none;
 
 use super::common::{LinkedTxn, NtRef};
@@ -10,7 +10,7 @@ use super::common::{LinkedTxn, NtRef};
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
 #[cfg_attr(feature = "builder", builder(setter(into), default))]
@@ -23,8 +23,57 @@ pub struct Line {
     pub linked_txn: Option<Vec<LinkedTxn>>,
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
-#[serde(tag = "DetailType")]
+impl Serialize for LineDetail {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer {
+        let mut state = serializer.serialize_struct("LineDetail", 2)?;
+        
+        // TODO Make this more generic, although there won't be more types to add in the future most likely
+        let detail_type = match self {
+            LineDetail::SalesItemLineDetail(data) => {
+                state.serialize_field("SalesItemLineDetail", data)?;
+                "SalesItemLineDetail"
+            },
+            LineDetail::GroupLineDetail(data) => {
+                state.serialize_field("GroupLineDetail", data)?;
+                "GroupLineDetail"
+            },
+            LineDetail::DescriptionLineDetail(data) => {
+                state.serialize_field("DescriptionLineDetail", data)?;
+                "DescriptionLineDetail"
+            },
+            LineDetail::DiscountLineDetail(data) => {
+                state.serialize_field("DiscountLineDetail", data)?;
+                "DiscountLineDetail"
+            },
+            LineDetail::SubTotalLineDetail(data) => {
+                state.serialize_field("SubTotalLineDetail", data)?;
+                "SubTotalLineDetail"
+            },
+            LineDetail::ItemBasedExpenseLineDetail(data) => {
+                state.serialize_field("ItemBasedExpenseLineDetail", data)?;
+                "ItemBasedExpenseLineDetail"
+            },
+            LineDetail::AccountBasedExpenseLineDetail(data) => {
+                state.serialize_field("AccountBasedExpenseLineDetail", data)?;
+                "AccountBasedExpenseLineDetail"
+            },
+        };
+        
+        state.serialize_field("DetailType", detail_type)?;
+        state.end()
+    }
+}
+
+impl std::fmt::Display for Line {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", serde_json::to_string_pretty(self).unwrap())
+    }
+}
+
+#[derive(Clone, Debug, Deserialize, PartialEq)]
+// #[serde(tag = "DetailType")]
 pub enum LineDetail {
     SalesItemLineDetail(SalesItemLineDetail),
     GroupLineDetail(GroupLineDetail),
@@ -36,7 +85,7 @@ pub enum LineDetail {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
-#[serde(rename_all = "PascalCase", default, tag = "SalesItemLineDetail")]
+#[serde(rename_all = "PascalCase", default)]
 pub struct SalesItemLineDetail {
     pub tax_inclusive_amt: f32,
     pub discount_amt: f32,
