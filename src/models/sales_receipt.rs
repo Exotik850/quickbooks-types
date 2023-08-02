@@ -50,6 +50,7 @@ pub struct SalesReceipt {
     pub department_ref: Option<NtRef>,
     pub ship_method_ref: Option<NtRef>,
     pub bill_addr: Option<Addr>,
+    #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
     pub home_balance: Option<f32>,
     pub delivery_info: Option<DeliveryInfo>,

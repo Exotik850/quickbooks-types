@@ -128,9 +128,9 @@ pub struct MarkupInfo {
 #[cfg_attr(feature = "builder", derive(Builder))]
 #[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct TxnTaxDetail {
-    txn_tax_code_ref: Option<NtRef>,
-    total_tax: Option<f32>,
-    tax_line: Option<Vec<Line>>,
+    pub txn_tax_code_ref: Option<NtRef>,
+    pub total_tax: Option<f32>,
+    pub tax_line: Option<Vec<Line>>,
 }
 
 #[skip_serializing_none]

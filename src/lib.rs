@@ -152,6 +152,7 @@ Read:
 - Estimate
 - Invoice
 - Item (Category, Bundle)
+- Preferences
 - Sales Receipt
 - Vendor
 Query:
@@ -165,6 +166,7 @@ Query:
 - Invoice
 - Item (Category, Bundle)
 - Payment
+- Preferences
 - Sales Receipt
 - Vendor
 Delete:
@@ -189,6 +191,7 @@ Full Update:
 - Invoice
 - Item (Category)
 - Payment
+- Preferences
 - Sales Receipt
 - Vendor
 Sparse Update:

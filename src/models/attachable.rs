@@ -15,6 +15,7 @@ use super::common::{CustomField, MetaData, NtRef};
 pub struct Attachable {
     pub id: Option<String>,
     pub sync_token: Option<String>,
+    #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
     pub file_name: Option<String>,
     pub note: Option<String>,

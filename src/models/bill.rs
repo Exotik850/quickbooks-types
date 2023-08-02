@@ -22,6 +22,7 @@ use super::{
 pub struct Bill {
     pub id: Option<String>,
     pub sync_token: Option<String>,
+    #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
     domain: Option<String>,
     #[serde(rename = "APAccountRef")]

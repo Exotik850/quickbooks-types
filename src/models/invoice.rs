@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBToRef};
+use crate::{QBCreatable, QBToRef, QBSparseUpdateable};
 
 use super::{
     common::{
@@ -25,6 +25,7 @@ use super::{
 pub struct Invoice {
     pub id: Option<String>,
     pub sync_token: Option<String>,
+    #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
     pub ship_from_addr: Option<Addr>,
     pub ship_date: Option<NaiveDate>,
@@ -84,5 +85,15 @@ impl QBCreatable for Invoice {
 impl QBToRef for Invoice {
     fn ref_name(&self) -> Option<&String> {
         self.doc_number.as_ref()
+    }
+}
+
+impl QBSparseUpdateable for Invoice {
+    fn can_sparse_update(&self) -> bool {
+        self.id.is_some() 
+        && self.line.is_some() 
+        && self.customer_ref.is_some() 
+        && self.sync_token.is_some()
+        // TODO add the docnumber check, it's more complicated though
     }
 }

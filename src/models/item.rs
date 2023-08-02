@@ -19,6 +19,7 @@ use super::common::{MetaData, NtRef};
 pub struct Item {
     pub id: Option<String>,
     pub sync_token: Option<String>,
+    #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
 
     /// If true, the object is currently enabled for use by QuickBooks.

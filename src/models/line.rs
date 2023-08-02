@@ -67,6 +67,10 @@ impl Serialize for LineDetail {
                 state.serialize_field("AccountBasedExpenseLineDetail", data)?;
                 "AccountBasedExpenseLineDetail"
             },
+            LineDetail::TaxLineDetail(data) => {
+                state.serialize_field("TaxLineDetail", data)?;
+                "TaxLineDetail"
+            },
         };
         
         state.serialize_field("DetailType", detail_type)?;
@@ -90,6 +94,7 @@ pub enum LineDetail {
     SubTotalLineDetail(SubTotalLineDetail),
     ItemBasedExpenseLineDetail(ItemBasedExpenseLineDetail),
     AccountBasedExpenseLineDetail(AccountBasedExpenseLineDetail),
+    TaxLineDetail(TaxLineDetail)
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
@@ -171,4 +176,15 @@ pub struct AccountBasedExpenseLineDetail {
     class_ref: NtRef,
     customer_ref: NtRef,
     billable_status: BillableStatus,
+}
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
+#[serde(rename_all = "PascalCase", default, tag = "TaxLineDetail")]
+pub struct TaxLineDetail {
+    tax_rate_ref: NtRef,
+    net_amount_taxable: f32,
+    percent_based: bool,
+    tax_inclusive_amount: f32,
+    override_delta_amount: f32,
+    tax_percent: f32,
 }

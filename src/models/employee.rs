@@ -19,6 +19,7 @@ use super::common::{Addr, Email, MetaData, PhoneNumber};
 pub struct Employee {
     pub id: Option<String>,
     pub sync_token: Option<String>,
+    #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
     pub primary_addr: Option<Addr>,
     pub primary_email_addr: Option<Email>,

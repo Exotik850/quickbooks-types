@@ -18,6 +18,7 @@ use super::common::{MetaData, NtRef};
 pub struct Account {
     pub id: Option<String>,
     pub sync_token: Option<String>,
+    #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
     pub name: Option<String>,
     pub acct_num: Option<String>,
