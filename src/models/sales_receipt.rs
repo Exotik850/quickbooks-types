@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBToRef, QBCreatable};
+use crate::{QBToRef, QBCreatable, QBVoidable};
 
 use super::common::{
     Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn,
@@ -75,3 +75,5 @@ impl QBCreatable for SalesReceipt {
         }
     }
 }
+
+impl QBVoidable for SalesReceipt {}

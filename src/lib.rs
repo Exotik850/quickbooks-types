@@ -98,8 +98,10 @@ pub trait QBDeletable: QBItem {
     }
 }
 
-pub trait QBVoidable {
-    fn can_void(&self) -> bool;
+pub trait QBVoidable: QBItem {
+    fn can_void(&self) -> bool {
+        self.id().is_some() && self.sync_token().is_some()
+    }
 }
 
 pub trait QBFullUpdatable {
@@ -144,7 +146,7 @@ Create: ✓
 - Payment
 - Sales Receipt
 - Vendor
-Read:
+Read: ✓
 - Attachable
 - Account
 - Bill
@@ -157,7 +159,7 @@ Read:
 - Preferences
 - Sales Receipt
 - Vendor
-Query:
+Query: ✓
 - Attachable
 - Account
 - Bill
@@ -171,14 +173,14 @@ Query:
 - Preferences
 - Sales Receipt
 - Vendor
-Delete:
+Delete: ✓
 - Attachable
 - Bill
 - Estimate
 - Invoice
 - Payment
 - Sales Receipt
-Void:
+Void: ✓
 - Invoice
 - Payment
 - Sales Receipt
