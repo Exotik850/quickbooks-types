@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::QBCreatable;
+use crate::{QBCreatable, QBDeletable};
 
 use super::{
     common::{LinkedTxn, MetaData, NtRef},
@@ -50,3 +50,5 @@ impl QBCreatable for Bill {
         !(self.vendor_ref.is_none() || self.line.is_none())
     }
 }
+
+impl QBDeletable for Bill {}

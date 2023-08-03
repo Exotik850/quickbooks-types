@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBToRef, QBSparseUpdateable};
+use crate::{QBCreatable, QBToRef, QBSparseUpdateable, QBDeletable};
 
 use super::{
     common::{
@@ -82,11 +82,7 @@ impl QBCreatable for Invoice {
     }
 }
 
-impl QBToRef for Invoice {
-    fn ref_name(&self) -> Option<&String> {
-        self.doc_number.as_ref()
-    }
-}
+impl QBDeletable for Invoice {}
 
 impl QBSparseUpdateable for Invoice {
     fn can_sparse_update(&self) -> bool {
@@ -95,5 +91,11 @@ impl QBSparseUpdateable for Invoice {
         && self.customer_ref.is_some() 
         && self.sync_token.is_some()
         // TODO add the docnumber check, it's more complicated though
+    }
+}
+
+impl QBToRef for Invoice {
+    fn ref_name(&self) -> Option<&String> {
+        self.doc_number.as_ref()
     }
 }

@@ -3,9 +3,9 @@
 extern crate derive_builder;
 
 mod models;
+pub use models::*;
 use const_str::convert_ascii_case;
 use models::common::{MetaData, NtRef};
-pub use models::*;
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 use std::fmt::{Debug, Display};
@@ -92,8 +92,10 @@ impl<T: QBItem> QBReadable for T {
 pub trait QBQueryable: QBItem {}
 impl<T: QBItem> QBQueryable for T {}
 
-pub trait QBDeletable {
-    fn can_delete(&self) -> bool;
+pub trait QBDeletable: QBItem {
+    fn can_delete(&self) -> bool {
+        self.id().is_some() && self.sync_token().is_some()
+    }
 }
 
 pub trait QBVoidable {

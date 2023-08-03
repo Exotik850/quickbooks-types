@@ -29,3 +29,4 @@ pub use payment::*;
 pub use sales_receipt::*;
 pub use vendor::*;
 pub use preferences::*;
+pub use line::TaxableLine;

@@ -1,6 +1,8 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use crate::QBDeletable;
+
 use super::common::{CustomField, MetaData, NtRef};
 
 /*
@@ -57,3 +59,5 @@ pub struct AttachableRef {
     pub inactive: Option<bool>,
     pub entity_ref: Option<NtRef>,
 }
+
+impl QBDeletable for Attachable {}

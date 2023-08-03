@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::QBCreatable;
+use crate::{QBCreatable, QBDeletable};
 
 use super::{
     common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail},
@@ -60,3 +60,5 @@ impl QBCreatable for Estimate {
         self.line.is_some() && self.customer_ref.is_some()
     }
 }
+
+impl QBDeletable for Estimate {}
