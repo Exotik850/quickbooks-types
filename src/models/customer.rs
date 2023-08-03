@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBToRef};
+use crate::{QBCreatable, QBToRef, QBFullUpdatable, QBReadable};
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
@@ -139,6 +139,12 @@ impl QBCreatable for Customer {
             || self.middle_name.is_some()
             || self.family_name.is_some()
             || self.given_name.is_some()
+    }
+}
+
+impl QBFullUpdatable for Customer {
+    fn can_full_update(&self) -> bool {
+        self.can_read() && self.can_create()
     }
 }
 

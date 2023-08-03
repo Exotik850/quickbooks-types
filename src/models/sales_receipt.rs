@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBToRef, QBCreatable, QBVoidable};
+use crate::{QBToRef, QBCreatable, QBVoidable, QBFullUpdatable};
 
 use super::common::{
     Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn,
@@ -68,12 +68,13 @@ impl QBToRef for SalesReceipt {
 
 impl QBCreatable for SalesReceipt {
     fn can_create(&self) -> bool {
-        if let Some(data) = &self.line {
-            data.iter().all(|c| c.can_create())
-        } else {
-            false
-        }
+        self.line.can_create()
     }
 }
 
 impl QBVoidable for SalesReceipt {}
+impl QBFullUpdatable for SalesReceipt {
+    fn can_full_update(&self) -> bool {
+        self.can_create() 
+    }
+}

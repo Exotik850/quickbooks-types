@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::QBDeletable;
+use crate::{QBDeletable, QBFullUpdatable, QBCreatable};
 
 use super::common::{CustomField, MetaData, NtRef};
 
@@ -60,4 +60,14 @@ pub struct AttachableRef {
     pub entity_ref: Option<NtRef>,
 }
 
+impl QBCreatable for Attachable {
+    fn can_create(&self) -> bool {
+        self.file_name.is_some() || self.note.is_some()
+    }
+}
 impl QBDeletable for Attachable {}
+impl QBFullUpdatable for Attachable {
+    fn can_full_update(&self) -> bool {
+        self.can_delete() && self.can_create()
+    }
+}

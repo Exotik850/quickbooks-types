@@ -137,6 +137,7 @@ impl<T: QBItem + QBToRef> From<T> for NtRef {
 /*
 Create: ✓
 - Account
+- Attachable
 - Bill
 - Customer
 - Employee

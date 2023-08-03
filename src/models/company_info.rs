@@ -2,6 +2,8 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
+use crate::QBFullUpdatable;
+
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
 /*
@@ -34,4 +36,12 @@ pub struct CompanyInfo {
     pub sparse: Option<bool>,
     pub supported_languages: Option<String>,
     pub web_addr: Option<WebAddr>,
+}
+
+impl QBFullUpdatable for CompanyInfo {
+    fn can_full_update(&self) -> bool {
+        self.sync_token.is_some()
+        && self.company_name.is_some()
+        && self.company_addr.is_some()
+    }
 }

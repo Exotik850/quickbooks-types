@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable};
+use crate::{QBCreatable, QBDeletable, QBFullUpdatable, common::EmailStatus};
 
 use super::{
     common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail},
@@ -37,7 +37,7 @@ pub struct Estimate {
     pub doc_number: Option<String>,
     pub private_note: Option<String>,
     pub customer_memo: Option<NtRef>,
-    pub email_status: Option<String>,
+    pub email_status: Option<EmailStatus>,
     pub txn_tax_detail: Option<TxnTaxDetail>,
     pub line: Option<Vec<Line>>,
     pub linked_txn: Option<Vec<LinkedTxn>>,
@@ -62,3 +62,23 @@ impl QBCreatable for Estimate {
 }
 
 impl QBDeletable for Estimate {}
+
+impl QBFullUpdatable for Estimate {
+    fn can_full_update(&self) -> bool {
+        if self.id.is_some() 
+        && self.customer_ref.is_some()
+        && self.sync_token.is_some() {
+            if let Some(status) = self.email_status.as_ref() {
+                if status == &EmailStatus::NeedToSend {
+                    self.bill_email.is_some()
+                } else {
+                    true
+                }
+            } else {
+                false
+            }
+        } else {
+            false
+        }
+    }
+}

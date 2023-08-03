@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable};
+use crate::{QBCreatable, QBDeletable, QBFullUpdatable};
 
 use super::{
     common::{LinkedTxn, MetaData, NtRef},
@@ -47,8 +47,16 @@ pub struct Bill {
 
 impl QBCreatable for Bill {
     fn can_create(&self) -> bool {
-        !(self.vendor_ref.is_none() || self.line.is_none())
+        self.vendor_ref.is_some() && self.line.is_some()
     }
 }
 
 impl QBDeletable for Bill {}
+impl QBFullUpdatable for Bill {
+    fn can_full_update(&self) -> bool {
+        self.id.is_some() 
+        && self.vendor_ref.is_some() 
+        && self.line.is_some()
+        && self.sync_token.is_some()
+    }
+}

@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::QBCreatable;
+use crate::{QBCreatable, QBFullUpdatable, QBReadable};
 
 use super::common::{MetaData, NtRef};
 
@@ -48,5 +48,11 @@ pub enum AccountType {
 impl QBCreatable for Account {
     fn can_create(&self) -> bool {
         self.name.is_some() && (self.account_type.is_some() || self.account_sub_type.is_some())
+    }
+}
+
+impl QBFullUpdatable for Account {
+    fn can_full_update(&self) -> bool {
+        self.name.is_some() && self.can_read() && self.sync_token.is_some()
     }
 }

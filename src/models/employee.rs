@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::QBCreatable;
+use crate::{QBCreatable, QBFullUpdatable};
 
 use super::common::{Addr, Email, MetaData, PhoneNumber};
 
@@ -50,5 +50,12 @@ pub struct Employee {
 impl QBCreatable for Employee {
     fn can_create(&self) -> bool {
         self.given_name.is_some() || self.family_name.is_some()
+    }
+}
+
+impl QBFullUpdatable for Employee {
+    fn can_full_update(&self) -> bool {
+        self.id.is_some()
+         && self.sync_token.is_some()
     }
 }

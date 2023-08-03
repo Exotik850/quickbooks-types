@@ -31,6 +31,22 @@ impl QBCreatable for Line {
     }
 }
 
+impl QBCreatable for Option<Vec<Line>> {
+    fn can_create(&self) -> bool {
+        if let Some(data) = self {
+            data.can_create()
+        } else {
+            false
+        }
+    }
+}
+
+impl QBCreatable for Vec<Line> {
+    fn can_create(&self) -> bool {
+        self.iter().all(|l| l.can_create())
+    }
+}
+
 impl Serialize for LineDetail {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where

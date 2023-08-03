@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBToRef, QBSparseUpdateable, QBDeletable, QBVoidable};
+use crate::{QBCreatable, QBToRef, QBSparseUpdateable, QBDeletable, QBVoidable, QBFullUpdatable};
 
 use super::{
     common::{
@@ -74,24 +74,26 @@ pub struct Invoice {
 
 impl QBCreatable for Invoice {
     fn can_create(&self) -> bool {
-        if let Some(data) = &self.line {
-            self.customer_ref.is_some() && data.iter().all(|c| c.can_create())
-        } else {
-            false
-        }
+        self.customer_ref.is_some() && self.line.can_create()
     }
 }
 
 impl QBDeletable for Invoice {}
 impl QBVoidable for Invoice {}
 
-impl QBSparseUpdateable for Invoice {
-    fn can_sparse_update(&self) -> bool {
+impl QBFullUpdatable for Invoice {
+    fn can_full_update(&self) -> bool {
         self.id.is_some() 
         && self.line.is_some() 
         && self.customer_ref.is_some() 
         && self.sync_token.is_some()
         // TODO add the docnumber check, it's more complicated though
+    }
+}
+
+impl QBSparseUpdateable for Invoice {
+    fn can_sparse_update(&self) -> bool {
+        self.can_full_update()
     }
 }
 
