@@ -84,6 +84,8 @@ impl std::fmt::Display for Line {
     }
 }
 
+
+
 #[derive(Clone, Debug, Deserialize, PartialEq)]
 // #[serde(tag = "DetailType")]
 pub enum LineDetail {
@@ -95,6 +97,32 @@ pub enum LineDetail {
     ItemBasedExpenseLineDetail(ItemBasedExpenseLineDetail),
     AccountBasedExpenseLineDetail(AccountBasedExpenseLineDetail),
     TaxLineDetail(TaxLineDetail)
+}
+
+pub trait TaxableLine {
+    fn set_taxable(&mut self);
+}
+
+impl TaxableLine for LineDetail {
+    fn set_taxable(&mut self) {
+        if let LineDetail::SalesItemLineDetail(data) = self {
+            data.tax_code_ref.value = Some("TAX".into())
+        }
+    }
+}
+
+impl TaxableLine for Line {
+    fn set_taxable(&mut self) {
+        if let Some(detail) = self.line_detail.as_mut() {
+            detail.set_taxable()
+        }
+    }
+}
+
+impl TaxableLine for Vec<Line> {
+    fn set_taxable(&mut self) {
+        self.iter_mut().for_each(|f| f.set_taxable());
+    }
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]

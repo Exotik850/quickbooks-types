@@ -108,9 +108,9 @@ impl From<u8> for TaxExemptStatus {
     }
 }
 
-impl Into<u8> for TaxExemptStatus {
-    fn into(self) -> u8 {
-        match self {
+impl From<TaxExemptStatus> for u8 {
+    fn from(value: TaxExemptStatus) -> u8 {
+        match value {
             TaxExemptStatus::Other => 0,
             TaxExemptStatus::FederalGovernment => 1,
             TaxExemptStatus::StateGovernment => 2,

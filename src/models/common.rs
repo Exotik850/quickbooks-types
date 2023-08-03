@@ -19,9 +19,9 @@ pub struct NtRef {
     // Reference Type
     #[serde(rename = "type")]
     pub entity_ref_type: Option<String>,
-    #[serde(alias = "name")]
+    #[serde(alias = "Name")]
     pub name: Option<String>,
-    #[serde(alias = "value")]
+    #[serde(alias = "Value")]
     pub value: Option<String>,
 }
 
