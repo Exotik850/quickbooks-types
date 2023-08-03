@@ -1,5 +1,5 @@
 use chrono::{DateTime, Utc};
-use serde::{Deserialize, Serialize, ser::SerializeStruct};
+use serde::{ser::SerializeStruct, Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::QBCreatable;
@@ -50,45 +50,46 @@ impl QBCreatable for Vec<Line> {
 impl Serialize for LineDetail {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
-        S: serde::Serializer {
+        S: serde::Serializer,
+    {
         let mut state = serializer.serialize_struct("LineDetail", 2)?;
-        
+
         // TODO Make this more generic, although there won't be more types to add in the future most likely
         let detail_type = match self {
             LineDetail::SalesItemLineDetail(data) => {
                 state.serialize_field("SalesItemLineDetail", data)?;
                 "SalesItemLineDetail"
-            },
+            }
             LineDetail::GroupLineDetail(data) => {
                 state.serialize_field("GroupLineDetail", data)?;
                 "GroupLineDetail"
-            },
+            }
             LineDetail::DescriptionLineDetail(data) => {
                 state.serialize_field("DescriptionLineDetail", data)?;
                 "DescriptionLineDetail"
-            },
+            }
             LineDetail::DiscountLineDetail(data) => {
                 state.serialize_field("DiscountLineDetail", data)?;
                 "DiscountLineDetail"
-            },
+            }
             LineDetail::SubTotalLineDetail(data) => {
                 state.serialize_field("SubTotalLineDetail", data)?;
                 "SubTotalLineDetail"
-            },
+            }
             LineDetail::ItemBasedExpenseLineDetail(data) => {
                 state.serialize_field("ItemBasedExpenseLineDetail", data)?;
                 "ItemBasedExpenseLineDetail"
-            },
+            }
             LineDetail::AccountBasedExpenseLineDetail(data) => {
                 state.serialize_field("AccountBasedExpenseLineDetail", data)?;
                 "AccountBasedExpenseLineDetail"
-            },
+            }
             LineDetail::TaxLineDetail(data) => {
                 state.serialize_field("TaxLineDetail", data)?;
                 "TaxLineDetail"
-            },
+            }
         };
-        
+
         state.serialize_field("DetailType", detail_type)?;
         state.end()
     }
@@ -100,8 +101,6 @@ impl std::fmt::Display for Line {
     }
 }
 
-
-
 #[derive(Clone, Debug, Deserialize, PartialEq)]
 // #[serde(tag = "DetailType")]
 pub enum LineDetail {
@@ -112,7 +111,7 @@ pub enum LineDetail {
     SubTotalLineDetail(SubTotalLineDetail),
     ItemBasedExpenseLineDetail(ItemBasedExpenseLineDetail),
     AccountBasedExpenseLineDetail(AccountBasedExpenseLineDetail),
-    TaxLineDetail(TaxLineDetail)
+    TaxLineDetail(TaxLineDetail),
 }
 
 pub trait TaxableLine {
@@ -136,7 +135,7 @@ impl TaxableLine for Line {
 }
 
 impl<'a, T> TaxableLine for std::slice::IterMut<'a, T>
-where 
+where
     T: TaxableLine,
 {
     fn set_taxable(&mut self) {
@@ -214,7 +213,11 @@ pub struct ItemBasedExpenseLineDetail {
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(default, rename_all = "PascalCase", tag = "AccountBasedExpenseLineDetail")]
+#[serde(
+    default,
+    rename_all = "PascalCase",
+    tag = "AccountBasedExpenseLineDetail"
+)]
 pub struct AccountBasedExpenseLineDetail {
     account_ref: NtRef,
     tax_code_ref: NtRef,

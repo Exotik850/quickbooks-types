@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBFullUpdatable, common::EmailStatus};
+use crate::{common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable};
 
 use super::{
     common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail},
@@ -65,9 +65,7 @@ impl QBDeletable for Estimate {}
 
 impl QBFullUpdatable for Estimate {
     fn can_full_update(&self) -> bool {
-        if self.id.is_some() 
-        && self.customer_ref.is_some()
-        && self.sync_token.is_some() {
+        if self.id.is_some() && self.customer_ref.is_some() && self.sync_token.is_some() {
             if let Some(status) = self.email_status.as_ref() {
                 if status == &EmailStatus::NeedToSend {
                     self.bill_email.is_some()

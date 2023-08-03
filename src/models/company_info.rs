@@ -40,8 +40,6 @@ pub struct CompanyInfo {
 
 impl QBFullUpdatable for CompanyInfo {
     fn can_full_update(&self) -> bool {
-        self.sync_token.is_some()
-        && self.company_name.is_some()
-        && self.company_addr.is_some()
+        self.sync_token.is_some() && self.company_name.is_some() && self.company_addr.is_some()
     }
 }

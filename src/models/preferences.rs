@@ -2,11 +2,14 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{common::{MetaData, Email, NtRef}, QBFullUpdatable};
+use crate::{
+    common::{Email, MetaData, NtRef},
+    QBFullUpdatable,
+};
 
 /*
     Preferences Object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences 
+    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences
 */
 
 #[skip_serializing_none]
@@ -99,14 +102,14 @@ pub struct SalesFormsPrefs {
     pub default_customer_message: Option<String>,
     pub allow_shipping: Option<bool>,
     pub default_discount_account: Option<bool>,
-    #[serde(rename="IPNSupportEnabled")]
+    #[serde(rename = "IPNSupportEnabled")]
     pub ipn_support_enabled: Option<bool>,
     pub e_transaction_payment_enabled: Option<bool>,
     pub default_terms: Option<NtRef>,
     pub allow_deposit: Option<bool>,
     pub using_price_levels: Option<bool>,
     pub default_shipping_account: Option<bool>,
-    #[serde(rename="ETransactionAttachPDF")]
+    #[serde(rename = "ETransactionAttachPDF")]
     pub e_transaction_attach_pdf: Option<bool>,
     pub custom_txn_numbers: Option<bool>,
     pub e_transaction_enabled_status: Option<String>,
@@ -119,14 +122,14 @@ pub struct SalesFormsPrefs {
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct VendorAndPurchasesPrefs {
-    #[serde(rename="POCustomField")]
+    #[serde(rename = "POCustomField")]
     pub po_custom_field: Option<String>, // TODO
     pub default_markup_account: Option<NtRef>,
     pub tracking_by_customer: Option<bool>,
     pub default_terms: Option<NtRef>,
     pub billable_expense_tracking: Option<bool>,
     pub default_markup: Option<f32>,
-    #[serde(rename="TPAREnabled")]
+    #[serde(rename = "TPAREnabled")]
     pub tpar_enabled: Option<bool>,
 }
 
@@ -142,8 +145,8 @@ pub struct TaxPrefs {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-pub struct OtherPrefs{
-    pub name_value: Option<Vec<NtRef>>
+pub struct OtherPrefs {
+    pub name_value: Option<Vec<NtRef>>,
 }
 
 #[skip_serializing_none]
@@ -167,7 +170,6 @@ pub struct CurrencyPrefs {
 
 impl QBFullUpdatable for Preferences {
     fn can_full_update(&self) -> bool {
-        self.id.is_some() 
-        && self.sync_token.is_some()
+        self.id.is_some() && self.sync_token.is_some()
     }
 }

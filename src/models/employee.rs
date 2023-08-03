@@ -55,7 +55,6 @@ impl QBCreatable for Employee {
 
 impl QBFullUpdatable for Employee {
     fn can_full_update(&self) -> bool {
-        self.id.is_some()
-         && self.sync_token.is_some()
+        self.id.is_some() && self.sync_token.is_some()
     }
 }

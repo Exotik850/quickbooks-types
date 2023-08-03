@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBVoidable, QBFullUpdatable};
+use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBVoidable};
 
 use super::{
     common::{CreditCardPayment, MetaData, NtRef},
@@ -53,8 +53,6 @@ impl QBDeletable for Payment {}
 impl QBVoidable for Payment {}
 impl QBFullUpdatable for Payment {
     fn can_full_update(&self) -> bool {
-        self.id.is_some()
-        && self.sync_token.is_some()
-        && self.can_create()
+        self.id.is_some() && self.sync_token.is_some() && self.can_create()
     }
 }

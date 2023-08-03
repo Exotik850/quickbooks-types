@@ -3,14 +3,15 @@
 extern crate derive_builder;
 
 mod models;
-pub use models::*;
 use const_str::convert_ascii_case;
 use models::common::{MetaData, NtRef};
+pub use models::*;
 use serde::de::DeserializeOwned;
 use serde::Serialize;
 use std::fmt::{Debug, Display};
 
-pub trait QBItem: Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned + Debug
+pub trait QBItem:
+    Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned + Debug
 {
     fn id(&self) -> Option<&String>;
     fn clone_id(&self) -> Option<String>;
@@ -27,7 +28,7 @@ macro_rules! impl_qb_data {
                 fn id(&self) -> Option<&String> {
                     self.id.as_ref()
                 }
-                
+
                 fn clone_id(&self) -> Option<String> {
                     self.id.clone()
                 }
@@ -126,10 +127,10 @@ pub trait QBToRef {
 
 impl<T: QBItem + QBToRef> From<T> for NtRef {
     fn from(value: T) -> Self {
-        NtRef { 
-            entity_ref_type: Some(T::name().into()), 
-            name: Some(value.ref_name().unwrap().to_owned()), 
-            value: value.clone_id() 
+        NtRef {
+            entity_ref_type: Some(T::name().into()),
+            name: Some(value.ref_name().unwrap().to_owned()),
+            value: value.clone_id(),
         }
     }
 }
