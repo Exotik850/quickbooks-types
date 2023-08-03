@@ -119,9 +119,12 @@ impl TaxableLine for Line {
     }
 }
 
-impl TaxableLine for Vec<Line> {
+impl<'a, T> TaxableLine for std::slice::IterMut<'a, T>
+where 
+    T: TaxableLine,
+{
     fn set_taxable(&mut self) {
-        self.iter_mut().for_each(|f| f.set_taxable());
+        self.for_each(|f| f.set_taxable());
     }
 }
 
