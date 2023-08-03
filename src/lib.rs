@@ -19,6 +19,9 @@ pub trait QBItem:
     fn meta_data(&self) -> Option<&MetaData>;
     fn name() -> &'static str;
     fn qb_id() -> &'static str;
+    fn has_read(&self) -> bool {
+        self.id().is_some() && self.sync_token().is_some()
+    }
 }
 
 macro_rules! impl_qb_data {
@@ -73,6 +76,7 @@ impl_qb_data!(
     Bill,
     Attachable,
     Account,
+    Preferences,
     SalesReceipt
 );
 
@@ -95,13 +99,13 @@ impl<T: QBItem> QBQueryable for T {}
 
 pub trait QBDeletable: QBItem {
     fn can_delete(&self) -> bool {
-        self.id().is_some() && self.sync_token().is_some()
+        self.has_read()
     }
 }
 
 pub trait QBVoidable: QBItem {
     fn can_void(&self) -> bool {
-        self.id().is_some() && self.sync_token().is_some()
+        self.has_read()
     }
 }
 

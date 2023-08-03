@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     common::{Email, MetaData, NtRef},
-    QBFullUpdatable,
+    QBFullUpdatable, QBItem,
 };
 
 /*
@@ -170,6 +170,6 @@ pub struct CurrencyPrefs {
 
 impl QBFullUpdatable for Preferences {
     fn can_full_update(&self) -> bool {
-        self.id.is_some() && self.sync_token.is_some()
+        self.has_read()
     }
 }

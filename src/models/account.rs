@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBReadable};
+use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBItem};
 
 use super::common::{MetaData, NtRef};
 
@@ -53,6 +53,6 @@ impl QBCreatable for Account {
 
 impl QBFullUpdatable for Account {
     fn can_full_update(&self) -> bool {
-        self.name.is_some() && self.can_read() && self.sync_token.is_some()
+        self.name.is_some() && self.has_read()
     }
 }

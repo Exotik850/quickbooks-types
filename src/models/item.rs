@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBToRef};
+use crate::{QBCreatable, QBFullUpdatable, QBToRef, QBItem};
 
 use super::common::{MetaData, NtRef};
 
@@ -110,7 +110,7 @@ impl QBCreatable for Item {
 
 impl QBFullUpdatable for Item {
     fn can_full_update(&self) -> bool {
-        self.id.is_some() && self.sync_token.is_some() && self.name.is_some()
+        self.has_read() && self.name.is_some()
     }
 }
 

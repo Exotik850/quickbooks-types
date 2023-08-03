@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable};
+use crate::{QBCreatable, QBFullUpdatable, QBItem};
 
 use super::common::{Addr, Email, MetaData, PhoneNumber};
 
@@ -55,6 +55,6 @@ impl QBCreatable for Employee {
 
 impl QBFullUpdatable for Employee {
     fn can_full_update(&self) -> bool {
-        self.id.is_some() && self.sync_token.is_some()
+        self.has_read()
     }
 }

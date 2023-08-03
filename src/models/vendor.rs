@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBToRef};
+use crate::{QBCreatable, QBFullUpdatable, QBToRef, QBItem};
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
@@ -95,7 +95,7 @@ impl QBCreatable for Vendor {
 
 impl QBFullUpdatable for Vendor {
     fn can_full_update(&self) -> bool {
-        self.id.is_some() && self.sync_token.is_some() && self.can_create()
+        self.has_read() && self.can_create()
     }
 }
 

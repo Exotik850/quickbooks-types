@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBSparseUpdateable, QBToRef, QBVoidable};
+use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBSparseUpdateable, QBToRef, QBVoidable, QBItem};
 
 use super::{
     common::{
@@ -83,10 +83,9 @@ impl QBVoidable for Invoice {}
 
 impl QBFullUpdatable for Invoice {
     fn can_full_update(&self) -> bool {
-        self.id.is_some()
+        self.has_read()
             && self.line.is_some()
             && self.customer_ref.is_some()
-            && self.sync_token.is_some()
         // TODO add the docnumber check, it's more complicated though
     }
 }
