@@ -190,7 +190,7 @@ Void: ✓
 - Invoice
 - Payment
 - Sales Receipt
-Full Update:
+Full Update: ✓
 - Account
 - Attachable
 - Bill
@@ -204,7 +204,7 @@ Full Update:
 - Preferences
 - Sales Receipt
 - Vendor
-Sparse Update:
+Sparse Update: ✓
 - CompanyInfo
 - Customer
 - Estimate

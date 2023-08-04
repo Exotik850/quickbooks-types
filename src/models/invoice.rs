@@ -62,6 +62,7 @@ pub struct Invoice {
     pub balance: Option<f32>,
     pub home_total_amt: Option<f32>,
     pub free_form_address: Option<bool>,
+    #[serde(rename="sparse")]
     pub sparse: Option<bool>,
     pub doc_number: Option<String>,
     pub txn_tax_detail: Option<TxnTaxDetail>,
@@ -92,7 +93,7 @@ impl QBFullUpdatable for Invoice {
 
 impl QBSparseUpdateable for Invoice {
     fn can_sparse_update(&self) -> bool {
-        self.can_full_update()
+        self.can_full_update() && self.sparse.is_some_and(|x| x)
     }
 }
 

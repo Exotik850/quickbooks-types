@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBItem};
+use crate::{QBCreatable, QBFullUpdatable, QBItem};
 
 use super::common::{MetaData, NtRef};
 

@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBToRef, QBVoidable};
+use crate::{QBCreatable, QBFullUpdatable, QBToRef, QBVoidable, QBSparseUpdateable};
 
 use super::common::{
     Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn,
@@ -47,6 +47,8 @@ pub struct SalesReceipt {
     pub payment_method_ref: Option<NtRef>,
     pub exchange_rate: Option<f32>,
     pub ship_addr: Option<Addr>,
+    #[serde(rename="sparse")]
+    pub sparse: Option<bool>,
     pub department_ref: Option<NtRef>,
     pub ship_method_ref: Option<NtRef>,
     pub bill_addr: Option<Addr>,
@@ -76,5 +78,11 @@ impl QBVoidable for SalesReceipt {}
 impl QBFullUpdatable for SalesReceipt {
     fn can_full_update(&self) -> bool {
         self.can_create()
+    }
+}
+
+impl QBSparseUpdateable for SalesReceipt {
+    fn can_sparse_update(&self) -> bool {
+        self.can_full_update() && self.sparse.is_some_and(|x| x)
     }
 }
