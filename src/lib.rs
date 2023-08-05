@@ -11,7 +11,7 @@ use serde::Serialize;
 use std::fmt::{Debug, Display};
 
 pub trait QBItem:
-    Serialize + Default + Clone + PartialEq + Sized + DeserializeOwned + Debug
+    Serialize + Default + Clone + Sized + DeserializeOwned + Debug
 {
     fn id(&self) -> Option<&String>;
     fn clone_id(&self) -> Option<String>;
