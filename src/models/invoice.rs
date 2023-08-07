@@ -2,7 +2,9 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBSparseUpdateable, QBToRef, QBVoidable, QBItem};
+use crate::{
+    QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable, QBToRef, QBVoidable,
+};
 
 use super::{
     common::{
@@ -62,7 +64,7 @@ pub struct Invoice {
     pub balance: Option<f32>,
     pub home_total_amt: Option<f32>,
     pub free_form_address: Option<bool>,
-    #[serde(rename="sparse")]
+    #[serde(rename = "sparse")]
     pub sparse: Option<bool>,
     pub doc_number: Option<String>,
     pub txn_tax_detail: Option<TxnTaxDetail>,
@@ -84,9 +86,7 @@ impl QBVoidable for Invoice {}
 
 impl QBFullUpdatable for Invoice {
     fn can_full_update(&self) -> bool {
-        self.has_read()
-            && self.line.is_some()
-            && self.customer_ref.is_some()
+        self.has_read() && self.line.is_some() && self.customer_ref.is_some()
         // TODO add the docnumber check, it's more complicated though
     }
 }

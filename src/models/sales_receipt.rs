@@ -2,13 +2,15 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBToRef, QBVoidable, QBSparseUpdateable};
+use crate::{QBCreatable, QBFullUpdatable, QBSparseUpdateable, QBToRef, QBVoidable};
 
-use super::common::{
-    Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn,
-    MetaData, NtRef, PrintStatus, TxnTaxDetail,
+use super::{
+    common::{
+        Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn,
+        MetaData, NtRef, PrintStatus, TxnTaxDetail,
+    },
+    Line,
 };
-use super::Line;
 
 /*
     Sales Receipt Object:
@@ -47,7 +49,7 @@ pub struct SalesReceipt {
     pub payment_method_ref: Option<NtRef>,
     pub exchange_rate: Option<f32>,
     pub ship_addr: Option<Addr>,
-    #[serde(rename="sparse")]
+    #[serde(rename = "sparse")]
     pub sparse: Option<bool>,
     pub department_ref: Option<NtRef>,
     pub ship_method_ref: Option<NtRef>,

@@ -54,8 +54,6 @@ impl QBCreatable for Bill {
 impl QBDeletable for Bill {}
 impl QBFullUpdatable for Bill {
     fn can_full_update(&self) -> bool {
-        self.has_read()
-            && self.vendor_ref.is_some()
-            && self.line.is_some()
+        self.has_read() && self.vendor_ref.is_some() && self.line.is_some()
     }
 }

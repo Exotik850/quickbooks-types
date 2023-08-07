@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBToRef, QBSparseUpdateable};
+use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBSparseUpdateable, QBToRef};
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
@@ -25,7 +25,7 @@ pub struct Customer {
     pub title: Option<String>,
     pub given_name: Option<String>,
     pub middle_name: Option<String>,
-    #[serde(rename="sparse")]
+    #[serde(rename = "sparse")]
     pub sparse: Option<bool>,
     pub suffix: Option<String>,
     pub family_name: Option<String>,

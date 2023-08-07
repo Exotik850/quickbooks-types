@@ -2,7 +2,9 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable};
+use crate::{
+    common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable,
+};
 
 use super::{
     common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail},
@@ -28,7 +30,7 @@ pub struct Estimate {
     pub class_ref: Option<NtRef>,
     pub custom_field: Option<Vec<CustomField>>,
     pub print_status: Option<String>,
-    #[serde(rename="sparse")]
+    #[serde(rename = "sparse")]
     pub sparse: Option<bool>,
     pub sales_term_ref: Option<NtRef>,
     pub txn_status: Option<String>,
