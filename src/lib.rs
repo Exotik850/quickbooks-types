@@ -116,9 +116,7 @@ pub trait QBSparseUpdateable {
 
 pub trait QBSendable {}
 
-pub trait QBPDFable {
-    fn can_get_pdf(&self) -> bool;
-}
+pub trait QBPDFable {}
 
 pub trait QBToRef {
     fn ref_name(&self) -> Option<&String>;
@@ -210,7 +208,7 @@ Send: ✓
 - Invoice
 - Payment
 - Sales Receipt
-Get as PDF:
+Get as PDF: ✓
 - Estimate
 - Invoice
 - Payment

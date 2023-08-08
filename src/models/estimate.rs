@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable, QBSendable,
+    common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable, QBSendable, QBPDFable,
 };
 
 use super::{
@@ -92,3 +92,4 @@ impl QBSparseUpdateable for Estimate {
 }
 
 impl QBSendable for Estimate {}
+impl QBPDFable for Estimate {}

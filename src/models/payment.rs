@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable, QBSendable};
+use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable, QBSendable, QBPDFable};
 
 use super::{
     common::{CreditCardPayment, MetaData, NtRef},
@@ -58,3 +58,4 @@ impl QBFullUpdatable for Payment {
 }
 
 impl QBSendable for Payment {}
+impl QBPDFable for Payment {}
