@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem};
+use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBToRef};
 
 use super::common::{CustomField, MetaData, NtRef};
 
@@ -72,5 +72,10 @@ impl QBDeletable for Attachable {}
 impl QBFullUpdatable for Attachable {
     fn can_full_update(&self) -> bool {
         self.has_read() && self.can_create()
+    }
+}
+impl QBToRef for Attachable {
+    fn ref_name(&self) -> Option<&String> {
+        self.file_name.as_ref()
     }
 }

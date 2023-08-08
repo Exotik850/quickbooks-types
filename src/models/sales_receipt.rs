@@ -2,7 +2,9 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBSparseUpdateable, QBToRef, QBVoidable, QBSendable, QBPDFable};
+use crate::{
+    QBCreatable, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdateable, QBToRef, QBVoidable,
+};
 
 use super::{
     common::{

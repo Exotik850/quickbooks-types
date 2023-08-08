@@ -3,7 +3,8 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable, QBSendable, QBPDFable,
+    common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable,
+    QBSparseUpdateable,
 };
 
 use super::{
