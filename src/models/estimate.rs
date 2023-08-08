@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable,
+    common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable, QBSendable,
 };
 
 use super::{
@@ -90,3 +90,5 @@ impl QBSparseUpdateable for Estimate {
         self.can_full_update() && self.sparse.is_some_and(|x| x)
     }
 }
+
+impl QBSendable for Estimate {}

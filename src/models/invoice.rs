@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable, QBToRef, QBVoidable,
+    QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBSparseUpdateable, QBToRef, QBVoidable, QBSendable,
 };
 
 use super::{
@@ -102,3 +102,5 @@ impl QBToRef for Invoice {
         self.doc_number.as_ref()
     }
 }
+
+impl QBSendable for Invoice {}

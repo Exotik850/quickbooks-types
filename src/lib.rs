@@ -114,9 +114,7 @@ pub trait QBSparseUpdateable {
     fn can_sparse_update(&self) -> bool;
 }
 
-pub trait QBSendable {
-    fn can_send(&self) -> bool;
-}
+pub trait QBSendable {}
 
 pub trait QBPDFable {
     fn can_get_pdf(&self) -> bool;
@@ -207,8 +205,7 @@ Sparse Update: ✓
 - Estimate
 - Invoice
 - Sales Receipt
-Send:
-- Account
+Send: ✓
 - Estimate
 - Invoice
 - Payment

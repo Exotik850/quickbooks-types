@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBSparseUpdateable, QBToRef, QBVoidable};
+use crate::{QBCreatable, QBFullUpdatable, QBSparseUpdateable, QBToRef, QBVoidable, QBSendable};
 
 use super::{
     common::{
@@ -88,3 +88,5 @@ impl QBSparseUpdateable for SalesReceipt {
         self.can_full_update() && self.sparse.is_some_and(|x| x)
     }
 }
+
+impl QBSendable for SalesReceipt {}
