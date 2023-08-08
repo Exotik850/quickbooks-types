@@ -34,6 +34,9 @@ pub struct Attachable {
     pub temp_download_uri: Option<String>,
 }
 
+pub trait QBAttachable {}
+impl QBAttachable for Attachable {}
+
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum AttachmentCategory {
     ContactPhoto,
