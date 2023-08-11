@@ -25,6 +25,25 @@ pub struct NtRef {
     pub value: Option<String>,
 }
 
+impl From<&str> for NtRef {
+    fn from(value: &str) -> Self {
+        Self {
+            value: Some(value.into()),
+            ..Default::default()
+        }
+    }
+}
+
+impl From<(&str, &str)> for NtRef {
+    fn from(value: (&str, &str)) -> Self {
+        Self {
+            name: Some(value.0.into()),
+            value: Some(value.1.into()),
+            ..Default::default()
+        }
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase")]
 pub struct MetaData {
@@ -103,11 +122,11 @@ pub struct LinkedTxn {
 #[cfg_attr(feature = "builder", derive(Builder))]
 #[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct CustomField {
-    definition_id: Option<String>,
-    string_value: Option<String>,
-    name: Option<String>,
+    pub definition_id: Option<String>,
+    pub string_value: Option<String>,
+    pub name: Option<String>,
     #[serde(rename = "type")]
-    field_type: Option<String>,
+    pub field_type: Option<String>,
 }
 
 #[skip_serializing_none]
@@ -116,10 +135,10 @@ pub struct CustomField {
 #[cfg_attr(feature = "builder", derive(Builder))]
 #[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct MarkupInfo {
-    percent_based: Option<bool>,
-    value: Option<f32>,
-    percent: Option<f32>,
-    price_level_ref: Option<NtRef>,
+    pub percent_based: Option<bool>,
+    pub value: Option<f32>,
+    pub percent: Option<f32>,
+    pub price_level_ref: Option<NtRef>,
 }
 
 #[skip_serializing_none]
@@ -137,18 +156,16 @@ pub struct TxnTaxDetail {
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct DeliveryInfo {
-    delivery_type: String,
-    delivery_time: DateTime<Utc>,
+    pub delivery_type: String,
+    pub delivery_time: DateTime<Utc>,
 }
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct CreditCardPayment {
-    credit_charge_response: Option<CreditChargeResponse>,
-    credit_charge_info: Option<CreditChargeInfo>,
+    pub credit_charge_response: Option<CreditChargeResponse>,
+    pub credit_charge_info: Option<CreditChargeInfo>,
 }
 
 #[skip_serializing_none]
@@ -157,11 +174,11 @@ pub struct CreditCardPayment {
 #[cfg_attr(feature = "builder", derive(Builder))]
 #[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct CreditChargeResponse {
-    status: Option<CCPaymentStatus>,
-    auth_code: Option<String>,
-    txn_authorization_time: Option<DateTime<Utc>>,
+    pub status: Option<CCPaymentStatus>,
+    pub auth_code: Option<String>,
+    pub txn_authorization_time: Option<DateTime<Utc>>,
     #[serde(rename = "CCTransId")]
-    cc_trans_id: Option<String>,
+    pub cc_trans_id: Option<String>,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
