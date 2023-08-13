@@ -9,7 +9,7 @@ pub use models::*;
 use serde::{de::DeserializeOwned, Serialize};
 use std::fmt::{Debug, Display};
 
-pub trait QBItem: Serialize + Default + Clone + Sized + DeserializeOwned + Debug {
+pub trait QBItem: Serialize + Default + Clone + Sized + DeserializeOwned + Debug + Send {
     fn id(&self) -> Option<&String>;
     fn clone_id(&self) -> Option<String>;
     fn sync_token(&self) -> Option<&String>;
