@@ -13,7 +13,7 @@ use super::common::{CustomField, MetaData, NtRef};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", builder(default))]
 pub struct Attachable {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -34,8 +34,19 @@ pub struct Attachable {
     pub temp_download_uri: Option<String>,
 }
 
-pub trait QBAttachable {}
-impl QBAttachable for Attachable {}
+pub trait QBAttachable {
+    fn can_upload(&self) -> bool;
+    fn file_path(&self) -> Option<&String>;
+}
+impl QBAttachable for Attachable {
+    fn can_upload(&self) -> bool {
+        self.note.is_some() || self.file_name.is_some()
+    }
+
+    fn file_path(&self) -> Option<&String> {
+        self.file_name.as_ref()
+    }
+}
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum AttachmentCategory {
@@ -53,7 +64,7 @@ pub enum AttachmentCategory {
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", builder(default))]
 pub struct AttachableRef {
     pub include_on_send: Option<bool>,
     pub line_info: Option<String>,
