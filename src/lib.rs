@@ -126,7 +126,12 @@ impl<T: QBItem + QBToRef> From<T> for NtRef {
     fn from(value: T) -> Self {
         NtRef {
             entity_ref_type: Some(T::name().into()),
-            name: Some(value.ref_name().unwrap().to_owned()),
+            name: Some(
+                value
+                    .ref_name()
+                    .expect("No Ref Name when converting from QB Object to Reference Object")
+                    .to_owned(),
+            ),
             value: value.clone_id(),
         }
     }
