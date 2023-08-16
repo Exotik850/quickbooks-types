@@ -61,6 +61,7 @@ pub fn content_type_from_ext(ext: &str) -> &'static str {
     }
 }
 
+#[cfg(feature = "builder")]
 impl AttachableBuilder {
     pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> &mut Self {
         let path = value.as_ref();
