@@ -65,6 +65,12 @@ pub fn content_type_from_ext(ext: &str) -> &'static str {
 impl AttachableBuilder {
     pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> &mut Self {
         let path = value.as_ref();
+
+        match path.is_file() {
+            true => (),
+            false => panic!("Not a file!"),
+        }
+
         self.file_name = Some(Some(
             path.file_name()
                 .expect("Not a file!")
