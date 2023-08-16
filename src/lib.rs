@@ -74,7 +74,8 @@ impl_qb_data!(
     Attachable,
     Account,
     Preferences,
-    SalesReceipt
+    SalesReceipt,
+    BillPayment
 );
 
 pub trait QBCreatable {
