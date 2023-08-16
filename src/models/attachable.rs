@@ -24,7 +24,7 @@ pub struct Attachable {
     pub category: Option<AttachmentCategory>,
     pub content_type: Option<String>,
     pub place_name: Option<String>,
-    pub attachable_ref: Option<AttachableRef>,
+    pub attachable_ref: Option<Vec<AttachableRef>>,
     pub long: Option<String>,
     pub tag: Option<String>,
     pub lat: Option<String>,
@@ -70,6 +70,8 @@ pub struct AttachableRef {
     pub line_info: Option<String>,
     pub no_ref_only: Option<bool>,
     pub custom_field: Option<Vec<CustomField>>,
+    #[serde(rename="type")]
+    pub ref_type: Option<String>,
     pub inactive: Option<bool>,
     pub entity_ref: Option<NtRef>,
 }
