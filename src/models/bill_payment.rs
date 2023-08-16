@@ -1,4 +1,7 @@
-use crate::{common::{NtRef, MetaData}, Line, QBCreatable, QBVoidable, QBDeletable, QBFullUpdatable, QBItem};
+use crate::{
+    common::{MetaData, NtRef},
+    Line, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable,
+};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
@@ -6,7 +9,6 @@ use serde_with::skip_serializing_none;
     Bill Payment Object
     https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/billpayment
 */
-
 
 #[skip_serializing_none]
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -40,26 +42,26 @@ pub struct CheckBillPayment {
 #[skip_serializing_none]
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreditCardBillPayment {
-    #[serde(rename="CCAccountRef")]
-    pub cc_account_ref: Option<NtRef>
+    #[serde(rename = "CCAccountRef")]
+    pub cc_account_ref: Option<NtRef>,
 }
-
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PayType {
-    #[default] CreditCard,
+    #[default]
+    CreditCard,
     Check,
 }
 
 impl QBCreatable for BillPayment {
     fn can_create(&self) -> bool {
-        self.vendor_ref.is_some() 
-        && self.total_amt.is_some() 
-        && self.line.is_some()
-        && self.pay_type.as_ref().is_some_and(|e| match e {
-            PayType::CreditCard => self.credit_card_payment.is_some(),
-            PayType::Check => self.check_payment.is_some(),
-        }) 
+        self.vendor_ref.is_some()
+            && self.total_amt.is_some()
+            && self.line.is_some()
+            && self.pay_type.as_ref().is_some_and(|e| match e {
+                PayType::CreditCard => self.credit_card_payment.is_some(),
+                PayType::Check => self.check_payment.is_some(),
+            })
         // TODO Currency ref check
     }
 }
@@ -69,5 +71,5 @@ impl QBDeletable for BillPayment {}
 impl QBFullUpdatable for BillPayment {
     fn can_full_update(&self) -> bool {
         self.can_create() && self.has_read()
-    } 
+    }
 }
