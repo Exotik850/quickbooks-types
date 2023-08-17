@@ -35,39 +35,39 @@ macro_rules! impl_qb_data {
                 }
             }
 
-                impl QBItem for $x {
-                    fn id(&self) -> Option<&String> {
-                        self.id.as_ref()
-                    }
-
-                    fn clone_id(&self) -> Option<String> {
-                        self.id.clone()
-                    }
-
-                    fn sync_token(&self) -> Option<&String> {
-                        self.sync_token.as_ref()
-                    }
-
-                    fn meta_data(&self) -> Option<&MetaData> {
-                        self.meta_data.as_ref()
-                    }
-
-                    #[inline]
-                    fn name() -> &'static str {
-                        stringify!($x)
-                    }
-
-                    #[inline]
-                    fn qb_id() -> &'static str {
-                        convert_ascii_case!(lower, stringify!($x))
-                    }
+            impl QBItem for $x {
+                fn id(&self) -> Option<&String> {
+                    self.id.as_ref()
                 }
 
-                impl Display for $x {
-                    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                        write!(f, "{} : {}", Self::name(), serde_json::to_string_pretty(self).unwrap())
-                    }
+                fn clone_id(&self) -> Option<String> {
+                    self.id.clone()
                 }
+
+                fn sync_token(&self) -> Option<&String> {
+                    self.sync_token.as_ref()
+                }
+
+                fn meta_data(&self) -> Option<&MetaData> {
+                    self.meta_data.as_ref()
+                }
+
+                #[inline]
+                fn name() -> &'static str {
+                    stringify!($x)
+                }
+
+                #[inline]
+                fn qb_id() -> &'static str {
+                    convert_ascii_case!(lower, stringify!($x))
+                }
+            }
+
+            impl Display for $x {
+                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                    write!(f, "{} : {}", Self::name(), serde_json::to_string_pretty(self).unwrap())
+                }
+            }
         )+
    }
 }
@@ -232,5 +232,6 @@ Get as PDF: ✓
 - Sales Receipt
 
 - Attachment has three other actions that are unique
+- Upload ✓
 
 */
