@@ -66,11 +66,6 @@ impl AttachableBuilder {
     pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> &mut Self {
         let path = value.as_ref();
 
-        match path.is_file() {
-            true => (),
-            false => panic!("Not a file!"),
-        }
-
         self.file_name = Some(Some(
             path.file_name()
                 .expect("Not a file!")
@@ -131,6 +126,15 @@ pub struct AttachableRef {
     pub ref_type: Option<String>,
     pub inactive: Option<bool>,
     pub entity_ref: Option<NtRef>,
+}
+
+impl From<NtRef> for AttachableRef {
+    fn from(value: NtRef) -> Self {
+       AttachableRef { 
+            entity_ref: Some(value),
+            ..Default::default()
+        }
+    }
 }
 
 impl QBCreatable for Attachable {
