@@ -3,6 +3,8 @@
 extern crate derive_builder;
 
 mod models;
+mod error;
+pub use error::*;
 use const_str::convert_ascii_case;
 use models::common::{MetaData, NtRef};
 pub use models::*;

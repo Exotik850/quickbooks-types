@@ -3,7 +3,7 @@ use std::path::Path;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBToRef};
+use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBToRef, QBError};
 
 use super::common::{CustomField, MetaData, NtRef};
 
@@ -16,7 +16,7 @@ use super::common::{CustomField, MetaData, NtRef};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default))]
+#[cfg_attr(feature = "builder", builder(default, build_fn(error="QBError")))]
 pub struct Attachable {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -63,26 +63,39 @@ pub fn content_type_from_ext(ext: &str) -> &'static str {
 
 #[cfg(feature = "builder")]
 impl AttachableBuilder {
-    pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> &mut Self {
+    pub fn file_name(
+        &mut self,
+        value: &dyn AsRef<Path>,
+    ) -> Result<&mut Self, QBError> {
         let path = value.as_ref();
 
         self.file_name = Some(Some(
             path.file_name()
-                .expect("Not a file!")
+                .ok_or(QBError::ValidationError(
+                    "Not a file!".into(),
+                ))?
                 .to_str()
-                .expect("Invalid file name!")
+                .ok_or(QBError::ValidationError(
+                    "Could not turn file name into str".into(),
+                ))?
                 .into(),
         ));
+
         self.content_type = Some(Some(
             content_type_from_ext(
                 path.extension()
-                    .expect("No Extension!")
+                    .ok_or(QBError::ValidationError(
+                        "No extension on file/dir".into(),
+                    ))?
                     .to_str()
-                    .expect("Invalid Extension!"),
+                    .ok_or(QBError::ValidationError(
+                        "Could not turn extension into string".into(),
+                    ))?,
             )
             .into(),
         ));
-        self
+
+        Ok(self)
     }
 }
 
@@ -130,10 +143,17 @@ pub struct AttachableRef {
 
 impl From<NtRef> for AttachableRef {
     fn from(value: NtRef) -> Self {
-       AttachableRef { 
+        AttachableRef {
             entity_ref: Some(value),
             ..Default::default()
         }
+    }
+}
+
+impl<T: QBItem + QBToRef> From<T> for AttachableRef {
+    fn from(value: T) -> Self {
+        let value: NtRef = value.into();
+        value.into()
     }
 }
 
