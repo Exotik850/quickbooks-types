@@ -2,10 +2,10 @@
 #[macro_use]
 extern crate derive_builder;
 
-mod models;
 mod error;
-pub use error::*;
+mod models;
 use const_str::convert_ascii_case;
+pub use error::*;
 use models::common::{MetaData, NtRef};
 pub use models::*;
 use serde::{de::DeserializeOwned, Serialize};
@@ -26,39 +26,48 @@ pub trait QBItem: Serialize + Default + Clone + Sized + DeserializeOwned + Debug
 macro_rules! impl_qb_data {
     ($($x:ident),+) => {
         $(
-            impl QBItem for $x {
-                fn id(&self) -> Option<&String> {
-                    self.id.as_ref()
-                }
-
-                fn clone_id(&self) -> Option<String> {
-                    self.id.clone()
-                }
-
-                fn sync_token(&self) -> Option<&String> {
-                    self.sync_token.as_ref()
-                }
-
-                fn meta_data(&self) -> Option<&MetaData> {
-                    self.meta_data.as_ref()
-                }
-
-                #[inline]
-                fn name() -> &'static str {
-                    stringify!($x)
-                }
-
-                #[inline]
-                fn qb_id() -> &'static str {
-                    convert_ascii_case!(lower, stringify!($x))
+            #[cfg(feature="builder")]
+            paste::paste! {
+                impl [<$x>] {
+                    pub fn new() -> [<$x Builder>] {
+                        [<$x Builder>]::default()
+                    }
                 }
             }
 
-            impl Display for $x {
-                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                    write!(f, "{} : {}", Self::name(), serde_json::to_string_pretty(self).unwrap())
+                impl QBItem for $x {
+                    fn id(&self) -> Option<&String> {
+                        self.id.as_ref()
+                    }
+
+                    fn clone_id(&self) -> Option<String> {
+                        self.id.clone()
+                    }
+
+                    fn sync_token(&self) -> Option<&String> {
+                        self.sync_token.as_ref()
+                    }
+
+                    fn meta_data(&self) -> Option<&MetaData> {
+                        self.meta_data.as_ref()
+                    }
+
+                    #[inline]
+                    fn name() -> &'static str {
+                        stringify!($x)
+                    }
+
+                    #[inline]
+                    fn qb_id() -> &'static str {
+                        convert_ascii_case!(lower, stringify!($x))
+                    }
                 }
-            }
+
+                impl Display for $x {
+                    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                        write!(f, "{} : {}", Self::name(), serde_json::to_string_pretty(self).unwrap())
+                    }
+                }
         )+
    }
 }

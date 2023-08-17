@@ -1,5 +1,4 @@
-
-#[cfg(feature="builder")]
+#[cfg(feature = "builder")]
 #[derive(Debug, thiserror::Error)]
 pub enum QBError {
     #[error("Error validating QB Object in builder: {0}")]

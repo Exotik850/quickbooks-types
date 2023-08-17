@@ -3,7 +3,7 @@ use std::path::Path;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBToRef, QBError};
+use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBToRef};
 
 use super::common::{CustomField, MetaData, NtRef};
 
@@ -16,7 +16,7 @@ use super::common::{CustomField, MetaData, NtRef};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default, build_fn(error="QBError")))]
+#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError")))]
 pub struct Attachable {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -63,17 +63,12 @@ pub fn content_type_from_ext(ext: &str) -> &'static str {
 
 #[cfg(feature = "builder")]
 impl AttachableBuilder {
-    pub fn file_name(
-        &mut self,
-        value: &dyn AsRef<Path>,
-    ) -> Result<&mut Self, QBError> {
+    pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> Result<&mut Self, QBError> {
         let path = value.as_ref();
 
         self.file_name = Some(Some(
             path.file_name()
-                .ok_or(QBError::ValidationError(
-                    "Not a file!".into(),
-                ))?
+                .ok_or(QBError::ValidationError("Not a file!".into()))?
                 .to_str()
                 .ok_or(QBError::ValidationError(
                     "Could not turn file name into str".into(),
@@ -84,9 +79,7 @@ impl AttachableBuilder {
         self.content_type = Some(Some(
             content_type_from_ext(
                 path.extension()
-                    .ok_or(QBError::ValidationError(
-                        "No extension on file/dir".into(),
-                    ))?
+                    .ok_or(QBError::ValidationError("No extension on file/dir".into()))?
                     .to_str()
                     .ok_or(QBError::ValidationError(
                         "Could not turn extension into string".into(),
