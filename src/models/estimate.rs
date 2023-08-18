@@ -3,8 +3,8 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable,
-    QBSparseUpdateable, QBError
+    common::EmailStatus, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable,
+    QBSendable, QBSparseUpdateable,
 };
 
 use super::{
@@ -16,7 +16,10 @@ use super::{
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
+#[cfg_attr(
+    feature = "builder",
+    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+)]
 pub struct Estimate {
     pub id: Option<String>,
     pub sync_token: Option<String>,

@@ -1,6 +1,6 @@
 use crate::{
     common::{MetaData, NtRef},
-    Line, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable, QBError
+    Line, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBVoidable,
 };
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
@@ -14,7 +14,10 @@ use serde_with::skip_serializing_none;
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
+#[cfg_attr(
+    feature = "builder",
+    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+)]
 pub struct BillPayment {
     pub sync_token: Option<String>,
     pub domain: Option<String>,

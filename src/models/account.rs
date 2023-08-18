@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBItem, QBError};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
 
 use super::common::{MetaData, NtRef};
 
@@ -14,7 +14,10 @@ use super::common::{MetaData, NtRef};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
+#[cfg_attr(
+    feature = "builder",
+    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+)]
 pub struct Account {
     pub id: Option<String>,
     pub sync_token: Option<String>,

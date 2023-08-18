@@ -15,10 +15,13 @@ use super::common::{LinkedTxn, NtRef};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
+#[cfg_attr(
+    feature = "builder",
+    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+)]
 pub struct Line {
     #[serde(flatten)]
-    pub line_detail: Option<LineDetail>,
+    pub line_detail: LineDetail,
     pub amount: Option<f32>,
     pub description: Option<String>,
     pub id: Option<String>,
@@ -27,7 +30,7 @@ pub struct Line {
 
 impl QBCreatable for Line {
     fn can_create(&self) -> bool {
-        self.line_detail.is_some() && self.amount.is_some()
+        self.amount.is_some()
     }
 }
 
@@ -88,6 +91,7 @@ impl Serialize for LineDetail {
                 state.serialize_field("TaxLineDetail", data)?;
                 "TaxLineDetail"
             }
+            _ => panic!("Cannot serialize Line Detail of None!")
         };
 
         state.serialize_field("DetailType", detail_type)?;
@@ -101,7 +105,7 @@ impl std::fmt::Display for Line {
     }
 }
 
-#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Default)]
 // #[serde(tag = "DetailType")]
 pub enum LineDetail {
     SalesItemLineDetail(SalesItemLineDetail),
@@ -112,6 +116,7 @@ pub enum LineDetail {
     ItemBasedExpenseLineDetail(ItemBasedExpenseLineDetail),
     AccountBasedExpenseLineDetail(AccountBasedExpenseLineDetail),
     TaxLineDetail(TaxLineDetail),
+    #[default] None,
 }
 
 pub trait TaxableLine {
@@ -128,9 +133,7 @@ impl TaxableLine for LineDetail {
 
 impl TaxableLine for Line {
     fn set_taxable(&mut self) {
-        if let Some(detail) = self.line_detail.as_mut() {
-            detail.set_taxable()
-        }
+        self.line_detail.set_taxable()
     }
 }
 
@@ -159,7 +162,10 @@ where
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into)))]
+#[cfg_attr(
+    feature = "builder",
+    builder(default, build_fn(error = "QBError"), setter(into))
+)]
 pub struct SalesItemLineDetail {
     pub tax_inclusive_amt: f32,
     pub discount_amt: f32,

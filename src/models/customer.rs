@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBSparseUpdateable, QBToRef, QBError};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBReadable, QBSparseUpdateable, QBToRef};
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
@@ -15,7 +15,10 @@ use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
+#[cfg_attr(
+    feature = "builder",
+    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+)]
 pub struct Customer {
     pub id: Option<String>,
     pub sync_token: Option<String>,

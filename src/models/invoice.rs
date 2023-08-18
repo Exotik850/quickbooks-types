@@ -3,14 +3,14 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable,
-    QBToRef, QBVoidable, QBError
+    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable,
+    QBSparseUpdateable, QBToRef, QBVoidable
 };
 
 use super::{
     common::{
         Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef,
-        PrintStatus, TxnTaxDetail,
+        PrintStatus, TxnTaxDetail
     },
     line::Line,
 };
@@ -24,7 +24,10 @@ use super::{
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
+#[cfg_attr(
+    feature = "builder",
+    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+)]
 pub struct Invoice {
     pub id: Option<String>,
     pub sync_token: Option<String>,

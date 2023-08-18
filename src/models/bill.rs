@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBError};
+use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem};
 
 use super::{
     common::{LinkedTxn, MetaData, NtRef},
@@ -18,7 +18,10 @@ use super::{
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
+#[cfg_attr(
+    feature = "builder",
+    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+)]
 pub struct Bill {
     pub id: Option<String>,
     pub sync_token: Option<String>,
