@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use serde::{ser::SerializeStruct, Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::QBCreatable;
+use crate::{QBCreatable, QBError};
 
 use super::common::{LinkedTxn, NtRef};
 
@@ -12,10 +12,10 @@ use super::common::{LinkedTxn, NtRef};
 */
 
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into), default))]
+#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
 pub struct Line {
     #[serde(flatten)]
     pub line_detail: Option<LineDetail>,
@@ -155,10 +155,11 @@ where
     }
 }
 
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into), default))]
+#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into)))]
 pub struct SalesItemLineDetail {
     pub tax_inclusive_amt: f32,
     pub discount_amt: f32,

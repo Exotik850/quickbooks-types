@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBFullUpdatable, QBItem, QBToRef};
+use crate::{QBCreatable, QBFullUpdatable, QBItem, QBToRef, QBError};
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 
@@ -9,7 +9,7 @@ use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
 pub struct Vendor {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -61,8 +61,6 @@ pub struct Vendor {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct ContactInfo {
     #[serde(rename = "Type")]
     contact_type: Option<String>,
@@ -73,8 +71,6 @@ pub struct ContactInfo {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
 pub struct VendorPaymentBankDetail {
     bank_account_name: Option<String>,
     bank_branch_identifier: Option<String>,

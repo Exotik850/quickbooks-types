@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     common::EmailStatus, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable,
-    QBSparseUpdateable,
+    QBSparseUpdateable, QBError
 };
 
 use super::{
@@ -16,7 +16,7 @@ use super::{
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into, strip_option), default))]
+#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
 pub struct Estimate {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -70,18 +70,15 @@ impl QBDeletable for Estimate {}
 
 impl QBFullUpdatable for Estimate {
     fn can_full_update(&self) -> bool {
-        if self.has_read() && self.customer_ref.is_some() {
-            if let Some(status) = self.email_status.as_ref() {
-                if status == &EmailStatus::NeedToSend {
-                    self.bill_email.is_some()
-                } else {
-                    true
-                }
-            } else {
-                false
+        if !self.has_read() || !self.customer_ref.is_some() {
+            false
+        } else if let Some(status) = self.email_status.as_ref() {
+            match status {
+                EmailStatus::NeedToSend => self.bill_email.is_some(),
+                _ => true,
             }
         } else {
-            false
+            true
         }
     }
 }

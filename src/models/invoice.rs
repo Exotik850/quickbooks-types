@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable,
-    QBToRef, QBVoidable,
+    QBToRef, QBVoidable, QBError
 };
 
 use super::{
@@ -24,7 +24,7 @@ use super::{
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(setter(into), default))]
+#[cfg_attr(feature = "builder", builder(default, build_fn(error = "QBError"), setter(into, strip_option)))]
 pub struct Invoice {
     pub id: Option<String>,
     pub sync_token: Option<String>,
