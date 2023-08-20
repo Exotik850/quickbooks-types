@@ -1,4 +1,4 @@
-use chrono::{DateTime, Utc};
+use chrono::{DateTime, Utc, NaiveDate};
 use serde::{ser::SerializeStruct, Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
@@ -172,7 +172,7 @@ pub struct SalesItemLineDetail {
     pub item_ref: NtRef,
     pub class_ref: NtRef,
     pub tax_code_ref: NtRef,
-    pub service_date: DateTime<Utc>,
+    pub service_date: NaiveDate,
     pub discount_rate: f32,
     pub qty: u32,
     pub unit_price: f32,

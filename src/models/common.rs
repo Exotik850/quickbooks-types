@@ -46,8 +46,6 @@ impl From<(&str, &str)> for NtRef {
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase")]
 pub struct MetaData {
-    // pub create_time: Option<DateTime<Utc>>,
-    // pub last_updated_time: Option<DateTime<Utc>>,
     pub create_time: DateTime<Utc>,
     pub last_updated_time: DateTime<Utc>,
 }
