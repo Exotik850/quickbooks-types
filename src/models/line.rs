@@ -1,4 +1,4 @@
-use chrono::{DateTime, Utc, NaiveDate};
+use chrono::{DateTime, NaiveDate, Utc};
 use serde::{ser::SerializeStruct, Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
@@ -91,7 +91,7 @@ impl Serialize for LineDetail {
                 state.serialize_field("TaxLineDetail", data)?;
                 "TaxLineDetail"
             }
-            _ => panic!("Cannot serialize Line Detail of None!")
+            _ => panic!("Cannot serialize Line Detail of None!"),
         };
 
         state.serialize_field("DetailType", detail_type)?;
@@ -116,7 +116,8 @@ pub enum LineDetail {
     ItemBasedExpenseLineDetail(ItemBasedExpenseLineDetail),
     AccountBasedExpenseLineDetail(AccountBasedExpenseLineDetail),
     TaxLineDetail(TaxLineDetail),
-    #[default] None,
+    #[default]
+    None,
 }
 
 pub trait TaxableLine {
@@ -234,10 +235,7 @@ pub struct ItemBasedExpenseLineDetail {
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
-#[serde(
-    default,
-    rename_all = "PascalCase"
-)]
+#[serde(default, rename_all = "PascalCase")]
 pub struct AccountBasedExpenseLineDetail {
     pub account_ref: NtRef,
     pub tax_code_ref: NtRef,

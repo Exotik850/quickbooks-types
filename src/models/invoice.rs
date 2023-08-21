@@ -4,13 +4,13 @@ use serde_with::skip_serializing_none;
 
 use crate::{
     QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable,
-    QBSparseUpdateable, QBToRef, QBVoidable
+    QBSparseUpdateable, QBToRef, QBVoidable,
 };
 
 use super::{
     common::{
         Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef,
-        PrintStatus, TxnTaxDetail
+        PrintStatus, TxnTaxDetail,
     },
     line::Line,
 };

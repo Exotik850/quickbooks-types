@@ -104,37 +104,31 @@ pub struct Item {
     pub unit_price: Option<f32>,
 }
 
-
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum ItemType {
     Inventory,
     Service,
-    #[default] NonInventory,
+    #[default]
+    NonInventory,
 }
 
-// TODO More conditions for creating items
 impl QBCreatable for Item {
     fn can_create(&self) -> bool {
-        self.name.is_some() &&
-        self.expense_account_ref.is_some() &&
-        match self.item_type.as_ref() {
-            Some(typ) => {
-                match typ {
+        self.name.is_some()
+            && self.expense_account_ref.is_some()
+            && match self.item_type.as_ref() {
+                Some(typ) => match typ {
                     &ItemType::Inventory => {
-                        self.income_account_ref.is_some() &&
-                        self.asset_account_ref.is_some() &&
-                        self.inv_start_date.is_some() &&
-                        self.qty_on_hand.is_some()
-                    },
+                        self.income_account_ref.is_some()
+                            && self.asset_account_ref.is_some()
+                            && self.inv_start_date.is_some()
+                            && self.qty_on_hand.is_some()
+                    }
                     &ItemType::Service => self.income_account_ref.is_some(),
                     &ItemType::NonInventory => true,
-                }
-            },
-            None => {
-                self.expense_account_ref.is_some()
-                || self.asset_account_ref.is_some()
+                },
+                None => self.asset_account_ref.is_some(),
             }
-        }
     }
 }
 

@@ -62,6 +62,6 @@ impl QBFullUpdatable for Account {
 
 impl QBToRef for Account {
     fn ref_name(&self) -> Option<&String> {
-       self.name.as_ref()
+        self.name.as_ref()
     }
 }
