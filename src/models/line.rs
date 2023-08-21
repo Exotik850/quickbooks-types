@@ -126,7 +126,7 @@ pub trait TaxableLine {
 impl TaxableLine for LineDetail {
     fn set_taxable(&mut self) {
         if let LineDetail::SalesItemLineDetail(data) = self {
-            data.tax_code_ref.value = Some("TAX".into())
+            data.tax_code_ref = Some("TAX".into())
         }
     }
 }
@@ -164,19 +164,19 @@ where
 #[cfg_attr(feature = "builder", derive(Builder))]
 #[cfg_attr(
     feature = "builder",
-    builder(default, build_fn(error = "QBError"), setter(into))
+    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
 pub struct SalesItemLineDetail {
-    pub tax_inclusive_amt: f32,
-    pub discount_amt: f32,
-    pub item_ref: NtRef,
-    pub class_ref: NtRef,
-    pub tax_code_ref: NtRef,
-    pub service_date: NaiveDate,
-    pub discount_rate: f32,
-    pub qty: u32,
-    pub unit_price: f32,
-    pub tax_classification_ref: NtRef,
+    pub tax_inclusive_amt: Option<f32>,
+    pub discount_amt: Option<f32>,
+    pub item_ref: Option<NtRef>,
+    pub class_ref: Option<NtRef>,
+    pub tax_code_ref: Option<NtRef>,
+    pub service_date: Option<NaiveDate>,
+    pub discount_rate: Option<f32>,
+    pub qty: Option<u32>,
+    pub unit_price: Option<f32>,
+    pub tax_classification_ref: Option<NtRef>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
@@ -250,7 +250,7 @@ pub struct AccountBasedExpenseLineDetail {
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
-#[serde(rename_all = "PascalCase", default, tag = "TaxLineDetail")]
+#[serde(rename_all = "PascalCase", default, tag = "TaxLineDetailEx")]
 pub struct TaxLineDetail {
     pub tax_rate_ref: NtRef,
     pub net_amount_taxable: f32,
