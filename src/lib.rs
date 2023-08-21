@@ -1,3 +1,5 @@
+#![warn(clippy::pedantic)]
+
 #[cfg(feature = "builder")]
 #[macro_use]
 extern crate derive_builder;
@@ -28,6 +30,7 @@ macro_rules! impl_qb_data {
         $(
             #[cfg(feature="builder")]
             paste::paste! {
+                #[allow(clippy::new_ret_no_self)]
                 impl [<$x>] {
                     pub fn new() -> [<$x Builder>] {
                         [<$x Builder>]::default()

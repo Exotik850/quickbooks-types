@@ -117,15 +117,15 @@ impl QBCreatable for Item {
         self.name.is_some()
             && self.expense_account_ref.is_some()
             && match self.item_type.as_ref() {
-                Some(typ) => match typ {
-                    &ItemType::Inventory => {
+                Some(typ) => match *typ {
+                    ItemType::Inventory => {
                         self.income_account_ref.is_some()
                             && self.asset_account_ref.is_some()
                             && self.inv_start_date.is_some()
                             && self.qty_on_hand.is_some()
                     }
-                    &ItemType::Service => self.income_account_ref.is_some(),
-                    &ItemType::NonInventory => true,
+                    ItemType::Service => self.income_account_ref.is_some(),
+                    ItemType::NonInventory => true,
                 },
                 None => self.asset_account_ref.is_some(),
             }

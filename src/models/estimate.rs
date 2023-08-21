@@ -73,13 +73,10 @@ impl QBDeletable for Estimate {}
 
 impl QBFullUpdatable for Estimate {
     fn can_full_update(&self) -> bool {
-        if !self.has_read() || !self.customer_ref.is_some() {
+        if !self.has_read() || self.customer_ref.is_none() {
             false
-        } else if let Some(status) = self.email_status.as_ref() {
-            match status {
-                EmailStatus::NeedToSend => self.bill_email.is_some(),
-                _ => true,
-            }
+        } else if let Some(EmailStatus::NeedToSend) = self.email_status.as_ref() {
+            self.bill_email.is_some()
         } else {
             true
         }
