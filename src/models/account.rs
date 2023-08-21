@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem, QBToRef};
 
 use super::common::{MetaData, NtRef};
 
@@ -57,5 +57,11 @@ impl QBCreatable for Account {
 impl QBFullUpdatable for Account {
     fn can_full_update(&self) -> bool {
         self.name.is_some() && self.has_read()
+    }
+}
+
+impl QBToRef for Account {
+    fn ref_name(&self) -> Option<&String> {
+       self.name.as_ref()
     }
 }
