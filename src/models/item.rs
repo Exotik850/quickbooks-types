@@ -90,7 +90,7 @@ pub struct Item {
     /// Applicable for France companies only.
     pub item_category_type: Option<String>,
     #[serde(rename = "Type")]
-    pub item_type: Option<String>,
+    pub item_type: Option<ItemType>,
     pub level: Option<i64>,
     pub name: Option<String>,
     pub purchase_desc: Option<String>,
@@ -104,10 +104,37 @@ pub struct Item {
     pub unit_price: Option<f32>,
 }
 
+
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+pub enum ItemType {
+    Inventory,
+    Service,
+    #[default] NonInventory,
+}
+
 // TODO More conditions for creating items
 impl QBCreatable for Item {
     fn can_create(&self) -> bool {
-        self.name.is_some()
+        self.name.is_some() &&
+        self.expense_account_ref.is_some() &&
+        match self.item_type.as_ref() {
+            Some(typ) => {
+                match typ {
+                    &ItemType::Inventory => {
+                        self.income_account_ref.is_some() &&
+                        self.asset_account_ref.is_some() &&
+                        self.inv_start_date.is_some() &&
+                        self.qty_on_hand.is_some()
+                    },
+                    &ItemType::Service => self.income_account_ref.is_some(),
+                    &ItemType::NonInventory => true,
+                }
+            },
+            None => {
+                self.expense_account_ref.is_some()
+                || self.asset_account_ref.is_some()
+            }
+        }
     }
 }
 
