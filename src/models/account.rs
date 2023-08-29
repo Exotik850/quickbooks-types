@@ -45,8 +45,43 @@ pub struct Account {
 #[serde(rename_all = "PascalCase")]
 pub enum AccountType {
     #[default]
-    TODO, // TODO Make this
+    TODO,
 }
+
+// #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+// #[serde(rename_all = "PascalCase")]
+// pub enum AccountType {
+//     Bank(BankSubType),
+//     OtherAsset(OtherAssetSubType),
+//     OtherCurrentAsset(OtherCurrentAssetSubType),
+//     FixedAsset(FixedAssetSubType)
+// }
+// #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+// #[serde(rename_all = "PascalCase")]
+// pub enum BankSubType {
+//     #[default]
+//     TODO,
+// }
+// #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+// #[serde(rename_all = "PascalCase")]
+// pub enum OtherAssetSubType {
+//     #[default]
+//     TODO,
+// }
+// #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+// #[serde(rename_all = "PascalCase")]
+// pub enum FixedAssetSubType {
+//     #[default]
+//     TODO,
+// }
+// #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
+// #[serde(rename_all = "PascalCase")]
+// pub enum BankSubAccountType {
+//     #[default]
+//     TODO,
+// }
+
+
 
 impl QBCreatable for Account {
     fn can_create(&self) -> bool {

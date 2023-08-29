@@ -14,13 +14,18 @@ use super::Line;
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(default)]
 pub struct NtRef {
-    // Reference Type
     #[serde(rename = "type")]
     pub entity_ref_type: Option<String>,
     #[serde(alias = "Name")]
     pub name: Option<String>,
     #[serde(alias = "Value")]
     pub value: Option<String>,
+    // #[serde(rename = "type")]
+    // pub entity_ref_type: Option<&'a str>,
+    // #[serde(alias = "Name")]
+    // pub name: Option<&'a str>,
+    // #[serde(alias = "Value")]
+    // pub value: Option<&'a str>,
 }
 
 impl From<&str> for NtRef {
@@ -74,13 +79,13 @@ impl std::fmt::Display for Addr {
         write!(
             f,
             "{}, {}, {}, {} {}",
-            self.line1.as_ref().unwrap_or(&"".to_owned()),
-            self.city.as_ref().unwrap_or(&"".to_owned()),
+            self.line1.as_ref().unwrap_or(&String::new()),
+            self.city.as_ref().unwrap_or(&String::new()),
             self.country_sub_division_code
                 .as_ref()
-                .unwrap_or(&"".to_owned()),
-            self.country.as_ref().unwrap_or(&"".to_owned()),
-            self.postal_code.as_ref().unwrap_or(&"".to_owned())
+                .unwrap_or(&String::new()),
+            self.country.as_ref().unwrap_or(&String::new()),
+            self.postal_code.as_ref().unwrap_or(&String::new())
         )
     }
 }

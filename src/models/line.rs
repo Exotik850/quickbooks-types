@@ -46,7 +46,7 @@ impl QBCreatable for Option<Vec<Line>> {
 
 impl QBCreatable for Vec<Line> {
     fn can_create(&self) -> bool {
-        self.iter().all(|l| l.can_create())
+        self.iter().all(QBCreatable::can_create)
     }
 }
 
@@ -91,7 +91,7 @@ impl Serialize for LineDetail {
                 state.serialize_field("TaxLineDetail", data)?;
                 "TaxLineDetail"
             }
-            _ => panic!("Cannot serialize Line Detail of None!"),
+            LineDetail::None => panic!("Cannot serialize Line Detail of None!"),
         };
 
         state.serialize_field("DetailType", detail_type)?;
@@ -127,26 +127,26 @@ pub trait TaxableLine {
 impl TaxableLine for LineDetail {
     fn set_taxable(&mut self) {
         if let LineDetail::SalesItemLineDetail(data) = self {
-            data.tax_code_ref = Some("TAX".into())
+            data.tax_code_ref = Some("TAX".into());
         }
     }
 }
 
 impl TaxableLine for Line {
     fn set_taxable(&mut self) {
-        self.line_detail.set_taxable()
+        self.line_detail.set_taxable();
     }
 }
 
 impl TaxableLine for Vec<Line> {
     fn set_taxable(&mut self) {
-        self.iter_mut().for_each(|f| f.set_taxable())
+        self.iter_mut().for_each(TaxableLine::set_taxable);
     }
 }
 
 impl TaxableLine for Option<Vec<Line>> {
     fn set_taxable(&mut self) {
-        self.iter_mut().for_each(|f| f.set_taxable())
+        self.iter_mut().for_each(TaxableLine::set_taxable);
     }
 }
 

@@ -145,7 +145,7 @@ impl<T: QBItem + QBToRef> From<T> for NtRef {
                 value
                     .ref_name()
                     .expect("No Ref Name when converting from QB Object to Reference Object")
-                    .to_owned(),
+                    .clone(),
             ),
             value: value.clone_id(),
         }
