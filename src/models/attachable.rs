@@ -42,6 +42,7 @@ pub struct Attachable {
     pub temp_download_uri: Option<String>,
 }
 
+#[must_use]
 pub fn content_type_from_ext(ext: &str) -> &'static str {
     match ext {
         "ai" | "eps" => "application/postscript",

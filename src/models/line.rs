@@ -155,7 +155,7 @@ where
     T: TaxableLine,
 {
     fn set_taxable(&mut self) {
-        self.for_each(|f| f.set_taxable());
+        self.for_each(TaxableLine::set_taxable);
     }
 }
 

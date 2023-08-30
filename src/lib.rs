@@ -32,7 +32,7 @@ macro_rules! impl_qb_data {
             paste::paste! {
                 #[allow(clippy::new_ret_no_self)]
                 impl [<$x>] {
-                    pub fn new() -> [<$x Builder>] {
+                    #[must_use] pub fn new() -> [<$x Builder>] {
                         [<$x Builder>]::default()
                     }
                 }

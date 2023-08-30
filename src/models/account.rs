@@ -81,8 +81,6 @@ pub enum AccountType {
 //     TODO,
 // }
 
-
-
 impl QBCreatable for Account {
     fn can_create(&self) -> bool {
         self.name.is_some() && (self.account_type.is_some() || self.account_sub_type.is_some())
