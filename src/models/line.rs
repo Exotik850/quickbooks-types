@@ -101,7 +101,7 @@ impl Serialize for LineDetail {
 
 impl std::fmt::Display for Line {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", serde_json::to_string_pretty(self).unwrap())
+        write!(f, "{}", serde_json::to_string_pretty(self).expect("Could not serialize Line for display!"))
     }
 }
 

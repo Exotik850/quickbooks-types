@@ -1,4 +1,4 @@
-#![warn(clippy::pedantic)]
+// #![warn(clippy::pedantic)]
 
 #[cfg(feature = "builder")]
 #[macro_use]
@@ -68,7 +68,7 @@ macro_rules! impl_qb_data {
 
             impl Display for $x {
                 fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                    write!(f, "{} : {}", Self::name(), serde_json::to_string_pretty(self).unwrap())
+                    write!(f, "{} : {}", Self::name(), serde_json::to_string_pretty(self).expect("Could not serialize object for display!"))
                 }
             }
         )+
