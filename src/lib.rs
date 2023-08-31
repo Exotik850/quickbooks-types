@@ -6,12 +6,13 @@ extern crate derive_builder;
 
 mod error;
 mod models;
+use std::fmt::{Debug, Display};
+
 use const_str::convert_ascii_case;
 pub use error::*;
 use models::common::{MetaData, NtRef};
 pub use models::*;
 use serde::{de::DeserializeOwned, Serialize};
-use std::fmt::{Debug, Display};
 
 pub trait QBItem: Serialize + Default + Clone + Sized + DeserializeOwned + Debug + Send {
     fn id(&self) -> Option<&String>;

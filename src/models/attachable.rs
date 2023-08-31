@@ -3,9 +3,8 @@ use std::path::Path;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBToRef};
-
 use super::common::{CustomField, MetaData, NtRef};
+use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBToRef};
 
 /*
     Attachable Object

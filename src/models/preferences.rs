@@ -3,8 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::{Email, MetaData, NtRef},
-    QBError, QBFullUpdatable, QBItem,
+    common::{Email, MetaData, NtRef}, QBError, QBFullUpdatable, QBItem
 };
 
 /*

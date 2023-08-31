@@ -2,9 +2,8 @@ use chrono::{DateTime, NaiveDate, Utc};
 use serde::{ser::SerializeStruct, Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBError};
-
 use super::common::{LinkedTxn, NtRef};
+use crate::{QBCreatable, QBError};
 
 /*
     Line object
@@ -101,7 +100,11 @@ impl Serialize for LineDetail {
 
 impl std::fmt::Display for Line {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", serde_json::to_string_pretty(self).expect("Could not serialize Line for display!"))
+        write!(
+            f,
+            "{}",
+            serde_json::to_string_pretty(self).expect("Could not serialize Line for display!")
+        )
     }
 }
 

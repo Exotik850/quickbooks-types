@@ -1,9 +1,8 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem, QBToRef};
-
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem, QBToRef};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]

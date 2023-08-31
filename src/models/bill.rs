@@ -2,12 +2,10 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem};
-
 use super::{
-    common::{LinkedTxn, MetaData, NtRef},
-    line::Line,
+    common::{LinkedTxn, MetaData, NtRef}, line::Line
 };
+use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem};
 
 /*
     Bill Object

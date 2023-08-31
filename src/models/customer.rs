@@ -2,9 +2,8 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBError, QBFullUpdatable, QBReadable, QBSparseUpdateable, QBToRef};
-
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBReadable, QBSparseUpdateable, QBToRef};
 
 /*
     Customer Object

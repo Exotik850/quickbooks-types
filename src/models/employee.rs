@@ -2,9 +2,8 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
-
 use super::common::{Addr, Email, MetaData, PhoneNumber};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
 
 /*
     Employee object

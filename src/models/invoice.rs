@@ -2,17 +2,13 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{
-    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable,
-    QBSparseUpdateable, QBToRef, QBVoidable,
-};
-
 use super::{
     common::{
-        Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef,
-        PrintStatus, TxnTaxDetail,
-    },
-    line::Line,
+        Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef, PrintStatus, TxnTaxDetail
+    }, line::Line
+};
+use crate::{
+    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBToRef, QBVoidable
 };
 
 /*

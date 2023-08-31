@@ -1,9 +1,9 @@
-use crate::{
-    common::{MetaData, NtRef},
-    Line, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBVoidable,
-};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
+
+use crate::{
+    common::{MetaData, NtRef}, Line, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBVoidable
+};
 
 /*
     Bill Payment Object

@@ -2,13 +2,11 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{
-    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable,
-};
-
 use super::{
-    common::{CreditCardPayment, MetaData, NtRef},
-    Line,
+    common::{CreditCardPayment, MetaData, NtRef}, Line
+};
+use crate::{
+    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable
 };
 
 /*

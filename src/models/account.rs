@@ -1,9 +1,8 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem, QBToRef};
-
 use super::common::{MetaData, NtRef};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem, QBToRef};
 
 /*
     Account Object
