@@ -19,11 +19,12 @@ use crate::{
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature = "builder", derive(Builder))]
 #[cfg_attr(
     feature = "builder",
+    derive(Builder),
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
+
 pub struct Invoice {
     pub id: Option<String>,
     pub sync_token: Option<String>,
