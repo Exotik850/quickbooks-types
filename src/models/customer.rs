@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
-use crate::{QBCreatable, QBError, QBFullUpdatable, QBHasRef, QBReadable, QBSparseUpdateable};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBToRef, QBReadable, QBSparseUpdateable};
 
 /*
     Customer Object
@@ -155,11 +155,5 @@ impl QBFullUpdatable for Customer {
 impl QBSparseUpdateable for Customer {
     fn can_sparse_update(&self) -> bool {
         self.can_full_update() && self.sparse.is_some_and(|x| x)
-    }
-}
-
-impl QBHasRef for Customer {
-    fn ref_name(&self) -> Option<&String> {
-        self.display_name.as_ref()
     }
 }

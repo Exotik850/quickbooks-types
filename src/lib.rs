@@ -134,25 +134,42 @@ pub trait QBSendable {}
 
 pub trait QBPDFable {}
 
-pub trait QBHasRef {
-    fn ref_name(&self) -> Option<&String>;
+pub trait QBToRef: QBItem {
+    fn to_ref(&self) -> Result<NtRef, QBError>;
 }
 
-pub trait QBToRef: QBHasRef + QBItem {
-    fn to_ref(&self) -> Result<NtRef, QBError> {
-        if let Some(nt_ref) = self.ref_name() {
-            Ok(NtRef {
+macro_rules! impl_qb_to_ref {
+    ($struct:ident {$name_field:ident}) => {
+      impl QBToRef for $struct {
+        fn to_ref(&self) -> Result<NtRef, QBError> {
+            if self.id.is_some() {
+              Ok(NtRef {
                 entity_ref_type: Some(Self::name().into()),
-                name: Some(nt_ref.clone()),
-                value: self.clone_id(),
-            })
-        } else {
-            Err(QBError::QBToRefError)
+                name: self.$name_field.clone(),
+                value: self.id.clone()
+              })
+            } else {
+              Err(QBError::QBToRefError)
+            }
         }
+      }
+    };
+    ($($struct:ident {$name_field:ident}),+) => {
+      $(
+        impl_qb_to_ref!($struct {$name_field});
+      )+
     }
 }
 
-impl<T: QBHasRef + QBItem> QBToRef for T {}
+impl_qb_to_ref!(
+  Account {fully_qualified_name},
+  Attachable {file_name},
+  Invoice {doc_number},
+  SalesReceipt {doc_number},
+  Item {name},
+  Customer {display_name},
+  Vendor {display_name}
+);
 
 /*
 Create: ✓

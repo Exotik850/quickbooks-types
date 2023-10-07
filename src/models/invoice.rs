@@ -8,7 +8,7 @@ use super::{
     }, line::Line
 };
 use crate::{
-    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBHasRef, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
+    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBToRef, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
 };
 
 /*
@@ -95,12 +95,6 @@ impl QBFullUpdatable for Invoice {
 impl QBSparseUpdateable for Invoice {
     fn can_sparse_update(&self) -> bool {
         self.can_full_update() && self.sparse.is_some_and(|x| x)
-    }
-}
-
-impl QBHasRef for Invoice {
-    fn ref_name(&self) -> Option<&String> {
-        self.doc_number.as_ref()
     }
 }
 
