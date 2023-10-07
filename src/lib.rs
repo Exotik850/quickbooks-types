@@ -134,24 +134,25 @@ pub trait QBSendable {}
 
 pub trait QBPDFable {}
 
-pub trait QBToRef {
+pub trait QBHasRef {
     fn ref_name(&self) -> Option<&String>;
 }
 
-impl<T: QBItem + QBToRef> From<T> for NtRef {
-    fn from(value: T) -> Self {
-        NtRef {
-            entity_ref_type: Some(T::name().into()),
-            name: Some(
-                value
-                    .ref_name()
-                    .expect("No Ref Name when converting from QB Object to Reference Object")
-                    .clone(),
-            ),
-            value: value.clone_id(),
+pub trait QBToRef: QBHasRef + QBItem {
+    fn to_ref(&self) -> Result<NtRef, QBError> {
+        if let Some(nt_ref) = self.ref_name() {
+            Ok(NtRef {
+                entity_ref_type: Some(Self::name().into()),
+                name: Some(nt_ref.clone()),
+                value: self.clone_id(),
+            })
+        } else {
+            Err(QBError::QBToRefError)
         }
     }
 }
+
+impl<T: QBHasRef + QBItem> QBToRef for T {}
 
 /*
 Create: ✓

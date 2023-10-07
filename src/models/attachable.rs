@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{CustomField, MetaData, NtRef};
-use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBToRef};
+use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBHasRef, QBItem, QBToRef};
 
 /*
     Attachable Object
@@ -42,7 +42,6 @@ pub struct Attachable {
     pub temp_download_uri: Option<String>,
 }
 
-#[must_use]
 pub fn content_type_from_ext(ext: &str) -> &'static str {
     match ext {
         "ai" | "eps" => "application/postscript",
@@ -147,10 +146,10 @@ impl From<NtRef> for AttachableRef {
     }
 }
 
-impl<T: QBItem + QBToRef> From<T> for AttachableRef {
-    fn from(value: T) -> Self {
-        let value: NtRef = value.into();
-        value.into()
+trait QBToAttachableRef: QBToRef {
+    fn to_attach_ref(&self) -> Result<AttachableRef, QBError> {
+        let value = self.to_ref()?;
+        Ok(value.into())
     }
 }
 
@@ -165,7 +164,7 @@ impl QBFullUpdatable for Attachable {
         self.has_read() && self.can_create()
     }
 }
-impl QBToRef for Attachable {
+impl QBHasRef for Attachable {
     fn ref_name(&self) -> Option<&String> {
         self.file_name.as_ref()
     }

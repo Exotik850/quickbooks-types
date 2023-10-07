@@ -8,7 +8,7 @@ use super::{
     }, Line
 };
 use crate::{
-    QBCreatable, QBError, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdateable, QBToRef, QBVoidable
+    QBCreatable, QBError, QBFullUpdatable, QBHasRef, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
 };
 
 /*
@@ -67,7 +67,7 @@ pub struct SalesReceipt {
     pub free_form_address: Option<bool>,
 }
 
-impl QBToRef for SalesReceipt {
+impl QBHasRef for SalesReceipt {
     fn ref_name(&self) -> Option<&String> {
         self.doc_number.as_ref()
     }

@@ -8,7 +8,7 @@ use super::{
     }, line::Line
 };
 use crate::{
-    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBToRef, QBVoidable
+    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBHasRef, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
 };
 
 /*
@@ -98,7 +98,7 @@ impl QBSparseUpdateable for Invoice {
     }
 }
 
-impl QBToRef for Invoice {
+impl QBHasRef for Invoice {
     fn ref_name(&self) -> Option<&String> {
         self.doc_number.as_ref()
     }

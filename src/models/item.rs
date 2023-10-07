@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{MetaData, NtRef};
-use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem, QBToRef};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBHasRef, QBItem};
 
 /*
     Item Object
@@ -138,7 +138,7 @@ impl QBFullUpdatable for Item {
     }
 }
 
-impl QBToRef for Item {
+impl QBHasRef for Item {
     fn ref_name(&self) -> Option<&String> {
         self.name.as_ref()
     }
