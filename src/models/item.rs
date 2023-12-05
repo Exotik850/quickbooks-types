@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{MetaData, NtRef};
-use crate::{QBCreatable, QBError, QBFullUpdatable, QBToRef, QBItem};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
 
 /*
     Item Object

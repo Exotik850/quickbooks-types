@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{CustomField, MetaData, NtRef};
-use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBToRef, QBItem};
+use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBToRef};
 
 /*
     Attachable Object

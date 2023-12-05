@@ -97,7 +97,3 @@ impl QBFullUpdatable for Vendor {
         self.has_read() && self.can_create()
     }
 }
-
-
-
-

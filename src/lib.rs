@@ -139,36 +139,35 @@ pub trait QBToRef: QBItem {
 }
 
 macro_rules! impl_qb_to_ref {
-    ($struct:ident {$name_field:ident}) => {
+  ($($struct:ident {$name_field:ident}),+) => {
+    $(
       impl QBToRef for $struct {
         fn to_ref(&self) -> Result<NtRef, QBError> {
-            if self.id.is_some() {
-              Ok(NtRef {
-                entity_ref_type: Some(Self::name().into()),
-                name: self.$name_field.clone(),
-                value: self.id.clone()
-              })
-            } else {
-              Err(QBError::QBToRefError)
-            }
+          if self.id.is_some() {
+            Ok(NtRef {
+              entity_ref_type: Some(Self::name().into()),
+              name: self.$name_field.clone(),
+              value: self.id.clone()
+            })
+          } else {
+            Err(QBError::QBToRefError)
+          }
         }
       }
-    };
-    ($($struct:ident {$name_field:ident}),+) => {
-      $(
-        impl_qb_to_ref!($struct {$name_field});
-      )+
-    }
+    )+
+  }
 }
 
 impl_qb_to_ref!(
-  Account {fully_qualified_name},
-  Attachable {file_name},
-  Invoice {doc_number},
-  SalesReceipt {doc_number},
-  Item {name},
-  Customer {display_name},
-  Vendor {display_name}
+    Account {
+        fully_qualified_name
+    },
+    Attachable { file_name },
+    Invoice { doc_number },
+    SalesReceipt { doc_number },
+    Item { name },
+    Customer { display_name },
+    Vendor { display_name }
 );
 
 /*

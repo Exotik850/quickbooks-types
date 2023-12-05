@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
-use crate::{QBCreatable, QBError, QBFullUpdatable, QBToRef, QBReadable, QBSparseUpdateable};
+use crate::{QBCreatable, QBError, QBFullUpdatable, QBReadable, QBSparseUpdateable};
 
 /*
     Customer Object
