@@ -10,6 +10,8 @@ use crate::{QBCreatable, QBError};
     No documentation page, but used as a detail for purchased items or services
 */
 
+pub type LineField = Vec<Line>;
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -34,7 +36,7 @@ impl QBCreatable for Line {
     }
 }
 
-impl QBCreatable for Option<Vec<Line>> {
+impl QBCreatable for Option<LineField> {
     fn can_create(&self) -> bool {
         if let Some(data) = self {
             data.can_create()
@@ -44,7 +46,7 @@ impl QBCreatable for Option<Vec<Line>> {
     }
 }
 
-impl QBCreatable for Vec<Line> {
+impl QBCreatable for LineField {
     fn can_create(&self) -> bool {
         self.iter().all(QBCreatable::can_create)
     }
@@ -142,13 +144,13 @@ impl TaxableLine for Line {
     }
 }
 
-impl TaxableLine for Vec<Line> {
+impl TaxableLine for LineField {
     fn set_taxable(&mut self) {
         self.iter_mut().for_each(TaxableLine::set_taxable);
     }
 }
 
-impl TaxableLine for Option<Vec<Line>> {
+impl TaxableLine for Option<LineField> {
     fn set_taxable(&mut self) {
         self.iter_mut().for_each(TaxableLine::set_taxable);
     }
@@ -180,7 +182,7 @@ pub struct SalesItemLineDetail {
     pub tax_code_ref: Option<NtRef>,
     pub service_date: Option<NaiveDate>,
     pub discount_rate: Option<f32>,
-    pub qty: Option<u32>,
+    pub qty: Option<i64>,
     pub unit_price: Option<f32>,
     pub tax_classification_ref: Option<NtRef>,
 }
@@ -189,7 +191,7 @@ pub struct SalesItemLineDetail {
 #[serde(rename_all = "PascalCase", default)]
 pub struct GroupLineDetail {
     pub quantity: f32,
-    pub line: Vec<Line>,
+    pub line: LineField,
     pub group_item_ref: NtRef,
 }
 
@@ -261,4 +263,69 @@ pub struct TaxLineDetail {
     pub tax_inclusive_amount: Option<f32>,
     pub override_delta_amount: Option<f32>,
     pub tax_percent: Option<f32>,
+}
+
+#[test]
+fn deserialize_line() {
+  let test: LineField = serde_json::from_str(r#"[{
+      "Description": "Rock Fountain", 
+      "DetailType": "SalesItemLineDetail", 
+      "SalesItemLineDetail": {
+        "TaxCodeRef": {
+          "value": "TAX"
+        }, 
+        "Qty": 1, 
+        "UnitPrice": 275, 
+        "ItemRef": {
+          "name": "Rock Fountain", 
+          "value": "5"
+        }
+      }, 
+      "LineNum": 1, 
+      "Amount": 275.0, 
+      "Id": "1"
+    }, 
+    {
+      "Description": "Fountain Pump", 
+      "DetailType": "SalesItemLineDetail", 
+      "SalesItemLineDetail": {
+        "TaxCodeRef": {
+          "value": "TAX"
+        }, 
+        "Qty": 1, 
+        "UnitPrice": 12.75, 
+        "ItemRef": {
+          "name": "Pump", 
+          "value": "11"
+        }
+      }, 
+      "LineNum": 2, 
+      "Amount": 12.75, 
+      "Id": "2"
+    }, 
+    {
+      "Description": "Concrete for fountain installation", 
+      "DetailType": "SalesItemLineDetail", 
+      "SalesItemLineDetail": {
+        "TaxCodeRef": {
+          "value": "TAX"
+        }, 
+        "Qty": 5, 
+        "UnitPrice": 9.5, 
+        "ItemRef": {
+          "name": "Concrete", 
+          "value": "3"
+        }
+      }, 
+      "LineNum": 3, 
+      "Amount": 47.5, 
+      "Id": "3"
+    }, 
+    {
+      "DetailType": "SubTotalLineDetail", 
+      "Amount": 335.25, 
+      "SubTotalLineDetail": {}
+    }
+  ]"#).unwrap();
+  dbg!(test);
 }

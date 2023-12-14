@@ -2,10 +2,8 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{
-    common::{LinkedTxn, MetaData, NtRef}, line::Line
-};
-use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem};
+use super::common::{LinkedTxn, MetaData, NtRef};
+use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, LineField};
 
 /*
     Bill Object
@@ -37,7 +35,7 @@ pub struct Bill {
     pub sales_term_ref: Option<NtRef>,
     pub due_date: Option<NaiveDate>,
     pub sparse: Option<bool>,
-    pub line: Option<Vec<Line>>,
+    pub line: Option<LineField>,
     pub balance: Option<f32>,
     pub doc_number: Option<String>,
     pub private_note: Option<String>,

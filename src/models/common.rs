@@ -2,7 +2,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::Line;
+use crate::LineField;
 
 /*
     These are not full quickbooks object but they are used in other quickbooks objects,
@@ -139,7 +139,7 @@ pub struct MarkupInfo {
 pub struct TxnTaxDetail {
     pub txn_tax_code_ref: Option<NtRef>,
     pub total_tax: Option<f32>,
-    pub tax_line: Option<Vec<Line>>,
+    pub tax_line: Option<LineField>,
 }
 
 #[skip_serializing_none]

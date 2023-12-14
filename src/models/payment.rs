@@ -2,11 +2,9 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{
-    common::{CreditCardPayment, MetaData, NtRef}, Line
-};
+use super::common::{CreditCardPayment, MetaData, NtRef};
 use crate::{
-    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable
+    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable, LineField
 };
 
 /*
@@ -36,7 +34,7 @@ pub struct Payment {
     pub unapplied_amt: Option<f32>,
     pub deposit_to_account_ref: Option<NtRef>,
     pub exchange_rate: Option<f32>,
-    pub line: Option<Vec<Line>>,
+    pub line: Option<LineField>,
     pub txn_source: Option<String>,
     #[serde(rename = "ARAccountRef")]
     pub ar_account_ref: Option<NtRef>,

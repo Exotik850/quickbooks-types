@@ -2,11 +2,9 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{
-    common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail}, Line
-};
+use super::common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail};
 use crate::{
-    common::EmailStatus, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable
+    common::EmailStatus, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, LineField
 };
 
 #[skip_serializing_none]
@@ -45,7 +43,7 @@ pub struct Estimate {
     pub customer_memo: Option<NtRef>,
     pub email_status: Option<EmailStatus>,
     pub txn_tax_detail: Option<TxnTaxDetail>,
-    pub line: Option<Vec<Line>>,
+    pub line: Option<LineField>,
     pub linked_txn: Option<Vec<LinkedTxn>>,
     pub accepted_by: Option<String>,
     pub exchange_rate: Option<f32>,

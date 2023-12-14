@@ -2,13 +2,11 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::{
-    common::{
+use super::common::{
         Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef, PrintStatus, TxnTaxDetail
-    }, line::Line
-};
+    };
 use crate::{
-    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
+    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable, LineField
 };
 
 /*
@@ -38,7 +36,7 @@ pub struct Invoice {
     pub deposit_to_account_ref: Option<NtRef>,
     #[serde(rename = "AllowOnlineACHPayment")]
     pub allow_online_ach_payment: Option<bool>,
-    pub line: Option<Vec<Line>>,
+    pub line: Option<LineField>,
     pub private_note: Option<String>,
     pub delivery_info: Option<DeliveryInfo>,
     pub bill_email_cc: Option<Email>,
@@ -87,7 +85,7 @@ impl QBVoidable for Invoice {}
 
 impl QBFullUpdatable for Invoice {
     fn can_full_update(&self) -> bool {
-        self.has_read() && self.line.is_some() && self.customer_ref.is_some()
+        self.has_read() && self.can_create()
         // TODO add the docnumber check, it's more complicated though
     }
 }

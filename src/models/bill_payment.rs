@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::{MetaData, NtRef}, Line, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBVoidable
+    common::{MetaData, NtRef}, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBVoidable, LineField
 };
 
 /*
@@ -28,7 +28,7 @@ pub struct BillPayment {
     pub pay_type: Option<PayType>,
     pub private_note: Option<String>,
     pub sparse: Option<bool>,
-    pub line: Option<Vec<Line>>,
+    pub line: Option<LineField>,
     pub id: Option<String>,
     pub check_payment: Option<CheckBillPayment>,
     pub credit_card_payment: Option<CreditCardBillPayment>,

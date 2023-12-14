@@ -5,7 +5,7 @@ use serde_with::skip_serializing_none;
 use super::{
     common::{
         Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn, MetaData, NtRef, PrintStatus, TxnTaxDetail
-    }, Line
+    }, LineField
 };
 use crate::{
     QBCreatable, QBError, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
@@ -27,7 +27,7 @@ use crate::{
 
 pub struct SalesReceipt {
     pub id: Option<String>,
-    pub line: Option<Vec<Line>>,
+    pub line: Option<LineField>,
     pub customer_ref: Option<NtRef>,
     pub sync_token: Option<String>,
     pub currency_ref: Option<NtRef>,
