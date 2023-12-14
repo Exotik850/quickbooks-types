@@ -267,7 +267,8 @@ pub struct TaxLineDetail {
 
 #[test]
 fn deserialize_line() {
-  let test: LineField = serde_json::from_str(r#"[{
+    let test: LineField = serde_json::from_str(
+        r#"[{
       "Description": "Rock Fountain", 
       "DetailType": "SalesItemLineDetail", 
       "SalesItemLineDetail": {
@@ -326,6 +327,8 @@ fn deserialize_line() {
       "Amount": 335.25, 
       "SubTotalLineDetail": {}
     }
-  ]"#).unwrap();
-  dbg!(test);
+  ]"#,
+    )
+    .unwrap();
+    dbg!(test);
 }

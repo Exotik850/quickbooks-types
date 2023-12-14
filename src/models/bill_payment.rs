@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::{MetaData, NtRef}, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBVoidable, LineField
+    common::{MetaData, NtRef}, LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBVoidable
 };
 
 /*

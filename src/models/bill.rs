@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{LinkedTxn, MetaData, NtRef};
-use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, LineField};
+use crate::{LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem};
 
 /*
     Bill Object

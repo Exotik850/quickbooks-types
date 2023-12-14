@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 
 use super::common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTaxDetail};
 use crate::{
-    common::EmailStatus, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, LineField
+    common::EmailStatus, LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable
 };
 
 #[skip_serializing_none]

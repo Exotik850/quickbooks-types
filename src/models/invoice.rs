@@ -3,10 +3,10 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{
-        Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef, PrintStatus, TxnTaxDetail
-    };
+    Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef, PrintStatus, TxnTaxDetail
+};
 use crate::{
-    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable, LineField
+    LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
 };
 
 /*

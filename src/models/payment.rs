@@ -4,7 +4,7 @@ use serde_with::skip_serializing_none;
 
 use super::common::{CreditCardPayment, MetaData, NtRef};
 use crate::{
-    QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable, LineField
+    LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable
 };
 
 /*
