@@ -5,11 +5,6 @@ use serde_with::skip_serializing_none;
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 use crate::{QBCreatable, QBError, QBFullUpdatable, QBReadable, QBSparseUpdateable};
 
-/*
-    Customer Object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/customer
-*/
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -18,6 +13,9 @@ use crate::{QBCreatable, QBError, QBFullUpdatable, QBReadable, QBSparseUpdateabl
     derive(Builder),
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
+/// Customer Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/customer
 pub struct Customer {
     pub id: Option<String>,
     pub sync_token: Option<String>,

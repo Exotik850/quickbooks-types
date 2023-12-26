@@ -5,11 +5,6 @@ use serde_with::skip_serializing_none;
 use super::common::{LinkedTxn, NtRef};
 use crate::{QBCreatable, QBError};
 
-/*
-    Line object
-    No documentation page, but used as a detail for purchased items or services
-*/
-
 pub type LineField = Vec<Line>;
 
 #[skip_serializing_none]
@@ -20,7 +15,9 @@ pub type LineField = Vec<Line>;
     derive(Builder),
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
-
+/// Line object
+///
+/// No documentation page, but used as a detail for purchased items or services
 pub struct Line {
     #[serde(flatten)]
     pub line_detail: LineDetail,

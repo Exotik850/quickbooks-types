@@ -7,8 +7,7 @@ use crate::{
 };
 
 /*
-    Preferences Object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences
+
 */
 
 #[skip_serializing_none]
@@ -20,6 +19,9 @@ use crate::{
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
 
+/// Preferences Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences
 pub struct Preferences {
     pub id: Option<String>,
     pub sync_token: Option<String>,

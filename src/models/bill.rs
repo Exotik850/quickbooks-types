@@ -5,11 +5,6 @@ use serde_with::skip_serializing_none;
 use super::common::{LinkedTxn, MetaData, NtRef};
 use crate::{LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem};
 
-/*
-    Bill Object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/bill
-*/
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -19,6 +14,9 @@ use crate::{LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBIte
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
 
+/// Bill Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/bill
 pub struct Bill {
     pub id: Option<String>,
     pub sync_token: Option<String>,

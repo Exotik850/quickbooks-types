@@ -12,7 +12,9 @@ use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
     derive(Builder),
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
-
+/// Vendor Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/vendor
 pub struct Vendor {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -60,7 +62,6 @@ pub struct Vendor {
     pub balance: Option<f32>,
 }
 
-// Weird type they used for just this specific object
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -70,7 +71,6 @@ pub struct ContactInfo {
     telephone: Option<PhoneNumber>,
 }
 
-// Another one
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

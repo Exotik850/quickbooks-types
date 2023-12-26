@@ -6,11 +6,6 @@ use serde_with::skip_serializing_none;
 use super::common::{CustomField, MetaData, NtRef};
 use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBToRef};
 
-/*
-    Attachable Object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/attachable
-*/
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -20,6 +15,9 @@ use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBToRef}
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
 
+/// Attachable Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/attachable
 pub struct Attachable {
     pub id: Option<String>,
     pub sync_token: Option<String>,

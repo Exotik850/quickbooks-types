@@ -5,11 +5,6 @@ use serde_with::skip_serializing_none;
 use super::common::{Addr, Email, MetaData, PhoneNumber};
 use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
 
-/*
-    Employee object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/employee
-*/
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -18,7 +13,9 @@ use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
     derive(Builder),
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
-
+/// Employee object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/employee
 pub struct Employee {
     pub id: Option<String>,
     pub sync_token: Option<String>,

@@ -12,8 +12,7 @@ use crate::{
 };
 
 /*
-    Sales Receipt Object:
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/salesreceipt
+
 */
 
 #[skip_serializing_none]
@@ -24,7 +23,9 @@ use crate::{
     derive(Builder),
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
-
+/// Sales Receipt Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/salesreceipt
 pub struct SalesReceipt {
     pub id: Option<String>,
     pub line: Option<LineField>,

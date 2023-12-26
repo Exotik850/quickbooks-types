@@ -4,11 +4,6 @@ use serde_with::skip_serializing_none;
 use super::common::{MetaData, NtRef};
 use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
 
-/*
-    Account Object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/account
-*/
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -18,6 +13,9 @@ use crate::{QBCreatable, QBError, QBFullUpdatable, QBItem};
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
 
+/// Account Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/account
 pub struct Account {
     pub id: Option<String>,
     pub sync_token: Option<String>,

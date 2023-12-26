@@ -9,11 +9,6 @@ use crate::{
     LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
 };
 
-/*
-    Invoice Object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/invoice
-*/
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -22,7 +17,9 @@ use crate::{
     derive(Builder),
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
-
+/// Invoice Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/invoice
 pub struct Invoice {
     pub id: Option<String>,
     pub sync_token: Option<String>,

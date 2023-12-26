@@ -16,6 +16,9 @@ use crate::{
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
 
+/// Estimate Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/estimate
 pub struct Estimate {
     pub id: Option<String>,
     pub sync_token: Option<String>,

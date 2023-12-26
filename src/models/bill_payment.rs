@@ -7,7 +7,7 @@ use crate::{
 
 /*
     Bill Payment Object
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/billpayment
+
 */
 
 #[skip_serializing_none]
@@ -19,6 +19,9 @@ use crate::{
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
 
+/// Bill Payment
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/billpayment
 pub struct BillPayment {
     pub sync_token: Option<String>,
     pub domain: Option<String>,

@@ -7,11 +7,6 @@ use crate::{
     LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable
 };
 
-/*
-    Payment Object:
-    https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/payment
-*/
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -21,6 +16,9 @@ use crate::{
     builder(default, build_fn(error = "QBError"), setter(into, strip_option))
 )]
 
+/// Payment Object
+///
+/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/payment
 pub struct Payment {
     pub id: Option<String>,
     pub sync_token: Option<String>,

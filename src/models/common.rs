@@ -10,6 +10,8 @@ use crate::LineField;
     they are used in
 */
 
+/// Type used to hold ID's and/or references to other QB
+/// Objects
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(default)]
@@ -20,12 +22,6 @@ pub struct NtRef {
     pub name: Option<String>,
     #[serde(alias = "Value")]
     pub value: Option<String>,
-    // #[serde(rename = "type")]
-    // pub entity_ref_type: Option<&'a str>,
-    // #[serde(alias = "Name")]
-    // pub name: Option<&'a str>,
-    // #[serde(alias = "Value")]
-    // pub value: Option<&'a str>,
 }
 
 impl From<&str> for NtRef {
@@ -42,6 +38,26 @@ impl From<(&str, &str)> for NtRef {
         Self {
             name: Some(value.0.into()),
             value: Some(value.1.into()),
+            ..Default::default()
+        }
+    }
+}
+
+impl From<String> for NtRef {
+    fn from(value: String) -> Self {
+        Self {
+            value: Some(value),
+            ..Default::default()
+        }
+    }
+}
+
+impl From<(String, String)> for NtRef {
+    fn from(value: (String, String)) -> Self {
+        let (name, value) = value;
+        Self {
+            name: Some(name),
+            value: Some(value),
             ..Default::default()
         }
     }
