@@ -11,7 +11,7 @@ serde  = { version = "1.0.217", features = ["derive"] }
 serde_json = "1.0.135"
 serde_with = "3.12.0"
 derive_builder = {version="0.20.2", optional = true}
-thiserror = {version="2.0.11", optional = true}
+thiserror = {version="2.0.11"}
 paste = {version="1.0.15", optional = true}
 const-str = "0.5.7"
 
@@ -19,4 +19,4 @@ const-str = "0.5.7"
 # quickbooks-types = {path=".", features = ["builder"]}
 
 [features]
-builder = ["dep:derive_builder", "dep:thiserror", "dep:paste"]
+builder = ["dep:derive_builder", "dep:paste"]

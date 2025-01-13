@@ -142,7 +142,7 @@ macro_rules! impl_qb_to_ref {
   ($($struct:ident {$name_field:ident}),+) => {
     $(
       impl QBToRef for $struct {
-        fn to_ref(&self) -> Result<NtRef, QBError> {
+        fn to_ref(&self) -> Result<NtRef, $crate::QBError> {
           if self.id.is_some() {
             Ok(NtRef {
               entity_ref_type: Some(Self::name().into()),
@@ -150,7 +150,7 @@ macro_rules! impl_qb_to_ref {
               value: self.id.clone()
             })
           } else {
-            Err(QBError::QBToRefError)
+            Err($crate::QBError::QBToRefError)
           }
         }
       }
