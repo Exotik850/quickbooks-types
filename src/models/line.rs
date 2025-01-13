@@ -3,7 +3,7 @@ use serde::{ser::SerializeStruct, Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{LinkedTxn, NtRef};
-use crate::{QBCreatable, QBError};
+use crate::QBCreatable;
 
 pub type LineField = Vec<Line>;
 

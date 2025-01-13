@@ -1,4 +1,3 @@
-use std::path::Path;
 
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
@@ -40,7 +39,7 @@ pub struct Attachable {
     pub temp_download_uri: Option<String>,
 }
 
-pub fn content_type_from_ext(ext: &str) -> &'static str {
+#[must_use] pub fn content_type_from_ext(ext: &str) -> &'static str {
     match ext {
         "ai" | "eps" => "application/postscript",
         "csv" => "text/csv",

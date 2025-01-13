@@ -8,7 +8,7 @@ use super::{
     }, LineField
 };
 use crate::{
-    QBCreatable, QBError, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
+    QBCreatable, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
 };
 
 /*

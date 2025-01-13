@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{LinkedTxn, MetaData, NtRef};
-use crate::{LineField, QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem};
+use crate::{LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
