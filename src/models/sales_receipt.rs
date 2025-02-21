@@ -11,6 +11,9 @@ use crate::{
     QBCreatable, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
 };
 
+#[cfg(feature = "builder")]
+use crate::error::QBError;
+
 /*
 
 */

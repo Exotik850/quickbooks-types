@@ -5,6 +5,9 @@ use serde_with::skip_serializing_none;
 use super::common::{MetaData, NtRef};
 use crate::{QBCreatable, QBFullUpdatable, QBItem};
 
+#[cfg(feature = "builder")]
+use crate::error::QBError;
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

@@ -5,6 +5,10 @@ use serde_with::skip_serializing_none;
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 use crate::{QBFullUpdatable, QBSparseUpdateable};
 
+#[cfg(feature = "builder")]
+use crate::error::QBError;
+
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

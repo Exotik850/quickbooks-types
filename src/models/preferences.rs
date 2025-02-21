@@ -6,6 +6,10 @@ use crate::{
     common::{Email, MetaData, NtRef}, QBFullUpdatable, QBItem
 };
 
+#[cfg(feature = "builder")]
+use crate::error::QBError;
+
+
 /*
 
 */

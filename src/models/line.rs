@@ -7,6 +7,9 @@ use crate::QBCreatable;
 
 pub type LineField = Vec<Line>;
 
+#[cfg(feature = "builder")]
+use crate::error::QBError;
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

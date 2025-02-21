@@ -7,6 +7,10 @@ use crate::{
     LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable
 };
 
+#[cfg(feature = "builder")]
+use crate::error::QBError;
+
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

@@ -5,6 +5,9 @@ use crate::{
     common::{MetaData, NtRef}, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable
 };
 
+#[cfg(feature = "builder")]
+use crate::error::QBError;
+
 /*
     Bill Payment Object
 
