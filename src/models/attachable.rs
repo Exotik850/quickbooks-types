@@ -41,8 +41,9 @@ pub struct Attachable {
     pub temp_download_uri: Option<String>,
 }
 
-#[must_use] pub fn content_type_from_ext(ext: &str) -> &'static str {
-    match ext {
+#[must_use]
+pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
+    let out = match ext {
         "ai" | "eps" => "application/postscript",
         "csv" => "text/csv",
         "doc" => "application/msword",
@@ -59,8 +60,9 @@ pub struct Attachable {
         "xls" => "application/vnd.ms-excel",
         "xml" => "text/xml",
         "xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        _ => panic!("Unsupported Format!"),
-    }
+        _ => return None,
+    };
+    Some(out)
 }
 
 #[cfg(feature = "builder")]
@@ -78,7 +80,7 @@ impl AttachableBuilder {
                 .into(),
         ));
 
-        self.content_type = Some(Some(
+        self.content_type = Some(
             content_type_from_ext(
                 path.extension()
                     .ok_or(QBError::ValidationError("No extension on file/dir".into()))?
@@ -87,8 +89,8 @@ impl AttachableBuilder {
                         "Could not turn extension into string".into(),
                     ))?,
             )
-            .into(),
-        ));
+            .map(|f| f.to_owned()),
+        );
 
         Ok(self)
     }

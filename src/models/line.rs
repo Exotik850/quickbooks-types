@@ -182,7 +182,7 @@ pub struct SalesItemLineDetail {
     pub tax_code_ref: Option<NtRef>,
     pub service_date: Option<NaiveDate>,
     pub discount_rate: Option<f32>,
-    pub qty: Option<i64>,
+    pub qty: Option<f32>,
     pub unit_price: Option<f32>,
     pub tax_classification_ref: Option<NtRef>,
 }
