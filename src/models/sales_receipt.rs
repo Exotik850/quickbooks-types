@@ -12,7 +12,7 @@ use crate::{
 };
 
 #[cfg(feature = "builder")]
-use crate::error::QBError;
+use crate::error::QBTypeError;
 
 /*
 
@@ -24,7 +24,7 @@ use crate::error::QBError;
 #[cfg_attr(
     feature = "builder",
     derive(Builder),
-    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+    builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 /// Sales Receipt Object
 ///

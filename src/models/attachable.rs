@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{CustomField, MetaData, NtRef};
-use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBToRef};
+use crate::{QBCreatable, QBDeletable, QBTypeError, QBFullUpdatable, QBItem, QBToRef};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -13,7 +13,7 @@ use crate::{QBCreatable, QBDeletable, QBError, QBFullUpdatable, QBItem, QBToRef}
 #[cfg_attr(
     feature = "builder",
     derive(Builder),
-    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+    builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
 /// Attachable Object
@@ -67,14 +67,14 @@ pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
 
 #[cfg(feature = "builder")]
 impl AttachableBuilder {
-    pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> Result<&mut Self, QBError> {
+    pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> Result<&mut Self, QBTypeError> {
         let path = value.as_ref();
 
         self.file_name = Some(Some(
             path.file_name()
-                .ok_or(QBError::ValidationError("Not a file!".into()))?
+                .ok_or(QBTypeError::ValidationError("Not a file!".into()))?
                 .to_str()
-                .ok_or(QBError::ValidationError(
+                .ok_or(QBTypeError::ValidationError(
                     "Could not turn file name into str".into(),
                 ))?
                 .into(),
@@ -83,9 +83,9 @@ impl AttachableBuilder {
         self.content_type = Some(
             content_type_from_ext(
                 path.extension()
-                    .ok_or(QBError::ValidationError("No extension on file/dir".into()))?
+                    .ok_or(QBTypeError::ValidationError("No extension on file/dir".into()))?
                     .to_str()
-                    .ok_or(QBError::ValidationError(
+                    .ok_or(QBTypeError::ValidationError(
                         "Could not turn extension into string".into(),
                     ))?,
             )
@@ -148,7 +148,7 @@ impl From<NtRef> for AttachableRef {
 }
 
 trait QBToAttachableRef: QBToRef {
-    fn to_attach_ref(&self) -> Result<AttachableRef, QBError> {
+    fn to_attach_ref(&self) -> Result<AttachableRef, QBTypeError> {
         let value = self.to_ref()?;
         Ok(value.into())
     }

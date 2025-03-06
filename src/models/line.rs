@@ -8,7 +8,7 @@ use crate::QBCreatable;
 pub type LineField = Vec<Line>;
 
 #[cfg(feature = "builder")]
-use crate::error::QBError;
+use crate::error::QBTypeError;
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -16,7 +16,7 @@ use crate::error::QBError;
 #[cfg_attr(
     feature = "builder",
     derive(Builder),
-    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+    builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 /// Line object
 ///
@@ -171,7 +171,7 @@ where
 #[cfg_attr(
     feature = "builder",
     derive(Builder),
-    builder(default, build_fn(error = "QBError"), setter(into, strip_option))
+    builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
 pub struct SalesItemLineDetail {

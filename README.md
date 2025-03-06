@@ -184,11 +184,11 @@ The crate provides types for the following QuickBooks entities:
 
 ## Error Handling
 
-The crate provides a comprehensive error type `QBError` for handling validation and API errors:
+The crate provides a comprehensive error type `QBTypeError` for handling validation and API errors:
 
 ```rust
 #[derive(Debug, thiserror::Error)]
-pub enum QBError {
+pub enum QBTypeError {
     #[error("Validation error: {0}")]
     ValidationError(String),
     #[error("Missing required field: {0}")]
