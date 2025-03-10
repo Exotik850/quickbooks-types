@@ -52,7 +52,7 @@ pub struct Vendor {
     pub alternate_phone: Option<PhoneNumber>,
     pub vendor_1099: Option<bool>,
     pub cost_rate: Option<f64>,
-    pub bill_rate: Option<f32>,
+    pub bill_rate: Option<f64>,
     pub web_addr: Option<WebAddr>,
     pub t5018_eligible: Option<bool>,
     pub company_name: Option<String>,
@@ -63,7 +63,7 @@ pub struct Vendor {
     pub gst_registration_type: Option<String>,
     pub print_check_on_name: Option<String>,
     pub bill_addr: Option<Addr>,
-    pub balance: Option<f32>,
+    pub balance: Option<f64>,
 }
 
 #[skip_serializing_none]

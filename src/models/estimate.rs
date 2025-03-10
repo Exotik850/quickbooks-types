@@ -52,7 +52,7 @@ pub struct Estimate {
     pub line: Option<LineField>,
     pub linked_txn: Option<Vec<LinkedTxn>>,
     pub accepted_by: Option<String>,
-    pub exchange_rate: Option<f32>,
+    pub exchange_rate: Option<f64>,
     pub ship_addr: Option<Addr>,
     pub department_ref: Option<NtRef>,
     pub ship_method_ref: Option<NtRef>,
@@ -61,7 +61,7 @@ pub struct Estimate {
     pub total_amt: Option<f64>,
     pub recur_data_ref: Option<NtRef>,
     pub tax_exemption_ref: Option<NtRef>,
-    pub home_total_amt: Option<f32>,
+    pub home_total_amt: Option<f64>,
     pub free_form_address: Option<bool>,
 }
 

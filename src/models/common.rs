@@ -144,8 +144,8 @@ pub struct CustomField {
 #[serde(rename_all = "PascalCase", default)]
 pub struct MarkupInfo {
     pub percent_based: Option<bool>,
-    pub value: Option<f32>,
-    pub percent: Option<f32>,
+    pub value: Option<f64>,
+    pub percent: Option<f64>,
     pub price_level_ref: Option<NtRef>,
 }
 
@@ -154,7 +154,7 @@ pub struct MarkupInfo {
 #[serde(rename_all = "PascalCase", default)]
 pub struct TxnTaxDetail {
     pub txn_tax_code_ref: Option<NtRef>,
-    pub total_tax: Option<f32>,
+    pub total_tax: Option<f64>,
     pub tax_line: Option<LineField>,
 }
 
@@ -199,7 +199,7 @@ pub struct CreditChargeInfo {
     cc_expiry_month: Option<u32>,
     process_payment: Option<bool>,
     postal_code: Option<String>,
-    amount: Option<f32>,
+    amount: Option<f64>,
     name_on_acct: Option<String>,
     cc_expiry_year: Option<u32>,
     #[serde(rename = "type")]

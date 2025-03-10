@@ -24,7 +24,7 @@ use crate::error::QBTypeError;
 pub struct Line {
     #[serde(flatten)]
     pub line_detail: LineDetail,
-    pub amount: Option<f32>,
+    pub amount: Option<f64>,
     pub description: Option<String>,
     pub id: Option<String>,
     pub linked_txn: Option<Vec<LinkedTxn>>,
@@ -175,22 +175,22 @@ where
 )]
 
 pub struct SalesItemLineDetail {
-    pub tax_inclusive_amt: Option<f32>,
-    pub discount_amt: Option<f32>,
+    pub tax_inclusive_amt: Option<f64>,
+    pub discount_amt: Option<f64>,
     pub item_ref: Option<NtRef>,
     pub class_ref: Option<NtRef>,
     pub tax_code_ref: Option<NtRef>,
     pub service_date: Option<NaiveDate>,
-    pub discount_rate: Option<f32>,
-    pub qty: Option<f32>,
-    pub unit_price: Option<f32>,
+    pub discount_rate: Option<f64>,
+    pub qty: Option<f64>,
+    pub unit_price: Option<f64>,
     pub tax_classification_ref: Option<NtRef>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct GroupLineDetail {
-    pub quantity: f32,
+    pub quantity: f64,
     pub line: LineField,
     pub group_item_ref: NtRef,
 }
@@ -210,7 +210,7 @@ pub struct DiscountLineDetail {
     pub discount_account_ref: NtRef,
     pub percent_based: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
-    pub discount_percent: Option<f32>,
+    pub discount_percent: Option<f64>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
@@ -230,15 +230,15 @@ pub enum BillableStatus {
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct ItemBasedExpenseLineDetail {
-    pub tax_inclusive_amt: f32,
+    pub tax_inclusive_amt: f64,
     pub item_ref: NtRef,
     pub customer_ref: NtRef,
     pub price_level_ref: NtRef,
     pub class_ref: NtRef,
     pub tax_code_ref: NtRef,
     pub billable_status: BillableStatus,
-    pub qty: f32,
-    pub unit_price: f32,
+    pub qty: f64,
+    pub unit_price: f64,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
@@ -246,8 +246,8 @@ pub struct ItemBasedExpenseLineDetail {
 pub struct AccountBasedExpenseLineDetail {
     pub account_ref: NtRef,
     pub tax_code_ref: NtRef,
-    pub tax_amount: f32,
-    pub tax_inclusive_amt: f32,
+    pub tax_amount: f64,
+    pub tax_inclusive_amt: f64,
     pub class_ref: NtRef,
     pub customer_ref: NtRef,
     pub billable_status: BillableStatus,
@@ -258,11 +258,11 @@ pub struct AccountBasedExpenseLineDetail {
 #[serde(rename_all = "PascalCase", default)]
 pub struct TaxLineDetail {
     pub tax_rate_ref: Option<NtRef>,
-    pub net_amount_taxable: Option<f32>,
+    pub net_amount_taxable: Option<f64>,
     pub percent_based: Option<bool>,
-    pub tax_inclusive_amount: Option<f32>,
-    pub override_delta_amount: Option<f32>,
-    pub tax_percent: Option<f32>,
+    pub tax_inclusive_amount: Option<f64>,
+    pub override_delta_amount: Option<f64>,
+    pub tax_percent: Option<f64>,
 }
 
 #[test]

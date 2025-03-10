@@ -37,12 +37,12 @@ pub struct Bill {
     pub due_date: Option<NaiveDate>,
     pub sparse: Option<bool>,
     pub line: Option<LineField>,
-    pub balance: Option<f32>,
+    pub balance: Option<f64>,
     pub doc_number: Option<String>,
     pub private_note: Option<String>,
-    pub exchange_rate: Option<f32>,
+    pub exchange_rate: Option<f64>,
     pub department_ref: Option<NtRef>,
-    pub home_balance: Option<f32>,
+    pub home_balance: Option<f64>,
     pub recur_data_ref: Option<NtRef>,
 }
 

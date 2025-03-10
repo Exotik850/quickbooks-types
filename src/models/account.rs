@@ -34,11 +34,11 @@ pub struct Account {
     pub fully_qualified_name: Option<String>,
     pub txn_location_type: Option<String>,
     pub account_type: Option<AccountType>,
-    pub current_balance_with_sub_accounts: Option<f32>,
+    pub current_balance_with_sub_accounts: Option<f64>,
     pub account_alias: Option<String>,
     pub tax_code_ref: Option<NtRef>,
     pub account_sub_type: Option<String>,
-    pub current_balance: Option<f32>,
+    pub current_balance: Option<f64>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]

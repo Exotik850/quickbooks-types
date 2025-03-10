@@ -74,7 +74,7 @@ pub struct Item {
     pub class_ref: Option<NtRef>,
     pub source: Option<String>,
     pub purcjase_tax_included: Option<bool>,
-    pub reorder_point: Option<f32>,
+    pub reorder_point: Option<f64>,
     pub purchase_dec: Option<String>,
     pub pref_vendor_ref: Option<NtRef>,
     pub purchase_tax_code_ref: Option<NtRef>,
@@ -101,7 +101,7 @@ pub struct Item {
     pub sub_item: Option<bool>,
     pub taxable: Option<bool>,
     pub track_qty_on_hand: Option<bool>,
-    pub unit_price: Option<f32>,
+    pub unit_price: Option<f64>,
 }
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]

@@ -54,7 +54,7 @@ pub struct SalesReceipt {
     pub credit_card_payment: Option<CreditCardPayment>,
     pub txn_tax_detail: Option<TxnTaxDetail>,
     pub payment_method_ref: Option<NtRef>,
-    pub exchange_rate: Option<f32>,
+    pub exchange_rate: Option<f64>,
     pub ship_addr: Option<Addr>,
     #[serde(rename = "sparse")]
     pub sparse: Option<bool>,
@@ -63,12 +63,13 @@ pub struct SalesReceipt {
     pub bill_addr: Option<Addr>,
     #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
-    pub home_balance: Option<f32>,
+    pub home_balance: Option<f64>,
     pub delivery_info: Option<DeliveryInfo>,
     pub recur_data_ref: Option<NtRef>,
     pub total_amt: Option<f64>,
-    pub balance: Option<f32>,
+    pub balance: Option<f64>,
     pub free_form_address: Option<bool>,
+    pub txn_date: Option<NaiveDate>,
 }
 
 impl QBCreatable for SalesReceipt {

@@ -36,7 +36,7 @@ pub struct Attachable {
     pub tag: Option<String>,
     pub lat: Option<String>,
     pub file_access_uri: Option<String>,
-    pub size: Option<f32>,
+    pub size: Option<f64>,
     pub thumbnail_file_access_uri: Option<String>,
     pub temp_download_uri: Option<String>,
 }
@@ -125,8 +125,7 @@ pub enum AttachmentCategory {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-#[cfg_attr(feature = "builder", derive(Builder))]
-#[cfg_attr(feature = "builder", builder(default))]
+#[cfg_attr(feature = "builder", derive(Builder), builder(default))]
 pub struct AttachableRef {
     pub include_on_send: Option<bool>,
     pub line_info: Option<String>,

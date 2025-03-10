@@ -28,14 +28,14 @@ pub struct Payment {
     pub sync_token: Option<String>,
     #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
-    pub total_amt: Option<f32>,
+    pub total_amt: Option<f64>,
     pub customer_ref: Option<NtRef>,
     pub currency_ref: Option<NtRef>,
     pub private_note: Option<String>,
     pub payment_method_ref: Option<NtRef>,
-    pub unapplied_amt: Option<f32>,
+    pub unapplied_amt: Option<f64>,
     pub deposit_to_account_ref: Option<NtRef>,
-    pub exchange_rate: Option<f32>,
+    pub exchange_rate: Option<f64>,
     pub line: Option<LineField>,
     pub txn_source: Option<String>,
     #[serde(rename = "ARAccountRef")]

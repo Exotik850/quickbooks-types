@@ -137,7 +137,7 @@ pub struct VendorAndPurchasesPrefs {
     pub tracking_by_customer: Option<bool>,
     pub default_terms: Option<NtRef>,
     pub billable_expense_tracking: Option<bool>,
-    pub default_markup: Option<f32>,
+    pub default_markup: Option<f64>,
     #[serde(rename = "TPAREnabled")]
     pub tpar_enabled: Option<bool>,
 }
