@@ -60,7 +60,7 @@ pub struct Account {
     pub current_balance: Option<f64>,
 }
 
-/// AccountType Enum
+/// `AccountType` Enum
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "PascalCase")]
 pub enum AccountType {

@@ -63,8 +63,8 @@ impl From<(String, String)> for NtRef {
     }
 }
 
-/// MetaData
-/// 
+/// `MetaData`
+///
 /// Metadata about the transaction
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase")]
@@ -124,7 +124,7 @@ pub struct PhoneNumber {
 }
 
 /// Linked Transaction
-/// 
+///
 /// Information about a linked transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -135,7 +135,7 @@ pub struct LinkedTxn {
 }
 
 /// CustomField
-/// 
+///
 /// Custom field information
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -176,7 +176,7 @@ pub struct DeliveryInfo {
 }
 
 /// CreditCardPayment
-/// 
+///
 /// Information about a credit card payment for the transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -187,7 +187,7 @@ pub struct CreditCardPayment {
 }
 
 /// CreditChargeResponse
-/// 
+///
 /// Information about a credit charge for a transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -200,8 +200,8 @@ pub struct CreditChargeResponse {
     pub cc_trans_id: Option<String>,
 }
 
-/// CCPaymentStatus Enum
-/// 
+/// `CCPaymentStatus` Enum
+///
 /// Status of the credit card payment
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum CCPaymentStatus {
@@ -211,7 +211,7 @@ pub enum CCPaymentStatus {
 }
 
 /// CreditChargeInfo
-/// 
+///
 /// Information about a credit card payment for the transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -228,8 +228,8 @@ pub struct CreditChargeInfo {
     bill_addr_street: Option<String>,
 }
 
-/// PrintStatus Enum
-/// 
+/// `PrintStatus` Enum
+///
 /// Status of whether a document needs to be printed or not
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum PrintStatus {
@@ -239,8 +239,8 @@ pub enum PrintStatus {
     PrintComplete,
 }
 
-/// EmailStatus Enum
-/// 
+/// `EmailStatus` Enum
+///
 /// Status of the email
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum EmailStatus {
@@ -251,8 +251,8 @@ pub enum EmailStatus {
     EmailSent,
 }
 
-/// GlobalTaxCalculation Enum
-/// 
+/// `GlobalTaxCalculation` Enum
+///
 /// Method in which tax is applied
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum GlobalTaxCalculation {

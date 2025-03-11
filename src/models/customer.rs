@@ -111,7 +111,7 @@ pub struct Customer {
 }
 
 /// TaxExemptStatus Enum
-/// 
+///
 /// Tax exemption reason identifier for the customer.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]

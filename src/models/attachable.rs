@@ -5,7 +5,7 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{CustomField, MetaData, NtRef};
-use crate::{QBCreatable, QBDeletable, QBTypeError, QBFullUpdatable, QBItem, QBToRef};
+use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBToRef, QBTypeError};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -98,7 +98,9 @@ impl AttachableBuilder {
         self.content_type = Some(
             content_type_from_ext(
                 path.extension()
-                    .ok_or(QBTypeError::ValidationError("No extension on file/dir".into()))?
+                    .ok_or(QBTypeError::ValidationError(
+                        "No extension on file/dir".into(),
+                    ))?
                     .to_str()
                     .ok_or(QBTypeError::ValidationError(
                         "Could not turn extension into string".into(),
@@ -126,7 +128,7 @@ impl QBAttachable for Attachable {
 }
 
 /// Attachment Category
-/// 
+///
 /// Category of the attachment
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum AttachmentCategory {
@@ -141,8 +143,8 @@ pub enum AttachmentCategory {
 }
 
 /// Attachable Reference
-/// 
-/// Specifies the transaction object to which this attachable file is to be linked. 
+///
+/// Specifies the transaction object to which this attachable file is to be linked.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

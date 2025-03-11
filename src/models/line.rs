@@ -116,8 +116,8 @@ impl std::fmt::Display for Line {
     }
 }
 
-/// LineDetail Enum
-/// 
+/// `LineDetail` Enum
+///
 /// Subtype of the line detail
 #[derive(Clone, Debug, Deserialize, PartialEq, Default)]
 // #[serde(tag = "DetailType")]
@@ -174,7 +174,7 @@ where
 }
 
 /// SalesItemLineDetail
-/// 
+///
 /// Description of the sales item line detail
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]

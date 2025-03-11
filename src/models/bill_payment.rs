@@ -2,7 +2,8 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::{MetaData, NtRef}, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable
+    common::{MetaData, NtRef},
+    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable,
 };
 
 #[cfg(feature = "builder")]
@@ -55,7 +56,7 @@ pub struct BillPayment {
 }
 
 /// CheckBillPayment
-/// 
+///
 /// Information about a check payment for the transaction.
 #[skip_serializing_none]
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -66,7 +67,7 @@ pub struct CheckBillPayment {
 }
 
 /// CreditCardBillPayment
-/// 
+///
 /// Information about a credit card payment for the transaction.
 #[skip_serializing_none]
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -75,8 +76,8 @@ pub struct CreditCardBillPayment {
     pub cc_account_ref: Option<NtRef>,
 }
 
-/// PayType Enum
-/// 
+/// `PayType` Enum
+///
 /// Type of payment for the transaction.
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PayType {
