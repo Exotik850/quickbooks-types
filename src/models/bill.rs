@@ -19,7 +19,7 @@ use crate::error::QBTypeError;
 
 /// Bill Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/bill
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/bill>
 pub struct Bill {
     pub id: Option<String>,
     pub sync_token: Option<String>,

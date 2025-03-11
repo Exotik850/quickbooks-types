@@ -17,7 +17,7 @@ use crate::error::QBTypeError;
 
 /// Account Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/account
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/account>
 pub struct Account {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -41,11 +41,12 @@ pub struct Account {
     pub current_balance: Option<f64>,
 }
 
+/// AccountType Enum
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "PascalCase")]
 pub enum AccountType {
     #[default]
-    TODO,
+    TODO, // TODO: Define actual types
 }
 
 // #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]

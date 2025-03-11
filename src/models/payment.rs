@@ -22,7 +22,7 @@ use crate::error::QBTypeError;
 
 /// Payment Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/payment
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/payment>
 pub struct Payment {
     pub id: Option<String>,
     pub sync_token: Option<String>,

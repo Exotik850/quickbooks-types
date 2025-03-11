@@ -19,7 +19,7 @@ use crate::error::QBTypeError;
 )]
 /// Customer Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/customer
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/customer>
 pub struct Customer {
     pub id: Option<String>,
     pub sync_token: Option<String>,

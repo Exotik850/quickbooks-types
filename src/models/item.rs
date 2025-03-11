@@ -18,7 +18,7 @@ use crate::error::QBTypeError;
 )]
 /// Item Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/item
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/item>
 pub struct Item {
     pub id: Option<String>,
     pub sync_token: Option<String>,

@@ -18,7 +18,7 @@ use crate::{QBCreatable, QBDeletable, QBTypeError, QBFullUpdatable, QBItem, QBTo
 
 /// Attachable Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/attachable
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/attachable>
 pub struct Attachable {
     pub id: Option<String>,
     pub sync_token: Option<String>,
@@ -110,6 +110,7 @@ impl QBAttachable for Attachable {
     }
 }
 
+/// Attachment Category
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum AttachmentCategory {
     ContactPhoto,
@@ -122,6 +123,9 @@ pub enum AttachmentCategory {
     Other,
 }
 
+/// Attachable Reference
+/// 
+/// Specifies the transaction object to which this attachable file is to be linked. 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

@@ -28,7 +28,7 @@ use crate::error::QBTypeError;
 )]
 /// Sales Receipt Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/salesreceipt
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/salesreceipt>
 pub struct SalesReceipt {
     pub id: Option<String>,
     pub line: Option<LineField>,

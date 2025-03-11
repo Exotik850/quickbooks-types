@@ -10,10 +10,6 @@ use crate::{
 use crate::error::QBTypeError;
 
 
-/*
-
-*/
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -25,7 +21,7 @@ use crate::error::QBTypeError;
 
 /// Preferences Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences>
 pub struct Preferences {
     pub id: Option<String>,
     pub sync_token: Option<String>,

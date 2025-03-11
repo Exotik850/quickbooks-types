@@ -24,7 +24,7 @@ use crate::error::QBTypeError;
 
 /// Bill Payment
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/billpayment
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/billpayment>
 pub struct BillPayment {
     pub sync_token: Option<String>,
     pub domain: Option<String>,

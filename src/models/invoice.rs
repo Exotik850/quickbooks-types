@@ -22,7 +22,7 @@ use crate::error::QBTypeError;
 )]
 /// Invoice Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/invoice
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/invoice>
 pub struct Invoice {
     pub id: Option<String>,
     pub sync_token: Option<String>,

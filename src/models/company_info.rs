@@ -20,7 +20,7 @@ use crate::error::QBTypeError;
 
 /// CompanyInfo Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/companyinfo
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/companyinfo>
 pub struct CompanyInfo {
     pub id: Option<String>,
     pub sync_token: Option<String>,

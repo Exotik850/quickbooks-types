@@ -18,7 +18,7 @@ use crate::error::QBTypeError;
 )]
 /// Vendor Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/vendor
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/vendor>
 pub struct Vendor {
     pub id: Option<String>,
     pub sync_token: Option<String>,

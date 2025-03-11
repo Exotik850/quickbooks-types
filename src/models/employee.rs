@@ -18,7 +18,7 @@ use crate::error::QBTypeError;
 )]
 /// Employee object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/employee
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/employee>
 pub struct Employee {
     pub id: Option<String>,
     pub sync_token: Option<String>,

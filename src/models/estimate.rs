@@ -21,7 +21,7 @@ use crate::error::QBTypeError;
 
 /// Estimate Object
 ///
-/// https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/estimate
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/estimate>
 pub struct Estimate {
     pub id: Option<String>,
     pub sync_token: Option<String>,
