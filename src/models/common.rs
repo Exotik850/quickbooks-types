@@ -63,7 +63,9 @@ impl From<(String, String)> for NtRef {
     }
 }
 
-// #[skip_serializing_none]
+/// MetaData
+/// 
+/// Metadata about the transaction
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase")]
 pub struct MetaData {
@@ -78,6 +80,7 @@ pub struct Email {
     pub address: Option<String>,
 }
 
+/// Address information
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -120,6 +123,9 @@ pub struct PhoneNumber {
     pub free_form_number: Option<String>,
 }
 
+/// Linked Transaction
+/// 
+/// Information about a linked transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -128,6 +134,9 @@ pub struct LinkedTxn {
     pub txn_type: Option<String>,
 }
 
+/// CustomField
+/// 
+/// Custom field information
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -166,6 +175,9 @@ pub struct DeliveryInfo {
     pub delivery_time: DateTime<Utc>,
 }
 
+/// CreditCardPayment
+/// 
+/// Information about a credit card payment for the transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -174,6 +186,9 @@ pub struct CreditCardPayment {
     pub credit_charge_info: Option<CreditChargeInfo>,
 }
 
+/// CreditChargeResponse
+/// 
+/// Information about a credit charge for a transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -185,6 +200,9 @@ pub struct CreditChargeResponse {
     pub cc_trans_id: Option<String>,
 }
 
+/// CCPaymentStatus Enum
+/// 
+/// Status of the credit card payment
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum CCPaymentStatus {
     Completed,
@@ -192,6 +210,9 @@ pub enum CCPaymentStatus {
     Unkown,
 }
 
+/// CreditChargeInfo
+/// 
+/// Information about a credit card payment for the transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -207,6 +228,9 @@ pub struct CreditChargeInfo {
     bill_addr_street: Option<String>,
 }
 
+/// PrintStatus Enum
+/// 
+/// Status of whether a document needs to be printed or not
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum PrintStatus {
     #[default]
@@ -215,6 +239,9 @@ pub enum PrintStatus {
     PrintComplete,
 }
 
+/// EmailStatus Enum
+/// 
+/// Status of the email
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum EmailStatus {
     #[default]
@@ -224,6 +251,9 @@ pub enum EmailStatus {
     EmailSent,
 }
 
+/// GlobalTaxCalculation Enum
+/// 
+/// Method in which tax is applied
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum GlobalTaxCalculation {
     WithinFrance,

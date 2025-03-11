@@ -3,12 +3,12 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::{Email, MetaData, NtRef}, QBFullUpdatable, QBItem
+    common::{Email, MetaData, NtRef},
+    QBFullUpdatable, QBItem,
 };
 
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
-
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -23,19 +23,32 @@ use crate::error::QBTypeError;
 ///
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences>
 pub struct Preferences {
+    /// The unique ID of the entity
     pub id: Option<String>,
+    /// The unique sync token of the entity, used for concurrency control
     pub sync_token: Option<String>,
+    /// Metadata about the entity
     #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
+    /// Preferences for email messages
     pub email_message_prefs: Option<EmailMessagePrefs>,
+    /// Preferences for products and services
     pub product_and_services_prefs: Option<ProductAndServicesPrefs>,
+    /// Preferences for reports
     pub report_prefs: Option<ReportPrefs>,
+    /// Preferences for accounting information
     pub accounting_info_prefs: Option<AccountingInfoPrefs>,
+    /// Preferences for sales forms
     pub sales_forms_prefs: Option<SalesFormsPrefs>,
+    /// Preferences for vendors and purchases
     pub vendor_and_purchases_prefs: Option<VendorAndPurchasesPrefs>,
+    /// Preferences for taxes
     pub tax_prefs: Option<TaxPrefs>,
+    /// Other miscellaneous preferences
     pub other_prefs: Option<OtherPrefs>,
+    /// Preferences for time tracking
     pub time_tracking_prefs: Option<TimeTrackingPrefs>,
+    /// Preferences for currency
     pub currency_prefs: Option<CurrencyPrefs>,
 }
 
@@ -96,44 +109,79 @@ pub struct AccountingInfoPrefs {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
+/// Sales Forms Preferences
+///
+/// Represents the preferences for sales forms in QuickBooks.
 pub struct SalesFormsPrefs {
+    /// BCC email address for sales forms.
     pub sales_emaill_bcc: Option<Email>,
+    /// CC email address for sales forms.
     pub sales_email_cc: Option<Email>,
+    /// Indicates if progress invoicing is being used.
     pub using_progress_invoicing: Option<bool>,
+    /// Custom field for sales forms.
     pub custom_field: Option<String>, // TODO
+    /// Indicates if service date is allowed on sales forms.
     pub allow_service_date: Option<bool>,
+    /// Default message for estimates.
     pub estimate_message: Option<String>,
+    /// Indicates if a copy of the email should be sent to the company.
     pub email_copy_to_company: Option<bool>,
+    /// Default customer message for sales forms.
     pub default_customer_message: Option<String>,
+    /// Indicates if shipping is allowed on sales forms.
     pub allow_shipping: Option<bool>,
+    /// Indicates if the default discount account is enabled.
     pub default_discount_account: Option<bool>,
+    /// Indicates if IPN support is enabled.
     #[serde(rename = "IPNSupportEnabled")]
     pub ipn_support_enabled: Option<bool>,
+    /// Indicates if e-transaction payment is enabled.
     pub e_transaction_payment_enabled: Option<bool>,
+    /// Default terms for sales forms.
     pub default_terms: Option<NtRef>,
+    /// Indicates if deposits are allowed on sales forms.
     pub allow_deposit: Option<bool>,
+    /// Indicates if price levels are being used.
     pub using_price_levels: Option<bool>,
+    /// Indicates if the default shipping account is enabled.
     pub default_shipping_account: Option<bool>,
+    /// Indicates if e-transaction PDF attachment is enabled.
     #[serde(rename = "ETransactionAttachPDF")]
     pub e_transaction_attach_pdf: Option<bool>,
+    /// Indicates if custom transaction numbers are allowed.
     pub custom_txn_numbers: Option<bool>,
+    /// Status of e-transaction enabled.
     pub e_transaction_enabled_status: Option<String>,
+    /// Indicates if estimates are allowed.
     pub allow_estimates: Option<bool>,
+    /// Indicates if discounts are allowed.
     pub allow_discount: Option<bool>,
+    /// Indicates if auto-apply credit is enabled.
     pub auto_apply_credit: Option<bool>,
 }
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
+/// Vendor and Purchases Preferences
+///
+/// Represents the preferences related to vendors and purchases.
 pub struct VendorAndPurchasesPrefs {
+    /// Custom field for purchase orders
     #[serde(rename = "POCustomField")]
     pub po_custom_field: Option<String>, // TODO
+    /// Reference to the default markup account
     pub default_markup_account: Option<NtRef>,
+    /// Indicates if tracking by customer is enabled
     pub tracking_by_customer: Option<bool>,
+    /// Reference to the default terms
     pub default_terms: Option<NtRef>,
+    /// Indicates if billable expense tracking is enabled
     pub billable_expense_tracking: Option<bool>,
+    /// Default markup value
     pub default_markup: Option<f64>,
+    /// Indicates if TPAR (Taxable Payments Annual Report) is enabled
     #[serde(rename = "TPAREnabled")]
     pub tpar_enabled: Option<bool>,
 }
@@ -157,11 +205,19 @@ pub struct OtherPrefs {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
+/// Time Tracking Preferences
+///
+/// Represents the preferences for time tracking in QuickBooks.
 pub struct TimeTrackingPrefs {
+    /// The start date of the work week.
     pub work_week_start_date: Option<String>,
+    /// Indicates if time entries should be marked as billable.
     pub mark_time_entries_billable: Option<bool>,
+    /// Indicates if the bill rate should be shown to all users.
     pub show_bill_rate_to_all: Option<bool>,
+    /// Indicates if sales tax is being used.
     pub using_sales_tax: Option<bool>,
+    /// Indicates if customers should be billed.
     pub bill_customers: Option<bool>,
 }
 

@@ -22,11 +22,16 @@ use crate::error::QBTypeError;
 ///
 /// No documentation page, but used as a detail for purchased items or services
 pub struct Line {
+    /// Details of the line item
     #[serde(flatten)]
     pub line_detail: LineDetail,
+    /// Amount total for the line item
     pub amount: Option<f64>,
+    /// Description of the line item
     pub description: Option<String>,
+    /// Unique line number
     pub id: Option<String>,
+    /// Linked transactions
     pub linked_txn: Option<Vec<LinkedTxn>>,
 }
 
@@ -111,6 +116,9 @@ impl std::fmt::Display for Line {
     }
 }
 
+/// LineDetail Enum
+/// 
+/// Subtype of the line detail
 #[derive(Clone, Debug, Deserialize, PartialEq, Default)]
 // #[serde(tag = "DetailType")]
 pub enum LineDetail {
@@ -165,6 +173,9 @@ where
     }
 }
 
+/// SalesItemLineDetail
+/// 
+/// Description of the sales item line detail
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

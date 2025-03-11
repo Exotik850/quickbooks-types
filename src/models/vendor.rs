@@ -7,7 +7,6 @@ use crate::{QBCreatable, QBFullUpdatable, QBItem};
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -18,51 +17,91 @@ use crate::error::QBTypeError;
 )]
 /// Vendor Object
 ///
-/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/vendor>
+/// Represents a vendor in the QuickBooks system.
+///
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/vendor>
 pub struct Vendor {
+    /// The unique ID of the entity
     pub id: Option<String>,
+    /// The unique sync token of the entity, used for concurrency control
     pub sync_token: Option<String>,
+    /// Metadata about the entity
     #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
+    /// Title of the vendor
     pub title: Option<String>,
+    /// Given name of the vendor
     pub given_name: Option<String>,
+    /// Middle name of the vendor
     pub middle_name: Option<String>,
+    /// Suffix of the vendor's name
     pub suffix: Option<String>,
+    /// Family name of the vendor
     pub family_name: Option<String>,
+    /// Primary email address of the vendor
     pub primary_email_addr: Option<Email>,
+    /// Display name of the vendor
     pub display_name: Option<String>,
+    /// Other contact information for the vendor
     pub other_contact_info: Option<ContactInfo>,
+    /// Accounts Payable account reference
     #[serde(rename = "APAccountRef")]
     pub ap_account_ref: Option<NtRef>,
+    /// Term reference for the vendor
     pub term_ref: Option<NtRef>,
+    /// Source of the vendor information
     pub source: Option<String>,
+    /// GSTIN of the vendor
     #[serde(rename = "GSTIN")]
     pub gstin: Option<String>,
+    /// Indicates if the vendor is T4A eligible
     #[serde(rename = "T4AEligible")]
     pub t4a_eligible: Option<bool>,
+    /// Fax number of the vendor
     pub fax: Option<PhoneNumber>,
+    /// Business number of the vendor
     pub business_number: Option<String>,
+    /// Currency reference for the vendor
     pub currency_ref: Option<NtRef>,
+    /// Indicates if the vendor has TPAR
     #[serde(rename = "HasTPAR")]
     pub has_tpar: Option<bool>,
+    /// Tax reporting basis for the vendor
     pub tax_reporting_basis: Option<String>,
+    /// Mobile phone number of the vendor
     pub mobile: Option<PhoneNumber>,
+    /// Primary phone number of the vendor
     pub primary_phone: Option<PhoneNumber>,
+    /// Indicates if the vendor is active
     pub active: Option<bool>,
+    /// Alternate phone number of the vendor
     pub alternate_phone: Option<PhoneNumber>,
+    /// Indicates if the vendor is 1099 eligible
     pub vendor_1099: Option<bool>,
+    /// Cost rate for the vendor
     pub cost_rate: Option<f64>,
+    /// Bill rate for the vendor
     pub bill_rate: Option<f64>,
+    /// Web address of the vendor
     pub web_addr: Option<WebAddr>,
+    /// Indicates if the vendor is T5018 eligible
     pub t5018_eligible: Option<bool>,
+    /// Company name of the vendor
     pub company_name: Option<String>,
+    /// Bank details for vendor payment
     pub vendor_payment_bank_detail: Option<VendorPaymentBankDetail>,
+    /// Tax identifier for the vendor
     pub tax_identifier: Option<String>,
+    /// Account number for the vendor
     pub acct_num: Option<String>,
+    /// GST registration type for the vendor
     #[serde(rename = "GSTRegistrationType")]
     pub gst_registration_type: Option<String>,
+    /// Name to print on checks for the vendor
     pub print_check_on_name: Option<String>,
+    /// Billing address of the vendor
     pub bill_addr: Option<Addr>,
+    /// Balance for the vendor
     pub balance: Option<f64>,
 }
 

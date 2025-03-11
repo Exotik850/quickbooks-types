@@ -8,7 +8,6 @@ use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBSparseUpdateable};
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -19,55 +18,101 @@ use crate::error::QBTypeError;
 )]
 /// Customer Object
 ///
-/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/customer>
+/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/customer>
 pub struct Customer {
+    /// The unique ID of the entity
     pub id: Option<String>,
+    /// The unique sync token of the entity, used for concurrency control
     pub sync_token: Option<String>,
+    /// Metadata about the entity
     #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
+    /// Display name of the customer
     pub display_name: Option<String>,
+    /// Title of the customer (e.g., Mr., Mrs., Ms.)
     pub title: Option<String>,
+    /// First name of the customer
     pub given_name: Option<String>,
+    /// Middle name of the customer
     pub middle_name: Option<String>,
+    /// Indicates if the entity is a sparse object
     #[serde(rename = "sparse")]
     pub sparse: Option<bool>,
+    /// Suffix of the customer's name (e.g., Jr., Sr., III)
     pub suffix: Option<String>,
+    /// Last name of the customer
     pub family_name: Option<String>,
+    /// Primary email address of the customer
     pub primary_email_addr: Option<Email>,
+    /// Resale number for the customer
     pub resale_num: Option<String>,
+    /// Secondary tax identifier for the customer
     pub secondary_tax_identifier: Option<String>,
+    /// Reference to the Accounts Receivable account for the customer
     pub ar_account_ref: Option<NtRef>,
+    /// Reference to the default tax code for the customer
     pub default_tax_code_ref: Option<NtRef>,
+    /// Preferred delivery method for the customer (None, Print, Email, or Trax)
     pub preferred_delivery_method: Option<String>,
+    /// Reference to the sales term for the customer
     pub sales_term_ref: Option<NtRef>,
+    /// Reference to the customer type for the customer
     pub customer_type_ref: Option<String>,
+    /// Fax number of the customer
     pub fax: Option<PhoneNumber>,
+    /// Indicates if the customer is billed with their parent
     pub bill_with_parent: Option<bool>,
+    /// Reference to the currency for the customer
     pub currency_ref: Option<NtRef>,
+    /// Mobile phone number of the customer
     pub mobile: Option<PhoneNumber>,
+    /// Indicates if the customer is a job
     pub job: Option<bool>,
+    /// Balance including all jobs related to the customer
     pub balance_with_jobs: Option<f64>,
+    /// Primary phone number of the customer
     pub primary_phone: Option<PhoneNumber>,
+    /// Date of the open balance in YYYY-MM-DD format
     pub open_balance_date: Option<NaiveDate>,
+    /// Indicates if the customer is taxable
     pub taxable: Option<bool>,
+    /// Alternative phone number of the customer
     pub alternate_phone: Option<PhoneNumber>,
+    /// Reference to the parent of the customer
     pub parent_ref: Option<NtRef>,
+    /// Notes about the customer
     pub notes: Option<String>,
+    /// Web address (URL) of the customer
     pub web_addr: Option<WebAddr>,
+    /// Indicates if the customer is active
     pub active: Option<bool>,
+    /// Company name of the customer
     pub company_name: Option<String>,
+    /// Current balance of the customer
     pub balance: Option<f64>,
+    /// Shipping address of the customer
     pub ship_addr: Option<Addr>,
+    /// Reference to the default payment method for the customer
     pub payment_method_ref: Option<NtRef>,
+    /// Indicates if the customer is a project
     pub is_project: Option<bool>,
+    /// Source of the customer record
     pub source: Option<String>,
+    /// Name to print on checks for the customer
     pub print_check_on_name: Option<String>,
+    /// Billing address of the customer
     pub bill_addr: Option<Addr>,
+    /// Fully qualified name of the customer
     pub fully_qualified_name: Option<String>,
+    /// Level in the customer hierarchy
     pub level: Option<u8>,
+    /// Tax exemption reason identifier for the customer
     pub tax_exemption_reason_id: Option<TaxExemptStatus>,
 }
 
+/// TaxExemptStatus Enum
+/// 
+/// Tax exemption reason identifier for the customer.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(from = "u8", into = "u8")]

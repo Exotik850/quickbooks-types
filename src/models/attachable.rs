@@ -20,24 +20,39 @@ use crate::{QBCreatable, QBDeletable, QBTypeError, QBFullUpdatable, QBItem, QBTo
 ///
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/attachable>
 pub struct Attachable {
+    /// The unique ID of the entity
     pub id: Option<String>,
+    /// The unique sync token of the entity, used for concurrency control
     pub sync_token: Option<String>,
+    /// Metadata about the entity
     #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
+    /// File name of the attachment
     #[cfg_attr(feature = "builder", builder(setter(custom)))]
     pub file_name: Option<String>,
+    /// Private note for the attachment
     pub note: Option<String>,
+    /// Category of the attachment
     pub category: Option<AttachmentCategory>,
+    /// Content type of the attachment
     #[cfg_attr(feature = "builder", builder(setter(custom)))]
     pub content_type: Option<String>,
     pub place_name: Option<String>,
+    /// References to the transaction object to which this attachable file is to be linked
     pub attachable_ref: Option<Vec<AttachableRef>>,
+    /// Longitude of the place where the attachment was taken
     pub long: Option<String>,
+    /// Tag for the attachment
     pub tag: Option<String>,
+    /// Latitude of the place where the attachment was taken
     pub lat: Option<String>,
+    /// URI for accessing the file
     pub file_access_uri: Option<String>,
+    /// Size of the file in bytes
     pub size: Option<f64>,
+    /// URI for accessing the thumbnail of the file
     pub thumbnail_file_access_uri: Option<String>,
+    /// Temporary download URI for the file
     pub temp_download_uri: Option<String>,
 }
 
@@ -111,6 +126,8 @@ impl QBAttachable for Attachable {
 }
 
 /// Attachment Category
+/// 
+/// Category of the attachment
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum AttachmentCategory {
     ContactPhoto,
@@ -131,13 +148,20 @@ pub enum AttachmentCategory {
 #[serde(rename_all = "PascalCase", default)]
 #[cfg_attr(feature = "builder", derive(Builder), builder(default))]
 pub struct AttachableRef {
+    /// Indicates if the entity should be included on send
     pub include_on_send: Option<bool>,
+    /// Line information for the entity
     pub line_info: Option<String>,
+    /// Indicates if the entity is a reference only
     pub no_ref_only: Option<bool>,
+    /// Custom fields for the entity
     pub custom_field: Option<Vec<CustomField>>,
+    /// Type of the entity
     #[serde(rename = "type")]
     pub ref_type: Option<String>,
+    /// Indicates if the entity is inactive
     pub inactive: Option<bool>,
+    /// The unique ID of the entity
     pub entity_ref: Option<NtRef>,
 }
 
