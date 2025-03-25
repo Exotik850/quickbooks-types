@@ -39,6 +39,7 @@ pub struct Attachable {
     pub content_type: Option<String>,
     pub place_name: Option<String>,
     /// References to the transaction object to which this attachable file is to be linked
+    #[cfg_attr(feature = "builder", builder(setter(strip_option)))]
     pub attachable_ref: Option<Vec<AttachableRef>>,
     /// Longitude of the place where the attachment was taken
     pub long: Option<String>,
@@ -83,6 +84,7 @@ pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
 #[cfg(feature = "builder")]
 impl AttachableBuilder {
     pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> Result<&mut Self, QBTypeError> {
+        
         let path = value.as_ref();
 
         self.file_name = Some(Some(
@@ -176,12 +178,19 @@ impl From<NtRef> for AttachableRef {
     }
 }
 
-trait QBToAttachableRef: QBToRef {
+pub trait QBToAttachableRef: QBToRef {
     fn to_attach_ref(&self) -> Result<AttachableRef, QBTypeError> {
         let value = self.to_ref()?;
         Ok(value.into())
     }
 }
+
+impl<T: QBToRef> QBToAttachableRef for T {
+  fn to_attach_ref(&self) -> Result<AttachableRef, QBTypeError> {
+      let value = self.to_ref()?;
+      Ok(value.into())
+  }
+} 
 
 impl QBCreatable for Attachable {
     fn can_create(&self) -> bool {
