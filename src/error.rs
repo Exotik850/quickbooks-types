@@ -4,8 +4,8 @@ pub enum QBTypeError {
     #[error("Error validating QB Object in builder: {0}")]
     ValidationError(String),
     #[cfg(feature = "builder")]
-    #[error("Uninitalized fields in QB Object in builder: {0}")]
-    UninitializedField(String),
+    #[error("Missing field in QB Object: {0}")]
+    MissingField(&'static str),
     #[error("QB Item could not be referenced!")]
     QBToRefError,
 }

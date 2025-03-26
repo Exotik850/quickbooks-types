@@ -1,5 +1,6 @@
 #[cfg(feature = "builder")]
 use std::path::Path;
+use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
@@ -84,18 +85,9 @@ pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
 #[cfg(feature = "builder")]
 impl AttachableBuilder {
     pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> Result<&mut Self, QBTypeError> {
-        
         let path = value.as_ref();
 
-        self.file_name = Some(Some(
-            path.file_name()
-                .ok_or(QBTypeError::ValidationError("Not a file!".into()))?
-                .to_str()
-                .ok_or(QBTypeError::ValidationError(
-                    "Could not turn file name into str".into(),
-                ))?
-                .into(),
-        ));
+        self.file_name = Some(Some(path.to_string_lossy().into_owned()));
 
         self.content_type = Some(
             content_type_from_ext(
@@ -116,12 +108,18 @@ impl AttachableBuilder {
 }
 
 pub trait QBAttachable {
-    fn can_upload(&self) -> bool;
+    fn can_upload(&self) -> Result<(), QBTypeError>;
     fn file_path(&self) -> Option<&String>;
 }
 impl QBAttachable for Attachable {
-    fn can_upload(&self) -> bool {
-        self.note.is_some() || self.file_name.is_some()
+    fn can_upload(&self) -> Result<(), QBTypeError> {
+        if self.note.is_none() && self.file_name.is_none() {
+            return Err(QBTypeError::MissingField("note"));
+        }
+        if self.file_name.is_none() {
+            return Err(QBTypeError::MissingField("file_name"));
+        }
+        Ok(())
     }
 
     fn file_path(&self) -> Option<&String> {
@@ -186,11 +184,11 @@ pub trait QBToAttachableRef: QBToRef {
 }
 
 impl<T: QBToRef> QBToAttachableRef for T {
-  fn to_attach_ref(&self) -> Result<AttachableRef, QBTypeError> {
-      let value = self.to_ref()?;
-      Ok(value.into())
-  }
-} 
+    fn to_attach_ref(&self) -> Result<AttachableRef, QBTypeError> {
+        let value = self.to_ref()?;
+        Ok(value.into())
+    }
+}
 
 impl QBCreatable for Attachable {
     fn can_create(&self) -> bool {
