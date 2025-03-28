@@ -3,10 +3,9 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
-use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBSparseUpdateable};
-
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
+use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBSparseUpdateable};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]

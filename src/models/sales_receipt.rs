@@ -4,15 +4,12 @@ use serde_with::skip_serializing_none;
 
 use super::{
     common::{
-        Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn,
-        MetaData, NtRef, PrintStatus, TxnTaxDetail,
-    },
-    LineField,
+        Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn, MetaData, NtRef, PrintStatus, TxnTaxDetail
+    }, LineField
 };
-use crate::{QBCreatable, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable};
-
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
+use crate::{QBCreatable, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]

@@ -1,13 +1,11 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::{
-    common::{MetaData, NtRef},
-    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable,
-};
-
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
+use crate::{
+    common::{MetaData, NtRef}, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable
+};
 
 /*
     Bill Payment Object
