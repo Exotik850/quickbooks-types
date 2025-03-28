@@ -31,6 +31,9 @@ pub struct Attachable {
     /// File name of the attachment
     #[cfg_attr(feature = "builder", builder(setter(custom)))]
     pub file_name: Option<String>,
+    #[cfg_attr(feature = "builder", builder(setter(custom)))]
+    #[serde(skip)]
+    pub file_path: Option<PathBuf>,
     /// Private note for the attachment
     pub note: Option<String>,
     /// Category of the attachment
@@ -84,10 +87,24 @@ pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
 
 #[cfg(feature = "builder")]
 impl AttachableBuilder {
-    pub fn file_name(&mut self, value: &dyn AsRef<Path>) -> Result<&mut Self, QBTypeError> {
-        let path = value.as_ref();
+    /// Sets the file_path (for_upload) and derives the file_name and content_type from it
+    pub fn file(&mut self, path: &impl AsRef<Path>) -> Result<&mut Self, QBTypeError> {
+        
+        let path = path.as_ref();
 
-        self.file_name = Some(Some(path.to_string_lossy().into_owned()));
+        self.file_path = Some(Some(path.to_path_buf()));
+
+        self.file_name = Some(Some(
+            path.file_name()
+                .ok_or(QBTypeError::ValidationError(
+                    "No file name on file path".into(),
+                ))?
+                .to_str()
+                .ok_or(QBTypeError::ValidationError(
+                    "Could not turn file name into string".into(),
+                ))?
+                .to_owned(),
+        ));
 
         self.content_type = Some(
             content_type_from_ext(
