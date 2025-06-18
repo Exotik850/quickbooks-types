@@ -4,8 +4,10 @@ use serde_with::skip_serializing_none;
 
 use super::{
     common::{
-        Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn, MetaData, NtRef, PrintStatus, TxnTaxDetail
-    }, LineField
+        Addr, CreditCardPayment, CustomField, DeliveryInfo, Email, GlobalTaxCalculation, LinkedTxn,
+        MetaData, NtRef, PrintStatus, TxnTaxDetail,
+    },
+    LineField,
 };
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;

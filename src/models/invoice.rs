@@ -3,12 +3,14 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{
-    Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef, PrintStatus, TxnTaxDetail
+    Addr, CustomField, DeliveryInfo, Email, EmailStatus, LinkedTxn, MetaData, NtRef, PrintStatus,
+    TxnTaxDetail,
 };
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable
+    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable,
+    QBSparseUpdateable, QBVoidable,
 };
 
 #[skip_serializing_none]

@@ -89,7 +89,6 @@ pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
 impl AttachableBuilder {
     /// Sets the file_path (for_upload) and derives the file_name and content_type from it
     pub fn file(&mut self, path: &impl AsRef<Path>) -> Result<&mut Self, QBTypeError> {
-        
         let path = path.as_ref();
 
         self.file_path = Some(Some(path.to_path_buf()));

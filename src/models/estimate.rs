@@ -6,7 +6,8 @@ use super::common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTax
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    common::EmailStatus, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable
+    common::EmailStatus, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable,
+    QBSendable, QBSparseUpdateable,
 };
 
 #[skip_serializing_none]

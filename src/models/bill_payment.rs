@@ -4,7 +4,8 @@ use serde_with::skip_serializing_none;
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    common::{MetaData, NtRef}, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable
+    common::{MetaData, NtRef},
+    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable,
 };
 
 /*

@@ -5,7 +5,8 @@ use serde_with::skip_serializing_none;
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    common::{Email, MetaData, NtRef}, QBFullUpdatable, QBItem
+    common::{Email, MetaData, NtRef},
+    QBFullUpdatable, QBItem,
 };
 
 #[skip_serializing_none]

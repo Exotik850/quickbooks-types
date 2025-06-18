@@ -6,7 +6,7 @@ use super::common::{CreditCardPayment, MetaData, NtRef};
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable
+    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable,
 };
 
 #[skip_serializing_none]
