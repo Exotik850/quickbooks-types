@@ -1,0 +1,252 @@
+{
+  "Header": {
+    "ReportName": "ItemSales",
+    "Option": [
+      {
+        "Name": "NoReportData",
+        "Value": "false"
+      }
+    ],
+    "ReportBasis": "Accrual",
+    "StartPeriod": "2015-08-01",
+    "Currency": "USD",
+    "EndPeriod": "2015-09-30",
+    "Time": "2016-06-17T15:31:24-07:00",
+    "SummarizeColumnsBy": "Total"
+  },
+  "Rows": {
+    "Row": [
+      {
+        "ColData": [
+          {
+            "id": "3",
+            "value": "Concrete"
+          },
+          {
+            "value": "5.00"
+          },
+          {
+            "value": "47.50"
+          },
+          {
+            "value": "0.56 %"
+          },
+          {
+            "value": "9.50"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "4",
+            "value": "Design"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "6",
+            "value": "Gardening"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "7",
+            "value": "Installation"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "8",
+            "value": "Lighting"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "10",
+            "value": "Pest Control"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "11",
+            "value": "Pump"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "5",
+            "value": "Rock Fountain"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "13",
+            "value": "Rocks"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "1",
+            "value": "Services"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "14",
+            "value": "Sod"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "15",
+            "value": "Soil"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "16",
+            "value": "Sprinkler Heads"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "17",
+            "value": "Sprinkler Pipes"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "id": "18",
+            "value": "Trimming"
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Not Specified"
+          }
+        ],
+        "group": "**"
+      },
+      {
+        "ColData": [
+          {
+            "value": "TOTAL"
+          }
+        ],
+        "group": "GrandTotal"
+      }
+    ]
+  },
+  "Columns": {
+    "Column": [
+      {
+        "ColType": "ProductsAndService",
+        "ColTitle": ""
+      },
+      {
+        "ColType": "Money",
+        "ColTitle": "Total",
+        "Columns": {
+          "Column": [
+            {
+              "ColType": "Money",
+              "ColTitle": "Quantity",
+              "MetaData": [
+                {
+                  "Name": "StartDate",
+                  "Value": "2015-08-01"
+                },
+                {
+                  "Name": "EndDate",
+                  "Value": "2015-09-30"
+                }
+              ]
+            },
+            {
+              "ColType": "Money",
+              "ColTitle": "Amount",
+              "MetaData": [
+                {
+                  "Name": "StartDate",
+                  "Value": "2015-08-01"
+                },
+                {
+                  "Name": "EndDate",
+                  "Value": "2015-09-30"
+                }
+              ]
+            },
+            {
+              "ColType": "Money",
+              "ColTitle": "% of Sales"
+            },
+            {
+              "ColType": "Money",
+              "ColTitle": "Avg Price"
+            },
+            {
+              "ColType": "Money",
+              "ColTitle": "COGS",
+              "MetaData": [
+                {
+                  "Name": "StartDate",
+                  "Value": "2015-08-01"
+                },
+                {
+                  "Name": "EndDate",
+                  "Value": "2015-09-30"
+                }
+              ]
+            },
+            {
+              "ColType": "Money",
+              "ColTitle": "Gross Margin"
+            },
+            {
+              "ColType": "Money",
+              "ColTitle": "Gross Margin %"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

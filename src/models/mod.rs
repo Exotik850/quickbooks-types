@@ -14,6 +14,7 @@ mod payment;
 mod preferences;
 mod sales_receipt;
 mod vendor;
+mod report;
 
 pub use account::*;
 pub use attachable::*;
@@ -30,3 +31,4 @@ pub use payment::*;
 pub use preferences::*;
 pub use sales_receipt::*;
 pub use vendor::*;
+pub use report::*;
