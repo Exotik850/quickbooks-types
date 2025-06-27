@@ -75,9 +75,50 @@ pub enum DateMacro {
     NextCalendarYear,
 }
 
+impl std::fmt::Display for DateMacro {
+  fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+      let out = match self {
+          DateMacro::All => "All",
+          DateMacro::Today => "Today",
+          DateMacro::ThisWeek => "This Week",
+          DateMacro::ThisWeekToDate => "This Week-to-date",
+          DateMacro::ThisMonth => "This Month",
+          DateMacro::ThisMonthToDate => "This Month-to-date",
+          DateMacro::ThisFiscalQuarter => "This Fiscal Quarter",
+          DateMacro::ThisFiscalQuarterToDate => "This Fiscal Quarter-to-date",
+          DateMacro::ThisFiscalYear => "This Fiscal Year",
+          DateMacro::ThisFiscalYearToDate => "This Fiscal Year-to-date",
+          DateMacro::ThisCalendarQuarter => "This Calendar Quarter",
+          DateMacro::ThisCalendarQuarterToDate => "This Calendar Quarter-to-date",
+          DateMacro::ThisCalendarYear => "This Calendar Year",
+          DateMacro::ThisCalendarYearToDate => "This Calendar Year-to-date",
+          DateMacro::Yesterday => "Yesterday",
+          DateMacro::LastWeek => "Last Week",
+          DateMacro::LastWeekToDate => "Last Week-to-date",
+          DateMacro::LastMonth => "Last Month",
+          DateMacro::LastMonthToDate => "Last Month-to-date",
+          DateMacro::LastFiscalQuarter => "Last Fiscal Quarter",
+          DateMacro::LastFiscalQuarterToDate => "Last Fiscal Quarter-to-date",
+          DateMacro::LastFiscalYear => "Last Fiscal Year",
+          DateMacro::LastFiscalYearToDate => "Last Fiscal Year-to-date",
+          DateMacro::LastCalendarQuarter => "Last Calendar Quarter",
+          DateMacro::LastCalendarQuarterToDate => "Last Calendar Quarter-to-date",
+          DateMacro::LastCalendarYear => "Last Calendar Year",
+          DateMacro::LastCalendarYearToDate => "Last Calendar Year-to-date",
+          DateMacro::NextWeek => "Next Week",
+          DateMacro::Next4Weeks => "Next 4 Weeks",
+          DateMacro::NextMonth => "Next Month",
+          DateMacro::NextFiscalQuarter => "Next Fiscal Quarter",
+          DateMacro::NextFiscalYear => "Next Fiscal Year",
+          DateMacro::NextCalendarQuarter => "Next Calendar Quarter",
+          DateMacro::NextCalendarYear => "Next Calendar Year",
+      }; 
+      write!(f, "{}", out)
+  }
+}
+
 /// Corresponds to the `SummarizeColumnsByEnum` simpleType in the XSD.
 #[derive(Debug, Serialize, Deserialize)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum SummarizeColumnsByEnum {
     Total,
     Year,
@@ -93,6 +134,28 @@ pub enum SummarizeColumnsByEnum {
     Departments,
     Classes,
     ProductsAndServices,
+}
+
+impl std::fmt::Display for SummarizeColumnsByEnum {
+  fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+      let out = match self {
+          SummarizeColumnsByEnum::Total => "Total",
+          SummarizeColumnsByEnum::Year => "Year",
+          SummarizeColumnsByEnum::Quarter => "Quarter",
+          SummarizeColumnsByEnum::FiscalYear => "Fiscal Year",
+          SummarizeColumnsByEnum::FiscalQuarter => "Fiscal Quarter",
+          SummarizeColumnsByEnum::Month => "Month",
+          SummarizeColumnsByEnum::Week => "Week",
+          SummarizeColumnsByEnum::Days => "Days",
+          SummarizeColumnsByEnum::Customers => "Customers",
+          SummarizeColumnsByEnum::Vendors => "Vendors",
+          SummarizeColumnsByEnum::Employees => "Employees",
+          SummarizeColumnsByEnum::Departments => "Departments",
+          SummarizeColumnsByEnum::Classes => "Classes",
+          SummarizeColumnsByEnum::ProductsAndServices => "ProductsAndServices",
+      }; 
+      write!(f, "{}", out)
+  }
 }
 
 /// Corresponds to the `ColumnTypeEnum` simpleType in the XSD.
