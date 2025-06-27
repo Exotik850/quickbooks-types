@@ -1,3 +1,4 @@
+use chrono::{DateTime, FixedOffset, NaiveDate};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
@@ -198,13 +199,12 @@ pub struct Rows {
 /// We capture this choice in an enum to represent mutually exclusive content.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
-#[serde(rename_all = "PascalCase", untagged)]
+#[serde(untagged)]
 pub enum RowContent {
     /// Contains a list of `ColData` elements.
-    ColdataVec {
-        #[serde(rename = "ColData")]
-        col_data: Vec<ColData>,
-    },
+    #[serde(rename_all = "PascalCase")]
+    ColdataVec { col_data: Vec<ColData> },
+    #[serde(rename_all = "PascalCase")]
     /// Contains `Header`, `Rows`, and `Summary` together.
     HeaderRowsSummary {
         header: Option<Vec<ColData>>,
@@ -235,12 +235,12 @@ pub struct Row {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct ReportHeader {
-    pub time: Option<String>,
+    pub time: Option<DateTime<FixedOffset>>,
     pub report_name: Option<String>,
     pub date_macro: Option<String>,
     pub report_basis: Option<ReportBasisEnum>,
-    pub start_period: Option<String>,
-    pub end_period: Option<String>,
+    pub start_period: Option<NaiveDate>,
+    pub end_period: Option<NaiveDate>,
     pub summarize_columns_by: Option<String>,
     pub currency: Option<String>,
     pub customer: Option<String>,
