@@ -6,6 +6,7 @@ extern crate derive_builder;
 
 mod error;
 mod models;
+pub mod reports;
 use std::fmt::{Debug, Display};
 
 use const_str::convert_ascii_case;
