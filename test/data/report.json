@@ -1,252 +1,774 @@
 {
-  "Header": {
-    "ReportName": "ItemSales",
-    "Option": [
-      {
-        "Name": "NoReportData",
-        "Value": "false"
-      }
-    ],
-    "ReportBasis": "Accrual",
-    "StartPeriod": "2015-08-01",
-    "Currency": "USD",
-    "EndPeriod": "2015-09-30",
-    "Time": "2016-06-17T15:31:24-07:00",
-    "SummarizeColumnsBy": "Total"
-  },
-  "Rows": {
-    "Row": [
-      {
-        "ColData": [
-          {
-            "id": "3",
-            "value": "Concrete"
-          },
-          {
-            "value": "5.00"
-          },
-          {
-            "value": "47.50"
-          },
-          {
-            "value": "0.56 %"
-          },
-          {
-            "value": "9.50"
-          },
-          {
-            "value": ""
-          },
-          {
-            "value": ""
-          },
-          {
-            "value": ""
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "4",
-            "value": "Design"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "6",
-            "value": "Gardening"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "7",
-            "value": "Installation"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "8",
-            "value": "Lighting"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "10",
-            "value": "Pest Control"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "11",
-            "value": "Pump"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "5",
-            "value": "Rock Fountain"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "13",
-            "value": "Rocks"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "1",
-            "value": "Services"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "14",
-            "value": "Sod"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "15",
-            "value": "Soil"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "16",
-            "value": "Sprinkler Heads"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "17",
-            "value": "Sprinkler Pipes"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "id": "18",
-            "value": "Trimming"
-          }
-        ]
-      },
-      {
-        "ColData": [
-          {
-            "value": "Not Specified"
-          }
-        ],
-        "group": "**"
-      },
-      {
-        "ColData": [
-          {
-            "value": "TOTAL"
-          }
-        ],
-        "group": "GrandTotal"
-      }
+ "Header": {
+  "Time": "2025-06-28T22:54:59-07:00",
+  "ReportName": "ProfitAndLoss",
+  "DateMacro": "this calendar year-to-date",
+  "ReportBasis": "Cash",
+  "StartPeriod": "2025-01-01",
+  "EndPeriod": "2025-06-28",
+  "SummarizeColumnsBy": "Total",
+  "Currency": "USD",
+  "Option": [
+   {
+    "Name": "AccountingStandard",
+    "Value": "GAAP"
+   },
+   {
+    "Name": "NoReportData",
+    "Value": "false"
+   }
+  ]
+ },
+ "Columns": {
+  "Column": [
+   {
+    "ColTitle": "",
+    "ColType": "Account",
+    "MetaData": [
+     {
+      "Name": "ColKey",
+      "Value": "account"
+     }
     ]
-  },
-  "Columns": {
-    "Column": [
+   },
+   {
+    "ColTitle": "Total",
+    "ColType": "Money",
+    "MetaData": [
+     {
+      "Name": "ColKey",
+      "Value": "total"
+     }
+    ]
+   }
+  ]
+ },
+ "Rows": {
+  "Row": [
+   {
+    "Header": {
+     "ColData": [
       {
-        "ColType": "ProductsAndService",
-        "ColTitle": ""
+       "value": "Income"
       },
       {
-        "ColType": "Money",
-        "ColTitle": "Total",
-        "Columns": {
-          "Column": [
-            {
-              "ColType": "Money",
-              "ColTitle": "Quantity",
-              "MetaData": [
-                {
-                  "Name": "StartDate",
-                  "Value": "2015-08-01"
-                },
-                {
-                  "Name": "EndDate",
-                  "Value": "2015-09-30"
-                }
-              ]
-            },
-            {
-              "ColType": "Money",
-              "ColTitle": "Amount",
-              "MetaData": [
-                {
-                  "Name": "StartDate",
-                  "Value": "2015-08-01"
-                },
-                {
-                  "Name": "EndDate",
-                  "Value": "2015-09-30"
-                }
-              ]
-            },
-            {
-              "ColType": "Money",
-              "ColTitle": "% of Sales"
-            },
-            {
-              "ColType": "Money",
-              "ColTitle": "Avg Price"
-            },
-            {
-              "ColType": "Money",
-              "ColTitle": "COGS",
-              "MetaData": [
-                {
-                  "Name": "StartDate",
-                  "Value": "2015-08-01"
-                },
-                {
-                  "Name": "EndDate",
-                  "Value": "2015-09-30"
-                }
-              ]
-            },
-            {
-              "ColType": "Money",
-              "ColTitle": "Gross Margin"
-            },
-            {
-              "ColType": "Money",
-              "ColTitle": "Gross Margin %"
-            }
-          ]
+       "value": ""
+      }
+     ]
+    },
+    "Rows": {
+     "Row": [
+      {
+       "ColData": [
+        {
+         "value": "Discounts given",
+         "id": "340"
+        },
+        {
+         "value": "-233.27"
         }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "PayPal Sales",
+         "id": "310"
+        },
+        {
+         "value": "823.13"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Sales",
+         "id": "203"
+        },
+        {
+         "value": "92428.44"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Sales of Product Income",
+         "id": "277"
+        },
+        {
+         "value": "323020.18"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Service",
+         "id": "233"
+        },
+        {
+         "value": "67848.10"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Shipping and Delivery Income",
+         "id": "204"
+        },
+        {
+         "value": "23297.13"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Unapplied Cash Payment Income",
+         "id": "274"
+        },
+        {
+         "value": "0.00"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Uncategorized Income",
+         "id": "198"
+        },
+        {
+         "value": "1020.06"
+        }
+       ],
+       "type": "Data"
       }
-    ]
-  }
+     ]
+    },
+    "Summary": {
+     "ColData": [
+      {
+       "value": "Total Income"
+      },
+      {
+       "value": "508203.77"
+      }
+     ]
+    },
+    "type": "Section",
+    "group": "Income"
+   },
+   {
+    "Header": {
+     "ColData": [
+      {
+       "value": "Cost of Goods Sold"
+      },
+      {
+       "value": ""
+      }
+     ]
+    },
+    "Rows": {
+     "Row": [
+      {
+       "ColData": [
+        {
+         "value": "Cost of Goods Sold",
+         "id": "245"
+        },
+        {
+         "value": "313665.75"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Freight and Shipping Costs",
+         "id": "205"
+        },
+        {
+         "value": "-540.05"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Sales new",
+         "id": "331"
+        },
+        {
+         "value": "-130.00"
+        }
+       ],
+       "type": "Data"
+      }
+     ]
+    },
+    "Summary": {
+     "ColData": [
+      {
+       "value": "Total Cost of Goods Sold"
+      },
+      {
+       "value": "312995.70"
+      }
+     ]
+    },
+    "type": "Section",
+    "group": "COGS"
+   },
+   {
+    "Summary": {
+     "ColData": [
+      {
+       "value": "Gross Profit"
+      },
+      {
+       "value": "195208.07"
+      }
+     ]
+    },
+    "type": "Section",
+    "group": "GrossProfit"
+   },
+   {
+    "Header": {
+     "ColData": [
+      {
+       "value": "Expenses"
+      },
+      {
+       "value": ""
+      }
+     ]
+    },
+    "Rows": {
+     "Row": [
+      {
+       "ColData": [
+        {
+         "value": "Advertising and Promotion",
+         "id": "209"
+        },
+        {
+         "value": "5044.63"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Automobile Expense",
+         "id": "210"
+        },
+        {
+         "value": "16926.81"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Bad Debt",
+         "id": "258"
+        },
+        {
+         "value": "-169.34"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Bank Service Charge",
+         "id": "260"
+        },
+        {
+         "value": "986.09"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Charitable Donations",
+         "id": "259"
+        },
+        {
+         "value": "500.00"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Computer and Internet Expenses",
+         "id": "212"
+        },
+        {
+         "value": "9595.25"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Contractor Labor",
+         "id": "289"
+        },
+        {
+         "value": "66471.71"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Donations",
+         "id": "257"
+        },
+        {
+         "value": "1772.72"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Dues and Subscriptions",
+         "id": "214"
+        },
+        {
+         "value": "11386.54"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Gifts",
+         "id": "263"
+        },
+        {
+         "value": "2121.00"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Insurance",
+         "id": "329"
+        },
+        {
+         "value": "2405.22"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Insurance Expense",
+         "id": "215"
+        },
+        {
+         "value": "15215.81"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Interest Expense",
+         "id": "216"
+        },
+        {
+         "value": "2814.50"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Janitorial Expense",
+         "id": "262"
+        },
+        {
+         "value": "3933.92"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Meals and Entertainment",
+         "id": "217"
+        },
+        {
+         "value": "4418.36"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Miscellaneous Expense",
+         "id": "261"
+        },
+        {
+         "value": "2550.42"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Office Supplies",
+         "id": "218"
+        },
+        {
+         "value": "2630.30"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Payroll Expenses",
+         "id": "230"
+        },
+        {
+         "value": "20200.00"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Professional Fees",
+         "id": "220"
+        },
+        {
+         "value": "800.00"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Purchases",
+         "id": "337"
+        },
+        {
+         "value": "2176.71"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "QuickBooks Payments Fees",
+         "id": "301"
+        },
+        {
+         "value": "636.01"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Rent Expense",
+         "id": "221"
+        },
+        {
+         "value": "42000.00"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Repairs and Maintenance",
+         "id": "222"
+        },
+        {
+         "value": "956.72"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Taxes Paid",
+         "id": "330"
+        },
+        {
+         "value": "596.62"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Telephone Expense",
+         "id": "223"
+        },
+        {
+         "value": "2460.51"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Travel Expense",
+         "id": "224"
+        },
+        {
+         "value": "3598.88"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Unapplied Cash Bill Payment Expense",
+         "id": "273"
+        },
+        {
+         "value": "-14441.00"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Uncategorized Expense",
+         "id": "199"
+        },
+        {
+         "value": "2007.07"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Uncategorized Expenses",
+         "id": "250"
+        },
+        {
+         "value": "1831.68"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Utilities",
+         "id": "225"
+        },
+        {
+         "value": "4294.00"
+        }
+       ],
+       "type": "Data"
+      },
+      {
+       "ColData": [
+        {
+         "value": "Warranty Holding Account",
+         "id": "1150040000"
+        },
+        {
+         "value": "234.65"
+        }
+       ],
+       "type": "Data"
+      }
+     ]
+    },
+    "Summary": {
+     "ColData": [
+      {
+       "value": "Total Expenses"
+      },
+      {
+       "value": "215955.79"
+      }
+     ]
+    },
+    "type": "Section",
+    "group": "Expenses"
+   },
+   {
+    "Summary": {
+     "ColData": [
+      {
+       "value": "Net Operating Income"
+      },
+      {
+       "value": "-20747.72"
+      }
+     ]
+    },
+    "type": "Section",
+    "group": "NetOperatingIncome"
+   },
+   {
+    "Header": {
+     "ColData": [
+      {
+       "value": "Other Income"
+      },
+      {
+       "value": ""
+      }
+     ]
+    },
+    "Rows": {
+     "Row": [
+      {
+       "ColData": [
+        {
+         "value": "Interest Income",
+         "id": "320"
+        },
+        {
+         "value": "205.00"
+        }
+       ],
+       "type": "Data"
+      }
+     ]
+    },
+    "Summary": {
+     "ColData": [
+      {
+       "value": "Total Other Income"
+      },
+      {
+       "value": "205.00"
+      }
+     ]
+    },
+    "type": "Section",
+    "group": "OtherIncome"
+   },
+   {
+    "Header": {
+     "ColData": [
+      {
+       "value": "Other Expenses"
+      },
+      {
+       "value": ""
+      }
+     ]
+    },
+    "Rows": {
+     "Row": [
+      {
+       "ColData": [
+        {
+         "value": "Reconciliation Discrepancies",
+         "id": "280"
+        },
+        {
+         "value": "-13633.20"
+        }
+       ],
+       "type": "Data"
+      }
+     ]
+    },
+    "Summary": {
+     "ColData": [
+      {
+       "value": "Total Other Expenses"
+      },
+      {
+       "value": "-13633.20"
+      }
+     ]
+    },
+    "type": "Section",
+    "group": "OtherExpenses"
+   },
+   {
+    "Summary": {
+     "ColData": [
+      {
+       "value": "Net Other Income"
+      },
+      {
+       "value": "13838.20"
+      }
+     ]
+    },
+    "type": "Section",
+    "group": "NetOtherIncome"
+   },
+   {
+    "Summary": {
+     "ColData": [
+      {
+       "value": "Net Income"
+      },
+      {
+       "value": "-6909.52"
+      }
+     ]
+    },
+    "type": "Section",
+    "group": "NetIncome"
+   }
+  ]
+ }
 }
