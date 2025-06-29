@@ -98,7 +98,16 @@ pub struct ColData {
     pub href: Option<String>,
 }
 
+/// Represents a collection of `ColData` elements.
+#[skip_serializing_none]
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "PascalCase")]
+pub struct ColDataCollection {
+    pub col_data: Option<Vec<ColData>>,
+}
+
 /// Corresponds to the `Rows` complexType in the XSD.
+#[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Rows {
     #[serde(rename = "Row", default)]
@@ -113,13 +122,17 @@ pub struct Rows {
 #[serde(untagged)]
 pub enum RowContent {
     /// Contains a list of `ColData` elements.
-    #[serde(rename_all = "PascalCase")]
-    ColdataVec { col_data: Vec<ColData> },
-    #[serde(rename_all = "PascalCase")]
+    Coldata {
+        #[serde(rename = "ColData")]
+        col_data: Vec<ColData>,
+    },
     /// Contains `Header`, `Rows`, and `Summary` together.
     HeaderRowsSummary {
-        header: Option<Vec<ColData>>,
-        summary: Option<Vec<ColData>>,
+        #[serde(rename = "Header")]
+        header: Option<ColDataCollection>,
+        #[serde(rename = "Summary")]
+        summary: Option<ColDataCollection>,
+        #[serde(rename = "Rows")]
         rows: Option<Rows>,
     },
 }
@@ -128,12 +141,12 @@ pub enum RowContent {
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Row {
+    #[serde(flatten)]
+    pub content: RowContent,
     #[serde(rename = "id", default)]
     pub id: Option<String>,
     #[serde(rename = "parentId", default)]
     pub parent_id: Option<String>,
-    #[serde(flatten)]
-    pub content: RowContent,
 
     /// Row attributes
     #[serde(rename = "type")]
