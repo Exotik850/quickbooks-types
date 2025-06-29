@@ -1,8 +1,20 @@
+use std::borrow::Cow;
+
 use super::params::*;
 use chrono::NaiveDate;
 
-pub trait HasQBReportType {
-    type QueryParams;
+pub trait QBReportParams {
+    fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_;
+    fn to_query_string(&self) -> String {
+        self.params()
+            .map(|(name, value)| format!("{}={}", name, value))
+            .collect::<Vec<_>>()
+            .join("&")
+    }
+}
+
+pub trait QBReportType {
+    type QueryParams: QBReportParams;
     fn url_name() -> &'static str;
     // fn valid_query_params() -> &'static [&'static str];
 }
@@ -15,10 +27,18 @@ macro_rules! impl_report_type {
         pub struct $report_ty;
 
         paste! {
-          impl HasQBReportType for $report_ty {
+          impl QBReportType for $report_ty {
               type QueryParams = [<$report_ty Params>];
               fn url_name() -> &'static str {
                   $url_name
+              }
+          }
+
+          impl QBReportParams for [<$report_ty Params>] {
+              fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_ {
+                  self.iter_params().filter_map(|(name, value)| {
+                      value.map(|v| (name, v.into()))
+                  })
               }
           }
 
@@ -46,29 +66,13 @@ macro_rules! impl_report_type {
                 }
               )*
 
-              fn iter_params(&self) -> impl Iterator<Item = (&str, Option<&dyn QBReportParam>)> {
+              fn iter_params(&self) -> impl Iterator<Item = (&'static str, Option<Cow<str>>)> {
                   [
                     $(
-                      (stringify!($param), self.$param.as_ref().map(|p| p as &dyn QBReportParam)),
+                      (stringify!($param), self.$param.as_ref().map(|p| p.value())),
                     )*
                   ]
                   .into_iter()
-              }
-
-              #[allow(unused_assignments)]
-              pub fn to_query_string(&self) -> String {
-                  let mut query = String::new();
-
-                  for (key, value) in self.iter_params() {
-                      if let Some(val) = value {
-                          if !query.is_empty() {
-                              query.push('&');
-                          }
-                          query.push_str(&format!("{}={}", key, val.value()));
-                      }
-                  }
-
-                  query
               }
           }
         }
