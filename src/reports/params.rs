@@ -41,7 +41,7 @@ macro_rules! impl_display_enum {
             }
         }
 
-        impl QBReportParam for $name {
+        impl HasValue for $name {
             fn value(&self) -> Cow<str> {
                 self.to_string().into()
             }
@@ -175,7 +175,7 @@ macro_rules! impl_id_param {
             #[derive(Debug, Clone, Copy, PartialEq, Eq)]
             #[doc = "Represents the ID for a " $name " in QuickBooks reports."]
             pub struct [<$name Id>](pub u32);
-            impl QBReportParam for [<$name Id>] {
+            impl HasValue for [<$name Id>] {
                 fn value(&self) -> Cow<str> {
                     self.to_string().into()
                 }
@@ -193,37 +193,37 @@ macro_rules! impl_id_param {
 
 impl_id_param!(Customer, Vendor, Employee, Item, Class, Department, Account, Term);
 
-pub trait QBReportParam {
+pub trait HasValue {
     // fn name() -> &'static str;
     fn value(&self) -> Cow<str>;
 }
 
 // Implement QBReportParam directly for common types
-impl QBReportParam for String {
+impl HasValue for String {
     fn value(&self) -> Cow<str> {
         self.into()
     }
 }
 
-impl QBReportParam for &str {
+impl HasValue for &str {
     fn value(&self) -> Cow<str> {
         (*self).into()
     }
 }
 
-impl QBReportParam for u32 {
+impl HasValue for u32 {
     fn value(&self) -> Cow<str> {
         self.to_string().into()
     }
 }
 
-impl QBReportParam for NaiveDate {
+impl HasValue for NaiveDate {
     fn value(&self) -> Cow<str> {
         self.format("%Y-%m-%d").to_string().into()
     }
 }
 
-impl QBReportParam for bool {
+impl HasValue for bool {
     fn value(&self) -> Cow<str> {
         if *self { "true" } else { "false" }.into()
     }
