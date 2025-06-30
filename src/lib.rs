@@ -9,7 +9,6 @@ mod models;
 pub mod reports;
 use std::fmt::{Debug, Display};
 
-use const_str::convert_ascii_case;
 pub use error::*;
 use models::common::{MetaData, NtRef};
 pub use models::*;
@@ -64,7 +63,9 @@ macro_rules! impl_qb_data {
 
                 #[inline]
                 fn qb_id() -> &'static str {
-                    convert_ascii_case!(lower, stringify!($x))
+                    paste::paste! {
+                        stringify!([<$x:lower>])
+                    }
                 }
             }
 
