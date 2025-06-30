@@ -17,7 +17,7 @@ pub trait QBReportParams {
 /// Represents a type of QuickBooks report.
 pub trait QBReportType {
     type QueryParams: QBReportParams;
-    fn url_name() -> &'static str;
+    fn url_name(&self) -> &'static str;
     // fn valid_query_params() -> &'static [&'static str];
 }
 
@@ -36,7 +36,7 @@ macro_rules! impl_report_type {
 
           impl QBReportType for $report_ty {
               type QueryParams = [<$report_ty Params>];
-              fn url_name() -> &'static str {
+              fn url_name(&self) -> &'static str {
                   $url_name
               }
           }
