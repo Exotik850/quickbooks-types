@@ -1,6 +1,9 @@
 pub mod params;
 pub mod types;
 
+#[cfg(feature = "polars")]
+mod polars;
+
 use chrono::{DateTime, FixedOffset, NaiveDate};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
