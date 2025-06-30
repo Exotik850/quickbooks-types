@@ -3,6 +3,7 @@ use std::borrow::Cow;
 use super::params::*;
 use chrono::NaiveDate;
 
+/// Represents parameters for QuickBooks reports.
 pub trait QBReportParams {
     fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_;
     fn to_query_string(&self) -> String {
@@ -13,6 +14,7 @@ pub trait QBReportParams {
     }
 }
 
+/// Represents a type of QuickBooks report.
 pub trait QBReportType {
     type QueryParams: QBReportParams;
     fn url_name() -> &'static str;
@@ -22,11 +24,16 @@ pub trait QBReportType {
 use paste::paste;
 
 macro_rules! impl_report_type {
-    ($($report_ty:ident, $url_name:expr, [$($param:tt),* $(,)?];)* $(;)?) => {
+    ($(
+      $report_ty:ident, $url_name:expr, [$($param:tt),* $(,)?]; $(($doc:expr))?
+    )*
+    $(;)?) => {
       $(
-        pub struct $report_ty;
 
         paste! {
+          #[doc = "Type to represent the `" $report_ty "` report in quickbooks:\n https://developer.intuit.com/app/developer/qbo/docs/api/accounting/report-entities/" [<$report_ty:lower>] "\n\n" $($doc)?]
+          pub struct $report_ty;
+
           impl QBReportType for $report_ty {
               type QueryParams = [<$report_ty Params>];
               fn url_name() -> &'static str {
@@ -34,16 +41,9 @@ macro_rules! impl_report_type {
               }
           }
 
-          impl QBReportParams for [<$report_ty Params>] {
-              fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_ {
-                  self.iter_params().filter_map(|(name, value)| {
-                      value.map(|v| (name, v.into()))
-                  })
-              }
-          }
-
           #[derive(Debug, Default)]
           #[allow(non_snake_case)]
+          #[doc = "Parameters for the `" $report_ty "` report.\n\n" $($doc)?]
           pub struct [<$report_ty Params>] {
               $(
                 pub $param: Option<impl_report_type!(@param_type $param)>,
@@ -73,6 +73,14 @@ macro_rules! impl_report_type {
                     )*
                   ]
                   .into_iter()
+              }
+          }
+
+          impl QBReportParams for [<$report_ty Params>] {
+              fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_ {
+                  self.iter_params().filter_map(|(name, value)| {
+                      value.map(|v| (name, v.into()))
+                  })
               }
           }
         }
@@ -140,8 +148,10 @@ macro_rules! impl_report_type {
     (@param_type name) => { String };
     (@param_type end_moddate) => { NaiveDate };
 
-    // Default to String for any unmatched parameters
-    // (@param_type $param:tt) => { String };
+    (@param_type $param:tt) => { compile_error!(
+        "Unsupported parameter type for report: {}",
+        stringify!($param)
+    ) };
 
     () => {}
 }
@@ -153,15 +163,15 @@ impl_report_type!(
       start_date,
       end_date,
       summarize_column_by
-  ];
-  
+  ]; ("List of accounts with details")
+
   APAgingDetail, "AgedPayableDetail", [
     as_of_date,
     aging_method,
     vendor,
     columns
   ];
-  
+
   APAgingSummary, "AgedPayables", [
     customer,
     qzurl,
@@ -172,7 +182,7 @@ impl_report_type!(
     sort_order,
     aging_method
   ];
-  
+
   ARAgingDetail, "AgedReceivableDetail", [
     customer,
     shipvia,
@@ -189,7 +199,7 @@ impl_report_type!(
     aging_period,
     columns
   ];
-  
+
   ARAgingSummary, "AgedReceivables", [
     customer,
     qzurl,
@@ -199,7 +209,7 @@ impl_report_type!(
     sort_order,
     department
   ];
-  
+
   BalanceSheet, "BalanceSheet", [
     customer,
     qzurl,
@@ -215,7 +225,7 @@ impl_report_type!(
     vendor,
     start_date
   ];
-  
+
   CashFlow, "CashFlow", [
     customer,
     vendor,
@@ -228,7 +238,7 @@ impl_report_type!(
     department,
     start_date
   ];
-  
+
   CustomerBalance, "CustomerBalance", [
     customer,
     accounting_method,
@@ -239,7 +249,7 @@ impl_report_type!(
     summarize_column_by,
     department
   ];
-  
+
   CustomerBalanceDetail, "CustomerBalanceDetail", [
     customer,
     shipvia,
@@ -255,7 +265,7 @@ impl_report_type!(
     aging_method,
     department
   ];
-  
+
   CustomerIncome, "CustomerIncome", [
     customer,
     term,
@@ -269,7 +279,7 @@ impl_report_type!(
     start_date,
     vendor
   ];
-  
+
   FECReport, "FECReport", [
     attachment_type,
     with_qbo_identifier,
@@ -277,7 +287,7 @@ impl_report_type!(
     end_date,
     add_due_date
   ];
-  
+
   GeneralLedger, "GeneralLedger", [
     customer,
     account,
@@ -296,7 +306,7 @@ impl_report_type!(
     vendor,
     columns
   ];
-  
+
   GeneralLedgerFR, "GeneralLedgerFR", [
     customer,
     account,
@@ -312,7 +322,7 @@ impl_report_type!(
     class,
     vendor
   ];
-  
+
   InventoryValuationDetail, "InventoryValuationDetail", [
     end_date,
     end_svcdate,
@@ -323,7 +333,7 @@ impl_report_type!(
     start_date,
     columns
   ];
-  
+
   InventoryValuationSummary, "InventoryValuationSummary", [
     qzurl,
     date_macro,
@@ -332,7 +342,7 @@ impl_report_type!(
     sort_order,
     summarize_column_by
   ];
-  
+
   JournalReport, "JournalReport", [
     end_date,
     date_macro,
@@ -341,7 +351,7 @@ impl_report_type!(
     start_date,
     columns
   ];
-  
+
   ProfitAndLoss, "ProfitAndLoss", [
     customer,
     qzurl,
@@ -357,7 +367,7 @@ impl_report_type!(
     vendor,
     start_date
   ];
-  
+
   ProfitAndLossDetail, "ProfitAndLossDetail", [
     customer,
     account,
@@ -376,7 +386,7 @@ impl_report_type!(
     start_date,
     columns
   ];
-  
+
   SalesByClassSummary, "ClassSales", [
     customer,
     accounting_method,
@@ -388,7 +398,7 @@ impl_report_type!(
     department,
     start_date
   ];
-  
+
   SalesByCustomer, "CustomerSales", [
     customer,
     qzurl,
@@ -402,7 +412,7 @@ impl_report_type!(
     department,
     start_date
   ];
-  
+
   SalesByDepartment, "DepartmentSales", [
     customer,
     accounting_method,
@@ -415,7 +425,7 @@ impl_report_type!(
     department,
     start_date
   ];
-  
+
   SalesByProduct, "ItemSales", [
     customer,
     end_duedate,
@@ -430,7 +440,7 @@ impl_report_type!(
     department,
     start_date
   ];
-  
+
   TaxSummary, "TaxSummary", [
     agency_id,
     accounting_method,
@@ -439,7 +449,7 @@ impl_report_type!(
     sort_order,
     start_date
   ];
-  
+
   TransactionList, "TransactionList", [
     date_macro,
     payment_method,
@@ -474,7 +484,7 @@ impl_report_type!(
     start_createdate,
     end_moddate
   ];
-  
+
   TransactionListByCustomer, "TransactionListByCustomer", [
     date_macro,
     payment_method,
@@ -508,7 +518,7 @@ impl_report_type!(
     start_createdate,
     end_moddate
   ];
-  
+
   TransactionListByVendor, "TransactionListByVendor", [
     date_macro,
     payment_method,
@@ -542,7 +552,7 @@ impl_report_type!(
     start_createdate,
     end_moddate
   ];
-  
+
   TransactionListWithSplits, "TransactionListWithSplits", [
     docnum,
     name,
@@ -557,7 +567,7 @@ impl_report_type!(
     start_date,
     columns
   ];
-  
+
   TrialBalance, "TrialBalance", [
     accounting_method,
     end_date,
@@ -566,7 +576,7 @@ impl_report_type!(
     summarize_column_by,
     start_date
   ];
-  
+
   VendorBalance, "VendorBalance", [
     qzurl,
     accounting_method,
@@ -578,7 +588,7 @@ impl_report_type!(
     department,
     vendor
   ];
-  
+
   VendorBalanceDetail, "VendorBalanceDetail", [
     term,
     accounting_method,
@@ -594,7 +604,7 @@ impl_report_type!(
     start_duedate,
     end_duedate
   ];
-  
+
   VendorExpenses, "VendorExpenses", [
     customer,
     vendor,
