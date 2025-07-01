@@ -1,0 +1,4319 @@
+{
+  "Header": {
+    "Time": "2025-06-30T12:39:58-07:00",
+    "ReportName": "ItemSales",
+    "DateMacro": "this month-to-date",
+    "ReportBasis": "Accrual",
+    "StartPeriod": "2025-06-01",
+    "EndPeriod": "2025-06-30",
+    "SummarizeColumnsBy": "Total",
+    "Currency": "USD",
+    "Option": [
+      {
+        "Name": "NoReportData",
+        "Value": "false"
+      }
+    ]
+  },
+  "Columns": {
+    "Column": [
+      {
+        "ColTitle": "",
+        "ColType": "ProductsAndService"
+      },
+      {
+        "ColTitle": "Total",
+        "ColType": "Money",
+        "MetaData": [
+          {
+            "Name": "ColKey",
+            "Value": "total"
+          }
+        ],
+        "Columns": {
+          "Column": [
+            {
+              "ColTitle": "Quantity",
+              "ColType": "Money",
+              "MetaData": [
+                {
+                  "Name": "StartDate",
+                  "Value": "2025-06-01"
+                },
+                {
+                  "Name": "EndDate",
+                  "Value": "2025-06-30"
+                },
+                {
+                  "Name": "ColKey",
+                  "Value": "Quantity"
+                }
+              ]
+            },
+            {
+              "ColTitle": "Amount",
+              "ColType": "Money",
+              "MetaData": [
+                {
+                  "Name": "StartDate",
+                  "Value": "2025-06-01"
+                },
+                {
+                  "Name": "EndDate",
+                  "Value": "2025-06-30"
+                },
+                {
+                  "Name": "ColKey",
+                  "Value": "Amount"
+                }
+              ]
+            },
+            {
+              "ColTitle": "% of Sales",
+              "ColType": "Money",
+              "MetaData": [
+                {
+                  "Name": "ColKey",
+                  "Value": "PercentSales"
+                }
+              ]
+            },
+            {
+              "ColTitle": "Avg Price",
+              "ColType": "Money",
+              "MetaData": [
+                {
+                  "Name": "ColKey",
+                  "Value": "AvgPrice"
+                }
+              ]
+            },
+            {
+              "ColTitle": "COGS",
+              "ColType": "Money",
+              "MetaData": [
+                {
+                  "Name": "StartDate",
+                  "Value": "2025-06-01"
+                },
+                {
+                  "Name": "EndDate",
+                  "Value": "2025-06-30"
+                },
+                {
+                  "Name": "ColKey",
+                  "Value": "Cogs"
+                }
+              ]
+            },
+            {
+              "ColTitle": "Gross Margin",
+              "ColType": "Money",
+              "MetaData": [
+                {
+                  "Name": "ColKey",
+                  "Value": "GrossMargin"
+                }
+              ]
+            },
+            {
+              "ColTitle": "Gross Margin %",
+              "ColType": "Money",
+              "MetaData": [
+                {
+                  "Name": "ColKey",
+                  "Value": "GrossMarginPerc"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Rows": {
+    "Row": [
+      {
+        "ColData": [
+          {
+            "value": "00751950",
+            "id": "6191"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "55.00"
+          },
+          {
+            "value": "0.08 %"
+          },
+          {
+            "value": "55.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "241816603",
+            "id": "6181"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "132.00"
+          },
+          {
+            "value": "0.18 %"
+          },
+          {
+            "value": "132.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "36507",
+            "id": "4330"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "A00126401",
+            "id": "6180"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "105.00"
+          },
+          {
+            "value": "0.14 %"
+          },
+          {
+            "value": "105.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "AJU75152602",
+            "id": "6186"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "156.00"
+          },
+          {
+            "value": "0.21 %"
+          },
+          {
+            "value": "156.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Chest Freezer",
+              "id": "5795"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "MRC10M5CWW",
+                  "id": "6174"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "350.00"
+                },
+                {
+                  "value": "0.48 %"
+                },
+                {
+                  "value": "350.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Chest Freezer",
+            "id": "5795"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "350.00"
+          },
+          {
+            "value": "0.48 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "CK1UP150RS1",
+            "id": "6157"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "420.00"
+          },
+          {
+            "value": "0.58 %"
+          },
+          {
+            "value": "420.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Customer Education",
+            "id": "5657"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Delivery",
+            "id": "3177"
+          },
+          {
+            "value": "22.00"
+          },
+          {
+            "value": "2394.47"
+          },
+          {
+            "value": "3.28 %"
+          },
+          {
+            "value": "108.84"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Discount",
+            "id": "3276"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "-40.00"
+          },
+          {
+            "value": "-0.05 %"
+          },
+          {
+            "value": "-40.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Dishwasher",
+              "id": "4746"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "FGIP2479SF",
+                  "id": "5486"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "600.00"
+                },
+                {
+                  "value": "0.82 %"
+                },
+                {
+                  "value": "600.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "MDF24P1BST",
+                  "id": "5897"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "529.99"
+                },
+                {
+                  "value": "0.73 %"
+                },
+                {
+                  "value": "529.99"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "MDT24H2AST",
+                  "id": "5275"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "550.00"
+                },
+                {
+                  "value": "0.75 %"
+                },
+                {
+                  "value": "550.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "PDT715SYVFS",
+                  "id": "6156"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "829.00"
+                },
+                {
+                  "value": "1.14 %"
+                },
+                {
+                  "value": "829.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "SDW6757ES",
+                  "id": "5091"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "800.00"
+                },
+                {
+                  "value": "1.10 %"
+                },
+                {
+                  "value": "800.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "SDW6888JS",
+                  "id": "5882"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "750.00"
+                },
+                {
+                  "value": "1.03 %"
+                },
+                {
+                  "value": "750.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Dishwasher",
+            "id": "4746"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "4058.99"
+          },
+          {
+            "value": "5.56 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Dishwasher Parts",
+              "id": "4764"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "WD12X334",
+                  "id": "6193"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "16.71"
+                },
+                {
+                  "value": "0.02 %"
+                },
+                {
+                  "value": "16.71"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "WD12X445",
+                  "id": "6194"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "21.98"
+                },
+                {
+                  "value": "0.03 %"
+                },
+                {
+                  "value": "21.98"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Dishwasher Parts",
+            "id": "4764"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "38.69"
+          },
+          {
+            "value": "0.05 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Dryer",
+              "id": "4789"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "Loaner Dryer",
+                  "id": "4856"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "250.00"
+                },
+                {
+                  "value": "0.34 %"
+                },
+                {
+                  "value": "125.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Dryer",
+            "id": "4789"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "250.00"
+          },
+          {
+            "value": "0.34 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Dryer Part",
+              "id": "4591"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "D510523",
+                  "id": "5523"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "D510707P",
+                  "id": "5223"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "45.01"
+                },
+                {
+                  "value": "0.06 %"
+                },
+                {
+                  "value": "45.01"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "D517562",
+                  "id": "5505"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "D518649",
+                  "id": "5624"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "10.00"
+                },
+                {
+                  "value": "0.01 %"
+                },
+                {
+                  "value": "10.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "d518862",
+                  "id": "5820"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "D519127",
+                  "id": "5960"
+                },
+                {
+                  "value": "3.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "Dryer Parts",
+                  "id": "4858"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "24.35"
+                },
+                {
+                  "value": "0.03 %"
+                },
+                {
+                  "value": "24.35"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Dryer Part",
+            "id": "4591"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "79.36"
+          },
+          {
+            "value": "0.11 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Freezer",
+              "id": "4799"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "FFUE0725AW",
+                  "id": "6196"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "900.00"
+                },
+                {
+                  "value": "1.23 %"
+                },
+                {
+                  "value": "450.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Freezer",
+            "id": "4799"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "900.00"
+          },
+          {
+            "value": "1.23 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "GEWR12x22183",
+            "id": "4185"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "90.00"
+          },
+          {
+            "value": "0.12 %"
+          },
+          {
+            "value": "90.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Half Call",
+            "id": "3172"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "47.49"
+          },
+          {
+            "value": "0.07 %"
+          },
+          {
+            "value": "47.49"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Hoses (Stainless)",
+            "id": "3870"
+          },
+          {
+            "value": "7.00"
+          },
+          {
+            "value": "240.00"
+          },
+          {
+            "value": "0.33 %"
+          },
+          {
+            "value": "34.29"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Icemaker",
+              "id": "5128"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "UCC15NPRII",
+                  "id": "6154"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "3199.00"
+                },
+                {
+                  "value": "4.39 %"
+                },
+                {
+                  "value": "3199.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Icemaker",
+            "id": "5128"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "3199.00"
+          },
+          {
+            "value": "4.39 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Install Fee",
+            "id": "3297"
+          },
+          {
+            "value": "8.00"
+          },
+          {
+            "value": "1300.00"
+          },
+          {
+            "value": "1.78 %"
+          },
+          {
+            "value": "162.50"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Inventory Asset",
+              "id": "4580"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "UPK4",
+                  "id": "5186"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "600.00"
+                },
+                {
+                  "value": "0.82 %"
+                },
+                {
+                  "value": "600.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Inventory Asset",
+            "id": "4580"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "600.00"
+          },
+          {
+            "value": "0.82 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Labor",
+            "id": "3170"
+          },
+          {
+            "value": "22.00"
+          },
+          {
+            "value": "1295.00"
+          },
+          {
+            "value": "1.78 %"
+          },
+          {
+            "value": "58.86"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Larry Phillips Install",
+            "id": "1010000451"
+          },
+          {
+            "value": "2.00"
+          },
+          {
+            "value": "275.00"
+          },
+          {
+            "value": "0.38 %"
+          },
+          {
+            "value": "137.50"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Micro",
+              "id": "5703"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "Header": {
+                "ColData": [
+                  {
+                    "value": "Microwave",
+                    "id": "4779"
+                  },
+                  {
+                    "value": ""
+                  },
+                  {
+                    "value": ""
+                  },
+                  {
+                    "value": ""
+                  },
+                  {
+                    "value": ""
+                  },
+                  {
+                    "value": ""
+                  },
+                  {
+                    "value": ""
+                  },
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              "Rows": {
+                "Row": [
+                  {
+                    "ColData": [
+                      {
+                        "value": "JVM3160RFSS",
+                        "id": "3990"
+                      },
+                      {
+                        "value": "1.00"
+                      },
+                      {
+                        "value": "370.00"
+                      },
+                      {
+                        "value": "0.51 %"
+                      },
+                      {
+                        "value": "370.00"
+                      },
+                      {
+                        "value": ""
+                      },
+                      {
+                        "value": ""
+                      },
+                      {
+                        "value": ""
+                      }
+                    ],
+                    "type": "Data"
+                  },
+                  {
+                    "ColData": [
+                      {
+                        "value": "PCWK22U1WDD",
+                        "id": "1010000431"
+                      },
+                      {
+                        "value": "1.00"
+                      },
+                      {
+                        "value": "500.00"
+                      },
+                      {
+                        "value": "0.69 %"
+                      },
+                      {
+                        "value": "500.00"
+                      },
+                      {
+                        "value": ""
+                      },
+                      {
+                        "value": ""
+                      },
+                      {
+                        "value": ""
+                      }
+                    ],
+                    "type": "Data"
+                  }
+                ]
+              },
+              "type": "Section"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "Total Microwave",
+                  "id": "4779"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": "870.00"
+                },
+                {
+                  "value": "1.19 %"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "SMD2470ASY",
+                  "id": "5727"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "1300.00"
+                },
+                {
+                  "value": "1.78 %"
+                },
+                {
+                  "value": "1300.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Micro",
+            "id": "5703"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "2170.00"
+          },
+          {
+            "value": "2.97 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Oven parts",
+              "id": "4739"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "W10775847",
+                  "id": "6195"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "174.37"
+                },
+                {
+                  "value": "0.24 %"
+                },
+                {
+                  "value": "174.37"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Oven parts",
+            "id": "4739"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "174.37"
+          },
+          {
+            "value": "0.24 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Range",
+              "id": "4796"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "GRF400SVSS",
+                  "id": "6047"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "880.00"
+                },
+                {
+                  "value": "1.21 %"
+                },
+                {
+                  "value": "880.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "JBS86SPSS",
+                  "id": "5008"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "1549.99"
+                },
+                {
+                  "value": "2.12 %"
+                },
+                {
+                  "value": "1549.99"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "PSS93YPFS",
+                  "id": "6155"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "1750.00"
+                },
+                {
+                  "value": "2.40 %"
+                },
+                {
+                  "value": "1750.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Range",
+            "id": "4796"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "4179.99"
+          },
+          {
+            "value": "5.73 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Range Parts",
+              "id": "5057"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "Range Cord",
+                  "id": "3181"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Range Parts",
+            "id": "5057"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "RB150003",
+            "id": "4305"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "65.00"
+          },
+          {
+            "value": "0.09 %"
+          },
+          {
+            "value": "65.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "RB170002",
+            "id": "3746"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Refrigerator",
+              "id": "4584"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "GNE29GYNFS",
+                  "id": "5236"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "2500.00"
+                },
+                {
+                  "value": "3.43 %"
+                },
+                {
+                  "value": "2500.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "GTE19JTNRWW",
+                  "id": "5907"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "975.00"
+                },
+                {
+                  "value": "1.34 %"
+                },
+                {
+                  "value": "975.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Refrigerator",
+            "id": "4584"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "3475.00"
+          },
+          {
+            "value": "4.76 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Refrigerator Parts",
+              "id": "4582"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "243297613",
+                  "id": "6178"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "100.00"
+                },
+                {
+                  "value": "0.14 %"
+                },
+                {
+                  "value": "100.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "5304505529",
+                  "id": "6192"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "328.00"
+                },
+                {
+                  "value": "0.45 %"
+                },
+                {
+                  "value": "164.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "WPWPW1019098165",
+                  "id": "4933"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "100.00"
+                },
+                {
+                  "value": "0.14 %"
+                },
+                {
+                  "value": "100.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "WR17X25027",
+                  "id": "6175"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "173.59"
+                },
+                {
+                  "value": "0.24 %"
+                },
+                {
+                  "value": "173.59"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "XWFE",
+                  "id": "4952"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "68.00"
+                },
+                {
+                  "value": "0.09 %"
+                },
+                {
+                  "value": "68.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Refrigerator Parts",
+            "id": "4582"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "769.59"
+          },
+          {
+            "value": "1.06 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Refund",
+            "id": "3687"
+          },
+          {
+            "value": "-1.00"
+          },
+          {
+            "value": "-1505.00"
+          },
+          {
+            "value": "-2.06 %"
+          },
+          {
+            "value": "1505.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "RWF1600A",
+            "id": "4973"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "50.00"
+          },
+          {
+            "value": "0.07 %"
+          },
+          {
+            "value": "50.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Sales",
+            "id": "4570"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "9.86"
+          },
+          {
+            "value": "0.01 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Service Call - Residential",
+            "id": "3169"
+          },
+          {
+            "value": "31.00"
+          },
+          {
+            "value": "2944.69"
+          },
+          {
+            "value": "4.04 %"
+          },
+          {
+            "value": "94.99"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Speed Queen Dryer",
+              "id": "5540"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "DC5003WE",
+                  "id": "4978"
+                },
+                {
+                  "value": "5.00"
+                },
+                {
+                  "value": "7200.00"
+                },
+                {
+                  "value": "9.87 %"
+                },
+                {
+                  "value": "1440.00"
+                },
+                {
+                  "value": "4500.00"
+                },
+                {
+                  "value": "2700.00"
+                },
+                {
+                  "value": "37.50 %"
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "DR3003WE",
+                  "id": "5043"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "1240.00"
+                },
+                {
+                  "value": "1.70 %"
+                },
+                {
+                  "value": "1240.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "DR5004WE",
+                  "id": "5062"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "1340.00"
+                },
+                {
+                  "value": "1.84 %"
+                },
+                {
+                  "value": "1340.00"
+                },
+                {
+                  "value": "840.00"
+                },
+                {
+                  "value": "500.00"
+                },
+                {
+                  "value": "37.31 %"
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "DR7004BE",
+                  "id": "5747"
+                },
+                {
+                  "value": "3.00"
+                },
+                {
+                  "value": "4920.00"
+                },
+                {
+                  "value": "6.74 %"
+                },
+                {
+                  "value": "1640.00"
+                },
+                {
+                  "value": "3213.00"
+                },
+                {
+                  "value": "1707.00"
+                },
+                {
+                  "value": "34.70 %"
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "DR7004WE",
+                  "id": "5049"
+                },
+                {
+                  "value": "3.00"
+                },
+                {
+                  "value": "4620.00"
+                },
+                {
+                  "value": "6.33 %"
+                },
+                {
+                  "value": "1540.00"
+                },
+                {
+                  "value": "2910.00"
+                },
+                {
+                  "value": "1710.00"
+                },
+                {
+                  "value": "37.01 %"
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Speed Queen Dryer",
+            "id": "5540"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "19320.00"
+          },
+          {
+            "value": "26.49 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "11463.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Speed Queen FL",
+              "id": "5687"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "DF7004BE",
+                  "id": "5841"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "2550.00"
+                },
+                {
+                  "value": "3.50 %"
+                },
+                {
+                  "value": "2550.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Speed Queen FL",
+            "id": "5687"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "2550.00"
+          },
+          {
+            "value": "3.50 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Speed Queen Washer",
+              "id": "5541"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "FF7009BN",
+                  "id": "6015"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "2550.00"
+                },
+                {
+                  "value": "3.50 %"
+                },
+                {
+                  "value": "2550.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "TC5003WN",
+                  "id": "5044"
+                },
+                {
+                  "value": "3.00"
+                },
+                {
+                  "value": "4320.00"
+                },
+                {
+                  "value": "5.92 %"
+                },
+                {
+                  "value": "1440.00"
+                },
+                {
+                  "value": "2700.00"
+                },
+                {
+                  "value": "1620.00"
+                },
+                {
+                  "value": "37.50 %"
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "TR5003WN",
+                  "id": "4975"
+                },
+                {
+                  "value": "3.00"
+                },
+                {
+                  "value": "4020.00"
+                },
+                {
+                  "value": "5.51 %"
+                },
+                {
+                  "value": "1340.00"
+                },
+                {
+                  "value": "2589.00"
+                },
+                {
+                  "value": "1431.00"
+                },
+                {
+                  "value": "35.60 %"
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "TR7003BN",
+                  "id": "5746"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "3280.00"
+                },
+                {
+                  "value": "4.50 %"
+                },
+                {
+                  "value": "1640.00"
+                },
+                {
+                  "value": "2080.00"
+                },
+                {
+                  "value": "1200.00"
+                },
+                {
+                  "value": "36.59 %"
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "TR7003WN",
+                  "id": "5048"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "3080.00"
+                },
+                {
+                  "value": "4.22 %"
+                },
+                {
+                  "value": "1540.00"
+                },
+                {
+                  "value": "1940.00"
+                },
+                {
+                  "value": "1140.00"
+                },
+                {
+                  "value": "37.01 %"
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Speed Queen Washer",
+            "id": "5541"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "17250.00"
+          },
+          {
+            "value": "23.65 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "9309.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "SQ TL Washer",
+              "id": "4708"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "TC5 Classic Black",
+                  "id": "1010000191"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "1490.00"
+                },
+                {
+                  "value": "2.04 %"
+                },
+                {
+                  "value": "1490.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total SQ TL Washer",
+            "id": "4708"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "1490.00"
+          },
+          {
+            "value": "2.04 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "SQ Warranty Call",
+            "id": "5489"
+          },
+          {
+            "value": "19.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "SQ202395P",
+            "id": "3789"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "45.00"
+          },
+          {
+            "value": "0.06 %"
+          },
+          {
+            "value": "45.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "SQ203768",
+            "id": "4473"
+          },
+          {
+            "value": "2.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "SQ39837",
+            "id": "4397"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "SQD511629P",
+            "id": "4532"
+          },
+          {
+            "value": "2.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "SQD516792",
+            "id": "4531"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "SQRB170002",
+            "id": "3709"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00 %"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "steam kit",
+            "id": "5998"
+          },
+          {
+            "value": "6.00"
+          },
+          {
+            "value": "300.00"
+          },
+          {
+            "value": "0.41 %"
+          },
+          {
+            "value": "50.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Vent Kit",
+            "id": "3174"
+          },
+          {
+            "value": "9.00"
+          },
+          {
+            "value": "320.00"
+          },
+          {
+            "value": "0.44 %"
+          },
+          {
+            "value": "35.56"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Washer",
+              "id": "4595"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "HTW265ASWWW",
+                  "id": "5937"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "600.00"
+                },
+                {
+                  "value": "0.82 %"
+                },
+                {
+                  "value": "600.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "Loaner Washer",
+                  "id": "4839"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "65.00"
+                },
+                {
+                  "value": "0.09 %"
+                },
+                {
+                  "value": "65.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "TR3003WN",
+                  "id": "5355"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "1240.00"
+                },
+                {
+                  "value": "1.70 %"
+                },
+                {
+                  "value": "1240.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "WM4000HBA03",
+                  "id": "6173"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "600.00"
+                },
+                {
+                  "value": "0.82 %"
+                },
+                {
+                  "value": "600.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Washer",
+            "id": "4595"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "2505.00"
+          },
+          {
+            "value": "3.43 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "Header": {
+          "ColData": [
+            {
+              "value": "Washer parts",
+              "id": "4589"
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            },
+            {
+              "value": ""
+            }
+          ]
+        },
+        "Rows": {
+          "Row": [
+            {
+              "ColData": [
+                {
+                  "value": "203741",
+                  "id": "4647"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "204383",
+                  "id": "5556"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "400.00"
+                },
+                {
+                  "value": "0.55 %"
+                },
+                {
+                  "value": "200.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "204659p",
+                  "id": "5490"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "204852",
+                  "id": "5848"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "205061",
+                  "id": "5715"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "25.00"
+                },
+                {
+                  "value": "0.03 %"
+                },
+                {
+                  "value": "25.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "205214P",
+                  "id": "5632"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "130.00"
+                },
+                {
+                  "value": "0.18 %"
+                },
+                {
+                  "value": "130.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "205222",
+                  "id": "5504"
+                },
+                {
+                  "value": "2.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "807837P",
+                  "id": "5487"
+                },
+                {
+                  "value": "1.00"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": "0.00 %"
+                },
+                {
+                  "value": "0.00"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            },
+            {
+              "ColData": [
+                {
+                  "value": "Misc Part",
+                  "id": "5620"
+                },
+                {
+                  "value": "5.00"
+                },
+                {
+                  "value": "224.94"
+                },
+                {
+                  "value": "0.31 %"
+                },
+                {
+                  "value": "44.99"
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                },
+                {
+                  "value": ""
+                }
+              ],
+              "type": "Data"
+            }
+          ]
+        },
+        "type": "Section"
+      },
+      {
+        "ColData": [
+          {
+            "value": "Total Washer parts",
+            "id": "4589"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "779.94"
+          },
+          {
+            "value": "1.07 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "0.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "WB2X8228",
+            "id": "6024"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "65.58"
+          },
+          {
+            "value": "0.09 %"
+          },
+          {
+            "value": "65.58"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "WP8269144A",
+            "id": "3840"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "20.00"
+          },
+          {
+            "value": "0.03 %"
+          },
+          {
+            "value": "20.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "WPW10721967",
+            "id": "4548"
+          },
+          {
+            "value": "1.00"
+          },
+          {
+            "value": "49.99"
+          },
+          {
+            "value": "0.07 %"
+          },
+          {
+            "value": "49.99"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ]
+      },
+      {
+        "ColData": [
+          {
+            "value": "Not Specified"
+          },
+          {
+            "value": "-293.68"
+          },
+          {
+            "value": "-29.37"
+          },
+          {
+            "value": "-0.04 %"
+          },
+          {
+            "value": "0.10"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ],
+        "group": "**"
+      },
+      {
+        "ColData": [
+          {
+            "value": "TOTAL"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "72945.64"
+          },
+          {
+            "value": "100.00 %"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": "20772.00"
+          },
+          {
+            "value": ""
+          },
+          {
+            "value": ""
+          }
+        ],
+        "group": "GrandTotal"
+      }
+    ]
+  }
+}
