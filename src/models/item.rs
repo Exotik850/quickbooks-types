@@ -72,7 +72,7 @@ pub struct Item {
     pub sales_tax_code_ref: Option<NtRef>,
     pub class_ref: Option<NtRef>,
     pub source: Option<String>,
-    pub purcjase_tax_included: Option<bool>,
+    pub purchase_tax_included: Option<bool>,
     pub reorder_point: Option<f64>,
     pub purchase_dec: Option<String>,
     pub pref_vendor_ref: Option<NtRef>,
