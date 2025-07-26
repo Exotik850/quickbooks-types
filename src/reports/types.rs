@@ -172,13 +172,13 @@ macro_rules! impl_report_type {
   (@param_type add_due_date) => { String };
   (@param_type account_type) => { String };
   (@param_type end_svcdate) => { NaiveDate };
-  (@param_type svcdate_macro) => { String };
+  (@param_type svcdate_macro) => { DateMacro };
   (@param_type start_svcdate) => { NaiveDate };
   (@param_type group_by) => { String };
   (@param_type payment_method) => { String };
   (@param_type employee) => { String };
   (@param_type agency_id) => { String };
-  (@param_type duedate_macro) => { String };
+  (@param_type duedate_macro) => { DateMacro };
   (@param_type bothamount) => { String };
   (@param_type transaction_type) => { String };
   (@param_type docnum) => { String };
@@ -196,8 +196,7 @@ macro_rules! impl_report_type {
   (@param_type end_moddate) => { NaiveDate };
 
   (@param_type $param:tt) => { compile_error!(
-    "Unsupported parameter type for report: {}",
-    stringify!($param)
+    "Unsupported parameter type for report"
   ) };
 
   () => {}
@@ -209,7 +208,7 @@ impl_report_type!(
       date_macro,
       start_date,
       end_date,
-      summarize_column_by
+      summarize_column_by,
   ]; ("List of accounts with details")
 
   APAgingDetail, "AgedPayableDetail", [
