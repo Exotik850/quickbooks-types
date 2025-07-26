@@ -19,7 +19,9 @@ fn main() {
         .as_of_date(NaiveDate::from_ymd_opt(2024, 6, 30).unwrap())
         .aging_method(AgingMethod::Current)
         .vendor(VendorId(789u32))
-        .columns("Name,DueDate,Amount");
+        .column("Name")
+        .column("DueDate")
+        .column("Amount");
 
     println!("AP Aging query: {}", ap_aging.to_query_string());
 }

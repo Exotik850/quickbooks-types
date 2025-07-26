@@ -24,136 +24,183 @@ pub trait QBReportType {
 use paste::paste;
 
 macro_rules! impl_report_type {
-    ($(
-      $report_ty:ident, $url_name:expr, [$($param:tt),* $(,)?]; $(($doc:expr))?
-    )*
-    $(;)?) => {
-      $(
+  ($(
+    $report_ty:ident, $url_name:expr, [$($param:tt),* $(,)?]; $(($doc:expr))?
+  )*
+  $(;)?) => {
+    $(
 
-        paste! {
-          #[doc = "Type to represent the `" $report_ty "` report in quickbooks:\n https://developer.intuit.com/app/developer/qbo/docs/api/accounting/report-entities/" [<$report_ty:lower>] "\n\n" $($doc)?]
-          pub struct $report_ty;
+    paste! {
+      #[doc = "Type to represent the `" $report_ty "` report in quickbooks:\n https://developer.intuit.com/app/developer/qbo/docs/api/accounting/report-entities/" [<$report_ty:lower>] "\n\n" $($doc)?]
+      pub struct $report_ty;
 
-          impl QBReportType for $report_ty {
-              type QueryParams = [<$report_ty Params>];
-              fn url_name(&self) -> &'static str {
-                  $url_name
-              }
-          }
+      impl QBReportType for $report_ty {
+        type QueryParams = [<$report_ty Params>];
+        fn url_name(&self) -> &'static str {
+          $url_name
+        }
+      }
 
-          #[derive(Debug, Default)]
-          #[allow(non_snake_case)]
-          #[doc = "Parameters for the `" $report_ty "` report.\n\n" $($doc)?]
-          pub struct [<$report_ty Params>] {
-              $(
-                pub $param: Option<impl_report_type!(@param_type $param)>,
-              )*
-          }
+      #[derive(Debug, Default)]
+      #[allow(non_snake_case)]
+      #[doc = "Parameters for the `" $report_ty "` report.\n\n" $($doc)?]
+      pub struct [<$report_ty Params>] {
+        $(
+        pub $param: Option<impl_report_type!(@param_type $param)>,
+        )*
+      }
 
-          impl [<$report_ty Params>] {
-              pub fn new() -> Self {
-                  Self {
-                      $(
-                        $param: None,
-                      )*
-                  }
-              }
-
-              $(
-                pub fn $param(mut self, param: impl Into<impl_report_type!(@param_type $param)>) -> Self {
-                    self.$param = Some(param.into());
-                    self
-                }
-              )*
-
-              fn iter_params(&self) -> impl Iterator<Item = (&'static str, Option<Cow<str>>)> {
-                  [
-                    $(
-                      (stringify!($param), self.$param.as_ref().map(|p| p.value())),
-                    )*
-                  ]
-                  .into_iter()
-              }
-          }
-
-          impl QBReportParams for [<$report_ty Params>] {
-              fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_ {
-                  self.iter_params().filter_map(|(name, value)| {
-                      value.map(|v| (name, v.into()))
-                  })
-              }
+      impl [<$report_ty Params>] {
+        pub fn new() -> Self {
+          Self {
+            $(
+            $param: None,
+            )*
           }
         }
-      )+
-    };
 
-    // Helper macro to map parameter names to appropriate types
-    // TODO : Ensure all of these types are strongly-typed where possible
-    (@param_type accounting_method) => { AccountingMethod };
-    (@param_type date_macro) => { DateMacro };
-    (@param_type start_date) => { NaiveDate };
-    (@param_type end_date) => { NaiveDate };
-    (@param_type summarize_column_by) => { SummarizeColumnBy };
-    (@param_type as_of_date) => { NaiveDate };
-    (@param_type aging_method) => { AgingMethod };
-    (@param_type vendor) => { VendorId };
-    (@param_type customer) => { CustomerId };
-    (@param_type columns) => { String };
-    (@param_type qzurl) => { String };
-    (@param_type department) => { String };
-    (@param_type report_date) => { NaiveDate };
-    (@param_type sort_order) => { SortOrder };
-    (@param_type shipvia) => { String };
-    (@param_type term) => { TermId };
-    (@param_type end_duedate) => { NaiveDate };
-    (@param_type start_duedate) => { NaiveDate };
-    (@param_type custom1) => { String };
-    (@param_type custom2) => { String };
-    (@param_type custom3) => { String };
-    (@param_type num_periods) => { u32 };
-    (@param_type past_due) => { String };
-    (@param_type aging_period) => { String };
-    (@param_type adjusted_gain_loss) => { String };
-    (@param_type class) => { String };
-    (@param_type item) => { ItemId };
-    (@param_type sort_by) => { String };
-    (@param_type arpaid) => { ArPaid };
-    (@param_type attachment_type) => { AttachmentType };
-    (@param_type with_qbo_identifier) => { bool };
-    (@param_type add_due_date) => { String };
-    (@param_type account) => { AccountId };
-    (@param_type source_account) => { AccountId };
-    (@param_type account_type) => { String };
-    (@param_type end_svcdate) => { NaiveDate };
-    (@param_type svcdate_macro) => { String };
-    (@param_type start_svcdate) => { NaiveDate };
-    (@param_type group_by) => { String };
-    (@param_type payment_method) => { String };
-    (@param_type employee) => { String };
-    (@param_type agency_id) => { String };
-    (@param_type duedate_macro) => { String };
-    (@param_type bothamount) => { String };
-    (@param_type transaction_type) => { String };
-    (@param_type docnum) => { String };
-    (@param_type start_moddate) => { NaiveDate };
-    (@param_type source_account_type) => { String };
-    (@param_type start_createdate) => { NaiveDate };
-    (@param_type memo) => { String };
-    (@param_type appaid) => { String };
-    (@param_type moddate_macro) => { String };
-    (@param_type printed) => { Printed };
-    (@param_type createdate_macro) => { String };
-    (@param_type cleared) => { Cleared };
-    (@param_type end_createdate) => { NaiveDate };
-    (@param_type name) => { String };
-    (@param_type end_moddate) => { NaiveDate };
+        $(
+        impl_report_type!(@param_method $param);
+        )*
 
-    (@param_type $param:tt) => { compile_error!(
-        "Unsupported parameter type for report: {}",
-        stringify!($param)
-    ) };
+        fn iter_params(&self) -> impl Iterator<Item = (&'static str, Option<Cow<str>>)> {
+          [
+          $(
+            (stringify!($param), self.$param.as_ref().map(|p| p.value())),
+          )*
+          ]
+          .into_iter()
+        }
+      }
 
-    () => {}
+      impl QBReportParams for [<$report_ty Params>] {
+        fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_ {
+          self.iter_params().filter_map(|(name, value)| {
+            value.map(|v| (name, v.into()))
+          })
+        }
+      }
+    }
+    )+
+  };
+
+  // Generic handler for vector parameters
+  (@param_method_vec $param:tt, $id_type:ty) => {
+    pub fn $param(mut self, param: impl Into<$id_type>) -> Self {
+      if let Some(ref mut vec) = self.$param {
+        vec.push(param.into());
+      } else {
+        self.$param = Some(vec![param.into()]);
+      }
+      self
+    }
+
+    paste! {
+      pub fn [<$param s>](mut self, params: Vec<$id_type>) -> Self {
+        self.$param = Some(params);
+        self
+      }
+    }
+  };
+
+  // Apply vector method for each vector parameter
+  (@param_method vendor) => { impl_report_type!(@param_method_vec vendor, VendorId); };
+  (@param_method customer) => { impl_report_type!(@param_method_vec customer, CustomerId); };
+  (@param_method term) => { impl_report_type!(@param_method_vec term, TermId); };
+  (@param_method item) => { impl_report_type!(@param_method_vec item, ItemId); };
+  (@param_method account) => { impl_report_type!(@param_method_vec account, AccountId); };
+  (@param_method source_account) => { impl_report_type!(@param_method_vec source_account, AccountId); };
+  // Special case for columns as it ends with an 's' yet is also a vector
+  (@param_method columns) => {
+    pub fn columns(mut self, params: Vec<String>) -> Self {
+      self.columns = Some(params);
+      self
+    }
+
+    pub fn column(mut self, param: impl Into<String>) -> Self {
+      if let Some(ref mut vec) = self.columns {
+        vec.push(param.into());
+      } else {
+        self.columns = Some(vec![param.into()]);
+      }
+      self
+    }
+  };
+
+  // Simple setter for non-vector parameters
+  (@param_method $param:tt) => {
+    pub fn $param(mut self, param: impl Into<impl_report_type!(@param_type $param)>) -> Self {
+      self.$param = Some(param.into());
+      self
+    }
+  };
+
+  // Helper macro to map parameter names to appropriate types
+  (@param_type vendor) => { Vec<VendorId> };
+  (@param_type customer) => { Vec<CustomerId> };
+  (@param_type term) => { Vec<TermId> };
+  (@param_type item) => { Vec<ItemId> };
+  (@param_type account) => { Vec<AccountId> };
+  (@param_type columns) => { Vec<String> };
+  (@param_type source_account) => { Vec<AccountId> };
+  (@param_type accounting_method) => { AccountingMethod };
+  (@param_type date_macro) => { DateMacro };
+  (@param_type start_date) => { NaiveDate };
+  (@param_type end_date) => { NaiveDate };
+  (@param_type summarize_column_by) => { SummarizeColumnBy };
+  (@param_type as_of_date) => { NaiveDate };
+  (@param_type aging_method) => { AgingMethod };
+  (@param_type arpaid) => { ArPaid };
+  (@param_type qzurl) => { String };
+  (@param_type department) => { String };
+  (@param_type report_date) => { NaiveDate };
+  (@param_type sort_order) => { SortOrder };
+  (@param_type shipvia) => { String };
+  (@param_type end_duedate) => { NaiveDate };
+  (@param_type start_duedate) => { NaiveDate };
+  (@param_type custom1) => { String };
+  (@param_type custom2) => { String };
+  (@param_type custom3) => { String };
+  (@param_type num_periods) => { u32 };
+  (@param_type past_due) => { String };
+  (@param_type aging_period) => { String };
+  (@param_type adjusted_gain_loss) => { String };
+  (@param_type class) => { String };
+  (@param_type sort_by) => { String };
+  (@param_type attachment_type) => { AttachmentType };
+  (@param_type with_qbo_identifier) => { bool };
+  (@param_type add_due_date) => { String };
+  (@param_type account_type) => { String };
+  (@param_type end_svcdate) => { NaiveDate };
+  (@param_type svcdate_macro) => { String };
+  (@param_type start_svcdate) => { NaiveDate };
+  (@param_type group_by) => { String };
+  (@param_type payment_method) => { String };
+  (@param_type employee) => { String };
+  (@param_type agency_id) => { String };
+  (@param_type duedate_macro) => { String };
+  (@param_type bothamount) => { String };
+  (@param_type transaction_type) => { String };
+  (@param_type docnum) => { String };
+  (@param_type start_moddate) => { NaiveDate };
+  (@param_type source_account_type) => { String };
+  (@param_type start_createdate) => { NaiveDate };
+  (@param_type memo) => { String };
+  (@param_type appaid) => { String };
+  (@param_type moddate_macro) => { String };
+  (@param_type printed) => { Printed };
+  (@param_type createdate_macro) => { String };
+  (@param_type cleared) => { Cleared };
+  (@param_type end_createdate) => { NaiveDate };
+  (@param_type name) => { String };
+  (@param_type end_moddate) => { NaiveDate };
+
+  (@param_type $param:tt) => { compile_error!(
+    "Unsupported parameter type for report: {}",
+    stringify!($param)
+  ) };
+
+  () => {}
 }
 
 impl_report_type!(
