@@ -228,3 +228,13 @@ impl HasValue for bool {
         if *self { "true" } else { "false" }.into()
     }
 }
+
+impl<V: HasValue> HasValue for Vec<V> {
+    fn value(&self) -> Cow<str> {
+        self.iter()
+            .map(|v| v.value())
+            .collect::<Vec<_>>()
+            .join(",")
+            .into()
+    }
+}
