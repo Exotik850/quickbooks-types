@@ -5,35 +5,50 @@ pub use models::*;
 
 #[cfg(feature = "polars")]
 mod polars;
+#[cfg(feature = "polars")]
+pub use polars::{PolarsReport, QBPolarsError};
 
 impl Report {
     pub fn name(&self) -> Option<&str> {
         self.header.as_ref().and_then(|h| h.report_name.as_deref())
     }
 
-    pub fn column_names(&self) -> Option<impl Iterator<Item = &str>> {
-        self.columns.as_ref()?.column.as_ref().map(|cols| {
-            cols.iter().map(|c| {
-                if c.col_title.is_empty() {
-                    // c.col_type.as_str()
-                    todo!()
+    pub fn col_data(&self, column: &str) -> Option<impl Iterator<Item = &ColData>> {
+        let index = self
+            .columns
+            .as_ref()?
+            .column
+            .as_ref()?
+            .iter()
+            .position(|c| c.col_title == column)?;
+        self.row_data().map(|rows| {
+            rows.filter_map(move |row| {
+                if let Some(col_data) = row.get(index) {
+                    Some(col_data)
                 } else {
-                    c.col_title.as_str()
+                    None
                 }
             })
         })
     }
 
+    pub fn column_names(&self) -> Option<impl Iterator<Item = &str>> {
+        self.columns
+            .as_ref()?
+            .column
+            .as_ref()
+            .map(|cols| cols.iter().map(|c| c.col_title.as_str()))
+    }
+
     pub fn row_data(&self) -> Option<impl Iterator<Item = &[ColData]>> {
         self.rows.as_ref()?.row.as_ref().map(|rows| {
-          rows.iter().filter_map(|row| {
-            if let RowContent::Coldata { col_data } = &row.content {
-              println!("Row {:?} ColData: {:?}", row.id, col_data);
-              Some(col_data.as_slice())
-            } else {
-              None
-            }
-          })
+            rows.iter().filter_map(|row| {
+                if let RowContent::Coldata { col_data } = &row.content {
+                    Some(col_data.as_slice())
+                } else {
+                    None
+                }
+            })
         })
     }
 }
