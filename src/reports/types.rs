@@ -76,7 +76,7 @@ macro_rules! impl_report_type {
       impl QBReportParams for [<$report_ty Params>] {
         fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_ {
           self.iter_params().filter_map(|(name, value)| {
-            value.map(|v| (name, v.into()))
+            value.map(|v| (name, v))
           })
         }
       }
