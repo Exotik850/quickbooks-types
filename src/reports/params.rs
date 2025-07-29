@@ -27,23 +27,29 @@ macro_rules! impl_display_enum {
             )*
         }
 
-        impl std::fmt::Display for $name {
-            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                let out = match self {
+        impl $name {
+            /// Returns the string representation of the enum variant.
+            pub fn as_str(&self) -> &str {
+                match self {
                     $(
                         $name::$variant_display => stringify!($variant_display),
                     )*
                     $(
                         $name::$variant => $display,
                     )*
-                };
-                write!(f, "{}", out)
+                }
+            }
+        }
+
+        impl std::fmt::Display for $name {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(f, "{}", self.as_str())
             }
         }
 
         impl HasValue for $name {
             fn value(&self) -> Cow<str> {
-                self.to_string().into()
+                self.as_str().into()
             }
         }
     };
