@@ -1,6 +1,6 @@
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
-use serde_with::skip_serializing_none;
+use serde_with::{skip_serializing_none, DisplayFromStr};
 
 use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
 #[cfg(feature = "builder")]
@@ -104,7 +104,7 @@ pub struct Customer {
     /// Fully qualified name of the customer
     pub fully_qualified_name: Option<String>,
     /// Level in the customer hierarchy
-    pub level: Option<u8>,
+    pub level: Option<String>,
     /// Tax exemption reason identifier for the customer
     pub tax_exemption_reason_id: Option<TaxExemptStatus>,
 }
@@ -113,8 +113,8 @@ pub struct Customer {
 ///
 /// Tax exemption reason identifier for the customer.
 #[skip_serializing_none]
-#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
-#[serde(from = "u8", into = "u8")]
+#[derive(Clone, Debug, PartialEq, Serialize, Default)]
+#[serde(into = "u8")]
 pub enum TaxExemptStatus {
     FederalGovernment,
     StateGovernment,
@@ -133,6 +133,30 @@ pub enum TaxExemptStatus {
     ForeignDiplomat,
     #[default]
     Other,
+}
+
+// TODO - Make sure this is necessary, as it might only be strings that are returned from
+// the API, and not numbers.
+impl<'de> Deserialize<'de> for TaxExemptStatus {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        #[derive(Deserialize)]
+        #[serde(untagged)]
+        enum StringOrNumber {
+            String(String),
+            Number(u8),
+        }
+
+        match StringOrNumber::deserialize(deserializer)? {
+            StringOrNumber::String(s) => match s.parse::<u8>() {
+                Ok(num) => Ok(num.into()),
+                Err(_) => Ok(TaxExemptStatus::Other),
+            },
+            StringOrNumber::Number(num) => Ok(num.into()),
+        }
+    }
 }
 
 impl From<u8> for TaxExemptStatus {
