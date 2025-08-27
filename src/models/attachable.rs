@@ -199,12 +199,7 @@ pub trait QBToAttachableRef: QBToRef {
     }
 }
 
-impl<T: QBToRef> QBToAttachableRef for T {
-    fn to_attach_ref(&self) -> Result<AttachableRef, QBTypeError> {
-        let value = self.to_ref()?;
-        Ok(value.into())
-    }
-}
+impl<T: QBToRef> QBToAttachableRef for T {}
 
 impl QBCreatable for Attachable {
     fn can_create(&self) -> bool {

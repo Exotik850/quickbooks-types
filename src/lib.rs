@@ -39,7 +39,7 @@ use serde::{de::DeserializeOwned, Serialize};
 /// use quickbooks_types::{QBItem, Customer};
 ///
 /// let customer = Customer::default();
-/// 
+///
 /// // Check if entity has been read from QuickBooks
 /// if customer.has_read() {
 ///     println!("Customer ID: {:?}", customer.id());
@@ -147,13 +147,13 @@ impl_qb_data!(
 /// use quickbooks_types::{Customer, QBCreatable};
 ///
 /// let mut customer = Customer::default();
-/// 
+///
 /// // Check if customer can be created (will be false - missing required fields)
 /// assert!(!customer.can_create());
 ///
 /// // Add required field
 /// customer.display_name = Some("John Doe".to_string());
-/// 
+///
 /// // Now it can be created
 /// assert!(customer.can_create());
 /// ```
@@ -396,7 +396,7 @@ pub trait QBPDFable {}
 ///
 /// // Convert to reference for use in other entities
 /// let customer_ref = customer.to_ref()?;
-/// 
+///
 /// // Use the reference in an invoice
 /// let mut invoice = Invoice::default();
 /// invoice.customer_ref = Some(customer_ref);

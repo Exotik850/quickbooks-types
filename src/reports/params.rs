@@ -48,7 +48,7 @@ macro_rules! impl_display_enum {
         }
 
         impl HasValue for $name {
-            fn value(&self) -> Cow<str> {
+            fn value(&self) -> Cow<'_, str> {
                 self.as_str().into()
             }
         }
@@ -182,7 +182,7 @@ macro_rules! impl_id_param {
             #[doc = "Represents the ID for a " $name " in QuickBooks reports."]
             pub struct [<$name Id>](pub u32);
             impl HasValue for [<$name Id>] {
-                fn value(&self) -> Cow<str> {
+                fn value(&self) -> Cow<'_, str> {
                     self.to_string().into()
                 }
             }
@@ -201,42 +201,42 @@ impl_id_param!(Customer, Vendor, Employee, Item, Class, Department, Account, Ter
 
 pub trait HasValue {
     // fn name() -> &'static str;
-    fn value(&self) -> Cow<str>;
+    fn value<'a>(&'a self) -> Cow<'a, str>;
 }
 
 // Implement QBReportParam directly for common types
 impl HasValue for String {
-    fn value(&self) -> Cow<str> {
+    fn value(&self) -> Cow<'_, str> {
         self.into()
     }
 }
 
 impl HasValue for &str {
-    fn value(&self) -> Cow<str> {
+    fn value(&self) -> Cow<'_, str> {
         (*self).into()
     }
 }
 
 impl HasValue for u32 {
-    fn value(&self) -> Cow<str> {
+    fn value(&self) -> Cow<'_, str> {
         self.to_string().into()
     }
 }
 
 impl HasValue for NaiveDate {
-    fn value(&self) -> Cow<str> {
+    fn value(&self) -> Cow<'_, str> {
         self.format("%Y-%m-%d").to_string().into()
     }
 }
 
 impl HasValue for bool {
-    fn value(&self) -> Cow<str> {
+    fn value(&self) -> Cow<'_, str> {
         if *self { "true" } else { "false" }.into()
     }
 }
 
 impl<V: HasValue> HasValue for Vec<V> {
-    fn value(&self) -> Cow<str> {
+    fn value(&self) -> Cow<'_, str> {
         self.iter()
             .map(|v| v.value())
             .collect::<Vec<_>>()

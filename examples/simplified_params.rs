@@ -1,6 +1,6 @@
-use quickbooks_types::reports::types::*;
-use quickbooks_types::reports::params::*;
 use chrono::NaiveDate;
+use quickbooks_types::reports::params::*;
+use quickbooks_types::reports::types::*;
 
 fn main() {
     let balance_sheet = BalanceSheetParams::new()
