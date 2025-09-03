@@ -96,8 +96,8 @@ pub struct Customer {
     /// Indicates if the customer is a project
     pub is_project: Option<bool>,
     /// Source of the customer record
-    /// 
-    /// DEPRECATED: as of 9/15/2025 
+    ///
+    /// DEPRECATED: as of 9/15/2025
     pub source: Option<String>,
     /// Name to print on checks for the customer
     pub print_check_on_name: Option<String>,

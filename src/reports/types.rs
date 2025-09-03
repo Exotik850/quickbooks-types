@@ -5,7 +5,7 @@ use chrono::NaiveDate;
 
 /// Represents parameters for QuickBooks reports.
 pub trait QBReportParams {
-    fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_;
+    fn params(&self) -> impl Iterator<Item = (&'static str, Cow<'_, str>)>;
     fn to_query_string(&self) -> String {
         self.params()
             .map(|(name, value)| format!("{}={}", name, value))
@@ -63,18 +63,18 @@ macro_rules! impl_report_type {
         impl_report_type!(@param_method $param);
         )*
 
-        fn iter_params(&self) -> impl Iterator<Item = (&'static str, Option<Cow<str>>)> {
+        fn iter_params(&self) -> impl Iterator<Item = (&'static str, Option<Cow<'_, str>>)> {
           [
-          $(
-            (stringify!($param), self.$param.as_ref().map(|p| p.value())),
-          )*
+            $(
+              (stringify!($param), self.$param.as_ref().map(|p| p.value())),
+            )*
           ]
           .into_iter()
         }
       }
 
       impl QBReportParams for [<$report_ty Params>] {
-        fn params(&self) -> impl Iterator<Item = (&'static str, Cow<str>)> + '_ {
+        fn params(&self) -> impl Iterator<Item = (&'static str, Cow<'_, str>)> {
           self.iter_params().filter_map(|(name, value)| {
             value.map(|v| (name, v))
           })

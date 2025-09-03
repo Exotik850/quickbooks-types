@@ -49,8 +49,8 @@ pub struct Vendor {
     /// Term reference for the vendor
     pub term_ref: Option<NtRef>,
     /// Source of the vendor information
-    /// 
-    /// DEPRECATED: as of 9/15/2025 
+    ///
+    /// DEPRECATED: as of 9/15/2025
     pub source: Option<String>,
     /// GSTIN of the vendor
     #[serde(rename = "GSTIN")]
