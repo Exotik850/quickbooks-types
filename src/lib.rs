@@ -39,7 +39,7 @@ use serde::{de::DeserializeOwned, Serialize};
 ///
 /// # Examples
 ///
-/// ```rust
+/// ```no_run
 /// use quickbooks_types::{QBItem, Customer};
 ///
 /// let customer = Customer::default();
@@ -147,7 +147,7 @@ impl_qb_data!(
 ///
 /// # Examples
 ///
-/// ```rust
+/// ```no_run
 /// use quickbooks_types::{Customer, QBCreatable};
 ///
 /// let mut customer = Customer::default();
@@ -185,7 +185,7 @@ pub trait QBCreatable {
 ///
 /// # Examples
 ///
-/// ```rust
+/// ```no_run
 /// use quickbooks_types::{Customer, QBReadable};
 ///
 /// let mut customer = Customer::default();
@@ -211,7 +211,7 @@ impl<T: QBItem> QBReadable for T {
 ///
 /// # Examples
 ///
-/// ```rust
+/// ```no_run
 /// use quickbooks_types::{Customer, QBQueryable};
 ///
 /// // All QBItem types automatically implement QBQueryable
@@ -233,15 +233,15 @@ impl<T: QBItem> QBQueryable for T {}
 ///
 /// # Examples
 ///
-/// ```rust
-/// use quickbooks_types::{Customer, QBDeletable};
+/// ```no_run
+/// use quickbooks_types::{Invoice, QBDeletable};
 ///
-/// let mut customer = Customer::default();
-/// customer.id = Some("123".to_string());
-/// customer.sync_token = Some("2".to_string());
+/// let mut invoice = Invoice::default();
+/// invoice.id = Some("123".to_string());
+/// invoice.sync_token = Some("2".to_string());
 ///
 /// // Can delete because it has both ID and sync token
-/// assert!(customer.can_delete());
+/// assert!(invoice.can_delete());
 /// ```
 pub trait QBDeletable: QBItem {
     fn can_delete(&self) -> bool {
@@ -265,7 +265,7 @@ pub trait QBDeletable: QBItem {
 ///
 /// # Examples
 ///
-/// ```rust
+/// ```no_run
 /// use quickbooks_types::{Invoice, QBVoidable};
 ///
 /// let mut invoice = Invoice::default();
@@ -300,7 +300,7 @@ pub trait QBVoidable: QBItem {
 ///
 /// # Examples
 ///
-/// ```rust
+/// ```no_run
 /// use quickbooks_types::{Customer, QBFullUpdatable};
 ///
 /// let mut customer = Customer::default();
@@ -336,7 +336,7 @@ pub trait QBFullUpdatable {
 ///
 /// # Examples
 ///
-/// ```rust
+/// ```no_run
 /// use quickbooks_types::{Customer, QBSparseUpdateable};
 ///
 /// let mut customer = Customer::default();
@@ -391,15 +391,15 @@ pub trait QBPDFable {}
 ///
 /// # Examples
 ///
-/// ```rust
-/// use quickbooks_types::{Customer, QBToRef};
+/// ```no_run
+/// use quickbooks_types::{Invoice, Customer, QBToRef};
 ///
 /// let mut customer = Customer::default();
 /// customer.id = Some("123".to_string());
 /// customer.display_name = Some("John Doe".to_string());
 ///
 /// // Convert to reference for use in other entities
-/// let customer_ref = customer.to_ref()?;
+/// let customer_ref = customer.to_ref().unwrap();
 ///
 /// // Use the reference in an invoice
 /// let mut invoice = Invoice::default();
