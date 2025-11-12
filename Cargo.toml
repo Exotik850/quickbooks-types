@@ -2,6 +2,11 @@
 name = "quickbooks-types"
 version = "0.1.0"
 edition = "2021"
+description = "Type definitions for QuickBooks Online API"
+license = "MIT"
+repository = "https://github.com/exotik850/quickbooks-types"
+keywords = ["quickbooks", "quickbooks-online", "api", "types", "rust"]
+categories = ["api-clients", "web-programming"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
