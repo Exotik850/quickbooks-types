@@ -1,24 +1,26 @@
 use std::borrow::Cow;
 
-use super::params::*;
+use super::params::{
+    AccountId, AccountingMethod, AgingMethod, ArPaid, AttachmentType, Cleared, CustomerId,
+    DateMacro, HasValue, ItemId, Printed, SortOrder, SummarizeColumnBy, TermId, VendorId,
+};
 use chrono::NaiveDate;
 
-/// Represents parameters for QuickBooks reports.
+/// Represents parameters for `QuickBooks` reports.
 pub trait QBReportParams {
     fn params(&self) -> impl Iterator<Item = (&'static str, Cow<'_, str>)>;
     fn to_query_string(&self) -> String {
         self.params()
-            .map(|(name, value)| format!("{}={}", name, value))
+            .map(|(name, value)| format!("{name}={value}"))
             .collect::<Vec<_>>()
             .join("&")
     }
 }
 
-/// Represents a type of QuickBooks report.
+/// Represents a type of `QuickBooks` report.
 pub trait QBReportType {
     type QueryParams: QBReportParams;
     fn url_name(&self) -> &'static str;
-    // fn valid_query_params() -> &'static [&'static str];
 }
 
 use paste::paste;
@@ -51,6 +53,7 @@ macro_rules! impl_report_type {
       }
 
       impl [<$report_ty Params>] {
+        #[must_use]
         pub fn new() -> Self {
           Self {
             $(
@@ -60,7 +63,7 @@ macro_rules! impl_report_type {
         }
 
         $(
-        impl_report_type!(@param_method $param);
+          impl_report_type!(@param_method $param);
         )*
 
         fn iter_params(&self) -> impl Iterator<Item = (&'static str, Option<Cow<'_, str>>)> {
@@ -86,6 +89,7 @@ macro_rules! impl_report_type {
 
   // Generic handler for vector parameters
   (@param_method_vec $param:tt, $id_type:ty) => {
+    #[must_use]
     pub fn $param(mut self, param: impl Into<$id_type>) -> Self {
       if let Some(ref mut vec) = self.$param {
         vec.push(param.into());
@@ -96,6 +100,7 @@ macro_rules! impl_report_type {
     }
 
     paste! {
+      #[must_use]
       pub fn [<$param s>](mut self, params: Vec<$id_type>) -> Self {
         self.$param = Some(params);
         self
@@ -112,11 +117,13 @@ macro_rules! impl_report_type {
   (@param_method source_account) => { impl_report_type!(@param_method_vec source_account, AccountId); };
   // Special case for columns as it ends with an 's' yet is also a vector
   (@param_method columns) => {
+    #[must_use]
     pub fn columns(mut self, params: Vec<String>) -> Self {
       self.columns = Some(params);
       self
     }
 
+    #[must_use]
     pub fn column(mut self, param: impl Into<String>) -> Self {
       if let Some(ref mut vec) = self.columns {
         vec.push(param.into());
@@ -129,6 +136,7 @@ macro_rules! impl_report_type {
 
   // Simple setter for non-vector parameters
   (@param_method $param:tt) => {
+    #[must_use]
     pub fn $param(mut self, param: impl Into<impl_report_type!(@param_type $param)>) -> Self {
       self.$param = Some(param.into());
       self

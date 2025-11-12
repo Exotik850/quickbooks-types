@@ -201,7 +201,7 @@ impl_id_param!(Customer, Vendor, Employee, Item, Class, Department, Account, Ter
 
 pub trait HasValue {
     // fn name() -> &'static str;
-    fn value<'a>(&'a self) -> Cow<'a, str>;
+    fn value(&self) -> Cow<'_, str>;
 }
 
 // Implement QBReportParam directly for common types

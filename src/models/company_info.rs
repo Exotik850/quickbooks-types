@@ -16,9 +16,9 @@ use crate::{QBFullUpdatable, QBSparseUpdateable};
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// CompanyInfo
+/// `CompanyInfo`
 ///
-/// Represents the company profile and contact settings for a QuickBooks Online company.
+/// Represents the company profile and contact settings for a `QuickBooks` Online company.
 ///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/companyinfo>
@@ -40,7 +40,7 @@ pub struct CompanyInfo {
     pub country: Option<String>,
     /// Address used for customer communications
     pub customer_communication_addr: Option<Addr>,
-    /// Domain of the company. Typically `QBO` for QuickBooks Online
+    /// Domain of the company. Typically `QBO` for `QuickBooks` Online
     pub domain: Option<String>,
     /// Company email information
     pub email: Option<Email>,

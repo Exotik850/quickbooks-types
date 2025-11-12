@@ -27,7 +27,7 @@ pub struct Item {
     #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
 
-    /// If true, the object is currently enabled for use by QuickBooks.
+    /// If true, the object is currently enabled for use by `QuickBooks`.
     pub active: Option<bool>,
 
     /// Reference to the Inventory Asset account that tracks the current value of the inventory.
@@ -56,7 +56,7 @@ pub struct Item {
     /// * This is an optional field.
     /// * This is the purchase account id, If not provided it defaults to the default purchase account: 605100 and 601100 are the default expense accounts used for Service and Product type of item, respectively.
     ///
-    /// Required for Inventory, NonInventory, and Service item types
+    /// Required for Inventory, `NonInventory`, and Service item types
     pub expense_account_ref: Option<NtRef>,
 
     /// Fully qualified name of the entity.

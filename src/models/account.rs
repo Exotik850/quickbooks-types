@@ -17,7 +17,7 @@ use crate::{QBCreatable, QBFullUpdatable, QBItem};
 
 /// Account
 ///
-/// Represents a general ledger account in QuickBooks Online (for example: Bank, Income, Expense).
+/// Represents a general ledger account in `QuickBooks` Online (for example: Bank, Income, Expense).
 /// Accounts categorize transactions and track balances. Many entities reference an account via `*Ref` fields.
 ///
 /// API reference:
@@ -64,9 +64,9 @@ pub struct Account {
     pub current_balance: Option<f64>,
 }
 
-/// AccountType
+/// `AccountType`
 ///
-/// High-level classification of an account (for example: Bank, OtherAsset, Income).
+/// High-level classification of an account (for example: Bank, `OtherAsset`, Income).
 /// Note: This enum is currently a placeholder; concrete variants will be added as the API surface is implemented.
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(rename_all = "PascalCase")]

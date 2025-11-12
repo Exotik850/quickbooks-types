@@ -22,7 +22,7 @@ use crate::{
 ///
 /// Represents company-wide configuration that controls behavior of sales forms,
 /// purchasing, accounting, taxes, time tracking, currency handling, and various
-/// messaging options in QuickBooks Online.
+/// messaging options in `QuickBooks` Online.
 ///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences>
@@ -120,7 +120,7 @@ pub struct AccountingInfoPrefs {
 #[serde(rename_all = "PascalCase", default)]
 /// Sales Forms Preferences
 ///
-/// Represents the preferences for sales forms in QuickBooks.
+/// Represents the preferences for sales forms in `QuickBooks`.
 pub struct SalesFormsPrefs {
     /// BCC email address for sales forms.
     pub sales_emaill_bcc: Option<Email>,
@@ -218,7 +218,7 @@ pub struct OtherPrefs {
 #[serde(rename_all = "PascalCase", default)]
 /// Time Tracking Preferences
 ///
-/// Represents the preferences for time tracking in QuickBooks.
+/// Represents the preferences for time tracking in `QuickBooks`.
 pub struct TimeTrackingPrefs {
     /// The start date of the work week.
     pub work_week_start_date: Option<String>,
@@ -234,7 +234,7 @@ pub struct TimeTrackingPrefs {
 
 /// Currency Preferences
 ///
-/// Represents the preferences related to currency handling in QuickBooks.
+/// Represents the preferences related to currency handling in `QuickBooks`.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

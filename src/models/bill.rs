@@ -31,7 +31,7 @@ pub struct Bill {
     /// Metadata about the entity
     #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
-    /// Domain of the transaction. `QBO` for QuickBooks Online.
+    /// Domain of the transaction. `QBO` for `QuickBooks` Online.
     pub domain: Option<String>,
     /// Reference to the Accounts Payable account for the transaction
     #[serde(rename = "APAccountRef")]

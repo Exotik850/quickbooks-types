@@ -1,4 +1,4 @@
-//! Common supporting value types used across QuickBooks entity models.
+//! Common supporting value types used across `QuickBooks` entity models.
 //!
 //! These types are embedded within top-level entities (e.g. Invoice, Customer) and
 //! do not have standalone API endpoints. They encapsulate reusable concepts such
@@ -10,9 +10,9 @@ use serde_with::skip_serializing_none;
 
 use crate::LineField;
 
-/// NtRef
+/// `NtRef`
 ///
-/// Generic reference to another QuickBooks entity. Appears in many `*Ref` fields.
+/// Generic reference to another `QuickBooks` entity. Appears in many `*Ref` fields.
 /// Provides optional type discriminator (`entity_ref_type`), display `name`, and underlying
 /// `value` identifier returned by the API.
 #[skip_serializing_none]
@@ -66,9 +66,9 @@ impl From<(String, String)> for NtRef {
     }
 }
 
-/// MetaData
+/// `MetaData`
 ///
-/// Immutable timestamps supplied by QuickBooks Online for auditing: creation (`create_time`)
+/// Immutable timestamps supplied by `QuickBooks` Online for auditing: creation (`create_time`)
 /// and last modification (`last_updated_time`).
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase")]
@@ -84,7 +84,6 @@ pub struct MetaData {
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
-
 pub struct Email {
     pub address: Option<String>,
 }
@@ -149,7 +148,7 @@ pub struct LinkedTxn {
     pub txn_type: Option<String>,
 }
 
-/// CustomField
+/// `CustomField`
 ///
 /// Custom field information
 #[skip_serializing_none]
@@ -163,7 +162,7 @@ pub struct CustomField {
     pub field_type: Option<String>,
 }
 
-/// MarkupInfo
+/// `MarkupInfo`
 ///
 /// Information about markup applied to a transaction.
 #[skip_serializing_none]
@@ -176,7 +175,7 @@ pub struct MarkupInfo {
     pub price_level_ref: Option<NtRef>,
 }
 
-/// TxnTaxDetail
+/// `TxnTaxDetail`
 ///
 /// Details about the tax applied to a transaction.
 #[skip_serializing_none]
@@ -199,7 +198,7 @@ pub struct DeliveryInfo {
     pub delivery_time: DateTime<Utc>,
 }
 
-/// CreditCardPayment
+/// `CreditCardPayment`
 ///
 /// Information about a credit card payment for the transaction.
 #[skip_serializing_none]
@@ -210,7 +209,7 @@ pub struct CreditCardPayment {
     pub credit_charge_info: Option<CreditChargeInfo>,
 }
 
-/// CreditChargeResponse
+/// `CreditChargeResponse`
 ///
 /// Information about a credit charge for a transaction.
 #[skip_serializing_none]
@@ -234,7 +233,7 @@ pub enum CCPaymentStatus {
     Unkown,
 }
 
-/// CreditChargeInfo
+/// `CreditChargeInfo`
 ///
 /// Information about a credit card payment for the transaction.
 #[skip_serializing_none]

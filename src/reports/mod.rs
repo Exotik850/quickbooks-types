@@ -1,4 +1,4 @@
-//! QuickBooks Reports API types
+//! `QuickBooks` Reports API types
 //!
 //! API reference: <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/report-entities/accountlistdetail>
 
@@ -13,10 +13,12 @@ mod polars;
 pub use polars::QBPolarsError;
 
 impl Report {
+    #[must_use]
     pub fn name(&self) -> Option<&str> {
         self.header.as_ref().and_then(|h| h.report_name.as_deref())
     }
 
+    #[must_use]
     pub fn col_data(&self, column: &str) -> Option<impl Iterator<Item = &ColData>> {
         let index = self
             .columns
@@ -25,17 +27,11 @@ impl Report {
             .as_ref()?
             .iter()
             .position(|c| c.col_title == column)?;
-        self.row_data().map(|rows| {
-            rows.filter_map(move |row| {
-                if let Some(col_data) = row.get(index) {
-                    Some(col_data)
-                } else {
-                    None
-                }
-            })
-        })
+        self.row_data()
+            .map(|rows| rows.filter_map(move |row| row.get(index)))
     }
 
+    #[must_use]
     pub fn column_names(&self) -> Option<impl Iterator<Item = &str>> {
         self.columns
             .as_ref()?
@@ -44,6 +40,7 @@ impl Report {
             .map(|cols| cols.iter().map(|c| c.col_title.as_str()))
     }
 
+    #[must_use]
     pub fn row_data(&self) -> Option<impl Iterator<Item = &[ColData]>> {
         self.rows.as_ref()?.row.as_ref().map(|rows| {
             rows.iter().filter_map(|row| {

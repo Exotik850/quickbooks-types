@@ -30,6 +30,7 @@ pub enum ColumnTypeEnum {
 
 impl ColumnTypeEnum {
     /// Returns the string representation of the column type.
+    #[must_use] 
     pub fn as_str(&self) -> &str {
         match self {
             ColumnTypeEnum::Account => "Account",
@@ -139,7 +140,7 @@ pub struct Rows {
     pub row: Option<Vec<Row>>,
 }
 
-/// The `Row` complexType has a choice: either (Header, Rows, Summary) or (ColData repeated).
+/// The `Row` complexType has a choice: either (Header, Rows, Summary) or (`ColData` repeated).
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(untagged)]

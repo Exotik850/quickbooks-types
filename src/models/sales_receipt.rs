@@ -22,7 +22,7 @@ use crate::{QBCreatable, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdatea
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// SalesReceipt
+/// `SalesReceipt`
 ///
 /// Represents a finalized sale where payment is received at the time of purchase. Unlike an invoice, it does not create an accounts receivable balance.
 ///

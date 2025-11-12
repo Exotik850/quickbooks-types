@@ -17,7 +17,7 @@ use crate::{
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// BillPayment
+/// `BillPayment`
 ///
 /// Represents a payment applied to vendor bills (accounts payable). Payments can be made by check or credit card; corresponding details are provided via `check_payment` or `credit_card_payment`.
 ///
@@ -26,7 +26,7 @@ use crate::{
 pub struct BillPayment {
     /// The unique ID of the entity
     pub sync_token: Option<String>,
-    /// Domain of the transaction. `QBO` for QuickBooks Online.
+    /// Domain of the transaction. `QBO` for `QuickBooks` Online.
     pub domain: Option<String>,
     /// Reference to the vendor for the transaction.
     pub vendor_ref: Option<NtRef>,
@@ -44,15 +44,15 @@ pub struct BillPayment {
     pub line: Option<LineField>,
     /// The unique ID of the entity
     pub id: Option<String>,
-    /// Information about a check payment for the transaction. Not applicable to Estimate and SalesOrder. Used when PayType is `Check`
+    /// Information about a check payment for the transaction. Not applicable to Estimate and `SalesOrder`. Used when `PayType` is `Check`
     pub check_payment: Option<CheckBillPayment>,
-    /// Information about a credit card payment for the transaction. Not applicable to Estimate and SalesOrder. Used when PayType is `CreditCard`
+    /// Information about a credit card payment for the transaction. Not applicable to Estimate and `SalesOrder`. Used when `PayType` is `CreditCard`
     pub credit_card_payment: Option<CreditCardBillPayment>,
     /// Metadata about the transaction
     pub meta_data: Option<MetaData>,
 }
 
-/// CheckBillPayment
+/// `CheckBillPayment`
 ///
 /// Information about a check payment for the transaction.
 #[skip_serializing_none]
@@ -63,7 +63,7 @@ pub struct CheckBillPayment {
     pub bank_account_ref: Option<NtRef>,
 }
 
-/// CreditCardBillPayment
+/// `CreditCardBillPayment`
 ///
 /// Information about a credit card payment for the transaction.
 #[skip_serializing_none]
@@ -73,7 +73,7 @@ pub struct CreditCardBillPayment {
     pub cc_account_ref: Option<NtRef>,
 }
 
-/// PayType
+/// `PayType`
 ///
 /// Method by which a bill payment is made.
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]

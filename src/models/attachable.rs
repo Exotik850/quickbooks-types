@@ -19,7 +19,7 @@ use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBToRef, QBTypeEr
 
 /// Attachable
 ///
-/// Represents a file attachment or note that can be linked to other QuickBooks entities (for example: Invoice, Bill, Customer).
+/// Represents a file attachment or note that can be linked to other `QuickBooks` entities (for example: Invoice, Bill, Customer).
 ///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/attachable>
@@ -65,6 +65,7 @@ pub struct Attachable {
 }
 
 /// Derives the content type from a file extension
+#[must_use] 
 pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
     let out = match ext {
         "ai" | "eps" => "application/postscript",
@@ -145,7 +146,7 @@ impl QBAttachable for Attachable {
     }
 }
 
-/// AttachmentCategory
+/// `AttachmentCategory`
 ///
 /// Enumerates the category of an attachment (for example: Document, Image, Receipt).
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -162,7 +163,7 @@ pub enum AttachmentCategory {
 
 /// AttachableRef
 ///
-/// A reference that links an attachment to a target QuickBooks entity (such as an Invoice line or a Bill).
+/// A reference that links an attachment to a target `QuickBooks` entity (such as an Invoice line or a Bill).
 ///
 /// Most callers will construct this via `QBToAttachableRef::to_attach_ref()` on an entity that implements `QBToRef`.
 #[skip_serializing_none]

@@ -1,7 +1,7 @@
-//! # QuickBooks Types Library
+//! # `QuickBooks` Types Library
 //!
-//! This library provides Rust types and traits for interacting with the QuickBooks Online API.
-//! It includes data models for various QuickBooks entities, as well as traits that define
+//! This library provides Rust types and traits for interacting with the `QuickBooks` Online API.
+//! It includes data models for various `QuickBooks` entities, as well as traits that define
 //! common behaviors such as creation, reading, updating, and deletion of these entities.
 
 #[cfg(feature = "builder")]
@@ -18,11 +18,11 @@ use models::common::{MetaData, NtRef};
 pub use models::*;
 use serde::{de::DeserializeOwned, Serialize};
 
-/// Core trait for all QuickBooks entities.
+/// Core trait for all `QuickBooks` entities.
 ///
-/// This trait defines the fundamental interface that all QuickBooks entities must implement.
+/// This trait defines the fundamental interface that all `QuickBooks` entities must implement.
 /// It provides access to common fields like ID, sync token, and metadata that are present
-/// on all QuickBooks objects, as well as type information for API operations.
+/// on all `QuickBooks` objects, as well as type information for API operations.
 ///
 /// # Required Methods
 ///
@@ -135,11 +135,11 @@ impl_qb_data!(
     BillPayment
 );
 
-/// Trait for entities that can be created in QuickBooks.
+/// Trait for entities that can be created in `QuickBooks`.
 ///
 /// This trait defines the validation logic for determining whether an entity
-/// has the required fields to be successfully created via the QuickBooks API.
-/// Each entity implements its own validation rules based on QuickBooks requirements.
+/// has the required fields to be successfully created via the `QuickBooks` API.
+/// Each entity implements its own validation rules based on `QuickBooks` requirements.
 ///
 /// # Required Methods
 ///
@@ -165,18 +165,18 @@ impl_qb_data!(
 /// # Implementation Notes
 ///
 /// Different entities have different creation requirements:
-/// - **Customer/Vendor**: Requires display_name or individual name components
-/// - **Account**: Requires name and account_type or account_sub_type
+/// - **Customer/Vendor**: Requires `display_name` or individual name components
+/// - **Account**: Requires name and `account_type` or `account_sub_type`
 /// - **Invoice**: Requires customer reference and line items
 /// - **Item**: Requires name and type
 pub trait QBCreatable {
     fn can_create(&self) -> bool;
 }
 
-/// Trait for entities that can be read from QuickBooks by ID.
+/// Trait for entities that can be read from `QuickBooks` by ID.
 ///
 /// This trait is automatically implemented for all [`QBItem`] types and provides
-/// the ability to read entities from QuickBooks using their unique identifier.
+/// the ability to read entities from `QuickBooks` using their unique identifier.
 ///
 /// # Default Implementation
 ///
@@ -204,10 +204,10 @@ impl<T: QBItem> QBReadable for T {
     }
 }
 
-/// Trait for entities that can be queried from QuickBooks.
+/// Trait for entities that can be queried from `QuickBooks`.
 ///
 /// This trait is automatically implemented for all [`QBItem`] types and indicates
-/// that the entity supports QuickBooks SQL-like query operations.
+/// that the entity supports `QuickBooks` SQL-like query operations.
 ///
 /// # Examples
 ///
@@ -220,10 +220,10 @@ impl<T: QBItem> QBReadable for T {
 pub trait QBQueryable: QBItem {}
 impl<T: QBItem> QBQueryable for T {}
 
-/// Trait for entities that can be deleted from QuickBooks.
+/// Trait for entities that can be deleted from `QuickBooks`.
 ///
 /// This trait is automatically implemented for all [`QBItem`] types and provides
-/// validation for delete operations. Entities must have been read from QuickBooks
+/// validation for delete operations. Entities must have been read from `QuickBooks`
 /// (have both ID and sync token) to be deletable.
 ///
 /// # Default Implementation
@@ -249,19 +249,19 @@ pub trait QBDeletable: QBItem {
     }
 }
 
-/// Trait for entities that can be voided in QuickBooks.
+/// Trait for entities that can be voided in `QuickBooks`.
 ///
-/// Voiding is a special operation in QuickBooks that marks transactions as void
+/// Voiding is a special operation in `QuickBooks` that marks transactions as void
 /// while preserving them for audit purposes. Only certain entities support voiding.
 ///
 /// # Default Implementation
 ///
-/// The default implementation requires that the entity has been read from QuickBooks
+/// The default implementation requires that the entity has been read from `QuickBooks`
 /// (has both ID and sync token).
 ///
 /// # Supported Entities
 ///
-/// Typically includes: Invoice, Payment, Bill, Check, SalesReceipt, and other transactional entities.
+/// Typically includes: Invoice, Payment, Bill, Check, `SalesReceipt`, and other transactional entities.
 ///
 /// # Examples
 ///
@@ -283,7 +283,7 @@ pub trait QBVoidable: QBItem {
 
 /// Trait for entities that support full update operations.
 ///
-/// Full updates require sending the complete entity data to QuickBooks,
+/// Full updates require sending the complete entity data to `QuickBooks`,
 /// replacing all fields with the provided values. This is in contrast to
 /// sparse updates which only update specified fields.
 ///
@@ -294,7 +294,7 @@ pub trait QBVoidable: QBItem {
 /// # Implementation Notes
 ///
 /// Typically requires:
-/// - Entity has been read from QuickBooks (has ID and sync token)
+/// - Entity has been read from `QuickBooks` (has ID and sync token)
 /// - Entity meets creation requirements (has required fields)
 /// - Some entities may have additional validation rules
 ///
@@ -332,7 +332,7 @@ pub trait QBFullUpdatable {
 /// Typically requires:
 /// - Entity can perform full updates
 /// - Entity has the `sparse` field set to `true`
-/// - QuickBooks API supports sparse updates for this entity type
+/// - `QuickBooks` API supports sparse updates for this entity type
 ///
 /// # Examples
 ///
@@ -354,29 +354,29 @@ pub trait QBSparseUpdateable {
     fn can_sparse_update(&self) -> bool;
 }
 
-/// Trait for entities that can be sent via email from QuickBooks.
+/// Trait for entities that can be sent via email from `QuickBooks`.
 ///
-/// This trait marks entities that support QuickBooks' built-in email functionality,
+/// This trait marks entities that support `QuickBooks`' built-in email functionality,
 /// such as sending invoices or estimates to customers via email.
 ///
 /// # Supported Entities
 ///
-/// Typically includes: Invoice, Estimate, SalesReceipt, and other customer-facing documents.
+/// Typically includes: Invoice, Estimate, `SalesReceipt`, and other customer-facing documents.
 pub trait QBSendable {}
 
 /// Trait for entities that can be generated as PDF documents.
 ///
-/// This trait marks entities that support QuickBooks' PDF generation functionality,
+/// This trait marks entities that support `QuickBooks`' PDF generation functionality,
 /// allowing you to retrieve formatted PDF versions of documents.
 ///
 /// # Supported Entities
 ///
-/// Typically includes: Invoice, Estimate, SalesReceipt, Statement, and other printable documents.
+/// Typically includes: Invoice, Estimate, `SalesReceipt`, Statement, and other printable documents.
 pub trait QBPDFable {}
 
-/// Trait for entities that can be converted to QuickBooks entity references.
+/// Trait for entities that can be converted to `QuickBooks` entity references.
 ///
-/// Entity references (`NtRef`) are used throughout QuickBooks to link entities together.
+/// Entity references (`NtRef`) are used throughout `QuickBooks` to link entities together.
 /// For example, an invoice has a customer reference that points to a specific customer.
 ///
 /// # Required Methods

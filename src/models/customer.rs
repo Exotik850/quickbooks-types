@@ -17,7 +17,7 @@ use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBSparseUpdateable};
 )]
 /// Customer
 ///
-/// Represents an individual or organization that purchases goods or services and is billed in QuickBooks Online.
+/// Represents an individual or organization that purchases goods or services and is billed in `QuickBooks` Online.
 ///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/customer>
@@ -114,7 +114,7 @@ pub struct Customer {
     pub tax_exemption_reason_id: Option<TaxExemptStatus>,
 }
 
-/// TaxExemptStatus
+/// `TaxExemptStatus`
 ///
 /// Enumerates QuickBooks-defined reason codes for tax exemption. Values may be returned
 /// either as their numeric code (1-15) or as strings that can be parsed to those codes.

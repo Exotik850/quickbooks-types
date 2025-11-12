@@ -70,7 +70,7 @@ pub struct Invoice {
     pub customer_ref: Option<NtRef>,
     /// Date of the transaction in YYYY-MM-DD format
     pub txn_date: Option<NaiveDate>,
-    /// Domain of the transaction. `QBO` for QuickBooks Online.
+    /// Domain of the transaction. `QBO` for `QuickBooks` Online.
     pub domain: Option<String>,
     /// Print status of the invoice
     pub print_status: Option<PrintStatus>,
@@ -92,7 +92,7 @@ pub struct Invoice {
     pub home_balance: Option<f64>,
     /// Total amount of the invoice
     pub total_amt: Option<f64>,
-    /// URL to the invoice in QuickBooks Online
+    /// URL to the invoice in `QuickBooks` Online
     pub invoice_link: Option<String>,
     /// Reference to recurring template data
     pub recur_data_ref: Option<NtRef>,

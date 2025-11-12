@@ -20,8 +20,8 @@ use crate::error::QBTypeError;
 )]
 /// Line
 ///
-/// Represents a single line within a transaction (e.g., Invoice, Bill, SalesReceipt). Encapsulates amount, description, and a specific LineDetail subtype.
-/// Note: This type has no standalone QuickBooks API endpoint and is only used as a nested component.
+/// Represents a single line within a transaction (e.g., Invoice, Bill, `SalesReceipt`). Encapsulates amount, description, and a specific `LineDetail` subtype.
+/// Note: This type has no standalone `QuickBooks` API endpoint and is only used as a nested component.
 pub struct Line {
     /// Details of the line item
     #[serde(flatten)]
@@ -165,7 +165,7 @@ impl TaxableLine for Option<LineField> {
     }
 }
 
-impl<'a, T> TaxableLine for std::slice::IterMut<'a, T>
+impl<T> TaxableLine for std::slice::IterMut<'_, T>
 where
     T: TaxableLine,
 {
@@ -174,7 +174,7 @@ where
     }
 }
 
-/// SalesItemLineDetail
+/// `SalesItemLineDetail`
 ///
 /// Description of the sales item line detail
 #[skip_serializing_none]
@@ -198,7 +198,7 @@ pub struct SalesItemLineDetail {
     pub tax_classification_ref: Option<NtRef>,
 }
 
-/// GroupLineDetail
+/// `GroupLineDetail`
 ///
 /// Description of the group line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
@@ -209,7 +209,7 @@ pub struct GroupLineDetail {
     pub group_item_ref: NtRef,
 }
 
-/// DescriptionLineDetail
+/// `DescriptionLineDetail`
 ///
 /// Description of the description line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
@@ -219,7 +219,7 @@ pub struct DescriptionLineDetail {
     pub service_date: DateTime<Utc>,
 }
 
-/// DiscountLineDetail
+/// `DiscountLineDetail`
 ///
 /// Description of the discount line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
@@ -233,7 +233,7 @@ pub struct DiscountLineDetail {
     pub discount_percent: Option<f64>,
 }
 
-/// SubTotalLineDetail
+/// `SubTotalLineDetail`
 ///
 /// Description of the subtotal line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
@@ -242,7 +242,7 @@ pub struct SubTotalLineDetail {
     pub item_ref: NtRef,
 }
 
-/// BillableStatus
+/// `BillableStatus`
 ///
 /// Indicates the billable status of an expense line item.
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
@@ -253,7 +253,7 @@ pub enum BillableStatus {
     HasBeenBilled,
 }
 
-/// ItemBasedExpenseLineDetail
+/// `ItemBasedExpenseLineDetail`
 ///
 /// Description of the item-based expense line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
@@ -270,7 +270,7 @@ pub struct ItemBasedExpenseLineDetail {
     pub unit_price: f64,
 }
 
-/// AccountBasedExpenseLineDetail
+/// `AccountBasedExpenseLineDetail`
 ///
 /// Description of the account-based expense line detail
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
@@ -285,7 +285,7 @@ pub struct AccountBasedExpenseLineDetail {
     pub billable_status: BillableStatus,
 }
 
-/// TaxLineDetail
+/// `TaxLineDetail`
 ///
 /// Description of the tax line detail
 #[skip_serializing_none]
