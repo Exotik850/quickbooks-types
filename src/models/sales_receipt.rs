@@ -21,10 +21,12 @@ use crate::{QBCreatable, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdatea
     derive(Builder),
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
-/// Sales Receipt
+
+/// SalesReceipt
 ///
-/// Represents a sales receipt in QuickBooks.
+/// Represents a finalized sale where payment is received at the time of purchase. Unlike an invoice, it does not create an accounts receivable balance.
 ///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/salesreceipt>
 pub struct SalesReceipt {
     /// The unique ID of the entity

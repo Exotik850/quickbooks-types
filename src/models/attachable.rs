@@ -17,8 +17,11 @@ use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBToRef, QBTypeEr
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// Attachable Object
+/// Attachable
 ///
+/// Represents a file attachment or note that can be linked to other QuickBooks entities (for example: Invoice, Bill, Customer).
+///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/attachable>
 pub struct Attachable {
     /// The unique ID of the entity
@@ -61,7 +64,7 @@ pub struct Attachable {
     pub temp_download_uri: Option<String>,
 }
 
-#[must_use]
+/// Derives the content type from a file extension
 pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
     let out = match ext {
         "ai" | "eps" => "application/postscript",
@@ -111,10 +114,8 @@ impl AttachableBuilder {
                     .ok_or(QBTypeError::ValidationError(
                         "No extension on file/dir".into(),
                     ))?
-                    .to_str()
-                    .ok_or(QBTypeError::ValidationError(
-                        "Could not turn extension into string".into(),
-                    ))?,
+                    .to_string_lossy()
+                    .as_ref(),
             )
             .map(|f| f.to_owned()),
         );
@@ -123,6 +124,7 @@ impl AttachableBuilder {
     }
 }
 
+/// Trait for all entities that can be attached as files/notes
 pub trait QBAttachable {
     fn can_upload(&self) -> Result<(), QBTypeError>;
     fn file_path(&self) -> Option<&String>;
@@ -143,9 +145,9 @@ impl QBAttachable for Attachable {
     }
 }
 
-/// Attachment Category
+/// AttachmentCategory
 ///
-/// Category of the attachment
+/// Enumerates the category of an attachment (for example: Document, Image, Receipt).
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum AttachmentCategory {
     ContactPhoto,
@@ -158,9 +160,11 @@ pub enum AttachmentCategory {
     Other,
 }
 
-/// Attachable Reference
+/// AttachableRef
 ///
-/// Specifies the transaction object to which this attachable file is to be linked.
+/// A reference that links an attachment to a target QuickBooks entity (such as an Invoice line or a Bill).
+///
+/// Most callers will construct this via `QBToAttachableRef::to_attach_ref()` on an entity that implements `QBToRef`.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -192,6 +196,7 @@ impl From<NtRef> for AttachableRef {
     }
 }
 
+/// Trait for entities that can be converted to a reference for an attachment.
 pub trait QBToAttachableRef: QBToRef {
     fn to_attach_ref(&self) -> Result<AttachableRef, QBTypeError> {
         let value = self.to_ref()?;

@@ -18,9 +18,10 @@ use crate::error::QBTypeError;
     derive(Builder),
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
-/// Line object
+/// Line
 ///
-/// No documentation page, but used as a detail for purchased items or services
+/// Represents a single line within a transaction (e.g., Invoice, Bill, SalesReceipt). Encapsulates amount, description, and a specific LineDetail subtype.
+/// Note: This type has no standalone QuickBooks API endpoint and is only used as a nested component.
 pub struct Line {
     /// Details of the line item
     #[serde(flatten)]
@@ -120,7 +121,6 @@ impl std::fmt::Display for Line {
 ///
 /// Subtype of the line detail
 #[derive(Clone, Debug, Deserialize, PartialEq, Default)]
-// #[serde(tag = "DetailType")]
 pub enum LineDetail {
     SalesItemLineDetail(SalesItemLineDetail),
     GroupLineDetail(GroupLineDetail),
@@ -134,6 +134,7 @@ pub enum LineDetail {
     None,
 }
 
+/// Trait for setting a line / line detail as taxable
 pub trait TaxableLine {
     fn set_taxable(&mut self);
 }
@@ -184,7 +185,6 @@ where
     derive(Builder),
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
-
 pub struct SalesItemLineDetail {
     pub tax_inclusive_amt: Option<f64>,
     pub discount_amt: Option<f64>,
@@ -198,6 +198,9 @@ pub struct SalesItemLineDetail {
     pub tax_classification_ref: Option<NtRef>,
 }
 
+/// GroupLineDetail
+///
+/// Description of the group line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct GroupLineDetail {
@@ -206,6 +209,9 @@ pub struct GroupLineDetail {
     pub group_item_ref: NtRef,
 }
 
+/// DescriptionLineDetail
+///
+/// Description of the description line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct DescriptionLineDetail {
@@ -213,6 +219,9 @@ pub struct DescriptionLineDetail {
     pub service_date: DateTime<Utc>,
 }
 
+/// DiscountLineDetail
+///
+/// Description of the discount line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct DiscountLineDetail {
@@ -224,12 +233,18 @@ pub struct DiscountLineDetail {
     pub discount_percent: Option<f64>,
 }
 
+/// SubTotalLineDetail
+///
+/// Description of the subtotal line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct SubTotalLineDetail {
     pub item_ref: NtRef,
 }
 
+/// BillableStatus
+///
+/// Indicates the billable status of an expense line item.
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 pub enum BillableStatus {
     #[default]
@@ -238,6 +253,9 @@ pub enum BillableStatus {
     HasBeenBilled,
 }
 
+/// ItemBasedExpenseLineDetail
+///
+/// Description of the item-based expense line detail
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct ItemBasedExpenseLineDetail {
@@ -252,6 +270,9 @@ pub struct ItemBasedExpenseLineDetail {
     pub unit_price: f64,
 }
 
+/// AccountBasedExpenseLineDetail
+///
+/// Description of the account-based expense line detail
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(default, rename_all = "PascalCase")]
 pub struct AccountBasedExpenseLineDetail {
@@ -264,6 +285,9 @@ pub struct AccountBasedExpenseLineDetail {
     pub billable_status: BillableStatus,
 }
 
+/// TaxLineDetail
+///
+/// Description of the tax line detail
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -280,62 +304,62 @@ pub struct TaxLineDetail {
 fn deserialize_line() {
     let test: LineField = serde_json::from_str(
         r#"[{
-      "Description": "Rock Fountain", 
-      "DetailType": "SalesItemLineDetail", 
+      "Description": "Rock Fountain",
+      "DetailType": "SalesItemLineDetail",
       "SalesItemLineDetail": {
         "TaxCodeRef": {
           "value": "TAX"
-        }, 
-        "Qty": 1, 
-        "UnitPrice": 275, 
+        },
+        "Qty": 1,
+        "UnitPrice": 275,
         "ItemRef": {
-          "name": "Rock Fountain", 
+          "name": "Rock Fountain",
           "value": "5"
         }
-      }, 
-      "LineNum": 1, 
-      "Amount": 275.0, 
+      },
+      "LineNum": 1,
+      "Amount": 275.0,
       "Id": "1"
-    }, 
+    },
     {
-      "Description": "Fountain Pump", 
-      "DetailType": "SalesItemLineDetail", 
+      "Description": "Fountain Pump",
+      "DetailType": "SalesItemLineDetail",
       "SalesItemLineDetail": {
         "TaxCodeRef": {
           "value": "TAX"
-        }, 
-        "Qty": 1, 
-        "UnitPrice": 12.75, 
+        },
+        "Qty": 1,
+        "UnitPrice": 12.75,
         "ItemRef": {
-          "name": "Pump", 
+          "name": "Pump",
           "value": "11"
         }
-      }, 
-      "LineNum": 2, 
-      "Amount": 12.75, 
+      },
+      "LineNum": 2,
+      "Amount": 12.75,
       "Id": "2"
-    }, 
+    },
     {
-      "Description": "Concrete for fountain installation", 
-      "DetailType": "SalesItemLineDetail", 
+      "Description": "Concrete for fountain installation",
+      "DetailType": "SalesItemLineDetail",
       "SalesItemLineDetail": {
         "TaxCodeRef": {
           "value": "TAX"
-        }, 
-        "Qty": 5, 
-        "UnitPrice": 9.5, 
+        },
+        "Qty": 5,
+        "UnitPrice": 9.5,
         "ItemRef": {
-          "name": "Concrete", 
+          "name": "Concrete",
           "value": "3"
         }
-      }, 
-      "LineNum": 3, 
-      "Amount": 47.5, 
+      },
+      "LineNum": 3,
+      "Amount": 47.5,
       "Id": "3"
-    }, 
+    },
     {
-      "DetailType": "SubTotalLineDetail", 
-      "Amount": 335.25, 
+      "DetailType": "SubTotalLineDetail",
+      "Amount": 335.25,
       "SubTotalLineDetail": {}
     }
   ]"#,

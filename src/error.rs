@@ -1,3 +1,4 @@
+/// Errors for Quickbooks validation / processing
 #[derive(Debug, thiserror::Error)]
 pub enum QBTypeError {
     #[cfg(feature = "builder")]

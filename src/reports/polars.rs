@@ -15,22 +15,9 @@ pub enum QBPolarsError {
     InvalidRowShape,
 }
 
-/// Trait to convert a Report into a Polars DataFrame.
-///
-/// This trait is implemented for the [`Report`](super::Report) type, which is expected to
-/// contain the necessary data to construct a DataFrame.
-///
-/// This method takes ownership of `self` and returns a `Result<DataFrame, QBPolarsError>`.
-///
-/// In the case that you need the original `Report` to remain unchanged, consider cloning
-/// the report before calling this method.
-pub trait PolarsReport {
-    /// Converts the report into a Polars DataFrame.
-    fn into_dataframe(self) -> Result<DataFrame, QBPolarsError>;
-}
-
-impl PolarsReport for super::Report {
-    fn into_dataframe(self) -> Result<DataFrame, QBPolarsError> {
+impl super::Report {
+    // Function to convert Report into Polars DataFrame
+    pub fn into_dataframe(self) -> Result<DataFrame, QBPolarsError> {
         // 1) Flatten and collect column definitions (name + type)
         let cols = self.columns.and_then(|c| c.column);
         let leaf_rows = self.rows.map(collect_leaf_rows);

@@ -15,8 +15,11 @@ use crate::{QBCreatable, QBFullUpdatable, QBItem};
     derive(Builder),
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
-/// Item Object
+/// Item
 ///
+/// Represents a product or service that can be purchased or sold. Items determine posting accounts (income, expense, inventory) and pricing.
+///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/item>
 pub struct Item {
     pub id: Option<String>,
@@ -103,6 +106,9 @@ pub struct Item {
     pub unit_price: Option<f64>,
 }
 
+/// Item Type
+///
+/// Classification that specifies whether the item is an inventory item, a service item, or a non-inventory item.
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 pub enum ItemType {
     Inventory,

@@ -1,4 +1,8 @@
-// #![warn(clippy::pedantic)]
+//! # QuickBooks Types Library
+//!
+//! This library provides Rust types and traits for interacting with the QuickBooks Online API.
+//! It includes data models for various QuickBooks entities, as well as traits that define
+//! common behaviors such as creation, reading, updating, and deletion of these entities.
 
 #[cfg(feature = "builder")]
 #[macro_use]

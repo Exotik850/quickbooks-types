@@ -16,11 +16,11 @@ use crate::{QBFullUpdatable, QBSparseUpdateable};
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// CompanyInfo Object
+/// CompanyInfo
 ///
-/// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/companyinfo>
-/// Company Information
+/// Represents the company profile and contact settings for a QuickBooks Online company.
 ///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/companyinfo>
 pub struct CompanyInfo {
     /// The unique ID of the entity

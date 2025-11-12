@@ -15,8 +15,11 @@ use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBSparseUpdateable};
     derive(Builder),
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
-/// Customer Object
+/// Customer
 ///
+/// Represents an individual or organization that purchases goods or services and is billed in QuickBooks Online.
+///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/customer>
 pub struct Customer {
     /// The unique ID of the entity
@@ -111,9 +114,11 @@ pub struct Customer {
     pub tax_exemption_reason_id: Option<TaxExemptStatus>,
 }
 
-/// TaxExemptStatus Enum
+/// TaxExemptStatus
 ///
-/// Tax exemption reason identifier for the customer.
+/// Enumerates QuickBooks-defined reason codes for tax exemption. Values may be returned
+/// either as their numeric code (1-15) or as strings that can be parsed to those codes.
+/// Unknown or unsupported values are coerced to `Other` during deserialization.
 #[skip_serializing_none]
 #[derive(Clone, Debug, PartialEq, Serialize, Default)]
 #[serde(into = "u8")]

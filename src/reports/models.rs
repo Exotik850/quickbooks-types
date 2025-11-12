@@ -2,7 +2,7 @@ use chrono::{DateTime, FixedOffset, NaiveDate};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-/// Corresponds to the `ColumnTypeEnum` simpleType in the XSD.
+/// Corresponds to the `ColumnTypeEnum`.
 #[derive(Debug, Serialize, Deserialize, Clone, Copy, PartialEq, Eq)]
 #[serde(rename_all = "PascalCase")]
 pub enum ColumnTypeEnum {
@@ -52,33 +52,28 @@ impl std::fmt::Display for ColumnTypeEnum {
     }
 }
 
-/// Corresponds to the `RowTypeEnum` simpleType in the XSD.
+/// Corresponds to the `RowTypeEnum`.
 #[derive(Debug, Serialize, Deserialize)]
 pub enum RowTypeEnum {
     Section,
     Data,
 }
 
-/// Placeholder for the `ReportBasisEnum` reference (not defined in the provided XSD snippet).
-/// Adjust these variants according to the actual definition if available.
 #[derive(Debug, Serialize, Deserialize)]
 pub enum ReportBasisEnum {
     Cash,
     Accrual,
 }
 
-/// Represents a placeholder for an XSD type `NameValue`,
-/// referred to in the snippet but not defined therein.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
 pub struct NameValue {
-    /// You can enhance this struct once the structure of `NameValue` is known.
     pub name: Option<String>,
     pub value: Option<String>,
 }
 
-/// Corresponds to the `Attribute` complexType in the XSD.
+/// Corresponds to the `Attribute`.
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Attribute {
     #[serde(rename = "Type")]
@@ -87,7 +82,7 @@ pub struct Attribute {
     pub value: String,
 }
 
-/// Corresponds to the `Attributes` complexType in the XSD.
+/// Corresponds to the `Attributes`.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct Attributes {
@@ -95,7 +90,7 @@ pub struct Attributes {
     pub attribute: Option<Vec<Attribute>>,
 }
 
-/// Corresponds to the `Columns` complexType in the XSD.
+/// Corresponds to the `Columns`.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Columns {
@@ -103,7 +98,7 @@ pub struct Columns {
     pub column: Option<Vec<Column>>,
 }
 
-/// Corresponds to the `Column` complexType in the XSD.
+/// Corresponds to the `Column`.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
@@ -116,7 +111,7 @@ pub struct Column {
     pub columns: Option<Columns>,
 }
 
-/// Corresponds to the `ColData` complexType in the XSD.
+/// Corresponds to the `ColData`.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct ColData {
@@ -136,7 +131,7 @@ pub struct ColDataCollection {
     pub col_data: Option<Vec<ColData>>,
 }
 
-/// Corresponds to the `Rows` complexType in the XSD.
+/// Corresponds to the `Rows`.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Rows {
@@ -145,8 +140,6 @@ pub struct Rows {
 }
 
 /// The `Row` complexType has a choice: either (Header, Rows, Summary) or (ColData repeated).
-///
-/// We capture this choice in an enum to represent mutually exclusive content.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -167,7 +160,7 @@ pub enum RowContent {
     },
 }
 
-/// Corresponds to the `Row` complexType in the XSD.
+/// Corresponds to the `Row`.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Row {
@@ -184,7 +177,7 @@ pub struct Row {
     pub group: Option<String>,
 }
 
-/// Corresponds to the `ReportHeader` complexType in the XSD.
+/// Corresponds to the `ReportHeader`.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]

@@ -8,11 +8,6 @@ use crate::{
     LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable,
 };
 
-/*
-    Bill Payment Object
-
-*/
-
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -22,8 +17,11 @@ use crate::{
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// Bill Payment
+/// BillPayment
 ///
+/// Represents a payment applied to vendor bills (accounts payable). Payments can be made by check or credit card; corresponding details are provided via `check_payment` or `credit_card_payment`.
+///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/billpayment>
 pub struct BillPayment {
     /// The unique ID of the entity
@@ -75,9 +73,9 @@ pub struct CreditCardBillPayment {
     pub cc_account_ref: Option<NtRef>,
 }
 
-/// `PayType` Enum
+/// PayType
 ///
-/// Type of payment for the transaction.
+/// Method by which a bill payment is made.
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum PayType {
     #[default]

@@ -1,3 +1,7 @@
+//! QuickBooks Reports API types
+//!
+//! API reference: <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/report-entities/accountlistdetail>
+
 mod models;
 pub mod params;
 pub mod types;
@@ -6,7 +10,7 @@ pub use models::*;
 #[cfg(feature = "polars")]
 mod polars;
 #[cfg(feature = "polars")]
-pub use polars::{PolarsReport, QBPolarsError};
+pub use polars::QBPolarsError;
 
 impl Report {
     pub fn name(&self) -> Option<&str> {

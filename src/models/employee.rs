@@ -17,6 +17,10 @@ use crate::{QBCreatable, QBFullUpdatable, QBItem};
 )]
 /// Employee
 ///
+/// Represents an internal staff member or contractor tracked for payroll, time entry,
+/// or billable activities in QuickBooks Online.
+///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/employee>
 pub struct Employee {
     /// The unique ID of the entity

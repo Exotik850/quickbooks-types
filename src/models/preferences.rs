@@ -18,8 +18,13 @@ use crate::{
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// Preferences Object
+/// Preferences
 ///
+/// Represents company-wide configuration that controls behavior of sales forms,
+/// purchasing, accounting, taxes, time tracking, currency handling, and various
+/// messaging options in QuickBooks Online.
+///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences>
 pub struct Preferences {
     /// The unique ID of the entity
@@ -51,6 +56,7 @@ pub struct Preferences {
     pub currency_prefs: Option<CurrencyPrefs>,
 }
 
+/// Email Message Preferences
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -61,6 +67,7 @@ pub struct EmailMessagePrefs {
     pub statement_message: Option<EmailMessageType>,
 }
 
+/// Email Message Type
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -69,6 +76,7 @@ pub struct EmailMessageType {
     pub subject: Option<String>,
 }
 
+/// Product and Services Preferences
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -81,6 +89,7 @@ pub struct ProductAndServicesPrefs {
     pub for_purchase: Option<bool>,
 }
 
+/// Report Preferences
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -89,6 +98,7 @@ pub struct ReportPrefs {
     pub calc_aging_report_from_txn_date: Option<bool>,
 }
 
+/// Accounting Info Preferences
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -185,6 +195,7 @@ pub struct VendorAndPurchasesPrefs {
     pub tpar_enabled: Option<bool>,
 }
 
+/// Tax Preferences
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -194,6 +205,7 @@ pub struct TaxPrefs {
     pub using_sales_tax: Option<bool>,
 }
 
+/// Miscellaneous Other Preferences
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -220,6 +232,9 @@ pub struct TimeTrackingPrefs {
     pub bill_customers: Option<bool>,
 }
 
+/// Currency Preferences
+///
+/// Represents the preferences related to currency handling in QuickBooks.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

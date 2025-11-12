@@ -1,17 +1,20 @@
+//! Common supporting value types used across QuickBooks entity models.
+//!
+//! These types are embedded within top-level entities (e.g. Invoice, Customer) and
+//! do not have standalone API endpoints. They encapsulate reusable concepts such
+//! as references (`NtRef`), metadata timestamps (`MetaData`), addresses (`Addr`),
+//! and contact info.
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::LineField;
 
-/*
-    These are not full quickbooks object but they are used in other quickbooks objects,
-    they have no documentation of their own but their types are shown in the objects
-    they are used in
-*/
-
-/// Type used to hold ID's and/or references to other QB
-/// Objects
+/// NtRef
+///
+/// Generic reference to another QuickBooks entity. Appears in many `*Ref` fields.
+/// Provides optional type discriminator (`entity_ref_type`), display `name`, and underlying
+/// `value` identifier returned by the API.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(default)]
@@ -63,9 +66,10 @@ impl From<(String, String)> for NtRef {
     }
 }
 
-/// `MetaData`
+/// MetaData
 ///
-/// Metadata about the transaction
+/// Immutable timestamps supplied by QuickBooks Online for auditing: creation (`create_time`)
+/// and last modification (`last_updated_time`).
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase")]
 pub struct MetaData {
@@ -73,9 +77,14 @@ pub struct MetaData {
     pub last_updated_time: DateTime<Utc>,
 }
 
+/// Email
+///
+/// Represents an email address container used in entities to support optional future
+/// structure; currently only holds a single `address` string.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
+
 pub struct Email {
     pub address: Option<String>,
 }
@@ -109,6 +118,9 @@ impl std::fmt::Display for Addr {
     }
 }
 
+/// Web Address
+///
+/// Represents a web address (URL) associated with an entity.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 pub struct WebAddr {
@@ -116,6 +128,9 @@ pub struct WebAddr {
     url: Option<String>,
 }
 
+/// Phone Number
+///
+/// Represents a phone number associated with an entity.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -148,6 +163,9 @@ pub struct CustomField {
     pub field_type: Option<String>,
 }
 
+/// MarkupInfo
+///
+/// Information about markup applied to a transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -158,6 +176,9 @@ pub struct MarkupInfo {
     pub price_level_ref: Option<NtRef>,
 }
 
+/// TxnTaxDetail
+///
+/// Details about the tax applied to a transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -167,6 +188,9 @@ pub struct TxnTaxDetail {
     pub tax_line: Option<LineField>,
 }
 
+/// Delivery Information
+///
+/// Information about delivery for the transaction.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

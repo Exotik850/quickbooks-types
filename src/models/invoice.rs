@@ -23,6 +23,9 @@ use crate::{
 )]
 /// Invoice
 ///
+/// Represents a sales transaction billed to a customer creating an accounts receivable balance; consists of line items, taxes, payment terms, and delivery information.
+///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/invoice>
 pub struct Invoice {
     /// The unique ID of the entity

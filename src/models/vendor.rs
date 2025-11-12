@@ -14,10 +14,11 @@ use crate::{QBCreatable, QBFullUpdatable, QBItem};
     derive(Builder),
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
-/// Vendor Object
+/// Vendor
 ///
-/// Represents a vendor in the QuickBooks system.
+/// Represents a supplier/payee from whom goods or services are purchased and to whom bills are owed in QuickBooks Online.
 ///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/vendor>
 pub struct Vendor {
     /// The unique ID of the entity
@@ -106,6 +107,9 @@ pub struct Vendor {
     pub balance: Option<f64>,
 }
 
+/// Contact Information
+///
+/// Represents additional contact information for a vendor in QuickBooks Online.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -115,6 +119,9 @@ pub struct ContactInfo {
     telephone: Option<PhoneNumber>,
 }
 
+/// Vendor Payment Bank Detail
+///
+/// Represents the bank details used for vendor payments in QuickBooks Online.
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]

@@ -18,10 +18,11 @@ use crate::{
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// Payment Object
+/// Payment
 ///
-/// Represents a payment transaction in QuickBooks.
+/// Represents receipt or application of funds against customer balances or invoices.
 ///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/payment>
 pub struct Payment {
     /// The unique ID of the entity

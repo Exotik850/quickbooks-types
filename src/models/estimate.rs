@@ -18,11 +18,13 @@ use crate::{
     derive(Builder),
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
+
 /// Estimate
 ///
-/// An estimate represents a proposal for a financial transaction between a business and its customer.
+/// Represents a proposal for a financial transaction between a business and its customer.
 /// It outlines proposed goods or services and their costs, which may later become an invoice.
 ///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/estimate>
 pub struct Estimate {
     /// The unique ID of the entity

@@ -16,8 +16,12 @@ use crate::{LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem};
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// Bill Object
+/// Bill
 ///
+/// Represents an accounts payable bill received from a vendor.
+/// Records amounts owed to vendors; line items specify products/services and their costs.
+///
+/// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/bill>
 pub struct Bill {
     /// The unique ID of the entity

@@ -31,7 +31,7 @@ macro_rules! impl_report_type {
     $(
 
     paste! {
-      #[doc = "Type to represent the `" $report_ty "` report in quickbooks:\n https://developer.intuit.com/app/developer/qbo/docs/api/accounting/report-entities/" [<$report_ty:lower>] "\n\n" $($doc)?]
+      #[doc = "Type to represent the `" $report_ty "` report in quickbooks:\n\nAPI Reference:\n<https://developer.intuit.com/app/developer/qbo/docs/api/accounting/report-entities/" [<$report_ty:lower>] ">\n\n" $($doc)?]
       pub struct $report_ty;
 
       impl QBReportType for $report_ty {
