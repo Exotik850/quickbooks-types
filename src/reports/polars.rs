@@ -171,12 +171,6 @@ fn collect_from_row(row: Row, out: &mut Vec<Vec<ColData>>) {
 
 #[cfg(test)]
 mod tests {
-    use std::io::Write;
-
-    use polars::io::SerWriter;
-
-    use crate::reports::polars::PolarsReport;
-
     #[test]
     fn test_report_to_dataframe() {
         let input = include_str!("../../test/data/report2.json");
