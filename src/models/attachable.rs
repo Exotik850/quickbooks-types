@@ -1,6 +1,4 @@
-#[cfg(feature = "builder")]
-use std::path::Path;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
@@ -19,7 +17,11 @@ use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBToRef, QBTypeEr
 
 /// Attachable
 ///
-/// Represents a file attachment or note that can be linked to other `QuickBooks` entities (for example: Invoice, Bill, Customer).
+/// Represents a file attachment or note that can be linked to other QuickBooks entities (for example: Invoice, Bill, Customer).
+///
+/// Notes:
+/// - With the "builder" feature enabled, `Attachable::new().file(path)` sets `file_path` for upload and derives `file_name` and `content_type` from the path.
+/// - This crate models metadata only; HTTP upload logic and file bytes handling should be implemented in your client.
 ///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/attachable>
@@ -34,6 +36,7 @@ pub struct Attachable {
     /// File name of the attachment
     #[cfg_attr(feature = "builder", builder(setter(custom)))]
     pub file_name: Option<String>,
+    /// Filesystem path used during upload (builder feature only); not serialized.
     #[cfg_attr(feature = "builder", builder(setter(custom)))]
     #[serde(skip)]
     pub file_path: Option<PathBuf>,
@@ -65,7 +68,7 @@ pub struct Attachable {
 }
 
 /// Derives the content type from a file extension
-#[must_use] 
+#[must_use]
 pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
     let out = match ext {
         "ai" | "eps" => "application/postscript",
@@ -91,7 +94,8 @@ pub fn content_type_from_ext(ext: &str) -> Option<&'static str> {
 
 #[cfg(feature = "builder")]
 impl AttachableBuilder {
-    /// Sets the file_path (for_upload) and derives the file_name and content_type from it
+    /// Sets `file_path` (for upload), and derives `file_name` and `content_type` from it.
+    /// On success, stores the original path for upload, sets `file_name` to the basename, and infers `content_type` from the file extension.
     pub fn file(&mut self, path: &impl AsRef<Path>) -> Result<&mut Self, QBTypeError> {
         let path = path.as_ref();
 
@@ -125,10 +129,17 @@ impl AttachableBuilder {
     }
 }
 
-/// Trait for all entities that can be attached as files/notes
+/// Trait for all entities that can be attached as files/notes.
+///
+/// Preconditions for upload:
+/// - `file_name` or `note` must be present;
+/// - `file_path` must be present.
+/// - `content_type` must be present.
+/// - `can_upload()` returns an error if required fields are missing.
 pub trait QBAttachable {
+    /// Returns Ok(()) when the instance has the fields required for upload.
     fn can_upload(&self) -> Result<(), QBTypeError>;
-    fn file_path(&self) -> Option<&String>;
+    fn file_path(&self) -> Option<&Path>;
 }
 impl QBAttachable for Attachable {
     fn can_upload(&self) -> Result<(), QBTypeError> {
@@ -141,8 +152,8 @@ impl QBAttachable for Attachable {
         Ok(())
     }
 
-    fn file_path(&self) -> Option<&String> {
-        self.file_name.as_ref()
+    fn file_path(&self) -> Option<&Path> {
+        self.file_path.as_deref()
     }
 }
 
@@ -209,7 +220,9 @@ impl<T: QBToRef> QBToAttachableRef for T {}
 
 impl QBCreatable for Attachable {
     fn can_create(&self) -> bool {
-        self.file_name.is_some() || self.note.is_some()
+        (self.file_name.is_some() || self.note.is_some())
+            && self.content_type.is_some()
+            && self.file_path.is_some()
     }
 }
 impl QBDeletable for Attachable {}
