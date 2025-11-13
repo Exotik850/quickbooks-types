@@ -132,7 +132,7 @@ impl AttachableBuilder {
 /// Trait for all entities that can be attached as files/notes.
 ///
 /// Preconditions for upload:
-/// - `file_name` or `note` must be present;
+/// - `file_name` must be present;
 /// - `file_path` must be present.
 /// - `content_type` must be present.
 /// - `can_upload()` returns an error if required fields are missing.
@@ -143,11 +143,14 @@ pub trait QBAttachable {
 }
 impl QBAttachable for Attachable {
     fn can_upload(&self) -> Result<(), QBTypeError> {
-        if self.note.is_none() && self.file_name.is_none() {
-            return Err(QBTypeError::MissingField("note"));
-        }
         if self.file_name.is_none() {
             return Err(QBTypeError::MissingField("file_name"));
+        }
+        if self.file_path.is_none() {
+            return Err(QBTypeError::MissingField("file_path"));
+        }
+        if self.content_type.is_none() {
+            return Err(QBTypeError::MissingField("content_type"));
         }
         Ok(())
     }
