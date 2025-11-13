@@ -1,8 +1,60 @@
-//! # `QuickBooks` Types Library
+//! QuickBooks Online type models and helpers for Rust.
 //!
-//! This library provides Rust types and traits for interacting with the `QuickBooks` Online API.
-//! It includes data models for various `QuickBooks` entities, as well as traits that define
-//! common behaviors such as creation, reading, updating, and deletion of these entities.
+//! This crate defines strongly-typed data models for common QBO entities and reports,
+//! plus helper traits that validate local preconditions (for example, `can_create` and `can_full_update`).
+/*! It does not make HTTP requests; bring your own client. */
+//!
+//! Modules and exports:
+//! - Top-level entities: `Account`, `Attachable`, `Bill`, `BillPayment`, `CompanyInfo`, `Customer`, `Employee`, `Estimate`, `Invoice`, `Item`, `Payment`, `Preferences`, `SalesReceipt`, `Vendor`
+//! - `common`: supporting types like `NtRef`, `MetaData`, addresses, phones, taxes, etc.
+//! - `reports`: report models and strongly-typed parameter builders
+//!
+//! Features:
+//! - `builder`: derive builders and add an associated `new()` for most entities
+//! - `polars`: optional helpers for reports + Polars integration
+//!
+//! Quick start (entities):
+//! ```no_run
+//! use chrono::NaiveDate;
+//! use crate::{Invoice, Line, LineDetail, SalesItemLineDetail, QBCreatable};
+//! use crate::common::NtRef;
+//!
+//! let invoice = Invoice {
+//!     customer_ref: Some(NtRef::from(("John Doe", "CUST-123"))),
+//!     txn_date: NaiveDate::from_ymd_opt(2024, 10, 1),
+
+//!     line: Some(vec![
+
+//!         Line {
+//!             amount: Some(100.0),
+//!             line_detail: LineDetail::SalesItemLineDetail(SalesItemLineDetail {
+//!                 item_ref: Some(NtRef::from(("Widget A", "ITEM-001"))),
+//!                 qty: Some(1.0),
+//!                 unit_price: Some(100.0),
+//!                 ..Default::default()
+//!             }),
+//!             ..Default::default()
+//!         }
+//!     ]),
+//!     ..Default::default()
+//! };
+//! assert!(invoice.can_create());
+//! ```
+//!
+//! Reports parameters:
+//! ```no_run
+//! use chrono::NaiveDate;
+//! use crate::reports::types::*;
+//! use crate::reports::params::*;
+//!
+//! let params = BalanceSheetParams::new()
+//!     .accounting_method(AccountingMethod::Cash)
+//!     .start_date(NaiveDate::from_ymd_opt(2024, 1, 1).unwrap())
+//!     .end_date(NaiveDate::from_ymd_opt(2024, 12, 31).unwrap())
+//!     .date_macro(DateMacro::ThisFiscalYear);
+//! let query = params.to_query_string();
+//! assert!(query.contains("accounting_method=Cash"));
+//! ```
 
 #[cfg(feature = "builder")]
 #[macro_use]
