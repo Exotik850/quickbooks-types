@@ -18,9 +18,16 @@ use crate::{
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
 
-/// Payment
+/// `Payment`
 ///
 /// Represents receipt or application of funds against customer balances or invoices.
+///
+/// Creation requirements:
+/// - `QBCreatable::can_create()` returns true when both `total_amt` and `customer_ref` are present.
+///
+/// Update semantics:
+/// - `QBFullUpdatable::can_full_update()` returns true when `has_read()` (ID + sync token) and `can_create()` are both true.
+/// - `QBDeletable` and `QBVoidable` are implemented; both require `has_read()`.
 ///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/payment>

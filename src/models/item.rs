@@ -19,6 +19,17 @@ use crate::{QBCreatable, QBFullUpdatable, QBItem};
 ///
 /// Represents a product or service that can be purchased or sold. Items determine posting accounts (income, expense, inventory) and pricing.
 ///
+/// Creation requirements:
+/// - `QBCreatable::can_create()` returns true when:
+///   - `name` and `expense_account_ref` are present, and
+///   - for `ItemType::Inventory`: `income_account_ref`, `asset_account_ref`, `inv_start_date`, and `qty_on_hand` are present
+///   - for `ItemType::Service`: `income_account_ref` is present
+///   - for `ItemType::NonInventory`: no additional fields beyond `name` and `expense_account_ref`
+///   - if `item_type` is `None`: `asset_account_ref` must be present
+///
+/// Update semantics:
+/// - `QBFullUpdatable::can_full_update()` returns true when `has_read()` is true (ID + sync token) and `name` is present.
+///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/item>
 pub struct Item {

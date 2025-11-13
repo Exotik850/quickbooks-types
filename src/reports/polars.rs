@@ -1,9 +1,7 @@
-use std::num::ParseFloatError;
-
-use crate::reports::{ColData, ColumnTypeEnum, Row, RowContent, Rows};
-
 use super::Column;
+use crate::reports::{ColData, ColumnTypeEnum, Row, RowContent, Rows};
 use polars::prelude::*;
+use std::num::ParseFloatError;
 
 #[derive(thiserror::Error, Debug)]
 pub enum QBPolarsError {

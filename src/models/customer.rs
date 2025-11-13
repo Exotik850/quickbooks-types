@@ -19,6 +19,13 @@ use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBSparseUpdateable};
 ///
 /// Represents an individual or organization that purchases goods or services and is billed in `QuickBooks` Online.
 ///
+/// Creation requirements:
+/// - `QBCreatable::can_create()` returns true when at least one of these fields is present:
+///   `display_name`, `given_name`, `family_name`, `middle_name`, `title`, or `suffix`.
+///
+/// Update semantics:
+/// - `QBFullUpdatable::can_full_update()` requires `can_read()` (ID present) and `can_create()`.
+///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/customer>
 pub struct Customer {
@@ -231,6 +238,6 @@ impl QBFullUpdatable for Customer {
 
 impl QBSparseUpdateable for Customer {
     fn can_sparse_update(&self) -> bool {
-        self.can_full_update() && self.sparse.is_some_and(|x| x)
+        self.can_full_update()
     }
 }

@@ -11,7 +11,9 @@ use super::{
 };
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
-use crate::{QBCreatable, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable};
+use crate::{
+    QBCreatable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable,
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -25,6 +27,10 @@ use crate::{QBCreatable, QBFullUpdatable, QBPDFable, QBSendable, QBSparseUpdatea
 /// `SalesReceipt`
 ///
 /// Represents a finalized sale where payment is received at the time of purchase. Unlike an invoice, it does not create an accounts receivable balance.
+///
+/// Update semantics:
+/// - `QBCreatable::can_create()` returns true when `line` contains at least one valid line.
+/// - `QBFullUpdatable::can_full_update()` for `SalesReceipt` requires `has_read()` (ID + sync token) and `can_create()`.
 ///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/salesreceipt>
@@ -118,13 +124,13 @@ impl QBCreatable for SalesReceipt {
 impl QBVoidable for SalesReceipt {}
 impl QBFullUpdatable for SalesReceipt {
     fn can_full_update(&self) -> bool {
-        self.can_create()
+        self.can_create() && self.has_read()
     }
 }
 
 impl QBSparseUpdateable for SalesReceipt {
     fn can_sparse_update(&self) -> bool {
-        self.can_full_update() && self.sparse.is_some_and(|x| x)
+        self.can_full_update()
     }
 }
 

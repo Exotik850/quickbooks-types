@@ -30,7 +30,7 @@ pub enum ColumnTypeEnum {
 
 impl ColumnTypeEnum {
     /// Returns the string representation of the column type.
-    #[must_use] 
+    #[must_use]
     pub fn as_str(&self) -> &str {
         match self {
             ColumnTypeEnum::Account => "Account",
@@ -53,19 +53,21 @@ impl std::fmt::Display for ColumnTypeEnum {
     }
 }
 
-/// Corresponds to the `RowTypeEnum`.
+/// Tells whether the row is a section header or data row.
 #[derive(Debug, Serialize, Deserialize)]
 pub enum RowTypeEnum {
     Section,
     Data,
 }
 
+/// Indicates whether the report is based on cash or accrual accounting.
 #[derive(Debug, Serialize, Deserialize)]
 pub enum ReportBasisEnum {
     Cash,
     Accrual,
 }
 
+/// Corresponds to the `NameValue`.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]
@@ -200,6 +202,7 @@ pub struct ReportHeader {
     pub option: Option<Vec<NameValue>>,
 }
 
+/// Report structure containing header, columns, and rows.
 #[skip_serializing_none]
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]

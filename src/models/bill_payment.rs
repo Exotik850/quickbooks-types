@@ -24,7 +24,7 @@ use crate::{
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/billpayment>
 pub struct BillPayment {
-    /// The unique ID of the entity
+    /// The unique sync token of the entity, used for concurrency control
     pub sync_token: Option<String>,
     /// Domain of the transaction. `QBO` for `QuickBooks` Online.
     pub domain: Option<String>,

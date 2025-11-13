@@ -20,6 +20,9 @@ use crate::{QBCreatable, QBFullUpdatable, QBItem};
 /// Represents an internal staff member or contractor tracked for payroll, time entry,
 /// or billable activities in `QuickBooks` Online.
 ///
+/// Creation requirements:
+/// - `QBCreatable::can_create()` returns true when either `given_name` or `family_name` is present.
+///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/employee>
 pub struct Employee {
@@ -87,6 +90,6 @@ impl QBCreatable for Employee {
 
 impl QBFullUpdatable for Employee {
     fn can_full_update(&self) -> bool {
-        self.has_read()
+        self.has_read() && self.can_create()
     }
 }

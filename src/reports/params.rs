@@ -1,7 +1,8 @@
-use std::borrow::Cow;
+//! Module defining various report parameters and their serialization.
 
 use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
+use std::borrow::Cow;
 
 macro_rules! impl_display_enum {
     (
@@ -199,12 +200,11 @@ macro_rules! impl_id_param {
 
 impl_id_param!(Customer, Vendor, Employee, Item, Class, Department, Account, Term);
 
+/// Trait for types that can provide a value for report parameters.
 pub trait HasValue {
-    // fn name() -> &'static str;
     fn value(&self) -> Cow<'_, str>;
 }
 
-// Implement QBReportParam directly for common types
 impl HasValue for String {
     fn value(&self) -> Cow<'_, str> {
         self.into()

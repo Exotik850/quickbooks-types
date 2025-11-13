@@ -1,3 +1,9 @@
+//! Module defining `QuickBooks` report types and their parameters.
+//!
+//! This module provides the type declarations for `QuickBooks` report types,
+//! as well as macros to generate parameter structures and implementations for each report type.
+//! Each report type has its own set of parameters that can be configured.
+
 use std::borrow::Cow;
 
 use super::params::{

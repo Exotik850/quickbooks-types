@@ -17,7 +17,7 @@ use crate::{QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBToRef, QBTypeEr
 
 /// Attachable
 ///
-/// Represents a file attachment or note that can be linked to other QuickBooks entities (for example: Invoice, Bill, Customer).
+/// Represents a file attachment or note that can be linked to other `QuickBooks` entities (for example: Invoice, Bill, Customer).
 ///
 /// Notes:
 /// - With the "builder" feature enabled, `Attachable::new().file(path)` sets `file_path` for upload and derives `file_name` and `content_type` from the path.

@@ -25,6 +25,10 @@ use crate::{
 ///
 /// Represents a sales transaction billed to a customer creating an accounts receivable balance; consists of line items, taxes, payment terms, and delivery information.
 ///
+/// Update semantics:
+/// - `QBCreatable::can_create()` returns true when both `customer_ref` and at least one valid line are present.
+/// - `QBFullUpdatable::can_full_update()` requires `has_read()` (ID + sync token) and `can_create()`.
+///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/invoice>
 pub struct Invoice {
@@ -135,13 +139,12 @@ impl QBVoidable for Invoice {}
 impl QBFullUpdatable for Invoice {
     fn can_full_update(&self) -> bool {
         self.has_read() && self.can_create()
-        // TODO add the docnumber check, it's more complicated though
     }
 }
 
 impl QBSparseUpdateable for Invoice {
     fn can_sparse_update(&self) -> bool {
-        self.can_full_update() && self.sparse.is_some_and(|x| x)
+        self.can_full_update()
     }
 }
 

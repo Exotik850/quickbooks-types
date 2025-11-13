@@ -1,6 +1,6 @@
 [package]
 name = "quickbooks-types"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Type definitions for QuickBooks Online API"
 license = "MIT"

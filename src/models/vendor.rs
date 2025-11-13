@@ -18,6 +18,14 @@ use crate::{QBCreatable, QBFullUpdatable, QBItem};
 ///
 /// Represents a supplier/payee from whom goods or services are purchased and to whom bills are owed in `QuickBooks` Online.
 ///
+/// Creation requirements:
+/// - `QBCreatable::can_create()` returns true when at least one of the following is present:
+///   `display_name`, `given_name`, `family_name`, `middle_name`, `title`, or `suffix`.
+///
+/// Update semantics:
+/// - `QBFullUpdatable::can_full_update()` returns true when both `has_read()` (ID + sync token are set)
+///   and `can_create()` are true.
+///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/vendor>
 pub struct Vendor {

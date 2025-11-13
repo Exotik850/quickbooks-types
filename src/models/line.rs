@@ -5,6 +5,9 @@ use serde_with::skip_serializing_none;
 use super::common::{LinkedTxn, NtRef};
 use crate::QBCreatable;
 
+/// `LineField`
+///
+/// A collection of Line items, typically used within transactions.
 pub type LineField = Vec<Line>;
 
 #[cfg(feature = "builder")]

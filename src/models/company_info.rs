@@ -20,6 +20,9 @@ use crate::{QBFullUpdatable, QBSparseUpdateable};
 ///
 /// Represents the company profile and contact settings for a `QuickBooks` Online company.
 ///
+/// Update semantics:
+/// - `QBFullUpdatable::can_full_update()` returns true when `sync_token`, `company_name`, and `company_addr` are present.
+///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/companyinfo>
 pub struct CompanyInfo {
@@ -70,6 +73,6 @@ impl QBFullUpdatable for CompanyInfo {
 
 impl QBSparseUpdateable for CompanyInfo {
     fn can_sparse_update(&self) -> bool {
-        self.can_full_update() && self.sparse.is_some_and(|x| x)
+        self.can_full_update()
     }
 }

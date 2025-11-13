@@ -24,6 +24,13 @@ use crate::{
 /// Represents a proposal for a financial transaction between a business and its customer.
 /// It outlines proposed goods or services and their costs, which may later become an invoice.
 ///
+/// Creation requirements:
+/// - `QBCreatable::can_create()` returns true when both `customer_ref` and at least one valid line are present.
+///
+/// Update semantics:
+/// - `QBFullUpdatable::can_full_update()` requires `has_read()` (ID + sync token) and `customer_ref`.
+///   If `email_status` is `EmailStatus::NeedToSend`, `bill_email` must also be set.
+///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/estimate>
 pub struct Estimate {
@@ -129,7 +136,7 @@ impl QBFullUpdatable for Estimate {
 
 impl QBSparseUpdateable for Estimate {
     fn can_sparse_update(&self) -> bool {
-        self.can_full_update() && self.sparse.is_some_and(|x| x)
+        self.can_full_update()
     }
 }
 

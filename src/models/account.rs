@@ -20,6 +20,12 @@ use crate::{QBCreatable, QBFullUpdatable, QBItem};
 /// Represents a general ledger account in `QuickBooks` Online (for example: Bank, Income, Expense).
 /// Accounts categorize transactions and track balances. Many entities reference an account via `*Ref` fields.
 ///
+/// Creation requirements:
+/// - `QBCreatable::can_create()` returns true when `name` is set and either `account_type` or `account_sub_type` is set.
+///
+/// Update semantics:
+/// - `QBFullUpdatable::can_full_update()` returns true when `has_read()` (ID + sync token present) and `name` are set.
+///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/account>
 pub struct Account {

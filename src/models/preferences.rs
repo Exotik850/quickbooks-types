@@ -17,12 +17,16 @@ use crate::{
     derive(Builder),
     builder(default, build_fn(error = "QBTypeError"), setter(into, strip_option))
 )]
-
 /// Preferences
 ///
-/// Represents company-wide configuration that controls behavior of sales forms,
-/// purchasing, accounting, taxes, time tracking, currency handling, and various
-/// messaging options in `QuickBooks` Online.
+/// Company-wide configuration controlling behavior for sales forms,
+/// purchasing, accounting, taxes, time tracking, currencies, and messaging
+/// in `QuickBooks` Online.
+///
+/// Semantics:
+/// - Models data only; no HTTP calls are performed in this crate.
+/// - `QBFullUpdatable::can_full_update()` returns true when `has_read()` is true
+///   (both `id` and `sync_token` are present).
 ///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/preferences>

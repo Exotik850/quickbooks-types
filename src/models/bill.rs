@@ -21,6 +21,12 @@ use crate::{LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem};
 /// Represents an accounts payable bill received from a vendor.
 /// Records amounts owed to vendors; line items specify products/services and their costs.
 ///
+/// Creation requirements:
+/// - `QBCreatable::can_create()` returns true when both `vendor_ref` and at least one valid `line` are present.
+///
+/// Update semantics:
+/// - `QBFullUpdatable::can_full_update()` returns true when `has_read()` (ID + sync token) is true and the creation requirements are satisfied (`vendor_ref` and `line`).
+///
 /// API reference:
 /// <https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/bill>
 pub struct Bill {
