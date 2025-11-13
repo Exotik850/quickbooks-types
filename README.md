@@ -321,6 +321,12 @@ Issues and PRs are welcome. If you need additional entities, fields, or extended
 
 ---
 
+## Documentation
+
+API documentation is available at [docs.rs/quickbooks-types](https://docs.rs/quickbooks-types).
+
+---
+
 ## License
 
 MIT. See the LICENSE file for details.
