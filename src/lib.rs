@@ -119,7 +119,7 @@ pub trait QBItem: Serialize + Default + Clone + Sized + DeserializeOwned + Debug
 }
 
 macro_rules! impl_qb_data {
-    ($($x:ident),+) => {
+    ($($x:ident),+ $(,)?) => {
         $(
             #[cfg(feature="builder")]
             paste::paste! {
@@ -184,7 +184,8 @@ impl_qb_data!(
     Account,
     Preferences,
     SalesReceipt,
-    BillPayment
+    BillPayment,
+    TaxCode,
 );
 
 /// Trait for entities that can be created in `QuickBooks`.

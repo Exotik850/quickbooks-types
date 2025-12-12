@@ -13,6 +13,7 @@ mod line;
 mod payment;
 mod preferences;
 mod sales_receipt;
+mod tax_code;
 mod vendor;
 
 pub use account::*;
@@ -25,8 +26,9 @@ pub use employee::*;
 pub use estimate::*;
 pub use invoice::*;
 pub use item::*;
-pub use line::{TaxableLine, *};
+pub use line::*;
 pub use payment::*;
 pub use preferences::*;
 pub use sales_receipt::*;
+pub use tax_code::*;
 pub use vendor::*;
