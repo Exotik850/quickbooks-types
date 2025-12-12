@@ -118,6 +118,29 @@ pub trait QBItem: Serialize + Default + Clone + Sized + DeserializeOwned + Debug
     }
 }
 
+/// Macro to apply a given macro to each QuickBooks entity type.
+#[macro_export]
+macro_rules! for_each_qb_item {
+    ($func:ident) => {
+        $func!(Invoice);
+        $func!(Vendor);
+        $func!(Payment);
+        $func!(Item);
+        $func!(Estimate);
+        $func!(Employee);
+        $func!(Customer);
+        $func!(CompanyInfo);
+        $func!(Bill);
+        $func!(Attachable);
+        $func!(Account);
+        $func!(Preferences);
+        $func!(SalesReceipt);
+        $func!(BillPayment);
+        $func!(TaxCode);
+        $func!(TaxRate);
+    };
+}
+
 macro_rules! impl_qb_data {
     ($($x:ident),+ $(,)?) => {
         $(
@@ -170,24 +193,7 @@ macro_rules! impl_qb_data {
    }
 }
 
-impl_qb_data!(
-    Invoice,
-    Vendor,
-    Payment,
-    Item,
-    Estimate,
-    Employee,
-    Customer,
-    CompanyInfo,
-    Bill,
-    Attachable,
-    Account,
-    Preferences,
-    SalesReceipt,
-    BillPayment,
-    TaxCode,
-    TaxRate,
-);
+for_each_qb_item!(impl_qb_data);
 
 /// Trait for entities that can be created in `QuickBooks`.
 ///
