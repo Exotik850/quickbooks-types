@@ -186,6 +186,7 @@ impl_qb_data!(
     SalesReceipt,
     BillPayment,
     TaxCode,
+    TaxRate,
 );
 
 /// Trait for entities that can be created in `QuickBooks`.

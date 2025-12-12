@@ -14,6 +14,7 @@ mod payment;
 mod preferences;
 mod sales_receipt;
 mod tax_code;
+mod tax_rate;
 mod vendor;
 
 pub use account::*;
@@ -31,4 +32,5 @@ pub use payment::*;
 pub use preferences::*;
 pub use sales_receipt::*;
 pub use tax_code::*;
+pub use tax_rate::*;
 pub use vendor::*;
