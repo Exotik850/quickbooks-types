@@ -142,55 +142,59 @@ macro_rules! for_each_qb_item {
 }
 
 macro_rules! impl_qb_data {
-    ($($x:ident),+ $(,)?) => {
-        $(
-            #[cfg(feature="builder")]
-            paste::paste! {
-                #[allow(clippy::new_ret_no_self)]
-                impl [<$x>] {
-                    #[must_use] pub fn new() -> [<$x Builder>] {
-                        [<$x Builder>]::default()
-                    }
+    ($x:ident) => {
+        #[cfg(feature = "builder")]
+        paste::paste! {
+            #[allow(clippy::new_ret_no_self)]
+            impl [<$x>] {
+                #[must_use] pub fn new() -> [<$x Builder>] {
+                    [<$x Builder>]::default()
                 }
             }
+        }
 
-            impl QBItem for $x {
-                fn id(&self) -> Option<&String> {
-                    self.id.as_ref()
-                }
-
-                fn clone_id(&self) -> Option<String> {
-                    self.id.clone()
-                }
-
-                fn sync_token(&self) -> Option<&String> {
-                    self.sync_token.as_ref()
-                }
-
-                fn meta_data(&self) -> Option<&MetaData> {
-                    self.meta_data.as_ref()
-                }
-
-                #[inline]
-                fn name() -> &'static str {
-                    stringify!($x)
-                }
-
-                #[inline]
-                fn qb_id() -> &'static str {
-                    paste::paste! {
-                        stringify!([<$x:lower>])
-                    }
-                }
+        impl QBItem for $x {
+            fn id(&self) -> Option<&String> {
+                self.id.as_ref()
             }
 
-            impl Display for $x {
-                fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-                    write!(f, "{} : {}", Self::name(), serde_json::to_string_pretty(self).expect("Could not serialize object for display!"))
+            fn clone_id(&self) -> Option<String> {
+                self.id.clone()
+            }
+
+            fn sync_token(&self) -> Option<&String> {
+                self.sync_token.as_ref()
+            }
+
+            fn meta_data(&self) -> Option<&MetaData> {
+                self.meta_data.as_ref()
+            }
+
+            #[inline]
+            fn name() -> &'static str {
+                stringify!($x)
+            }
+
+            #[inline]
+            fn qb_id() -> &'static str {
+                paste::paste! {
+                    stringify!([<$x:lower>])
                 }
             }
-        )+
-   }
+        }
+
+        impl Display for $x {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(
+                    f,
+                    "{} : {}",
+                    Self::name(),
+                    serde_json::to_string_pretty(self)
+                        .expect("Could not serialize object for display!")
+                )
+            }
+        }
+    };
 }
 
 for_each_qb_item!(impl_qb_data);
