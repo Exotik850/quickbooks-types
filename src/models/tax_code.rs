@@ -1,4 +1,10 @@
-use crate::{QBQueryable, QBReadable};
+use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
+
+use crate::{
+    common::{MetaData, NtRef},
+    QBQueryable, QBReadable,
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -60,5 +66,3 @@ pub enum TaxCodeConfigType {
     UserDefined,
     SystemGenerated,
 }
-
-impl QBQueryable for TaxCode {}

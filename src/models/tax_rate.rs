@@ -1,3 +1,9 @@
+use chrono::NaiveDateTime;
+use serde::{Deserialize, Serialize};
+use serde_with::skip_serializing_none;
+
+use crate::common::{MetaData, NtRef};
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
