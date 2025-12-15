@@ -27,6 +27,24 @@ pub struct NtRef {
     pub value: Option<String>,
 }
 
+/// `TypedRef`
+///
+/// Concrete reference to another `QuickBooks` entity.
+///
+#[skip_serializing_none]
+#[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
+#[serde(default)]
+pub struct TypedRef<O> {
+    #[serde(rename = "type")]
+    pub entity_ref_type: Option<String>,
+    #[serde(alias = "Name")]
+    pub name: Option<String>,
+    #[serde(alias = "Value")]
+    pub value: Option<String>,
+    #[serde(skip)]
+    _marker: std::marker::PhantomData<O>,
+}
+
 impl From<&str> for NtRef {
     fn from(value: &str) -> Self {
         Self {

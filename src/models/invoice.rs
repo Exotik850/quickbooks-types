@@ -9,8 +9,8 @@ use super::common::{
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable,
-    QBSparseUpdateable, QBVoidable,
+    common::TypedRef, Customer, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem,
+    QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable,
 };
 
 #[skip_serializing_none]
@@ -71,7 +71,7 @@ pub struct Invoice {
     /// Customer memo for the invoice
     pub customer_memo: Option<NtRef>,
     /// Reference to the customer for the invoice
-    pub customer_ref: Option<NtRef>,
+    pub customer_ref: Option<TypedRef<Customer>>,
     /// Date of the transaction in YYYY-MM-DD format
     pub txn_date: Option<NaiveDate>,
     /// Domain of the transaction. `QBO` for `QuickBooks` Online.

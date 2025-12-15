@@ -61,6 +61,20 @@ impl QBCreatable for LineField {
     }
 }
 
+macro_rules! serialize_line_variant {
+    ($mat:expr, $state:expr, $($name:ident),+) => {
+        paste::paste! {
+            match $mat {
+                $(LineDetail::[<$name LineDetail>](data) => {
+                    $state.serialize_field(stringify!([<$name LineDetail>]), data)?;
+                    stringify!([<$name LineDetail>])
+                }),+
+                LineDetail::None => return Err(serde::ser::Error::custom("LineDetail cannot be None when serializing")),
+            }
+        }
+    }
+}
+
 impl Serialize for LineDetail {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
@@ -68,42 +82,18 @@ impl Serialize for LineDetail {
     {
         let mut state = serializer.serialize_struct("LineDetail", 2)?;
 
-        // TODO Make this more generic, although there won't be more types to add in the future most likely
-        let detail_type = match self {
-            LineDetail::SalesItemLineDetail(data) => {
-                state.serialize_field("SalesItemLineDetail", data)?;
-                "SalesItemLineDetail"
-            }
-            LineDetail::GroupLineDetail(data) => {
-                state.serialize_field("GroupLineDetail", data)?;
-                "GroupLineDetail"
-            }
-            LineDetail::DescriptionLineDetail(data) => {
-                state.serialize_field("DescriptionLineDetail", data)?;
-                "DescriptionLineDetail"
-            }
-            LineDetail::DiscountLineDetail(data) => {
-                state.serialize_field("DiscountLineDetail", data)?;
-                "DiscountLineDetail"
-            }
-            LineDetail::SubTotalLineDetail(data) => {
-                state.serialize_field("SubTotalLineDetail", data)?;
-                "SubTotalLineDetail"
-            }
-            LineDetail::ItemBasedExpenseLineDetail(data) => {
-                state.serialize_field("ItemBasedExpenseLineDetail", data)?;
-                "ItemBasedExpenseLineDetail"
-            }
-            LineDetail::AccountBasedExpenseLineDetail(data) => {
-                state.serialize_field("AccountBasedExpenseLineDetail", data)?;
-                "AccountBasedExpenseLineDetail"
-            }
-            LineDetail::TaxLineDetail(data) => {
-                state.serialize_field("TaxLineDetail", data)?;
-                "TaxLineDetail"
-            }
-            LineDetail::None => panic!("Cannot serialize Line Detail of None!"),
-        };
+        let detail_type = serialize_line_variant!(
+            self,
+            state,
+            SalesItem,
+            Group,
+            Description,
+            Discount,
+            SubTotal,
+            ItemBasedExpense,
+            AccountBasedExpense,
+            Tax
+        );
 
         state.serialize_field("DetailType", detail_type)?;
         state.end()

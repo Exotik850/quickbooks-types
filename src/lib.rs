@@ -61,6 +61,7 @@
 extern crate derive_builder;
 
 mod error;
+mod linked;
 mod models;
 pub mod reports;
 use std::fmt::{Debug, Display};
