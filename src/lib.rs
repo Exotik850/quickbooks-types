@@ -1,4 +1,4 @@
-//! QuickBooks Online type models and helpers for Rust.
+//! `QuickBooks` Online type models and helpers for Rust.
 //!
 //! This crate defines strongly-typed data models for common QBO entities and reports,
 //! plus helper traits that validate local preconditions (for example, `can_create` and `can_full_update`).
@@ -67,6 +67,7 @@ pub mod reports;
 use std::fmt::{Debug, Display};
 
 pub use error::*;
+pub use linked::LinkedTo;
 use models::common::{MetaData, NtRef};
 pub use models::*;
 use serde::{de::DeserializeOwned, Serialize};
@@ -119,7 +120,7 @@ pub trait QBItem: Serialize + Default + Clone + Sized + DeserializeOwned + Debug
     }
 }
 
-/// Macro to apply a given macro to each QuickBooks entity type.
+/// Macro to apply a given macro to each `QuickBooks` entity type.
 #[macro_export]
 macro_rules! for_each_qb_item {
     ($func:ident) => {
@@ -145,6 +146,7 @@ macro_rules! for_each_qb_item {
         $func!(CreditMemo);
         $func!(CompanyCurrency);
         $func!(Department);
+        $func!(TaxAgency);
     };
 }
 
