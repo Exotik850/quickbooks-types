@@ -124,29 +124,30 @@ pub trait QBItem: Serialize + Default + Clone + Sized + DeserializeOwned + Debug
 #[macro_export]
 macro_rules! for_each_qb_item {
     ($func:ident) => {
-        $func!(Invoice);
-        $func!(Vendor);
-        $func!(Payment);
-        $func!(Item);
-        $func!(Estimate);
-        $func!(Employee);
-        $func!(Customer);
-        $func!(CompanyInfo);
-        $func!(Bill);
-        $func!(Attachable);
         $func!(Account);
+        $func!(Attachable);
+        $func!(Bill);
+        $func!(BillPayment);
+        $func!(Budget);
+        $func!(Class);
+        $func!(CompanyCurrency);
+        $func!(CompanyInfo);
+        $func!(CreditMemo);
+        $func!(Customer);
+        $func!(Department);
+        $func!(Employee);
+        $func!(Estimate);
+        $func!(Invoice);
+        $func!(Item);
+        $func!(Payment);
+        $func!(PaymentMethod);
         $func!(Preferences);
         $func!(SalesReceipt);
-        $func!(BillPayment);
+        $func!(TaxAgency);
         $func!(TaxCode);
         $func!(TaxRate);
         $func!(Term);
-        $func!(Budget);
-        $func!(Class);
-        $func!(CreditMemo);
-        $func!(CompanyCurrency);
-        $func!(Department);
-        $func!(TaxAgency);
+        $func!(Vendor);
     };
 }
 
