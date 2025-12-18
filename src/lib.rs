@@ -142,6 +142,7 @@ macro_rules! for_each_qb_item {
         $func!(Term);
         $func!(Budget);
         $func!(Class);
+        $func!(CreditMemo);
     };
 }
 
