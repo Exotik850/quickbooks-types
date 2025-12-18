@@ -33,7 +33,7 @@ pub struct NtRef {
 ///
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(default)]
-pub struct TypedRef<O> {
+pub struct TypedRef<O: ?Sized> {
     #[serde(flatten)]
     pub inner: NtRef,
     #[serde(skip)]

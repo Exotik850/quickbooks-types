@@ -214,7 +214,7 @@ impl From<NtRef> for AttachableRef {
 /// Trait for entities that can be converted to a reference for an attachment.
 pub trait QBToAttachableRef: QBToRef {
     fn to_attach_ref(&self) -> Result<AttachableRef, QBTypeError> {
-        let value = self.to_ref()?;
+        let value = self.to_ntref()?;
         Ok(value.into())
     }
 }

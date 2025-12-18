@@ -6,7 +6,7 @@ use crate::common::TypedRef;
 /// Trait for "this object has a single linked object of type `Target`".
 ///
 /// Returns an optional reference to the linked object.
-pub trait LinkedTo<Target> {
+pub trait LinkedTo<Target: ?Sized> {
     const FIELD: &'static str;
     fn linked(&self) -> Option<&TypedRef<Target>>;
 }

@@ -72,6 +72,8 @@ use models::common::{MetaData, NtRef};
 pub use models::*;
 use serde::{de::DeserializeOwned, Serialize};
 
+use crate::models::common::TypedRef;
+
 /// Core trait for all `QuickBooks` entities.
 ///
 /// This trait defines the fundamental interface that all `QuickBooks` entities must implement.
@@ -480,14 +482,21 @@ pub trait QBPDFable {}
 /// invoice.customer_ref = Some(customer_ref);
 /// ```
 pub trait QBToRef: QBItem {
-    fn to_ref(&self) -> Result<NtRef, QBTypeError>;
+    fn to_ref(&self) -> Result<TypedRef<Self>, QBTypeError>;
+    fn to_ntref(&self) -> Result<NtRef, QBTypeError>;
 }
 
 macro_rules! impl_qb_to_ref {
   ($($struct:ident {$name_field:ident}),+) => {
     $(
       impl QBToRef for $struct {
-        fn to_ref(&self) -> Result<NtRef, $crate::QBTypeError> {
+
+        fn to_ref(&self) -> Result<TypedRef<Self>, $crate::QBTypeError> {
+            let r = self.to_ntref()?;
+            Ok(TypedRef::new(r))
+        }
+
+        fn to_ntref(&self) -> Result<NtRef, $crate::QBTypeError> {
           if self.id.is_some() {
             Ok(NtRef {
               entity_ref_type: Some(Self::name().into()),
