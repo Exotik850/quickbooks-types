@@ -140,6 +140,7 @@ macro_rules! for_each_qb_item {
         $func!(TaxCode);
         $func!(TaxRate);
         $func!(Term);
+        $func!(Budget);
     };
 }
 
