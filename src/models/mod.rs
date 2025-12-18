@@ -3,6 +3,7 @@ mod attachable;
 mod bill;
 mod bill_payment;
 mod budget;
+mod class;
 pub mod common;
 mod company_info;
 mod customer;
@@ -23,9 +24,9 @@ mod vendor;
 pub use account::*;
 pub use attachable::*;
 pub use bill::*;
-
 pub use bill_payment::*;
 pub use budget::*;
+pub use class::*;
 pub use company_info::*;
 pub use customer::*;
 pub use employee::*;

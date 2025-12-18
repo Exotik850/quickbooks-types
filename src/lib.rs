@@ -141,6 +141,7 @@ macro_rules! for_each_qb_item {
         $func!(TaxRate);
         $func!(Term);
         $func!(Budget);
+        $func!(Class);
     };
 }
 
