@@ -31,16 +31,11 @@ pub struct NtRef {
 ///
 /// Concrete reference to another `QuickBooks` entity.
 ///
-#[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(default)]
 pub struct TypedRef<O> {
-    #[serde(rename = "type")]
-    pub entity_ref_type: Option<String>,
-    #[serde(alias = "Name")]
-    pub name: Option<String>,
-    #[serde(alias = "Value")]
-    pub value: Option<String>,
+    #[serde(flatten)]
+    pub inner: NtRef,
     #[serde(skip)]
     _marker: std::marker::PhantomData<O>,
 }
@@ -84,6 +79,20 @@ impl From<(String, String)> for NtRef {
     }
 }
 
+impl<O> std::ops::Deref for TypedRef<O> {
+    type Target = NtRef;
+
+    fn deref(&self) -> &Self::Target {
+        &self.inner
+    }
+}
+
+impl<O> std::ops::DerefMut for TypedRef<O> {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.inner
+    }
+}
+
 /// `MetaData`
 ///
 /// Immutable timestamps supplied by `QuickBooks` Online for auditing: creation (`create_time`)
@@ -116,6 +125,12 @@ pub struct Addr {
     pub country_sub_division_code: Option<String>,
     pub id: Option<String>,
     pub line1: Option<String>,
+    pub line2: Option<String>,
+    pub line3: Option<String>,
+    pub line4: Option<String>,
+    pub line5: Option<String>,
+    pub lat: Option<String>,
+    pub long: Option<String>,
     pub postal_code: Option<String>,
 }
 
