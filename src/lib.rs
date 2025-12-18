@@ -144,6 +144,7 @@ macro_rules! for_each_qb_item {
         $func!(Class);
         $func!(CreditMemo);
         $func!(CompanyCurrency);
+        $func!(Department);
     };
 }
 
