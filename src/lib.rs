@@ -143,6 +143,7 @@ macro_rules! for_each_qb_item {
         $func!(Budget);
         $func!(Class);
         $func!(CreditMemo);
+        $func!(CompanyCurrency);
     };
 }
 
