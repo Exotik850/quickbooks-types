@@ -5,8 +5,8 @@ use serde_with::skip_serializing_none;
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    common::{Email, MetaData, NtRef},
-    QBFullUpdatable, QBItem,
+    common::{Email, MetaData, NtRef, TypedRef},
+    impl_linked, Account, CompanyCurrency, QBFullUpdatable, QBItem, Term,
 };
 
 #[skip_serializing_none]
@@ -152,7 +152,7 @@ pub struct SalesFormsPrefs {
     /// Indicates if e-transaction payment is enabled.
     pub e_transaction_payment_enabled: Option<bool>,
     /// Default terms for sales forms.
-    pub default_terms: Option<NtRef>,
+    pub default_terms: Option<TypedRef<Term>>,
     /// Indicates if deposits are allowed on sales forms.
     pub allow_deposit: Option<bool>,
     /// Indicates if price levels are being used.
@@ -174,6 +174,8 @@ pub struct SalesFormsPrefs {
     pub auto_apply_credit: Option<bool>,
 }
 
+impl_linked!(SalesFormsPrefs as default_terms => Term);
+
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
@@ -185,11 +187,11 @@ pub struct VendorAndPurchasesPrefs {
     #[serde(rename = "POCustomField")]
     pub po_custom_field: Option<String>, // TODO
     /// Reference to the default markup account
-    pub default_markup_account: Option<NtRef>,
+    pub default_markup_account: Option<TypedRef<Account>>,
     /// Indicates if tracking by customer is enabled
     pub tracking_by_customer: Option<bool>,
     /// Reference to the default terms
-    pub default_terms: Option<NtRef>,
+    pub default_terms: Option<TypedRef<Term>>,
     /// Indicates if billable expense tracking is enabled
     pub billable_expense_tracking: Option<bool>,
     /// Default markup value
@@ -198,6 +200,9 @@ pub struct VendorAndPurchasesPrefs {
     #[serde(rename = "TPAREnabled")]
     pub tpar_enabled: Option<bool>,
 }
+
+impl_linked!(VendorAndPurchasesPrefs as default_markup_account => Account);
+impl_linked!(VendorAndPurchasesPrefs as default_terms => Term);
 
 /// Tax Preferences
 #[skip_serializing_none]
@@ -214,7 +219,13 @@ pub struct TaxPrefs {
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct OtherPrefs {
+    /// Name value pairs for miscellaneous preferences
     pub name_value: Option<Vec<NtRef>>,
+    // Capture everything else into a value map
+    //
+    // TODO: Handle specific fields as needed
+    #[serde(flatten)]
+    pub extra: std::collections::HashMap<String, serde_json::Value>,
 }
 
 #[skip_serializing_none]
@@ -243,9 +254,11 @@ pub struct TimeTrackingPrefs {
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct CurrencyPrefs {
-    pub home_currency: Option<NtRef>,
+    pub home_currency: Option<TypedRef<CompanyCurrency>>,
     pub multi_currency_enabled: Option<bool>,
 }
+
+impl_linked!(CurrencyPrefs as home_currency => CompanyCurrency);
 
 impl QBFullUpdatable for Preferences {
     fn can_full_update(&self) -> bool {

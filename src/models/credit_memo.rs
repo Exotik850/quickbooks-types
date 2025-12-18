@@ -6,8 +6,9 @@ use crate::{
     common::{
         Addr, CustomField, Email, EmailStatus, MetaData, NtRef, PrintStatus, TxnTaxDetail, TypedRef,
     },
-    Class, Customer, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable,
-    QBSendable,
+    impl_linked, Class, CompanyCurrency, Customer, Department, LineField, PaymentMethod,
+    QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, RecurringTransaction,
+    Term,
 };
 
 #[skip_serializing_none]
@@ -36,7 +37,7 @@ pub struct CreditMemo {
     /// Reference to the customer
     pub customer_ref: Option<TypedRef<Customer>>,
     /// Reference to the currency
-    pub currency_ref: Option<NtRef>,
+    pub currency_ref: Option<TypedRef<CompanyCurrency>>,
     /// Global tax calculation method
     pub global_tax_calculation: Option<String>,
     /// Reference to the project
@@ -52,7 +53,7 @@ pub struct CreditMemo {
     /// Print status of the credit memo
     pub print_status: Option<PrintStatus>,
     /// Source of the transaction
-    pub sales_term_ref: Option<NtRef>,
+    pub sales_term_ref: Option<TypedRef<Term>>,
     /// Due date of the credit memo in YYYY-MM-DD format
     pub total_amt: Option<f64>,
     /// Reference to the sales terms
@@ -66,13 +67,13 @@ pub struct CreditMemo {
     /// Tax details for the transaction
     pub txn_tax_detail: Option<TxnTaxDetail>,
     /// Payment method reference
-    pub payment_method_ref: Option<NtRef>,
+    pub payment_method_ref: Option<TypedRef<PaymentMethod>>,
     /// Exchange rate for the transaction
     pub exhange_rate: Option<f64>,
     /// Address to which the items are shipped
     pub ship_addr: Option<Addr>,
     /// Reference to the department
-    pub department_ref: Option<NtRef>,
+    pub department_ref: Option<TypedRef<Department>>,
     /// Email status of the credit memo
     pub email_status: Option<EmailStatus>,
     /// Billing address
@@ -82,7 +83,7 @@ pub struct CreditMemo {
     /// Remaining credit amount
     pub remaining_credit: Option<f64>,
     /// Reference to recurring schedule information
-    pub recur_data_ref: Option<NtRef>,
+    pub recur_data_ref: Option<TypedRef<RecurringTransaction>>,
     /// Reference to tax exemption information
     pub tax_exemption_ref: Option<NtRef>,
     /// Current balance of the credit memo
@@ -90,6 +91,14 @@ pub struct CreditMemo {
     /// Total amount in home currency
     pub home_total_amt: Option<f64>,
 }
+
+impl_linked!(CreditMemo => Customer);
+impl_linked!(CreditMemo => Class);
+impl_linked!(CreditMemo => PaymentMethod);
+impl_linked!(CreditMemo => Department);
+impl_linked!(CreditMemo as sales_term_ref => Term);
+impl_linked!(CreditMemo as recur_data_ref => RecurringTransaction);
+impl_linked!(CreditMemo as currency_ref => CompanyCurrency);
 
 impl QBCreatable for CreditMemo {
     fn can_create(&self) -> bool {

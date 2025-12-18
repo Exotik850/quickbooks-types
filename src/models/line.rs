@@ -3,7 +3,10 @@ use serde::{ser::SerializeStruct, Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use super::common::{LinkedTxn, NtRef};
-use crate::QBCreatable;
+use crate::{
+    common::TypedRef, impl_linked, Account, Class, Customer, Item, LinkedTo, QBCreatable, TaxCode,
+    TaxRate,
+};
 
 /// `LineField`
 ///
@@ -135,7 +138,7 @@ pub trait TaxableLine {
 impl TaxableLine for LineDetail {
     fn set_taxable(&mut self) {
         if let LineDetail::SalesItemLineDetail(data) = self {
-            data.tax_code_ref = Some("TAX".into());
+            data.tax_code_ref = Some(TypedRef::new("TAX"));
         }
     }
 }
@@ -181,15 +184,19 @@ where
 pub struct SalesItemLineDetail {
     pub tax_inclusive_amt: Option<f64>,
     pub discount_amt: Option<f64>,
-    pub item_ref: Option<NtRef>,
-    pub class_ref: Option<NtRef>,
-    pub tax_code_ref: Option<NtRef>,
+    pub item_ref: Option<TypedRef<Item>>,
+    pub class_ref: Option<TypedRef<Class>>,
+    pub tax_code_ref: Option<TypedRef<TaxCode>>,
     pub service_date: Option<NaiveDate>,
     pub discount_rate: Option<f64>,
     pub qty: Option<f64>,
     pub unit_price: Option<f64>,
     pub tax_classification_ref: Option<NtRef>,
 }
+
+impl_linked!(SalesItemLineDetail => Item);
+impl_linked!(SalesItemLineDetail => Class);
+impl_linked!(SalesItemLineDetail => TaxCode);
 
 /// `GroupLineDetail`
 ///
@@ -208,9 +215,11 @@ pub struct GroupLineDetail {
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct DescriptionLineDetail {
-    pub tax_code_ref: NtRef,
+    pub tax_code_ref: TypedRef<TaxCode>,
     pub service_date: DateTime<Utc>,
 }
+
+impl_linked!(DescriptionLineDetail => !TaxCode);
 
 /// `DiscountLineDetail`
 ///
@@ -218,12 +227,22 @@ pub struct DescriptionLineDetail {
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct DiscountLineDetail {
-    pub class_ref: NtRef,
-    pub tax_code_ref: NtRef,
-    pub discount_account_ref: NtRef,
+    pub class_ref: TypedRef<Class>,
+    pub tax_code_ref: TypedRef<TaxCode>,
+    pub discount_account_ref: TypedRef<Account>,
     pub percent_based: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub discount_percent: Option<f64>,
+}
+
+impl_linked!(DiscountLineDetail => !Class);
+impl_linked!(DiscountLineDetail => !TaxCode);
+
+impl LinkedTo<Account> for DiscountLineDetail {
+    const FIELD: &'static str = "DiscountAccountRef";
+    fn linked(&self) -> Option<&TypedRef<Account>> {
+        Some(&self.discount_account_ref)
+    }
 }
 
 /// `SubTotalLineDetail`
@@ -232,8 +251,10 @@ pub struct DiscountLineDetail {
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct SubTotalLineDetail {
-    pub item_ref: NtRef,
+    pub item_ref: TypedRef<Item>,
 }
+
+impl_linked!(SubTotalLineDetail => !Item);
 
 /// `BillableStatus`
 ///
@@ -253,15 +274,20 @@ pub enum BillableStatus {
 #[serde(rename_all = "PascalCase", default)]
 pub struct ItemBasedExpenseLineDetail {
     pub tax_inclusive_amt: f64,
-    pub item_ref: NtRef,
-    pub customer_ref: NtRef,
+    pub item_ref: TypedRef<Item>,
+    pub customer_ref: TypedRef<Customer>,
     pub price_level_ref: NtRef,
-    pub class_ref: NtRef,
-    pub tax_code_ref: NtRef,
+    pub class_ref: TypedRef<Class>,
+    pub tax_code_ref: TypedRef<TaxCode>,
     pub billable_status: BillableStatus,
     pub qty: f64,
     pub unit_price: f64,
 }
+
+impl_linked!(ItemBasedExpenseLineDetail => !Item);
+impl_linked!(ItemBasedExpenseLineDetail => !Customer);
+impl_linked!(ItemBasedExpenseLineDetail => !Class);
+impl_linked!(ItemBasedExpenseLineDetail => !TaxCode);
 
 /// `AccountBasedExpenseLineDetail`
 ///
@@ -269,14 +295,19 @@ pub struct ItemBasedExpenseLineDetail {
 #[derive(Clone, Debug, Default, Deserialize, PartialEq, Serialize)]
 #[serde(default, rename_all = "PascalCase")]
 pub struct AccountBasedExpenseLineDetail {
-    pub account_ref: NtRef,
-    pub tax_code_ref: NtRef,
+    pub account_ref: TypedRef<Account>,
+    pub tax_code_ref: TypedRef<TaxCode>,
     pub tax_amount: f64,
     pub tax_inclusive_amt: f64,
-    pub class_ref: NtRef,
-    pub customer_ref: NtRef,
+    pub class_ref: TypedRef<Class>,
+    pub customer_ref: TypedRef<Customer>,
     pub billable_status: BillableStatus,
 }
+
+impl_linked!(AccountBasedExpenseLineDetail => !Account);
+impl_linked!(AccountBasedExpenseLineDetail => !TaxCode);
+impl_linked!(AccountBasedExpenseLineDetail => !Class);
+impl_linked!(AccountBasedExpenseLineDetail => !Customer);
 
 /// `TaxLineDetail`
 ///
@@ -285,13 +316,15 @@ pub struct AccountBasedExpenseLineDetail {
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct TaxLineDetail {
-    pub tax_rate_ref: Option<NtRef>,
+    pub tax_rate_ref: Option<TypedRef<TaxRate>>,
     pub net_amount_taxable: Option<f64>,
     pub percent_based: Option<bool>,
     pub tax_inclusive_amount: Option<f64>,
     pub override_delta_amount: Option<f64>,
     pub tax_percent: Option<f64>,
 }
+
+impl_linked!(TaxLineDetail => TaxRate);
 
 #[test]
 fn deserialize_line() {

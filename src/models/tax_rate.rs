@@ -2,7 +2,10 @@ use chrono::NaiveDateTime;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::common::{MetaData, NtRef};
+use crate::{
+    common::{MetaData, NtRef, TypedRef},
+    impl_linked, TaxAgency,
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -26,10 +29,10 @@ pub struct TaxRate {
     /// Description of the tax rate
     pub description: Option<String>,
     /// Reference to the tax agency associated with the tax rate
-    pub agency_ref: Option<NtRef>,
+    pub agency_ref: Option<TypedRef<TaxAgency>>,
     /// Metadata about the entity
     pub meta_data: Option<MetaData>,
-    /// TaxRate DisplayType enum which acts as display config.
+    /// `TaxRate` `DisplayType` enum which acts as display config.
     pub display_type: Option<String>,
     /// Reference to the tax return line associated with the tax rate
     pub tax_return_line_ref: Option<NtRef>,
@@ -38,6 +41,8 @@ pub struct TaxRate {
     /// Special tax type information
     pub special_tax_type: Option<String>,
 }
+
+impl_linked!(TaxRate as agency_ref => TaxAgency);
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "PascalCase")]

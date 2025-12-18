@@ -3,8 +3,8 @@ use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
 use crate::{
-    common::{MetaData, NtRef},
-    QBCreatable, QBDeletable, QBFullUpdatable,
+    common::{MetaData, TypedRef},
+    impl_linked, Account, Class, Customer, QBCreatable, QBDeletable, QBFullUpdatable,
 };
 
 #[skip_serializing_none]
@@ -51,14 +51,18 @@ pub struct BudgetDetail {
     /// Amount allocated for the budget entry
     pub amount: Option<f64>,
     /// Reference to the account associated with the budget entry
-    pub account_ref: Option<NtRef>,
+    pub account_ref: Option<TypedRef<Account>>,
     /// Reference to the class associated with the budget entry
-    pub class_ref: Option<NtRef>,
+    pub class_ref: Option<TypedRef<Class>>,
     /// Reference to the customer associated with the budget entry
-    pub customer_ref: Option<NtRef>,
+    pub customer_ref: Option<TypedRef<Customer>>,
     /// Date of the budget entry
     pub budget_date: Option<NaiveDate>,
 }
+
+impl_linked!(BudgetDetail => Account);
+impl_linked!(BudgetDetail => Class);
+impl_linked!(BudgetDetail => Customer);
 
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize)]
 pub enum BudgetEntryType {

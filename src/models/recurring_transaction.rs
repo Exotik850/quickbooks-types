@@ -19,7 +19,9 @@ pub struct RecurringTransaction {
     pub sync_token: Option<String>,
     /// Name of the recurring transaction
     pub name: Option<String>,
+    /// Information about the recurrence pattern
     pub recur_data_ref: Option<NtRef>,
+    /// Metadata about the entity
     pub meta_data: Option<MetaData>,
     #[serde(rename = "Type")]
     pub entity_type: Option<String>,

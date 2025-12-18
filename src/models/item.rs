@@ -5,7 +5,10 @@ use serde_with::skip_serializing_none;
 use super::common::{MetaData, NtRef};
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
-use crate::{QBCreatable, QBFullUpdatable, QBItem};
+use crate::{
+    common::TypedRef, impl_linked, Account, Class, QBCreatable, QBFullUpdatable, QBItem, TaxCode,
+    Vendor,
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -47,7 +50,7 @@ pub struct Item {
     /// Use `Account.id` and `Account.name` from that object for `AssetAccountRef.value` and `AssetAccountRef.name`, respectively.
     ///
     /// Required for Inventory item types.
-    pub asset_account_ref: Option<NtRef>,
+    pub asset_account_ref: Option<TypedRef<Account>>,
 
     /// Description of the item.
     ///
@@ -68,7 +71,7 @@ pub struct Item {
     /// * This is the purchase account id, If not provided it defaults to the default purchase account: 605100 and 601100 are the default expense accounts used for Service and Product type of item, respectively.
     ///
     /// Required for Inventory, `NonInventory`, and Service item types
-    pub expense_account_ref: Option<NtRef>,
+    pub expense_account_ref: Option<TypedRef<Account>>,
 
     /// Fully qualified name of the entity.
     /// The fully qualified name prepends the topmost parent, followed by each sub element separated by colons.
@@ -80,19 +83,19 @@ pub struct Item {
     /// * read only
     /// * system defined
     pub fully_qualified_name: Option<String>,
-    pub income_account_ref: Option<NtRef>,
+    pub income_account_ref: Option<TypedRef<Account>>,
     pub inv_start_date: Option<NaiveDate>,
     pub sales_tax_included: Option<bool>,
-    pub sales_tax_code_ref: Option<NtRef>,
-    pub class_ref: Option<NtRef>,
+    pub sales_tax_code_ref: Option<TypedRef<TaxCode>>,
+    pub class_ref: Option<TypedRef<Class>>,
     pub source: Option<String>,
     pub purchase_tax_included: Option<bool>,
     pub reorder_point: Option<f64>,
     pub purchase_dec: Option<String>,
-    pub pref_vendor_ref: Option<NtRef>,
-    pub purchase_tax_code_ref: Option<NtRef>,
+    pub pref_vendor_ref: Option<TypedRef<Vendor>>,
+    pub purchase_tax_code_ref: Option<TypedRef<TaxCode>>,
     pub purchase_cost: Option<f64>,
-    pub parent_ref: Option<NtRef>,
+    pub parent_ref: Option<TypedRef<Item>>,
     pub tax_classification_ref: Option<NtRef>,
 
     /// Classification that specifies the use of this item.
@@ -116,6 +119,9 @@ pub struct Item {
     pub track_qty_on_hand: Option<bool>,
     pub unit_price: Option<f64>,
 }
+
+impl_linked!(Item as parent_ref => Item);
+impl_linked!(Item as pref_vendor_ref => Vendor);
 
 /// Item Type
 ///

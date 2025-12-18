@@ -9,8 +9,9 @@ use super::common::{
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    common::TypedRef, Customer, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem,
-    QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable,
+    common::TypedRef, impl_linked, Account, Class, Customer, Department, LineField, QBCreatable,
+    QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable,
+    RecurringTransaction, Term,
 };
 
 #[skip_serializing_none]
@@ -46,11 +47,11 @@ pub struct Invoice {
     /// Shipping tracking number
     pub tracking_num: Option<String>,
     /// Reference to the class for the invoice
-    pub class_ref: Option<NtRef>,
+    pub class_ref: Option<TypedRef<Class>>,
     /// Source of the transaction
     pub txn_source: Option<String>,
     /// Reference to the account where the deposit is made
-    pub deposit_to_account_ref: Option<NtRef>,
+    pub deposit_to_account_ref: Option<TypedRef<Account>>,
     /// Indicates if online ACH payment is allowed
     #[serde(rename = "AllowOnlineACHPayment")]
     pub allow_online_ach_payment: Option<bool>,
@@ -65,7 +66,7 @@ pub struct Invoice {
     /// Blind carbon copy email address for billing emails
     pub bill_email_bcc: Option<Email>,
     /// Reference to the shipping method used
-    pub ship_method_reef: Option<NtRef>,
+    pub ship_method_ref: Option<NtRef>,
     /// Indicates if tax is applied after discount
     pub apply_tax_after_discount: Option<bool>,
     /// Customer memo for the invoice
@@ -79,7 +80,7 @@ pub struct Invoice {
     /// Print status of the invoice
     pub print_status: Option<PrintStatus>,
     /// Reference to the sales terms for the invoice
-    pub sales_term_ref: Option<NtRef>,
+    pub sales_term_ref: Option<TypedRef<Term>>,
     /// Exchange rate for the transaction
     pub exchange_rate: Option<f64>,
     /// Deposit amount for the invoice
@@ -87,7 +88,7 @@ pub struct Invoice {
     /// Indicates if online credit card payment is allowed
     pub allow_online_credit_card_payment: Option<bool>,
     /// Reference to the department for the invoice
-    pub department_ref: Option<NtRef>,
+    pub department_ref: Option<TypedRef<Department>>,
     /// Email status of the invoice
     pub email_status: Option<EmailStatus>,
     /// Due date for the invoice
@@ -99,7 +100,7 @@ pub struct Invoice {
     /// URL to the invoice in `QuickBooks` Online
     pub invoice_link: Option<String>,
     /// Reference to recurring template data
-    pub recur_data_ref: Option<NtRef>,
+    pub recur_data_ref: Option<TypedRef<RecurringTransaction>>,
     /// Reference to tax exemption information
     pub tax_exemption_ref: Option<NtRef>,
     /// Current balance of the invoice
@@ -126,6 +127,13 @@ pub struct Invoice {
     /// Custom fields for the invoice
     pub custom_field: Option<Vec<CustomField>>,
 }
+
+impl_linked!(Invoice => Customer);
+impl_linked!(Invoice => Class);
+impl_linked!(Invoice => Department);
+impl_linked!(Invoice as deposit_to_account_ref => Account);
+impl_linked!(Invoice as sales_term_ref => Term);
+impl_linked!(Invoice as recur_data_ref => RecurringTransaction);
 
 impl QBCreatable for Invoice {
     fn can_create(&self) -> bool {

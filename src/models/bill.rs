@@ -2,10 +2,13 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{LinkedTxn, MetaData, NtRef};
+use super::common::{LinkedTxn, MetaData};
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
-use crate::{LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem};
+use crate::{
+    common::TypedRef, impl_linked, Account, CompanyCurrency, Department, LineField, QBCreatable,
+    QBDeletable, QBFullUpdatable, QBItem, RecurringTransaction, Term, Vendor,
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -41,19 +44,19 @@ pub struct Bill {
     pub domain: Option<String>,
     /// Reference to the Accounts Payable account for the transaction
     #[serde(rename = "APAccountRef")]
-    pub ap_account_ref: Option<NtRef>,
+    pub ap_account_ref: Option<TypedRef<Account>>,
     /// Reference to the vendor for the transaction
-    pub vendor_ref: Option<NtRef>,
+    pub vendor_ref: Option<TypedRef<Vendor>>,
     /// Date of the transaction in YYYY-MM-DD format
     pub txn_date: Option<NaiveDate>,
     /// Total amount of the transaction
     pub total_amt: Option<f64>,
     /// Reference to the currency for the transaction
-    pub currency_ref: Option<NtRef>,
+    pub currency_ref: Option<TypedRef<CompanyCurrency>>,
     /// List of transactions linked to this bill
     pub linked_txn: Option<Vec<LinkedTxn>>,
     /// Reference to the sales terms for the transaction
-    pub sales_term_ref: Option<NtRef>,
+    pub sales_term_ref: Option<TypedRef<Term>>,
     /// Due date of the bill in YYYY-MM-DD format
     pub due_date: Option<NaiveDate>,
     /// Indicates if the transaction is a sparse object
@@ -69,12 +72,19 @@ pub struct Bill {
     /// Exchange rate for the transaction
     pub exchange_rate: Option<f64>,
     /// Reference to the department for the transaction
-    pub department_ref: Option<NtRef>,
+    pub department_ref: Option<TypedRef<Department>>,
     /// Home currency balance for the transaction
     pub home_balance: Option<f64>,
     /// Reference to recurring schedule information
-    pub recur_data_ref: Option<NtRef>,
+    pub recur_data_ref: Option<TypedRef<RecurringTransaction>>,
 }
+
+impl_linked!(Bill as ap_account_ref => Account);
+impl_linked!(Bill as vendor_ref => Vendor);
+impl_linked!(Bill as currency_ref => CompanyCurrency);
+impl_linked!(Bill as sales_term_ref => Term);
+impl_linked!(Bill as department_ref => Department);
+impl_linked!(Bill as recur_data_ref => RecurringTransaction);
 
 impl QBCreatable for Bill {
     fn can_create(&self) -> bool {

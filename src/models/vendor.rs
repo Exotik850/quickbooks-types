@@ -1,10 +1,13 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
+use super::common::{Addr, Email, MetaData, PhoneNumber, WebAddr};
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
-use crate::{QBCreatable, QBFullUpdatable, QBItem};
+use crate::{
+    common::TypedRef, impl_linked, Account, CompanyCurrency, QBCreatable, QBFullUpdatable, QBItem,
+    Term,
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -54,9 +57,9 @@ pub struct Vendor {
     pub other_contact_info: Option<ContactInfo>,
     /// Accounts Payable account reference
     #[serde(rename = "APAccountRef")]
-    pub ap_account_ref: Option<NtRef>,
+    pub ap_account_ref: Option<TypedRef<Account>>,
     /// Term reference for the vendor
-    pub term_ref: Option<NtRef>,
+    pub term_ref: Option<TypedRef<Term>>,
     /// Source of the vendor information
     ///
     /// DEPRECATED: as of 9/15/2025
@@ -72,7 +75,7 @@ pub struct Vendor {
     /// Business number of the vendor
     pub business_number: Option<String>,
     /// Currency reference for the vendor
-    pub currency_ref: Option<NtRef>,
+    pub currency_ref: Option<TypedRef<CompanyCurrency>>,
     /// Indicates if the vendor has TPAR
     #[serde(rename = "HasTPAR")]
     pub has_tpar: Option<bool>,
@@ -114,6 +117,10 @@ pub struct Vendor {
     /// Balance for the vendor
     pub balance: Option<f64>,
 }
+
+impl_linked!(Vendor => Term);
+impl_linked!(Vendor as ap_account_ref => Account);
+impl_linked!(Vendor as currency_ref => CompanyCurrency);
 
 /// Contact Information
 ///

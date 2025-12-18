@@ -6,8 +6,9 @@ use super::common::{Addr, CustomField, Email, LinkedTxn, MetaData, NtRef, TxnTax
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    common::EmailStatus, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable,
-    QBSendable, QBSparseUpdateable,
+    common::{EmailStatus, TypedRef},
+    impl_linked, Class, CompanyCurrency, Customer, Department, LineField, QBCreatable, QBDeletable,
+    QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, RecurringTransaction, Term,
 };
 
 #[skip_serializing_none]
@@ -42,9 +43,9 @@ pub struct Estimate {
     #[serde(skip_serializing)]
     pub meta_data: Option<MetaData>,
     /// Reference to the customer for the estimate
-    pub customer_ref: Option<NtRef>,
+    pub customer_ref: Option<TypedRef<Customer>>,
     /// Reference to the currency for the estimate
-    pub currency_ref: Option<NtRef>,
+    pub currency_ref: Option<TypedRef<CompanyCurrency>>,
     /// Email address where the estimate should be sent
     pub bill_email: Option<Email>,
     /// Date of the estimate in YYYY-MM-DD format
@@ -54,7 +55,7 @@ pub struct Estimate {
     /// Date the items are expected to ship
     pub ship_date: Option<NaiveDate>,
     /// Reference to the class for the estimate
-    pub class_ref: Option<NtRef>,
+    pub class_ref: Option<TypedRef<Class>>,
     /// Custom fields for the estimate
     pub custom_field: Option<Vec<CustomField>>,
     /// Status indicating whether the estimate has been printed
@@ -63,7 +64,7 @@ pub struct Estimate {
     #[serde(rename = "sparse")]
     pub sparse: Option<bool>,
     /// Reference to the sales terms for the estimate
-    pub sales_term_ref: Option<NtRef>,
+    pub sales_term_ref: Option<TypedRef<Term>>,
     /// Status of the transaction (e.g., "Pending", "Accepted")
     pub txn_status: Option<String>,
     /// Global tax calculation method
@@ -95,7 +96,7 @@ pub struct Estimate {
     /// Shipping address for the estimate
     pub ship_addr: Option<Addr>,
     /// Reference to the department for the estimate
-    pub department_ref: Option<NtRef>,
+    pub department_ref: Option<TypedRef<Department>>,
     /// Reference to the shipping method for the estimate
     pub ship_method_ref: Option<NtRef>,
     /// Billing address for the estimate
@@ -105,7 +106,7 @@ pub struct Estimate {
     /// Total amount of the estimate
     pub total_amt: Option<f64>,
     /// Reference to recurring data for the estimate
-    pub recur_data_ref: Option<NtRef>,
+    pub recur_data_ref: Option<TypedRef<RecurringTransaction>>,
     /// Reference to tax exemption information
     pub tax_exemption_ref: Option<NtRef>,
     /// Total amount in home currency
@@ -113,6 +114,13 @@ pub struct Estimate {
     /// Indicates if the address is free-form (not structured)
     pub free_form_address: Option<bool>,
 }
+
+impl_linked!(Estimate as sales_term_ref => Term);
+impl_linked!(Estimate => Department);
+impl_linked!(Estimate as recur_data_ref => RecurringTransaction);
+impl_linked!(Estimate => Customer);
+impl_linked!(Estimate => Class);
+impl_linked!(Estimate as currency_ref => CompanyCurrency);
 
 impl QBCreatable for Estimate {
     fn can_create(&self) -> bool {

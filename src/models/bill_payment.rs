@@ -4,8 +4,9 @@ use serde_with::skip_serializing_none;
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    common::{MetaData, NtRef},
-    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable,
+    common::{MetaData, TypedRef},
+    impl_linked, Account, LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBVoidable,
+    Vendor,
 };
 
 #[skip_serializing_none]
@@ -29,7 +30,7 @@ pub struct BillPayment {
     /// Domain of the transaction. `QBO` for `QuickBooks` Online.
     pub domain: Option<String>,
     /// Reference to the vendor for the transaction.
-    pub vendor_ref: Option<NtRef>,
+    pub vendor_ref: Option<TypedRef<Vendor>>,
     /// Date of the transaction in YYYY-MM-DD format.
     pub txn_date: Option<String>,
     /// Total amount of the transaction.
@@ -52,6 +53,8 @@ pub struct BillPayment {
     pub meta_data: Option<MetaData>,
 }
 
+impl_linked!(BillPayment => Vendor);
+
 /// `CheckBillPayment`
 ///
 /// Information about a check payment for the transaction.
@@ -60,8 +63,10 @@ pub struct BillPayment {
 #[serde(rename_all = "PascalCase")]
 pub struct CheckBillPayment {
     pub print_status: Option<String>,
-    pub bank_account_ref: Option<NtRef>,
+    pub bank_account_ref: Option<TypedRef<Account>>,
 }
+
+impl_linked!(CheckBillPayment as bank_account_ref => Account);
 
 /// `CreditCardBillPayment`
 ///
@@ -70,8 +75,10 @@ pub struct CheckBillPayment {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CreditCardBillPayment {
     #[serde(rename = "CCAccountRef")]
-    pub cc_account_ref: Option<NtRef>,
+    pub cc_account_ref: Option<TypedRef<Account>>,
 }
+
+impl_linked!(CreditCardBillPayment as cc_account_ref => Account);
 
 /// `PayType`
 ///

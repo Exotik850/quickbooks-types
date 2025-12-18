@@ -8,7 +8,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use crate::LineField;
+use crate::{impl_linked, LineField, TaxCode};
 
 /// `NtRef`
 ///
@@ -38,6 +38,15 @@ pub struct TypedRef<O> {
     pub inner: NtRef,
     #[serde(skip)]
     _marker: std::marker::PhantomData<O>,
+}
+
+impl<O> TypedRef<O> {
+    pub(crate) fn new(inner: impl Into<NtRef>) -> Self {
+        Self {
+            inner: inner.into(),
+            _marker: std::marker::PhantomData,
+        }
+    }
 }
 
 impl From<&str> for NtRef {
@@ -215,10 +224,12 @@ pub struct MarkupInfo {
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
 #[serde(rename_all = "PascalCase", default)]
 pub struct TxnTaxDetail {
-    pub txn_tax_code_ref: Option<NtRef>,
+    pub txn_tax_code_ref: Option<TypedRef<TaxCode>>,
     pub total_tax: Option<f64>,
     pub tax_line: Option<LineField>,
 }
+
+impl_linked!(TxnTaxDetail as txn_tax_code_ref => TaxCode);
 
 /// Delivery Information
 ///

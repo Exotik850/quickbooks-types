@@ -12,7 +12,9 @@ use super::{
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
+    common::TypedRef, impl_linked, Account, Class, CompanyCurrency, Department, PaymentMethod,
     QBCreatable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBSparseUpdateable, QBVoidable,
+    RecurringTransaction,
 };
 
 #[skip_serializing_none]
@@ -44,7 +46,7 @@ pub struct SalesReceipt {
     /// The unique sync token of the entity, used for concurrency control
     pub sync_token: Option<String>,
     /// Reference to the currency for the transaction
-    pub currency_ref: Option<NtRef>,
+    pub currency_ref: Option<TypedRef<CompanyCurrency>>,
     /// Email address for billing
     pub bill_email: Option<Email>,
     /// Address from which the items are shipped
@@ -56,7 +58,7 @@ pub struct SalesReceipt {
     /// Tracking number for the shipment
     pub tracking_num: Option<String>,
     /// Reference to the class for the transaction
-    pub class_ref: Option<NtRef>,
+    pub class_ref: Option<TypedRef<Class>>,
     /// Print status of the sales receipt
     pub print_status: Option<PrintStatus>,
     /// Reference number for the payment
@@ -74,7 +76,7 @@ pub struct SalesReceipt {
     /// Private note for the transaction
     pub private_note: Option<String>,
     /// Reference to the account where the deposit is made
-    pub deposit_to_account_ref: Option<NtRef>,
+    pub deposit_to_account_ref: Option<TypedRef<Account>>,
     /// Memo for the customer
     pub customer_memo: Option<NtRef>,
     /// Information about a credit card payment for the transaction
@@ -82,7 +84,7 @@ pub struct SalesReceipt {
     /// Tax details for the transaction
     pub txn_tax_detail: Option<TxnTaxDetail>,
     /// Reference to the payment method for the transaction
-    pub payment_method_ref: Option<NtRef>,
+    pub payment_method_ref: Option<TypedRef<PaymentMethod>>,
     /// Exchange rate for the transaction
     pub exchange_rate: Option<f64>,
     /// Address to which the items are shipped
@@ -91,7 +93,7 @@ pub struct SalesReceipt {
     #[serde(rename = "sparse")]
     pub sparse: Option<bool>,
     /// Reference to the department for the transaction
-    pub department_ref: Option<NtRef>,
+    pub department_ref: Option<TypedRef<Department>>,
     /// Reference to the shipping method for the transaction
     pub ship_method_ref: Option<NtRef>,
     /// Address for billing
@@ -104,7 +106,7 @@ pub struct SalesReceipt {
     /// Delivery information for the transaction
     pub delivery_info: Option<DeliveryInfo>,
     /// Reference to the recurring data for the transaction
-    pub recur_data_ref: Option<NtRef>,
+    pub recur_data_ref: Option<TypedRef<RecurringTransaction>>,
     /// Total amount of the transaction
     pub total_amt: Option<f64>,
     /// Balance for the transaction
@@ -114,6 +116,13 @@ pub struct SalesReceipt {
     /// Date of the transaction in YYYY-MM-DD format
     pub txn_date: Option<NaiveDate>,
 }
+
+impl_linked!(SalesReceipt => Department);
+impl_linked!(SalesReceipt => PaymentMethod);
+impl_linked!(SalesReceipt => Class);
+impl_linked!(SalesReceipt as currency_ref => CompanyCurrency);
+impl_linked!(SalesReceipt as recur_data_ref => RecurringTransaction);
+impl_linked!(SalesReceipt as deposit_to_account_ref => Account);
 
 impl QBCreatable for SalesReceipt {
     fn can_create(&self) -> bool {

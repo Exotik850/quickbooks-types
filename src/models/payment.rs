@@ -6,7 +6,8 @@ use super::common::{CreditCardPayment, MetaData, NtRef};
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
-    LineField, QBCreatable, QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable,
+    common::TypedRef, Account, CompanyCurrency, Customer, LineField, PaymentMethod, QBCreatable,
+    QBDeletable, QBFullUpdatable, QBItem, QBPDFable, QBSendable, QBVoidable,
 };
 
 #[skip_serializing_none]
@@ -42,17 +43,17 @@ pub struct Payment {
     /// Total amount of the payment
     pub total_amt: Option<f64>,
     /// Reference to the customer for the payment
-    pub customer_ref: Option<NtRef>,
+    pub customer_ref: Option<TypedRef<Customer>>,
     /// Reference to the currency for the payment
-    pub currency_ref: Option<NtRef>,
+    pub currency_ref: Option<TypedRef<CompanyCurrency>>,
     /// Private note for the payment
     pub private_note: Option<String>,
     /// Reference to the payment method
-    pub payment_method_ref: Option<NtRef>,
+    pub payment_method_ref: Option<TypedRef<PaymentMethod>>,
     /// Unapplied amount of the payment
     pub unapplied_amt: Option<f64>,
     /// Reference to the account where the payment is deposited
-    pub deposit_to_account_ref: Option<NtRef>,
+    pub deposit_to_account_ref: Option<TypedRef<Account>>,
     /// Exchange rate for the payment
     pub exchange_rate: Option<f64>,
     /// Line items for the payment
@@ -61,7 +62,7 @@ pub struct Payment {
     pub txn_source: Option<String>,
     /// Reference to the accounts receivable account
     #[serde(rename = "ARAccountRef")]
-    pub ar_account_ref: Option<NtRef>,
+    pub ar_account_ref: Option<TypedRef<Account>>,
     /// Date of the transaction in YYYY-MM-DD format
     pub txn_date: Option<NaiveDate>,
     /// Information about a credit card payment for the transaction

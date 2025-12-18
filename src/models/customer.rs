@@ -2,10 +2,13 @@ use chrono::NaiveDate;
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{Addr, Email, MetaData, NtRef, PhoneNumber, WebAddr};
+use super::common::{Addr, Email, MetaData, PhoneNumber, WebAddr};
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
-use crate::{QBCreatable, QBFullUpdatable, QBReadable, QBSparseUpdateable};
+use crate::{
+    common::TypedRef, impl_linked, Account, CompanyCurrency, PaymentMethod, QBCreatable,
+    QBFullUpdatable, QBReadable, QBSparseUpdateable, TaxCode, Term,
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -58,13 +61,13 @@ pub struct Customer {
     /// Secondary tax identifier for the customer
     pub secondary_tax_identifier: Option<String>,
     /// Reference to the Accounts Receivable account for the customer
-    pub ar_account_ref: Option<NtRef>,
+    pub ar_account_ref: Option<TypedRef<Account>>,
     /// Reference to the default tax code for the customer
-    pub default_tax_code_ref: Option<NtRef>,
+    pub default_tax_code_ref: Option<TypedRef<TaxCode>>,
     /// Preferred delivery method for the customer (None, Print, Email, or Trax)
     pub preferred_delivery_method: Option<String>,
     /// Reference to the sales term for the customer
-    pub sales_term_ref: Option<NtRef>,
+    pub sales_term_ref: Option<TypedRef<Term>>,
     /// Reference to the customer type for the customer
     pub customer_type_ref: Option<String>,
     /// Fax number of the customer
@@ -72,7 +75,7 @@ pub struct Customer {
     /// Indicates if the customer is billed with their parent
     pub bill_with_parent: Option<bool>,
     /// Reference to the currency for the customer
-    pub currency_ref: Option<NtRef>,
+    pub currency_ref: Option<TypedRef<CompanyCurrency>>,
     /// Mobile phone number of the customer
     pub mobile: Option<PhoneNumber>,
     /// Indicates if the customer is a job
@@ -88,7 +91,7 @@ pub struct Customer {
     /// Alternative phone number of the customer
     pub alternate_phone: Option<PhoneNumber>,
     /// Reference to the parent of the customer
-    pub parent_ref: Option<NtRef>,
+    pub parent_ref: Option<TypedRef<Customer>>,
     /// Notes about the customer
     pub notes: Option<String>,
     /// Web address (URL) of the customer
@@ -102,7 +105,7 @@ pub struct Customer {
     /// Shipping address of the customer
     pub ship_addr: Option<Addr>,
     /// Reference to the default payment method for the customer
-    pub payment_method_ref: Option<NtRef>,
+    pub payment_method_ref: Option<TypedRef<PaymentMethod>>,
     /// Indicates if the customer is a project
     pub is_project: Option<bool>,
     /// Source of the customer record
@@ -120,6 +123,13 @@ pub struct Customer {
     /// Tax exemption reason identifier for the customer
     pub tax_exemption_reason_id: Option<TaxExemptStatus>,
 }
+
+impl_linked!(Customer => PaymentMethod);
+impl_linked!(Customer as ar_account_ref => Account);
+impl_linked!(Customer as default_tax_code_ref => TaxCode);
+impl_linked!(Customer as sales_term_ref => Term);
+impl_linked!(Customer as currency_ref => CompanyCurrency);
+impl_linked!(Customer as parent_ref => Customer);
 
 /// `TaxExemptStatus`
 ///

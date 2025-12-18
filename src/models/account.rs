@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use serde_with::skip_serializing_none;
 
-use super::common::{MetaData, NtRef};
+use super::common::MetaData;
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
 use crate::{
