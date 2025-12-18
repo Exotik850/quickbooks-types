@@ -4,7 +4,9 @@ use serde_with::skip_serializing_none;
 use super::common::{MetaData, NtRef};
 #[cfg(feature = "builder")]
 use crate::error::QBTypeError;
-use crate::{QBCreatable, QBFullUpdatable, QBItem};
+use crate::{
+    common::TypedRef, impl_linked, CompanyCurrency, QBCreatable, QBFullUpdatable, QBItem, TaxCode,
+};
 
 #[skip_serializing_none]
 #[derive(Clone, Debug, Deserialize, PartialEq, Serialize, Default)]
@@ -41,9 +43,9 @@ pub struct Account {
     /// Account number
     pub acct_num: Option<String>,
     /// Reference to the currency for the account
-    pub currency_ref: Option<NtRef>,
+    pub currency_ref: Option<TypedRef<CompanyCurrency>>,
     /// Reference to the parent account if this is a sub-account
-    pub parent_ref: Option<NtRef>,
+    pub parent_ref: Option<TypedRef<Account>>,
     /// Description of the account
     pub descripton: Option<String>,
     /// Indicates if the account is active
@@ -63,12 +65,16 @@ pub struct Account {
     /// Alternative name for the account
     pub account_alias: Option<String>,
     /// Reference to the tax code associated with the account
-    pub tax_code_ref: Option<NtRef>,
+    pub tax_code_ref: Option<TypedRef<TaxCode>>,
     /// Sub-type of the account
     pub account_sub_type: Option<String>,
     /// Current balance of the account
     pub current_balance: Option<f64>,
 }
+
+impl_linked!(Account as parent_ref => Account);
+impl_linked!(Account as currency_ref => CompanyCurrency);
+impl_linked!(Account => TaxCode);
 
 /// `AccountType`
 ///
